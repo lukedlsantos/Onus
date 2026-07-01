@@ -1,0 +1,20 @@
+# Features - Climbing Training PWA
+
+| Feature | Status | Notes / Phase |
+|---|---|---|
+| Project Structure & Layout Shell | In Progress | Phase 1 - Mobile-first CSS Grid/Flexbox shell |
+| Mock Auth & Role Switcher | In Progress | Phase 1 - Switch between Athlete and Admin |
+| Basic Navigation | In Progress | Phase 1 - Tab navigation for Athlete and Admin views |
+| Seed Mock Data | In Progress | Phase 1 - Pre-populate programs, sessions, and default users |
+| Athlete Dashboard ("Today") | Planned | Phase 2 - Active session summary, logging actions |
+| Training Calendar | Planned | Phase 2 - Completion status log and calendar history |
+| Session Logging Form | Planned | Phase 2 - Log fatigue, pain flags, RPE, and notes |
+| Weekly Check-in | Planned | Phase 3 - Weekly feedback form with pain/fatigue logs |
+| Video Review Requests | Planned | Phase 3 - External link submission (Google Drive, Telegram) |
+| Resources Tab | Planned | Phase 3 - External document/link list |
+| FAQs Tab | Planned | Phase 3 - FAQ list view for athletes, management for admin |
+| Admin Dashboard | Planned | Phase 4 - Client overview table, pain flags, review backlog |
+| Access Control Admin | Planned | Phase 4 - Activate, pause, or expire athlete access |
+| Program Builder | Planned | Phase 4 - Edit/assign training phases and session plans |
+| Supabase Integration | Deferred | Phase 5 - Replace mock services with live Supabase Auth + DB |
+| PWA Manifest & Service Worker | Planned | Phase 5 - Offline caching, installable manifest |

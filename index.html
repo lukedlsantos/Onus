@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Onus - Climbing Coach PWA</title>
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+  <div id="app-container">
+    <!-- Header with logo and mock user/role switcher -->
+    <header>
+      <div class="brand-title">
+        <span>ONUS</span> COACHING
+      </div>
+      <div class="auth-controls">
+        <span id="role-badge" class="role-badge">ATHLETE</span>
+        <button id="switch-role-btn" class="switch-btn">Switch to Coach</button>
+      </div>
+    </header>
+
+    <!-- Main Screens Container -->
+    <main id="main-content">
+      
+      <!-- ATHLETE SCREENS -->
+      <section id="screen-today" class="screen active">
+        <div class="card">
+          <h2 class="card-title">Today's Session</h2>
+          <p id="today-session-title" class="text-muted">Loading...</p>
+          <div class="alert alert-warning" id="pain-warning" style="display: none;">
+            <strong>Warning:</strong> High pain/fatigue logs detected. Take it easy!
+          </div>
+          <button class="btn btn-primary" id="log-today-btn">Log Today's Work</button>
+        </div>
+      </section>
+
+      <section id="screen-calendar" class="screen">
+        <div class="card">
+          <h2 class="card-title">Training Calendar</h2>
+          <p class="text-muted">Phase 1: Calendar Overview Placeholder</p>
+        </div>
+      </section>
+
+      <section id="screen-log" class="screen">
+        <div class="card">
+          <h2 class="card-title">Log Session</h2>
+          <p class="text-muted">Submit logs for completed sessions.</p>
+        </div>
+      </section>
+
+      <section id="screen-review" class="screen">
+        <div class="card">
+          <h2 class="card-title">Video Review Requests</h2>
+          <p class="text-muted">Submit video links for coach review.</p>
+        </div>
+      </section>
+
+      <section id="screen-resources" class="screen">
+        <div class="card">
+          <h2 class="card-title">Resource Files & Links</h2>
+          <div id="resources-list"></div>
+        </div>
+      </section>
+
+      <section id="screen-faqs" class="screen">
+        <div class="card">
+          <h2 class="card-title">FAQs & Guides</h2>
+          <div id="faqs-list"></div>
+        </div>
+      </section>
+
+      <section id="screen-profile" class="screen">
+        <div class="card">
+          <h2 class="card-title">Profile & Plan Status</h2>
+          <p><strong>Name:</strong> <span id="profile-name">Loading...</span></p>
+          <p><strong>Status:</strong> <span id="profile-status" class="badge">Loading...</span></p>
+          <p><strong>Valid Until:</strong> <span id="profile-valid-until">Loading...</span></p>
+        </div>
+      </section>
+
+      <!-- COACH/ADMIN SCREENS -->
+      <section id="screen-athletes" class="screen">
+        <div class="card">
+          <h2 class="card-title">Active Athletes</h2>
+          <p class="text-muted">Overview of client adherence and pain indicators.</p>
+        </div>
+      </section>
+
+      <section id="screen-programs" class="screen">
+        <div class="card">
+          <h2 class="card-title">Program Templates</h2>
+          <p class="text-muted">Assign and edit training program blocks.</p>
+        </div>
+      </section>
+
+      <section id="screen-reviews-queue" class="screen">
+        <div class="card">
+          <h2 class="card-title">Review Queue</h2>
+          <p class="text-muted">Pending client climb analysis requests.</p>
+        </div>
+      </section>
+
+      <section id="screen-checkins" class="screen">
+        <div class="card">
+          <h2 class="card-title">Client Check-ins</h2>
+          <p class="text-muted">Read weekly questionnaire details.</p>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Navigation Tabs Bar -->
+    <nav class="tab-navigation" id="tab-nav-bar">
+      <!-- Generated via app.js -->
+    </nav>
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
