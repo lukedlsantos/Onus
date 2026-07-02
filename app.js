@@ -773,4 +773,13 @@ function loadProfileScreen() {
 }
 
 // Boot application
-window.addEventListener("DOMContentLoaded", initApp);
+window.addEventListener("DOMContentLoaded", () => {
+  initApp();
+
+  // Register Service Worker for PWA offline capability
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./sw.js')
+      .then(reg => console.log('ServiceWorker registered successfully:', reg.scope))
+      .catch(err => console.error('ServiceWorker registration failed:', err));
+  }
+});
