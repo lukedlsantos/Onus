@@ -13,8 +13,8 @@
 | Video Review Requests | Built | Phase 3 - External link submission (Google Drive, Telegram) |
 | Resources Tab | Built | Phase 3 - External document/link list |
 | FAQs Tab | Built | Phase 3 - FAQ list view for athletes, management for admin |
-| Admin Dashboard | Planned | Phase 4 - Client overview table, pain flags, review backlog |
-| Access Control Admin | Planned | Phase 4 - Activate, pause, or expire athlete access |
-| Program Builder | Planned | Phase 4 - Edit/assign training phases and session plans |
+| Admin Dashboard | Built | Phase 4 - Client overview table, pain flags, review backlog |
+| Access Control Admin | Built | Phase 4 - Activate, pause, or expire athlete access |
+| Program Builder | Built | Phase 4 - Edit/assign training phases and session plans |
 | Supabase Integration | Deferred | Phase 5 - Replace mock services with live Supabase Auth + DB |
 | PWA Manifest & Service Worker | Planned | Phase 5 - Offline caching, installable manifest |

@@ -400,3 +400,30 @@ input[type="range"].form-control::-webkit-slider-thumb:hover {
 .status-badge.modified { background-color: rgba(245, 158, 11, 0.2); color: var(--accent-amber); }
 .status-badge.pending { background-color: rgba(156, 163, 175, 0.1); color: var(--text-muted); }
 
+/* Locked Overlay */
+.locked-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(11, 15, 25, 0.98);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 32px;
+  text-align: center;
+  z-index: 200;
+}
+
+.locked-icon {
+  width: 64px;
+  height: 64px;
+  stroke: var(--accent-red);
+  stroke-width: 1.5;
+  fill: none;
+  margin-bottom: 16px;
+}
+
+

@@ -37,35 +37,40 @@ const NAVIGATION_CONFIG = {
 
 // Initialize Application UI
 async function initApp() {
-  // Setup default user profile (Athlete "Alex Honnold" initially)
   const defaultUserId = "ath-1";
   await switchUser(defaultUserId);
 
-  // Bind Role Switcher Event
   document.getElementById("switch-role-btn").addEventListener("click", handleRoleSwitchToggle);
-
-  // Bind Slider Value Displays
   setupSliderIndicators();
 
-  // Bind Logging Form Submit
   document.getElementById("session-log-form").addEventListener("submit", handleLogSubmit);
-
-  // Bind Weekly Checkin Form Submit
   document.getElementById("weekly-checkin-form").addEventListener("submit", handleCheckinSubmit);
-
-  // Bind Video Review Form Submit
   document.getElementById("video-review-form").addEventListener("submit", handleVideoReviewSubmit);
-
-  // Bind Collapsible Header trigger for Weekly Checkin
   document.getElementById("toggle-checkin-header").addEventListener("click", toggleWeeklyCheckinForm);
 
-  // Bind "Log Today's Work" Action
   document.getElementById("log-today-btn").addEventListener("click", () => {
     switchTab("log");
     if (state.todaySession) {
       document.getElementById("log-session-select").value = state.todaySession.id;
     }
   });
+
+  // Admin access card handlers
+  document.getElementById("admin-access-form").addEventListener("submit", handleAdminAccessSubmit);
+  document.getElementById("cancel-access-btn").addEventListener("click", () => {
+    document.getElementById("admin-access-card").style.display = "none";
+  });
+}
+
+// Verify locks and lock app if account status is expired
+function verifyAccessLock() {
+  const lockedScreen = document.getElementById("locked-screen");
+  
+  if (state.currentUser.role === "athlete" && state.currentAccess && state.currentAccess.status === "expired") {
+    lockedScreen.style.display = "flex";
+  } else {
+    lockedScreen.style.display = "none";
+  }
 }
 
 // Switch User & Update State
@@ -73,7 +78,9 @@ async function switchUser(userId) {
   state.currentUser = await db.getProfile(userId);
   state.currentAccess = await db.getAccess(userId);
 
-  // Update layout header info
+  // Apply visual expired lock
+  verifyAccessLock();
+
   const badgeEl = document.getElementById("role-badge");
   const switchBtn = document.getElementById("switch-role-btn");
 
@@ -86,21 +93,26 @@ async function switchUser(userId) {
     switchBtn.textContent = "Switch to Coach";
   }
 
-  // Draw appropriate Navigation Tabs
   renderNavigation();
 
-  // Navigate to first screen default
   const defaultTab = NAVIGATION_CONFIG[state.currentUser.role][0];
   switchTab(defaultTab.id);
 
-  // Load screen data
   loadResources();
   loadFAQs();
-  loadAthleteTodayScreen();
-  loadProfileScreen();
-  loadTrainingCalendar();
-  loadVideoReviews();
-  setupSessionSelectDropdown();
+  
+  if (state.currentUser.role === "athlete") {
+    loadAthleteTodayScreen();
+    loadProfileScreen();
+    loadTrainingCalendar();
+    loadVideoReviews();
+    setupSessionSelectDropdown();
+  } else {
+    loadAdminAthletes();
+    loadAdminPrograms();
+    loadAdminReviewsQueue();
+    loadAdminCheckins();
+  }
 }
 
 // Toggle Athlete / Admin Role Switches (Simulating Auth Toggle)
@@ -122,7 +134,6 @@ function renderNavigation() {
     </button>
   `).join('');
 
-  // Bind Navigation click events
   navContainer.querySelectorAll(".tab-btn").forEach(btn => {
     btn.addEventListener("click", () => {
       switchTab(btn.dataset.tabId);
@@ -138,7 +149,6 @@ function switchTab(tabId) {
 
   if (!targetTab) return;
 
-  // Update CSS tab highlights
   document.querySelectorAll(".tab-btn").forEach(btn => {
     if (btn.dataset.tabId === tabId) {
       btn.classList.add("active");
@@ -147,7 +157,6 @@ function switchTab(tabId) {
     }
   });
 
-  // Hide all screens and show active
   document.querySelectorAll(".screen").forEach(screen => {
     screen.classList.remove("active");
   });
@@ -157,11 +166,15 @@ function switchTab(tabId) {
     targetScreenEl.classList.add("active");
   }
 
-  // Hook-up reloads on navigation
-  if (tabId === 'calendar') {
-    loadTrainingCalendar();
-  } else if (tabId === 'review') {
-    loadVideoReviews();
+  // Reload lists on routing
+  if (state.currentUser.role === "athlete") {
+    if (tabId === 'calendar') loadTrainingCalendar();
+    else if (tabId === 'review') loadVideoReviews();
+  } else {
+    if (tabId === 'athletes') loadAdminAthletes();
+    else if (tabId === 'programs') loadAdminPrograms();
+    else if (tabId === 'reviews-queue') loadAdminReviewsQueue();
+    else if (tabId === 'checkins') loadAdminCheckins();
   }
 }
 
@@ -172,7 +185,6 @@ function setupSliderIndicators() {
     { id: 'log-fatigue', valId: 'fatigue-val' },
     { id: 'log-finger-pain', valId: 'finger-pain-val' },
     { id: 'log-skin', valId: 'skin-val' },
-    // Weekly Checkin sliders
     { id: 'chk-energy', valId: 'chk-energy-val' },
     { id: 'chk-sleep', valId: 'chk-sleep-val' },
     { id: 'chk-stress', valId: 'chk-stress-val' },
@@ -184,9 +196,7 @@ function setupSliderIndicators() {
     const input = document.getElementById(slider.id);
     const label = document.getElementById(slider.valId);
     if (input && label) {
-      // Set initial
       label.textContent = input.value;
-      // Add update listener
       input.addEventListener("input", (e) => {
         label.textContent = e.target.value;
       });
@@ -194,7 +204,7 @@ function setupSliderIndicators() {
   });
 }
 
-// Populate session logging dropdown with athlete's program sessions
+// Populate dropdown options
 async function setupSessionSelectDropdown() {
   if (state.currentUser.role !== "athlete") return;
 
@@ -233,7 +243,6 @@ async function loadAthleteTodayScreen() {
   const logBtn = document.getElementById("log-today-btn");
   const phaseWeekLabel = document.getElementById("today-session-phase-week");
 
-  // Load check-in status
   const checkins = await db.getWeeklyCheckinsForAthlete(state.currentUser.id);
   const badge = document.getElementById("checkin-status-badge");
   if (checkins.length > 0) {
@@ -261,7 +270,6 @@ async function loadAthleteTodayScreen() {
     if (weeks.length > 0) {
       const sessions = await db.getSessionsForWeek(weeks[0].id);
       if (sessions.length > 0) {
-        // Use Day 1 session as the mock Today's Session
         const session = sessions[0];
         state.todaySession = session;
 
@@ -270,7 +278,6 @@ async function loadAthleteTodayScreen() {
         objectiveEl.textContent = session.objective;
         logBtn.style.display = "block";
 
-        // Fetch drills
         const drills = await db.getExercisesForSession(session.id);
         if (drills.length > 0) {
           drillList.innerHTML = drills.map(d => `
@@ -361,23 +368,19 @@ async function handleLogSubmit(e) {
 
   await db.addLog(logData);
 
-  // Pain/Fatigue warning check
   const warningEl = document.getElementById("pain-warning");
   if (logData.finger_pain >= 5 || logData.fatigue >= 5) {
     if (warningEl) warningEl.style.display = "block";
   }
 
-  // Reset form inputs
   document.getElementById("session-log-form").reset();
   setupSliderIndicators();
 
-  // Reset labels
   document.getElementById("rpe-val").textContent = "6";
   document.getElementById("fatigue-val").textContent = "3";
   document.getElementById("finger-pain-val").textContent = "0";
   document.getElementById("skin-val").textContent = "5";
 
-  // Redirect to calendar screen to see log status updated
   switchTab("calendar");
 }
 
@@ -412,7 +415,6 @@ async function handleCheckinSubmit(e) {
 
   await db.addWeeklyCheckin(checkinData);
 
-  // Update badge and collapse
   const badge = document.getElementById("checkin-status-badge");
   badge.textContent = "Done";
   badge.style.backgroundColor = "rgba(16, 185, 129, 0.15)";
@@ -439,11 +441,7 @@ async function handleVideoReviewSubmit(e) {
   };
 
   await db.addVideoReview(reviewReq);
-
-  // Reset form
   document.getElementById("video-review-form").reset();
-  
-  // Refresh review list
   loadVideoReviews();
 }
 
@@ -484,6 +482,251 @@ async function loadVideoReviews() {
       </div>
     `;
   }).join('');
+}
+
+/* ==========================================================================
+   COACH / ADMIN PORTAL LOGIC
+   ========================================================================== */
+
+// Load Active Athletes Grid
+async function loadAdminAthletes() {
+  const container = document.getElementById("admin-athletes-list");
+  if (!container) return;
+
+  const profiles = await db.getProfiles();
+  const athletes = profiles.filter(p => p.role === "athlete");
+  
+  let html = '';
+
+  for (const athlete of athletes) {
+    const access = await db.getAccess(athlete.id);
+    const logs = await db.getLogsForAthlete(athlete.id);
+    const reviews = await db.getVideoReviewsForAthlete(athlete.id);
+
+    // Calculate Adherence rate (out of 3 seeded sessions in default program)
+    const completedCount = logs.filter(l => l.status === "completed").length;
+    const adherence = completedCount > 0 ? Math.round((completedCount / 3) * 100) : 0;
+    
+    // Find latest pain / fatigue scores
+    const latestLog = logs[logs.length - 1];
+    const latestPain = latestLog ? latestLog.finger_pain : 0;
+    const latestFatigue = latestLog ? latestLog.fatigue : 1;
+
+    // Check Red Flag indicators
+    let hasRedFlags = false;
+    let flagsList = [];
+
+    if (latestPain >= 5) {
+      hasRedFlags = true;
+      flagsList.push(`High Finger Pain (${latestPain})`);
+    }
+    if (latestFatigue >= 5) {
+      hasRedFlags = true;
+      flagsList.push(`High Fatigue (${latestFatigue})`);
+    }
+
+    const pendingReviews = reviews.filter(r => r.status === "submitted").length;
+
+    html += `
+      <div style="padding: 14px; background-color: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: var(--border-radius-lg);">
+        <div style="display: flex; justify-content: space-between; align-items: start;">
+          <div>
+            <h3 style="font-size: 1.1rem; margin-bottom: 2px;">${athlete.full_name}</h3>
+            <small class="text-muted">Plan: ${access ? access.plan_type.replace('_', ' ') : 'None'} | Expiry: ${access ? access.access_until : 'N/A'}</small>
+          </div>
+          <span class="badge ${access ? access.status : 'expired'}">${access ? access.status : 'expired'}</span>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; font-size: 0.85rem;">
+          <div><strong>Adherence:</strong> ${adherence}%</div>
+          <div><strong>Pending Reviews:</strong> ${pendingReviews}</div>
+          <div><strong>Last Pain Log:</strong> ${latestPain}/10</div>
+          <div><strong>Telegram:</strong> <a href="https://t.me/${athlete.telegram_username || ''}" target="_blank" style="color: var(--accent-cyan); text-decoration: none;">@${athlete.telegram_username || 'None'}</a></div>
+        </div>
+
+        ${hasRedFlags ? `
+          <div class="alert alert-warning" style="margin-top: 10px; padding: 6px 10px; font-size: 0.8rem;">
+            <strong>Red Flags:</strong> ${flagsList.join(', ')}
+          </div>
+        ` : ''}
+
+        <button class="btn btn-primary manage-access-trigger" data-athlete-id="${athlete.id}" style="margin-top: 10px; font-size: 0.8rem; padding: 6px 12px; width: auto;">
+          Edit Access Settings
+        </button>
+      </div>
+    `;
+  }
+  container.innerHTML = html;
+
+  // Bind Manage Access buttons
+  container.querySelectorAll(".manage-access-trigger").forEach(btn => {
+    btn.addEventListener("click", () => {
+      openAccessManagement(btn.dataset.athleteId);
+    });
+  });
+}
+
+// Open Access Settings Card
+async function openAccessManagement(athleteId) {
+  const athlete = await db.getProfile(athleteId);
+  const access = await db.getAccess(athleteId);
+
+  document.getElementById("access-edit-name").textContent = athlete.full_name;
+  document.getElementById("access-edit-athlete-id").value = athlete.id;
+
+  if (access) {
+    document.getElementById("access-status").value = access.status;
+    document.getElementById("access-plan").value = access.plan_type;
+    document.getElementById("access-until").value = access.access_until;
+    document.getElementById("access-notes").value = access.notes || '';
+  }
+
+  // Display edit card
+  document.getElementById("admin-access-card").style.display = "block";
+  document.getElementById("admin-access-card").scrollIntoView({ behavior: 'smooth' });
+}
+
+// Submit updated client settings
+async function handleAdminAccessSubmit(e) {
+  e.preventDefault();
+  const athleteId = document.getElementById("access-edit-athlete-id").value;
+  const accessData = await db.getAccess(athleteId);
+
+  const updatedAccess = {
+    id: accessData ? accessData.id : "access-" + Math.random().toString(36).substr(2, 9),
+    athlete_id: athleteId,
+    status: document.getElementById("access-status").value,
+    plan_type: document.getElementById("access-plan").value,
+    access_until: document.getElementById("access-until").value,
+    notes: document.getElementById("access-notes").value
+  };
+
+  await db.updateAccess(updatedAccess);
+
+  // Close card
+  document.getElementById("admin-access-card").style.display = "none";
+  
+  // Refresh lists
+  loadAdminAthletes();
+}
+
+// Load Program Templates
+async function loadAdminPrograms() {
+  const container = document.getElementById("admin-programs-list");
+  if (!container) return;
+
+  const programs = await db.getPrograms();
+  container.innerHTML = programs.map(prog => `
+    <div style="padding: 12px; background-color: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: var(--border-radius-md);">
+      <strong style="color: var(--accent-cyan); font-size: 1rem;">${prog.title}</strong>
+      <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 4px;">${prog.description || 'No description provided.'}</p>
+    </div>
+  `).join('');
+}
+
+// Load Video Reviews Queue
+async function loadAdminReviewsQueue() {
+  const container = document.getElementById("admin-reviews-list");
+  if (!container) return;
+
+  const reviews = await db.getAllVideoReviews();
+  const pending = reviews.filter(r => r.status === "submitted" || r.status === "needs_follow_up");
+
+  if (pending.length === 0) {
+    container.innerHTML = `<p class="text-muted" style="font-size: 0.9rem;">Review queue is clean! No pending requests.</p>`;
+    return;
+  }
+
+  let html = '';
+  for (const rev of pending) {
+    const athlete = await db.getProfile(rev.athlete_id);
+    html += `
+      <div style="padding: 14px; background-color: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: var(--border-radius-lg);">
+        <div style="display: flex; justify-content: space-between; align-items: start;">
+          <div>
+            <strong style="color: var(--accent-cyan);">${athlete ? athlete.full_name : 'Unknown Athlete'}</strong>
+            <p style="font-size: 0.8rem; color: var(--text-secondary);">Grade: ${rev.climb_grade || 'V?'} | Angle: ${rev.wall_angle || 'N/A'}</p>
+          </div>
+          <span class="status-badge ${rev.status === 'needs_follow_up' ? 'modified' : 'pending'}">${rev.status}</span>
+        </div>
+        <p style="font-size: 0.85rem; margin-top: 6px;">Q: "${rev.athlete_question || ''}"</p>
+        <a href="${rev.video_url}" target="_blank" style="color: var(--accent-blue); font-size: 0.85rem; text-decoration: none; display: inline-block; margin-top: 6px;">Watch Video &rarr;</a>
+
+        <form class="coach-feedback-form" data-review-id="${rev.id}" style="margin-top: 12px; display: flex; flex-direction: column; gap: 6px;">
+          <div class="form-group">
+            <label class="form-label" style="font-size: 0.75rem;">Coach Assessment Notes</label>
+            <textarea class="form-control feedback-notes" style="font-size: 0.85rem; min-height: 60px;" placeholder="Add core cues, focus on feet tension..." required></textarea>
+          </div>
+          <div style="display: flex; gap: 8px; justify-content: flex-end;">
+            <select class="form-control feedback-status" style="font-size: 0.85rem; width: auto; padding: 4px 8px;">
+              <option value="reviewed">Reviewed</option>
+              <option value="needs_follow_up">Needs Follow Up</option>
+            </select>
+            <button type="submit" class="btn btn-primary" style="width: auto; padding: 4px 12px; font-size: 0.85rem;">Send Feedback</button>
+          </div>
+        </form>
+      </div>
+    `;
+  }
+  container.innerHTML = html;
+
+  // Bind feedbacks forms submits
+  container.querySelectorAll(".coach-feedback-form").forEach(form => {
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const reviewId = form.dataset.reviewId;
+      const reviewsList = await db.getAllVideoReviews();
+      const request = reviewsList.find(r => r.id === reviewId);
+
+      if (request) {
+        request.coach_feedback_summary = form.querySelector(".feedback-notes").value;
+        request.status = form.querySelector(".feedback-status").value;
+        request.reviewed_at = new Date().toISOString();
+        await db.updateVideoReview(request);
+        loadAdminReviewsQueue();
+      }
+    });
+  });
+}
+
+// Load Checkins
+async function loadAdminCheckins() {
+  const container = document.getElementById("admin-checkins-list");
+  if (!container) return;
+
+  const checkins = await db.getAllWeeklyCheckins();
+
+  if (checkins.length === 0) {
+    container.innerHTML = `<p class="text-muted" style="font-size: 0.9rem;">No client check-ins submitted yet this week.</p>`;
+    return;
+  }
+
+  let html = '';
+  for (const chk of checkins) {
+    const athlete = await db.getProfile(chk.athlete_id);
+    html += `
+      <div style="padding: 12px; background-color: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: var(--border-radius-md);">
+        <strong style="color: var(--accent-cyan);">${athlete ? athlete.full_name : 'Unknown Athlete'}</strong>
+        <span class="text-muted" style="font-size: 0.75rem; margin-left: 8px;">Check-in on ${chk.submitted_at.split('T')[0]}</span>
+        
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-top: 8px; font-size: 0.8rem;">
+          <div>Energy: <strong>${chk.energy}/5</strong></div>
+          <div>Sleep: <strong>${chk.sleep}/5</strong></div>
+          <div>Stress: <strong>${chk.stress}/5</strong></div>
+          <div>Motivation: <strong>${chk.motivation}/5</strong></div>
+          <div>Pain: <strong style="color: ${chk.finger_pain >= 5 ? 'var(--accent-red)' : 'inherit'};">${chk.finger_pain}/10</strong></div>
+          <div>Skin: <strong>${chk.skin_condition}/5</strong></div>
+        </div>
+
+        <div style="font-size: 0.85rem; margin-top: 8px;">
+          <div><strong>Felt Good:</strong> <span class="text-muted">${chk.what_felt_good || 'None'}</span></div>
+          <div><strong>Felt Bad:</strong> <span class="text-muted">${chk.what_felt_bad || 'None'}</span></div>
+          <div><strong>Coach Notes:</strong> <span class="text-muted">${chk.notes || 'None'}</span></div>
+        </div>
+      </div>
+    `;
+  }
+  container.innerHTML = html;
 }
 
 // Load Resources List

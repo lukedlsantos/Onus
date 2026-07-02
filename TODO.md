@@ -21,9 +21,14 @@
 - [x] Telegram/Google Drive instructions integration
 - [x] Static list displays for Resources and FAQs
 
-## Phase 4: Coach Portal
-- [ ] Coach Dashboard view: Athlete progress summary grid
-- [ ] Red flag indicators (pain >= 5, fatigue >= 5, missed 2+ sessions, inactivity)
-- [ ] Active client list & manual Access Control editor (status, expiration date)
-- [ ] Review Queue page: coach feedback summaries and status updates
-- [ ] Basic FAQ/Resource CRUD for admins
+## Phase 4: Coach Portal (Completed)
+- [x] Coach Dashboard view: Athlete progress summary grid
+- [x] Red flag indicators (pain >= 5, fatigue >= 5, missed 2+ sessions, inactivity)
+- [x] Active client list & manual Access Control editor (status, expiration date)
+- [x] Review Queue page: coach feedback summaries and status updates
+- [x] Basic FAQ/Resource CRUD for admins
+
+## Phase 5: Production Readiness & PWA
+- [ ] Clean up structure and prepare for Netlify deployment
+- [ ] Service worker and manifest configurations for PWA compliance
+- [ ] End-to-end user manual test validations
