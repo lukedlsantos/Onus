@@ -272,5 +272,39 @@ export const db = {
     resources.push(res);
     db._set("onus_resources", resources);
     return Promise.resolve(res);
+  },
+
+  // Weekly Check-ins
+  getWeeklyCheckinsForAthlete: (athleteId) => Promise.resolve(db._get("onus_weekly_checkins").filter(c => c.athlete_id === athleteId)),
+  getAllWeeklyCheckins: () => Promise.resolve(db._get("onus_weekly_checkins")),
+  addWeeklyCheckin: (checkin) => {
+    const all = db._get("onus_weekly_checkins");
+    checkin.id = checkin.id || "chk-" + Math.random().toString(36).substr(2, 9);
+    checkin.submitted_at = checkin.submitted_at || new Date().toISOString();
+    all.push(checkin);
+    db._set("onus_weekly_checkins", all);
+    return Promise.resolve(checkin);
+  },
+
+  // Video Review Requests
+  getVideoReviewsForAthlete: (athleteId) => Promise.resolve(db._get("onus_video_reviews").filter(r => r.athlete_id === athleteId)),
+  getAllVideoReviews: () => Promise.resolve(db._get("onus_video_reviews")),
+  addVideoReview: (req) => {
+    const all = db._get("onus_video_reviews");
+    req.id = req.id || "rev-" + Math.random().toString(36).substr(2, 9);
+    req.created_at = req.created_at || new Date().toISOString();
+    req.status = req.status || "submitted";
+    all.push(req);
+    db._set("onus_video_reviews", all);
+    return Promise.resolve(req);
+  },
+  updateVideoReview: (req) => {
+    const all = db._get("onus_video_reviews");
+    const idx = all.findIndex(r => r.id === req.id);
+    if (idx !== -1) {
+      all[idx] = req;
+    }
+    db._set("onus_video_reviews", all);
+    return Promise.resolve(req);
   }
 };

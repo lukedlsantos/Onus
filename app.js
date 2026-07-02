@@ -50,6 +50,15 @@ async function initApp() {
   // Bind Logging Form Submit
   document.getElementById("session-log-form").addEventListener("submit", handleLogSubmit);
 
+  // Bind Weekly Checkin Form Submit
+  document.getElementById("weekly-checkin-form").addEventListener("submit", handleCheckinSubmit);
+
+  // Bind Video Review Form Submit
+  document.getElementById("video-review-form").addEventListener("submit", handleVideoReviewSubmit);
+
+  // Bind Collapsible Header trigger for Weekly Checkin
+  document.getElementById("toggle-checkin-header").addEventListener("click", toggleWeeklyCheckinForm);
+
   // Bind "Log Today's Work" Action
   document.getElementById("log-today-btn").addEventListener("click", () => {
     switchTab("log");
@@ -90,6 +99,7 @@ async function switchUser(userId) {
   loadAthleteTodayScreen();
   loadProfileScreen();
   loadTrainingCalendar();
+  loadVideoReviews();
   setupSessionSelectDropdown();
 }
 
@@ -150,6 +160,8 @@ function switchTab(tabId) {
   // Hook-up reloads on navigation
   if (tabId === 'calendar') {
     loadTrainingCalendar();
+  } else if (tabId === 'review') {
+    loadVideoReviews();
   }
 }
 
@@ -159,12 +171,22 @@ function setupSliderIndicators() {
     { id: 'log-rpe', valId: 'rpe-val' },
     { id: 'log-fatigue', valId: 'fatigue-val' },
     { id: 'log-finger-pain', valId: 'finger-pain-val' },
-    { id: 'log-skin', valId: 'skin-val' }
+    { id: 'log-skin', valId: 'skin-val' },
+    // Weekly Checkin sliders
+    { id: 'chk-energy', valId: 'chk-energy-val' },
+    { id: 'chk-sleep', valId: 'chk-sleep-val' },
+    { id: 'chk-stress', valId: 'chk-stress-val' },
+    { id: 'chk-motivation', valId: 'chk-motivation-val' },
+    { id: 'chk-finger-pain', valId: 'chk-finger-pain-val' },
+    { id: 'chk-skin', valId: 'chk-skin-val' }
   ];
   sliders.forEach(slider => {
     const input = document.getElementById(slider.id);
     const label = document.getElementById(slider.valId);
     if (input && label) {
+      // Set initial
+      label.textContent = input.value;
+      // Add update listener
       input.addEventListener("input", (e) => {
         label.textContent = e.target.value;
       });
@@ -210,6 +232,19 @@ async function loadAthleteTodayScreen() {
   const drillList = document.getElementById("today-drills-list");
   const logBtn = document.getElementById("log-today-btn");
   const phaseWeekLabel = document.getElementById("today-session-phase-week");
+
+  // Load check-in status
+  const checkins = await db.getWeeklyCheckinsForAthlete(state.currentUser.id);
+  const badge = document.getElementById("checkin-status-badge");
+  if (checkins.length > 0) {
+    badge.textContent = "Done";
+    badge.style.backgroundColor = "rgba(16, 185, 129, 0.15)";
+    badge.style.color = "var(--accent-green)";
+  } else {
+    badge.textContent = "Start";
+    badge.style.backgroundColor = "rgba(6, 182, 212, 0.15)";
+    badge.style.color = "var(--accent-cyan)";
+  }
 
   const assigned = await db.getAssignedProgram(state.currentUser.id);
   if (!assigned) {
@@ -344,6 +379,111 @@ async function handleLogSubmit(e) {
 
   // Redirect to calendar screen to see log status updated
   switchTab("calendar");
+}
+
+// Collapsible Check-in form toggle
+function toggleWeeklyCheckinForm() {
+  const form = document.getElementById("weekly-checkin-form");
+  if (form.style.display === "none") {
+    form.style.display = "flex";
+    form.style.flexDirection = "column";
+  } else {
+    form.style.display = "none";
+  }
+}
+
+// Handle weekly checkin submissions
+async function handleCheckinSubmit(e) {
+  e.preventDefault();
+
+  const checkinData = {
+    athlete_id: state.currentUser.id,
+    week_start_date: new Date().toISOString().split('T')[0],
+    energy: parseInt(document.getElementById("chk-energy").value),
+    sleep: parseInt(document.getElementById("chk-sleep").value),
+    stress: parseInt(document.getElementById("chk-stress").value),
+    motivation: parseInt(document.getElementById("chk-motivation").value),
+    finger_pain: parseInt(document.getElementById("chk-finger-pain").value),
+    skin_condition: parseInt(document.getElementById("chk-skin").value),
+    what_felt_good: document.getElementById("chk-good").value,
+    what_felt_bad: document.getElementById("chk-bad").value,
+    notes: document.getElementById("chk-notes").value
+  };
+
+  await db.addWeeklyCheckin(checkinData);
+
+  // Update badge and collapse
+  const badge = document.getElementById("checkin-status-badge");
+  badge.textContent = "Done";
+  badge.style.backgroundColor = "rgba(16, 185, 129, 0.15)";
+  badge.style.color = "var(--accent-green)";
+
+  document.getElementById("weekly-checkin-form").reset();
+  setupSliderIndicators();
+  toggleWeeklyCheckinForm();
+}
+
+// Handle video review submissions
+async function handleVideoReviewSubmit(e) {
+  e.preventDefault();
+
+  const reviewReq = {
+    athlete_id: state.currentUser.id,
+    video_url: document.getElementById("rev-url").value,
+    storage_source: document.getElementById("rev-source").value,
+    climb_grade: document.getElementById("rev-grade").value,
+    wall_angle: document.getElementById("rev-angle").value,
+    climb_style: document.getElementById("rev-style").value,
+    athlete_question: document.getElementById("rev-question").value,
+    status: "submitted"
+  };
+
+  await db.addVideoReview(reviewReq);
+
+  // Reset form
+  document.getElementById("video-review-form").reset();
+  
+  // Refresh review list
+  loadVideoReviews();
+}
+
+// Load Video Reviews onto Athlete Screen
+async function loadVideoReviews() {
+  if (state.currentUser.role !== "athlete") return;
+
+  const listEl = document.getElementById("video-reviews-list");
+  if (!listEl) return;
+
+  const reviews = await db.getVideoReviewsForAthlete(state.currentUser.id);
+
+  if (reviews.length === 0) {
+    listEl.innerHTML = `<p class="text-muted" style="font-size: 0.9rem;">No review requests submitted yet.</p>`;
+    return;
+  }
+
+  listEl.innerHTML = reviews.map(rev => {
+    let statusClass = 'pending';
+    if (rev.status === 'reviewed') statusClass = 'completed';
+    if (rev.status === 'needs_follow_up') statusClass = 'modified';
+
+    return `
+      <div style="padding: 12px; margin-top: 10px; background-color: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: var(--border-radius-md);">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <span style="font-weight: 600; font-size: 0.9rem; color: var(--accent-cyan);">${rev.climb_grade || 'Unspecified Grade'} - ${rev.climb_style || 'General Climb'}</span>
+          <span class="status-badge ${statusClass}">${rev.status}</span>
+        </div>
+        <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 4px;">Angle: ${rev.wall_angle || 'N/A'} | Source: ${rev.storage_source}</p>
+        <p style="font-size: 0.85rem; margin-top: 6px;">Q: "${rev.athlete_question || 'None'}"</p>
+        <a href="${rev.video_url}" target="_blank" style="color: var(--accent-blue); font-size: 0.85rem; text-decoration: none; display: inline-block; margin-top: 4px;">Watch Video Link &rarr;</a>
+        ${rev.coach_feedback_summary ? `
+          <div style="margin-top: 8px; padding-top: 8px; border-top: 1px dashed var(--border-color); font-size: 0.85rem;">
+            <strong>Coach Feedback:</strong>
+            <p style="color: var(--accent-amber);">${rev.coach_feedback_summary}</p>
+          </div>
+        ` : ''}
+      </div>
+    `;
+  }).join('');
 }
 
 // Load Resources List

@@ -15,8 +15,15 @@
 - [x] Workload calculation (`duration * RPE`) logic and telemetry storage
 - [x] Training Calendar view: Mark completed, skipped, modified session history
 
-## Phase 3: Athlete Utilities & Feedback
-- [ ] Weekly Check-in questionnaire (stress, sleep, energy, pain)
-- [ ] Video Review request submittal form (external URL, grade, questions)
-- [ ] Telegram/Google Drive instructions integration
-- [ ] Static list displays for Resources and FAQs
+## Phase 3: Athlete Utilities & Feedback (Completed)
+- [x] Weekly Check-in questionnaire (stress, sleep, energy, pain)
+- [x] Video Review request submittal form (external URL, grade, questions)
+- [x] Telegram/Google Drive instructions integration
+- [x] Static list displays for Resources and FAQs
+
+## Phase 4: Coach Portal
+- [ ] Coach Dashboard view: Athlete progress summary grid
+- [ ] Red flag indicators (pain >= 5, fatigue >= 5, missed 2+ sessions, inactivity)
+- [ ] Active client list & manual Access Control editor (status, expiration date)
+- [ ] Review Queue page: coach feedback summaries and status updates
+- [ ] Basic FAQ/Resource CRUD for admins
