@@ -2,13 +2,13 @@
 
 | Feature | Status | Notes / Phase |
 |---|---|---|
-| Project Structure & Layout Shell | In Progress | Phase 1 - Mobile-first CSS Grid/Flexbox shell |
-| Mock Auth & Role Switcher | In Progress | Phase 1 - Switch between Athlete and Admin |
-| Basic Navigation | In Progress | Phase 1 - Tab navigation for Athlete and Admin views |
-| Seed Mock Data | In Progress | Phase 1 - Pre-populate programs, sessions, and default users |
-| Athlete Dashboard ("Today") | Planned | Phase 2 - Active session summary, logging actions |
-| Training Calendar | Planned | Phase 2 - Completion status log and calendar history |
-| Session Logging Form | Planned | Phase 2 - Log fatigue, pain flags, RPE, and notes |
+| Project Structure & Layout Shell | Built | Phase 1 - Mobile-first CSS Grid/Flexbox shell |
+| Mock Auth & Role Switcher | Built | Phase 1 - Switch between Athlete and Admin |
+| Basic Navigation | Built | Phase 1 - Tab navigation for Athlete and Admin views |
+| Seed Mock Data | Built | Phase 1 - Pre-populate programs, sessions, and default users |
+| Athlete Dashboard ("Today") | Built | Phase 2 - Active session summary, logging actions |
+| Training Calendar | Built | Phase 2 - Completion status log and calendar history |
+| Session Logging Form | Built | Phase 2 - Log fatigue, pain flags, RPE, and notes |
 | Weekly Check-in | Planned | Phase 3 - Weekly feedback form with pain/fatigue logs |
 | Video Review Requests | Planned | Phase 3 - External link submission (Google Drive, Telegram) |
 | Resources Tab | Planned | Phase 3 - External document/link list |

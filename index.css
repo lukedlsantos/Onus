@@ -270,3 +270,133 @@ main {
   flex-direction: column;
   gap: 16px;
 }
+
+/* Forms */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.form-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-control {
+  background-color: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  border-radius: var(--border-radius-md);
+  padding: 10px;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  width: 100%;
+  outline: none;
+  transition: var(--transition-fast);
+}
+
+.form-control:focus {
+  border-color: var(--accent-cyan);
+}
+
+textarea.form-control {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* Sliders */
+input[type="range"].form-control {
+  padding: 0;
+  height: 6px;
+  background: var(--border-color);
+  border: none;
+  outline: none;
+  -webkit-appearance: none;
+}
+
+input[type="range"].form-control::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--accent-cyan);
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+input[type="range"].form-control::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+/* Drill/Exercise List */
+.drill-item {
+  border-left: 3px solid var(--accent-cyan);
+  background-color: var(--bg-tertiary);
+  padding: 12px;
+  border-radius: 0 var(--border-radius-md) var(--border-radius-md) 0;
+  margin-top: 8px;
+}
+
+.drill-title {
+  font-weight: 600;
+  font-size: 0.95rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.drill-meta {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+/* Calendar Layout */
+.calendar-week {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.calendar-day-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  background-color: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-md);
+}
+
+.calendar-day-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.calendar-day-name {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.calendar-session-title {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.status-badge {
+  font-size: 0.7rem;
+  padding: 2px 6px;
+  border-radius: var(--border-radius-sm);
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.status-badge.completed { background-color: rgba(16, 185, 129, 0.2); color: var(--accent-green); }
+.status-badge.skipped { background-color: rgba(239, 68, 68, 0.2); color: var(--accent-red); }
+.status-badge.modified { background-color: rgba(245, 158, 11, 0.2); color: var(--accent-amber); }
+.status-badge.pending { background-color: rgba(156, 163, 175, 0.1); color: var(--text-muted); }
+

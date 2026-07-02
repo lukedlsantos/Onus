@@ -10,7 +10,8 @@ import { db } from './db.js';
 const state = {
   currentUser: null,
   currentAccess: null,
-  activeTab: null
+  activeTab: null,
+  todaySession: null
 };
 
 // Navigation Tab Configuration
@@ -42,6 +43,20 @@ async function initApp() {
 
   // Bind Role Switcher Event
   document.getElementById("switch-role-btn").addEventListener("click", handleRoleSwitchToggle);
+
+  // Bind Slider Value Displays
+  setupSliderIndicators();
+
+  // Bind Logging Form Submit
+  document.getElementById("session-log-form").addEventListener("submit", handleLogSubmit);
+
+  // Bind "Log Today's Work" Action
+  document.getElementById("log-today-btn").addEventListener("click", () => {
+    switchTab("log");
+    if (state.todaySession) {
+      document.getElementById("log-session-select").value = state.todaySession.id;
+    }
+  });
 }
 
 // Switch User & Update State
@@ -74,6 +89,8 @@ async function switchUser(userId) {
   loadFAQs();
   loadAthleteTodayScreen();
   loadProfileScreen();
+  loadTrainingCalendar();
+  setupSessionSelectDropdown();
 }
 
 // Toggle Athlete / Admin Role Switches (Simulating Auth Toggle)
@@ -129,36 +146,204 @@ function switchTab(tabId) {
   if (targetScreenEl) {
     targetScreenEl.classList.add("active");
   }
+
+  // Hook-up reloads on navigation
+  if (tabId === 'calendar') {
+    loadTrainingCalendar();
+  }
+}
+
+// Setup form range value live updates
+function setupSliderIndicators() {
+  const sliders = [
+    { id: 'log-rpe', valId: 'rpe-val' },
+    { id: 'log-fatigue', valId: 'fatigue-val' },
+    { id: 'log-finger-pain', valId: 'finger-pain-val' },
+    { id: 'log-skin', valId: 'skin-val' }
+  ];
+  sliders.forEach(slider => {
+    const input = document.getElementById(slider.id);
+    const label = document.getElementById(slider.valId);
+    if (input && label) {
+      input.addEventListener("input", (e) => {
+        label.textContent = e.target.value;
+      });
+    }
+  });
+}
+
+// Populate session logging dropdown with athlete's program sessions
+async function setupSessionSelectDropdown() {
+  if (state.currentUser.role !== "athlete") return;
+
+  const select = document.getElementById("log-session-select");
+  if (!select) return;
+
+  const assigned = await db.getAssignedProgram(state.currentUser.id);
+  if (!assigned) {
+    select.innerHTML = `<option value="">No program assigned</option>`;
+    return;
+  }
+
+  const phases = await db.getPhasesForProgram(assigned.program_id);
+  let optionsHtml = '';
+
+  for (const phase of phases) {
+    const weeks = await db.getWeeksForPhase(phase.id);
+    for (const week of weeks) {
+      const sessions = await db.getSessionsForWeek(week.id);
+      sessions.forEach(sess => {
+        optionsHtml += `<option value="${sess.id}">${phase.title} (W${week.week_number}) - ${sess.day_label}: ${sess.title}</option>`;
+      });
+    }
+  }
+  select.innerHTML = optionsHtml;
 }
 
 // Load content onto Athlete dashboard
 async function loadAthleteTodayScreen() {
   if (state.currentUser.role !== "athlete") return;
 
+  const titleEl = document.getElementById("today-session-title");
+  const objectiveEl = document.getElementById("today-session-objective");
+  const drillContainer = document.getElementById("today-drills-container");
+  const drillList = document.getElementById("today-drills-list");
+  const logBtn = document.getElementById("log-today-btn");
+  const phaseWeekLabel = document.getElementById("today-session-phase-week");
+
   const assigned = await db.getAssignedProgram(state.currentUser.id);
   if (!assigned) {
-    document.getElementById("today-session-title").textContent = "No program assigned.";
+    titleEl.textContent = "No program assigned.";
+    objectiveEl.textContent = "Ask your coach to assign a plan.";
+    drillContainer.style.display = "none";
+    logBtn.style.display = "none";
     return;
   }
 
-  // Get first session of first week as mock today's session
   const phases = await db.getPhasesForProgram(assigned.program_id);
   if (phases.length > 0) {
     const weeks = await db.getWeeksForPhase(phases[0].id);
     if (weeks.length > 0) {
       const sessions = await db.getSessionsForWeek(weeks[0].id);
       if (sessions.length > 0) {
-        const todaySession = sessions[0];
-        document.getElementById("today-session-title").innerHTML = `
-          <strong>${todaySession.title}</strong><br>
-          <small>Objective: ${todaySession.objective}</small><br>
-          <small>Duration: ${todaySession.estimated_duration_minutes} mins | Target RPE: ${todaySession.target_intensity}/10</small>
-        `;
+        // Use Day 1 session as the mock Today's Session
+        const session = sessions[0];
+        state.todaySession = session;
+
+        phaseWeekLabel.textContent = `${phases[0].title} — Week ${weeks[0].week_number}`;
+        titleEl.textContent = `${session.day_label}: ${session.title}`;
+        objectiveEl.textContent = session.objective;
+        logBtn.style.display = "block";
+
+        // Fetch drills
+        const drills = await db.getExercisesForSession(session.id);
+        if (drills.length > 0) {
+          drillList.innerHTML = drills.map(d => `
+            <div class="drill-item">
+              <div class="drill-title">
+                <span>${d.name}</span>
+                <span style="font-size: 0.8rem; color: var(--accent-cyan); font-weight: 500;">${d.sets} sets</span>
+              </div>
+              <div class="drill-meta">Rep/Duration: ${d.reps_or_duration} | Rest: ${d.rest}</div>
+              ${d.notes ? `<div class="drill-meta" style="font-style: italic; color: var(--text-muted);">Note: ${d.notes}</div>` : ''}
+            </div>
+          `).join('');
+          drillContainer.style.display = "block";
+        } else {
+          drillContainer.style.display = "none";
+        }
         return;
       }
     }
   }
-  document.getElementById("today-session-title").textContent = "Rest Day";
+  
+  titleEl.textContent = "Rest Day";
+  objectiveEl.textContent = "Enjoy your recovery.";
+  drillContainer.style.display = "none";
+  logBtn.style.display = "none";
+}
+
+// Load Training Calendar View
+async function loadTrainingCalendar() {
+  if (state.currentUser.role !== "athlete") return;
+
+  const calendarList = document.getElementById("calendar-list");
+  if (!calendarList) return;
+
+  const assigned = await db.getAssignedProgram(state.currentUser.id);
+  if (!assigned) {
+    calendarList.innerHTML = `<p class="text-muted">No training program assigned.</p>`;
+    return;
+  }
+
+  const logs = await db.getLogsForAthlete(state.currentUser.id);
+  const phases = await db.getPhasesForProgram(assigned.program_id);
+  
+  let calendarHtml = '';
+
+  for (const phase of phases) {
+    calendarHtml += `<h3 style="margin-top: 14px; font-size: 1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 4px;">${phase.title}</h3>`;
+    const weeks = await db.getWeeksForPhase(phase.id);
+    for (const week of weeks) {
+      calendarHtml += `<h4 style="font-size: 0.85rem; color: var(--accent-cyan); margin-top: 8px;">Week ${week.week_number}</h4>`;
+      const sessions = await db.getSessionsForWeek(week.id);
+      
+      sessions.forEach(sess => {
+        const log = logs.find(l => l.session_id === sess.id);
+        const status = log ? log.status : 'pending';
+        
+        calendarHtml += `
+          <div class="calendar-day-row">
+            <div class="calendar-day-info">
+              <span class="calendar-day-name">${sess.day_label}: ${sess.title}</span>
+              <span class="calendar-session-title">${sess.objective}</span>
+            </div>
+            <span class="status-badge ${status}">${status}</span>
+          </div>
+        `;
+      });
+    }
+  }
+  calendarList.innerHTML = calendarHtml;
+}
+
+// Handle session logs submission form
+async function handleLogSubmit(e) {
+  e.preventDefault();
+
+  const logData = {
+    athlete_id: state.currentUser.id,
+    session_id: document.getElementById("log-session-select").value,
+    status: document.getElementById("log-status").value,
+    duration_minutes: parseInt(document.getElementById("log-duration").value) || 0,
+    rpe: parseInt(document.getElementById("log-rpe").value) || 1,
+    fatigue: parseInt(document.getElementById("log-fatigue").value) || 1,
+    finger_pain: parseInt(document.getElementById("log-finger-pain").value) || 0,
+    skin_condition: parseInt(document.getElementById("log-skin").value) || 5,
+    video_url: document.getElementById("log-video-url").value,
+    notes: document.getElementById("log-notes").value
+  };
+
+  await db.addLog(logData);
+
+  // Pain/Fatigue warning check
+  const warningEl = document.getElementById("pain-warning");
+  if (logData.finger_pain >= 5 || logData.fatigue >= 5) {
+    if (warningEl) warningEl.style.display = "block";
+  }
+
+  // Reset form inputs
+  document.getElementById("session-log-form").reset();
+  setupSliderIndicators();
+
+  // Reset labels
+  document.getElementById("rpe-val").textContent = "6";
+  document.getElementById("fatigue-val").textContent = "3";
+  document.getElementById("finger-pain-val").textContent = "0";
+  document.getElementById("skin-val").textContent = "5";
+
+  // Redirect to calendar screen to see log status updated
+  switchTab("calendar");
 }
 
 // Load Resources List

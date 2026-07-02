@@ -24,28 +24,91 @@
     <main id="main-content">
       
       <!-- ATHLETE SCREENS -->
+      <!-- ATHLETE SCREENS -->
       <section id="screen-today" class="screen active">
         <div class="card">
-          <h2 class="card-title">Today's Session</h2>
-          <p id="today-session-title" class="text-muted">Loading...</p>
-          <div class="alert alert-warning" id="pain-warning" style="display: none;">
-            <strong>Warning:</strong> High pain/fatigue logs detected. Take it easy!
+          <h2 class="card-title" id="today-session-phase-week">Today's Session</h2>
+          <div id="today-session-header">
+            <h3 id="today-session-title" style="margin-bottom: 4px;">Rest Day</h3>
+            <p id="today-session-objective" class="text-muted" style="font-size: 0.9rem; margin-bottom: 8px;">Enjoy your recovery.</p>
           </div>
-          <button class="btn btn-primary" id="log-today-btn">Log Today's Work</button>
+          <div class="alert alert-warning" id="pain-warning" style="display: none;">
+            <strong>Warning:</strong> Active pain indicators or fatigue flags detected. Check in with your coach!
+          </div>
+          
+          <div id="today-drills-container" style="display: none;">
+            <h4 style="margin: 12px 0 6px 0; font-size: 0.95rem;">Drills & Plan:</h4>
+            <div id="today-drills-list"></div>
+          </div>
+
+          <button class="btn btn-primary" id="log-today-btn" style="margin-top: 12px; display: none;">Log Today's Work</button>
         </div>
       </section>
 
       <section id="screen-calendar" class="screen">
         <div class="card">
           <h2 class="card-title">Training Calendar</h2>
-          <p class="text-muted">Phase 1: Calendar Overview Placeholder</p>
+          <div id="calendar-list" class="calendar-week">
+            <!-- Dynamically populated -->
+          </div>
         </div>
       </section>
 
       <section id="screen-log" class="screen">
         <div class="card">
           <h2 class="card-title">Log Session</h2>
-          <p class="text-muted">Submit logs for completed sessions.</p>
+          <form id="session-log-form">
+            <div class="form-group">
+              <label class="form-label" for="log-session-select">Select Session</label>
+              <select id="log-session-select" class="form-control" required></select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="log-status">Status</label>
+              <select id="log-status" class="form-control">
+                <option value="completed">Completed</option>
+                <option value="modified">Modified</option>
+                <option value="skipped">Skipped</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="log-duration">Duration (Minutes)</label>
+              <input type="number" id="log-duration" class="form-control" value="60" min="0" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="log-rpe">RPE (Intensity: 1-10) <span id="rpe-val">6</span></label>
+              <input type="range" id="log-rpe" class="form-control" min="1" max="10" value="6">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="log-fatigue">Fatigue (1-5) <span id="fatigue-val">3</span></label>
+              <input type="range" id="log-fatigue" class="form-control" min="1" max="5" value="3">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="log-finger-pain">Finger Pain (0-10) <span id="finger-pain-val">0</span></label>
+              <input type="range" id="log-finger-pain" class="form-control" min="0" max="10" value="0">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="log-skin">Skin Condition (1-5) <span id="skin-val">5</span></label>
+              <input type="range" id="log-skin" class="form-control" min="1" max="5" value="5">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="log-video-url">Video Link (Google Drive / Telegram)</label>
+              <input type="url" id="log-video-url" class="form-control" placeholder="https://drive.google.com/...">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="log-notes">Session Notes</label>
+              <textarea id="log-notes" class="form-control" placeholder="How did it feel? Any specific sends?"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Save Session Log</button>
+          </form>
         </div>
       </section>
 
