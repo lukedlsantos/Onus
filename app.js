@@ -60,6 +60,9 @@ async function initApp() {
   document.getElementById("cancel-access-btn").addEventListener("click", () => {
     document.getElementById("admin-access-card").style.display = "none";
   });
+
+  // Strava integration trigger
+  document.getElementById("connect-strava-btn").addEventListener("click", handleStravaConnectionToggle);
 }
 
 // Verify locks and lock app if account status is expired
@@ -770,6 +773,64 @@ function loadProfileScreen() {
   statusEl.className = `badge ${state.currentAccess.status}`;
 
   document.getElementById("profile-valid-until").textContent = state.currentAccess.access_until;
+
+  // Render Strava UI details
+  const stravaStatusEl = document.getElementById("strava-status");
+  const stravaSyncDetails = document.getElementById("strava-sync-details");
+  const stravaLastActivityEl = document.getElementById("strava-last-activity");
+  const stravaBtn = document.getElementById("connect-strava-btn");
+
+  if (state.currentUser.strava_connected) {
+    stravaStatusEl.textContent = "Connected";
+    stravaStatusEl.style.backgroundColor = "rgba(16, 185, 129, 0.15)";
+    stravaStatusEl.style.color = "var(--accent-green)";
+    
+    stravaSyncDetails.style.display = "block";
+    stravaLastActivityEl.textContent = state.currentUser.strava_last_sync;
+
+    stravaBtn.textContent = "Disconnect Strava";
+    stravaBtn.style.backgroundColor = "var(--bg-tertiary)";
+    stravaBtn.style.color = "var(--text-primary)";
+  } else {
+    stravaStatusEl.textContent = "Not Connected";
+    stravaStatusEl.style.backgroundColor = "var(--bg-tertiary)";
+    stravaStatusEl.style.color = "var(--text-muted)";
+
+    stravaSyncDetails.style.display = "none";
+
+    stravaBtn.textContent = "Connect Strava Account";
+    stravaBtn.style.backgroundColor = "#fc4c02";
+    stravaBtn.style.color = "white";
+  }
+}
+
+// Toggle Strava state and simulate activities fetch (mock Garmin/Apple Sync)
+async function handleStravaConnectionToggle() {
+  if (state.currentUser.strava_connected) {
+    // Disconnect
+    await db.disconnectStrava(state.currentUser.id);
+  } else {
+    // Connect and simulate syncing Garmin/Apple workout via Strava
+    await db.connectStrava(state.currentUser.id);
+    
+    // Add mock synced log
+    await db.addLog({
+      athlete_id: state.currentUser.id,
+      session_id: "session-w1-d2", // Active Recovery
+      status: "completed",
+      duration_minutes: 45,
+      rpe: 3,
+      fatigue: 2,
+      finger_pain: 0,
+      skin_condition: 5,
+      notes: "Synced via Garmin Connect (Active Recovery run)"
+    });
+  }
+
+  // Refresh profile user state
+  state.currentUser = await db.getProfile(state.currentUser.id);
+  loadProfileScreen();
+  loadTrainingCalendar();
 }
 
 // Boot application

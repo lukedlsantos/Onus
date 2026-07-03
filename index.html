@@ -258,6 +258,24 @@
           <p><strong>Status:</strong> <span id="profile-status" class="badge">Loading...</span></p>
           <p><strong>Valid Until:</strong> <span id="profile-valid-until">Loading...</span></p>
         </div>
+
+        <div class="card">
+          <h2 class="card-title">Integrations</h2>
+          <p style="font-size: 0.85rem; color: var(--text-secondary);">Connect your Apple Watch or Garmin workouts via Strava to automatically sync climbing activities.</p>
+          
+          <div style="margin-top: 10px; display: flex; flex-direction: column; gap: 8px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.9rem;">
+              <span>Strava Connection:</span>
+              <span id="strava-status" class="badge" style="background-color: var(--bg-tertiary); color: var(--text-muted);">Not Connected</span>
+            </div>
+            
+            <div id="strava-sync-details" style="display: none; font-size: 0.85rem;">
+              <p><strong>Last activity synced:</strong> <span id="strava-last-activity" class="text-muted">None</span></p>
+            </div>
+
+            <button id="connect-strava-btn" class="btn" style="background-color: #fc4c02; color: white;">Connect Strava Account</button>
+          </div>
+        </div>
       </section>
 
       <!-- COACH/ADMIN SCREENS -->

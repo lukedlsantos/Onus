@@ -12,6 +12,8 @@ const DEFAULT_PROFILES = [
     role: "athlete",
     full_name: "Alex Honnold",
     telegram_username: "alex_climbs",
+    strava_connected: false,
+    strava_last_sync: null,
     created_at: new Date().toISOString()
   },
   {
@@ -306,5 +308,27 @@ export const db = {
     }
     db._set("onus_video_reviews", all);
     return Promise.resolve(req);
+  },
+
+  // Strava Integration Actions
+  connectStrava: (athleteId) => {
+    const profiles = db._get("onus_profiles");
+    const profile = profiles.find(p => p.id === athleteId);
+    if (profile) {
+      profile.strava_connected = true;
+      profile.strava_last_sync = new Date().toLocaleString();
+      db._set("onus_profiles", profiles);
+    }
+    return Promise.resolve(profile);
+  },
+  disconnectStrava: (athleteId) => {
+    const profiles = db._get("onus_profiles");
+    const profile = profiles.find(p => p.id === athleteId);
+    if (profile) {
+      profile.strava_connected = false;
+      profile.strava_last_sync = null;
+      db._set("onus_profiles", profiles);
+    }
+    return Promise.resolve(profile);
   }
 };
