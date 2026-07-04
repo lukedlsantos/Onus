@@ -425,12 +425,36 @@ async function loadAthleteTodayScreen() {
   }
 
   if (!session && phases.length > 0) {
-    const weeks = await db.getWeeksForPhase(phases[0].id);
-    if (weeks.length > 0) {
-      const sessions = await db.getSessionsForWeek(weeks[0].id);
-      if (sessions.length > 0) {
-        session = sessions[0];
-        phaseWeekLabel.textContent = `${phases[0].title} — Week ${weeks[0].week_number}`;
+    // Find the first unlogged session in chronological order
+    const logs = await db.getLogsForAthlete(state.currentUser.id);
+    let foundUnlogged = false;
+    for (const phase of phases) {
+      const weeks = await db.getWeeksForPhase(phase.id);
+      for (const week of weeks) {
+        const sessions = await db.getSessionsForWeek(week.id);
+        for (const sess of sessions) {
+          const logged = logs.some(l => l.session_id === sess.id);
+          if (!logged) {
+            session = sess;
+            phaseWeekLabel.textContent = `${phase.title} — Week ${week.week_number}`;
+            foundUnlogged = true;
+            break;
+          }
+        }
+        if (foundUnlogged) break;
+      }
+      if (foundUnlogged) break;
+    }
+
+    // Dynamic fallback to the absolute first session if all sessions in program have logs
+    if (!session) {
+      const weeks = await db.getWeeksForPhase(phases[0].id);
+      if (weeks.length > 0) {
+        const sessions = await db.getSessionsForWeek(weeks[0].id);
+        if (sessions.length > 0) {
+          session = sessions[0];
+          phaseWeekLabel.textContent = `${phases[0].title} — Week ${weeks[0].week_number}`;
+        }
       }
     }
   }
@@ -662,6 +686,10 @@ async function handleLogSubmit(e) {
   };
 
   await db.addLog(logData);
+
+  // Clear current active selection to auto-advance to the next incomplete day on reload
+  localStorage.removeItem("onus_selected_today_session_id");
+  state.startedSessionId = null;
 
   const warningEl = document.getElementById("pain-warning");
   if (logData.finger_pain >= 5 || logData.fatigue >= 5) {
