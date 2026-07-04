@@ -78,12 +78,20 @@ async function initApp() {
     document.getElementById("quick-rpe-val").textContent = `${e.target.value} / 10`;
   });
   
-  document.getElementById("quick-log-fatigue").addEventListener("input", (e) => {
-    document.getElementById("quick-fatigue-val").textContent = `${e.target.value} / 5`;
+  document.getElementById("quick-log-skin").addEventListener("input", (e) => {
+    document.getElementById("quick-skin-val").textContent = `${e.target.value} / 10`;
   });
   
-  document.getElementById("quick-log-pain").addEventListener("input", (e) => {
-    document.getElementById("quick-pain-val").textContent = `${e.target.value} / 5`;
+  document.getElementById("quick-log-fatigue").addEventListener("input", (e) => {
+    document.getElementById("quick-fatigue-val").textContent = `${e.target.value} / 10`;
+  });
+  
+  document.getElementById("quick-log-finger-pain").addEventListener("input", (e) => {
+    document.getElementById("quick-finger-pain-val").textContent = `${e.target.value} / 10`;
+  });
+  
+  document.getElementById("quick-log-body-pain").addEventListener("input", (e) => {
+    document.getElementById("quick-body-pain-val").textContent = `${e.target.value} / 10`;
   });
   
   document.getElementById("submit-quick-log-btn").addEventListener("click", submitQuickLog);
@@ -1091,16 +1099,24 @@ async function submitQuickLog() {
   if (!state.todaySession) return;
   
   const rpe = parseInt(document.getElementById("quick-log-rpe").value) || 6;
-  const fatigue = parseInt(document.getElementById("quick-log-fatigue").value) || 3;
-  const pain = parseInt(document.getElementById("quick-log-pain").value) || 0;
+  const skin = parseInt(document.getElementById("quick-log-skin").value) || 5;
+  const fatigue = parseInt(document.getElementById("quick-log-fatigue").value) || 5;
+  const fingerPain = parseInt(document.getElementById("quick-log-finger-pain").value) || 0;
+  const bodyPain = parseInt(document.getElementById("quick-log-body-pain").value) || 0;
+  const painDesc = document.getElementById("quick-log-pain-desc").value.trim();
   
   // Calculate completed exercises details
   const sessionDrills = await db.getExercisesForSession(state.todaySession.id);
   const completions = [];
   
   for (const d of sessionDrills) {
-    if (d.category === "Tier 4") {
-      const subItems = parseSubExercises(d.notes);
+    const subItems = parseSubExercises(d.notes);
+    const isWorkoutContainer = subItems.length > 0 && (
+      d.category === "Tier 4" || 
+      subItems.some(sub => sub.sets > 1 || sub.repsOrDuration !== "1 set")
+    );
+    
+    if (isWorkoutContainer) {
       subItems.forEach(sub => {
         const completed = state.drillCompletions[sub.id] || 0;
         completions.push({
@@ -1121,6 +1137,12 @@ async function submitQuickLog() {
     }
   }
   
+  const formattedNotes = [
+    `Quick Log. Completed exercises details: ` + completions.map(c => `${c.name} (${c.sets_completed}/${c.sets_total})`).join(", "),
+    `Body Pain / Soreness: ${bodyPain} / 10`,
+    painDesc ? `Pain Details: ${painDesc}` : ""
+  ].filter(Boolean).join("\n\n");
+  
   const logData = {
     athlete_id: state.currentUser.id,
     session_id: state.todaySession.id,
@@ -1128,10 +1150,10 @@ async function submitQuickLog() {
     duration_minutes: state.todaySession.estimated_duration_minutes || 60,
     rpe: rpe,
     fatigue: fatigue,
-    finger_pain: pain,
-    skin_condition: 5,
+    finger_pain: fingerPain,
+    skin_condition: skin,
     video_url: "",
-    notes: `Quick Log. Completed exercises details: ` + completions.map(c => `${c.name} (${c.sets_completed}/${c.sets_total})`).join(", ")
+    notes: formattedNotes
   };
   
   await db.addLog(logData);
@@ -1145,10 +1167,15 @@ async function submitQuickLog() {
   // Reset fields to defaults
   document.getElementById("quick-log-rpe").value = "6";
   document.getElementById("quick-rpe-val").textContent = "6 / 10";
-  document.getElementById("quick-log-fatigue").value = "3";
-  document.getElementById("quick-fatigue-val").textContent = "3 / 5";
-  document.getElementById("quick-log-pain").value = "0";
-  document.getElementById("quick-pain-val").textContent = "0 / 5";
+  document.getElementById("quick-log-skin").value = "5";
+  document.getElementById("quick-skin-val").textContent = "5 / 10";
+  document.getElementById("quick-log-fatigue").value = "5";
+  document.getElementById("quick-fatigue-val").textContent = "5 / 10";
+  document.getElementById("quick-log-finger-pain").value = "0";
+  document.getElementById("quick-finger-pain-val").textContent = "0 / 10";
+  document.getElementById("quick-log-body-pain").value = "0";
+  document.getElementById("quick-body-pain-val").textContent = "0 / 10";
+  document.getElementById("quick-log-pain-desc").value = "";
   
   switchTab("calendar");
 }

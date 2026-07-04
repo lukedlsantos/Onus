@@ -448,35 +448,86 @@
 
   <!-- Quick Log Modal Sheet -->
   <div id="quick-log-modal" class="modal-overlay" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); z-index: 1000; align-items: flex-end; justify-content: center; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);">
-    <div class="quick-log-sheet" style="background: var(--bg-secondary); border-top: 1px solid var(--border-color); border-top-left-radius: var(--border-radius-lg); border-top-right-radius: var(--border-radius-lg); padding: 20px; width: 100%; max-width: 500px; box-shadow: 0 -10px 25px rgba(0,0,0,0.5); display: flex; flex-direction: column; gap: 14px; box-sizing: border-box; transform: translateY(100%); transition: transform 0.3s ease-out; margin-bottom: 0;">
+    <div class="quick-log-sheet" style="background: var(--bg-secondary); border-top: 1px solid var(--border-color); border-top-left-radius: var(--border-radius-lg); border-top-right-radius: var(--border-radius-lg); padding: 20px; width: 100%; max-width: 500px; box-shadow: 0 -10px 25px rgba(0,0,0,0.5); display: flex; flex-direction: column; gap: 14px; box-sizing: border-box; transform: translateY(100%); transition: transform 0.3s ease-out; margin-bottom: 0; max-height: 90vh; overflow-y: auto;">
       <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 8px;">
         <h3 id="quick-log-title" style="margin: 0; font-size: 1rem; color: var(--accent-cyan);">Log Training Session</h3>
         <button id="close-quick-log-btn" style="background: none; border: none; color: var(--text-muted); font-size: 1.5rem; cursor: pointer; padding: 0 4px; line-height: 1;">&times;</button>
       </div>
       
+      <!-- Metric 1: RPE -->
       <div class="form-group">
-        <label class="form-label" style="display: flex; justify-content: space-between; font-size: 0.85rem;">
-          <span>Session Difficulty (RPE)</span>
+        <label class="form-label" style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 4px;">
+          <span>Difficulty (RPE)</span>
           <span id="quick-rpe-val" style="color: var(--accent-cyan); font-weight: 700;">6 / 10</span>
         </label>
         <input type="range" id="quick-log-rpe" class="form-control slider-input" min="1" max="10" value="6" style="width: 100%;">
-        <p class="text-muted" style="font-size: 0.65rem; margin: 2px 0 0 0;">1 = rest/light recovery, 10 = absolute limit</p>
+        <div style="display: flex; justify-content: space-between; font-size: 0.6rem; color: var(--text-secondary); margin-top: 2px;">
+          <span>1: Recovery/Rest</span>
+          <span>5: Active/Moderate</span>
+          <span>10: Max Effort (++)</span>
+        </div>
       </div>
 
+      <!-- Metric 2: Skin -->
       <div class="form-group">
-        <label class="form-label" style="display: flex; justify-content: space-between; font-size: 0.85rem;">
+        <label class="form-label" style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 4px;">
+          <span>Skin Condition</span>
+          <span id="quick-skin-val" style="color: var(--accent-cyan); font-weight: 700;">5 / 10</span>
+        </label>
+        <input type="range" id="quick-log-skin" class="form-control slider-input" min="1" max="10" value="5" style="width: 100%;">
+        <div style="display: flex; justify-content: space-between; font-size: 0.6rem; color: var(--text-secondary); margin-top: 2px;">
+          <span>1: Bleeding/Split</span>
+          <span>5: Warm/Thinned</span>
+          <span>10: Perfect Callus (++)</span>
+        </div>
+      </div>
+
+      <!-- Metric 3: Fatigue -->
+      <div class="form-group">
+        <label class="form-label" style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 4px;">
           <span>Fatigue Level</span>
-          <span id="quick-fatigue-val" style="color: var(--accent-cyan); font-weight: 700;">3 / 5</span>
+          <span id="quick-fatigue-val" style="color: var(--accent-cyan); font-weight: 700;">5 / 10</span>
         </label>
-        <input type="range" id="quick-log-fatigue" class="form-control slider-input" min="1" max="5" value="3" style="width: 100%;">
+        <input type="range" id="quick-log-fatigue" class="form-control slider-input" min="1" max="10" value="5" style="width: 100%;">
+        <div style="display: flex; justify-content: space-between; font-size: 0.6rem; color: var(--text-secondary); margin-top: 2px;">
+          <span>1: Fresh/Rested</span>
+          <span>5: Tired/Heavy</span>
+          <span>10: Exhausted (++)</span>
+        </div>
       </div>
 
+      <!-- Metric 4: Finger Pain -->
       <div class="form-group">
-        <label class="form-label" style="display: flex; justify-content: space-between; font-size: 0.85rem;">
-          <span>Finger Pain / Pulley Tweaks</span>
-          <span id="quick-pain-val" style="color: var(--accent-cyan); font-weight: 700;">0 / 5</span>
+        <label class="form-label" style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 4px;">
+          <span>Finger Pain / Tweaks</span>
+          <span id="quick-finger-pain-val" style="color: var(--accent-cyan); font-weight: 700;">0 / 10</span>
         </label>
-        <input type="range" id="quick-log-pain" class="form-control slider-input" min="0" max="5" value="0" style="width: 100%;">
+        <input type="range" id="quick-log-finger-pain" class="form-control slider-input" min="0" max="10" value="0" style="width: 100%;">
+        <div style="display: flex; justify-content: space-between; font-size: 0.6rem; color: var(--text-secondary); margin-top: 2px;">
+          <span>0: Perfect/No pain</span>
+          <span>5: Mild ache</span>
+          <span>10: Severe pain (++)</span>
+        </div>
+      </div>
+
+      <!-- Metric 5: Body Pain -->
+      <div class="form-group">
+        <label class="form-label" style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 4px;">
+          <span>Body Pain / Soreness</span>
+          <span id="quick-body-pain-val" style="color: var(--accent-cyan); font-weight: 700;">0 / 10</span>
+        </label>
+        <input type="range" id="quick-log-body-pain" class="form-control slider-input" min="0" max="10" value="0" style="width: 100%;">
+        <div style="display: flex; justify-content: space-between; font-size: 0.6rem; color: var(--text-secondary); margin-top: 2px;">
+          <span>0: Perfect/No soreness</span>
+          <span>5: Moderate ache</span>
+          <span>10: Severe joint pain (++)</span>
+        </div>
+      </div>
+
+      <!-- Pain Description Notes -->
+      <div class="form-group">
+        <label class="form-label" for="quick-log-pain-desc" style="font-size: 0.85rem;">Describe any pain or tweaks:</label>
+        <textarea id="quick-log-pain-desc" class="form-control" rows="2" placeholder="Describe what type of pain you feel, or location of any tweak..." style="width: 100%; border: 1px solid var(--border-color); background: var(--bg-primary); color: var(--text-primary); border-radius: var(--border-radius-sm); padding: 6px; box-sizing: border-box; resize: none; font-size: 0.8rem;"></textarea>
       </div>
 
       <button class="btn btn-primary" id="submit-quick-log-btn" style="width: 100%; margin-top: 8px;">Confirm & Save Log</button>
