@@ -1165,8 +1165,8 @@ async function submitQuickLog() {
   closeQuickLogModal();
   
   // Reset fields to defaults
-  document.getElementById("quick-log-rpe").value = "6";
-  document.getElementById("quick-rpe-val").textContent = "6 / 10";
+  document.getElementById("quick-log-rpe").value = "5";
+  document.getElementById("quick-rpe-val").textContent = "5 / 10";
   document.getElementById("quick-log-skin").value = "5";
   document.getElementById("quick-skin-val").textContent = "5 / 10";
   document.getElementById("quick-log-fatigue").value = "5";
