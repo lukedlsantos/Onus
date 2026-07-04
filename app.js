@@ -479,24 +479,42 @@ async function loadAthleteTodayScreen() {
     const drills = await db.getExercisesForSession(session.id);
     if (drills.length > 0) {
       drillList.innerHTML = drills.map(d => {
-        const timerSecs = parseDurationText(d.reps_or_duration);
+        const timerSecs = parseDurationText(d.rest);
         let timerHtml = '';
         
         if (timerSecs !== null) {
+          let remainingSecs = timerSecs;
+          let startText = "Start";
+          let resetStyle = "display: none;";
+          
+          if (state.activeTimers[d.id]) {
+            const activeTimer = state.activeTimers[d.id];
+            remainingSecs = activeTimer.remainingSeconds;
+            if (activeTimer.running) {
+              startText = "Pause";
+              resetStyle = "display: inline-block;";
+            } else if (activeTimer.remainingSeconds < activeTimer.originalSeconds) {
+              resetStyle = "display: inline-block;";
+            }
+          }
+
           timerHtml = `
             <div class="timer-container" data-drill-id="${d.id}" data-seconds="${timerSecs}">
-              <span class="timer-display">${formatTime(timerSecs)}</span>
-              <button class="timer-btn timer-start-btn">Start</button>
-              <button class="timer-btn timer-reset-btn" style="display: none;">Reset</button>
+              <span class="timer-display">${formatTime(remainingSecs)}</span>
+              <button class="timer-btn timer-start-btn">${startText}</button>
+              <button class="timer-btn timer-reset-btn" style="${resetStyle}">Reset</button>
             </div>
           `;
         }
 
         return `
           <div class="drill-item" id="drill-card-${d.id}">
-            <div class="drill-title">
-              <span>${d.name}</span>
-              <span style="font-size: 0.8rem; color: var(--accent-cyan); font-weight: 500;">${d.sets} sets</span>
+            <div class="drill-title" style="display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+              <span style="font-weight: 600;">${d.name}</span>
+              <div style="display: flex; align-items: center; gap: 6px;">
+                <span class="badge" style="background-color: var(--bg-secondary); color: var(--accent-cyan); font-size: 0.65rem; font-weight: 600; padding: 2px 6px; border-radius: var(--border-radius-sm); border: 1px solid var(--border-color);">${d.category}</span>
+                <span style="font-size: 0.8rem; color: var(--text-secondary); font-weight: 500;">${d.sets} sets</span>
+              </div>
             </div>
             <div class="drill-meta">Rep/Duration: ${d.reps_or_duration} | Rest: ${d.rest}</div>
             ${d.notes ? `<div class="drill-meta" style="font-style: italic; color: var(--text-muted);">Note: ${d.notes}</div>` : ''}
@@ -583,13 +601,20 @@ function handleDrillActionsClick(e) {
         const elapsed = Math.floor((Date.now() - timer.startTime) / 1000);
         timer.remainingSeconds = Math.max(0, timer.originalRemaining - elapsed);
         
-        container.querySelector(".timer-display").textContent = formatTime(timer.remainingSeconds);
+        // Query the active DOM container element to avoid detached DOM node update bugs
+        const activeContainer = document.querySelector(`.timer-container[data-drill-id="${drillId}"]`);
+        if (activeContainer) {
+          activeContainer.querySelector(".timer-display").textContent = formatTime(timer.remainingSeconds);
+        }
 
         if (timer.remainingSeconds <= 0) {
           clearInterval(timer.intervalId);
           timer.running = false;
-          target.textContent = "Start";
-          resetBtn.style.display = "none";
+          
+          if (activeContainer) {
+            activeContainer.querySelector(".timer-start-btn").textContent = "Start";
+            activeContainer.querySelector(".timer-reset-btn").style.display = "none";
+          }
           if (navigator.vibrate) navigator.vibrate([200, 100, 200]);
         }
       }, 200);
@@ -607,9 +632,13 @@ function handleDrillActionsClick(e) {
       clearInterval(timer.intervalId);
       timer.running = false;
       timer.remainingSeconds = timer.originalSeconds;
-      container.querySelector(".timer-display").textContent = formatTime(timer.originalSeconds);
-      container.querySelector(".timer-start-btn").textContent = "Start";
-      target.style.display = "none";
+      
+      const activeContainer = document.querySelector(`.timer-container[data-drill-id="${drillId}"]`);
+      if (activeContainer) {
+        activeContainer.querySelector(".timer-display").textContent = formatTime(timer.originalSeconds);
+        activeContainer.querySelector(".timer-start-btn").textContent = "Start";
+        activeContainer.querySelector(".timer-reset-btn").style.display = "none";
+      }
     }
   }
 }
