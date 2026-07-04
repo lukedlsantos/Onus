@@ -452,6 +452,54 @@ function parseSubExercises(notes) {
   return subItems;
 }
 
+// Play an audible double-beep alarm using Web Audio API (cross-browser compatible)
+function playAlarmSound() {
+  try {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    
+    osc.type = "sine";
+    osc.frequency.setValueAtTime(880, ctx.currentTime); // High-pitched clean beep (A5 note)
+    gain.gain.setValueAtTime(0, ctx.currentTime);
+    
+    // Double beep pattern: beep (0.25s), gap (0.15s), beep (0.4s)
+    gain.gain.setValueAtTime(0.5, ctx.currentTime);
+    gain.gain.setValueAtTime(0, ctx.currentTime + 0.25);
+    gain.gain.setValueAtTime(0.5, ctx.currentTime + 0.4);
+    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.8);
+    
+    osc.start(ctx.currentTime);
+    osc.stop(ctx.currentTime + 0.8);
+  } catch (e) {
+    console.warn("AudioContext failed to start:", e);
+  }
+}
+
+// Send local system push notification
+function sendTimerNotification(timerId, container) {
+  let labelText = "Timer";
+  if (container) {
+    const labelSpan = container.querySelector('span');
+    if (labelSpan) {
+      labelText = labelSpan.textContent.trim();
+    }
+  }
+  
+  if ("Notification" in window) {
+    if (Notification.permission === "granted") {
+      new Notification(`${labelText} Finished!`, {
+        body: `Time is up for your training block. Click to resume training.`,
+        icon: "./icons/icon-192.png",
+        vibrate: [300, 150, 300]
+      });
+    }
+  }
+}
+
 // Load content onto Athlete dashboard
 async function loadAthleteTodayScreen() {
   if (state.currentUser.role !== "athlete") return;
@@ -757,7 +805,11 @@ function handleDrillActionsClick(e) {
             activeContainer.querySelector(".timer-start-btn").textContent = "Start";
             activeContainer.querySelector(".timer-reset-btn").style.display = "none";
           }
-          if (navigator.vibrate) navigator.vibrate([200, 100, 200]);
+          
+          // Trigger audible, vibration, and push notification alarms
+          playAlarmSound();
+          if (navigator.vibrate) navigator.vibrate([300, 150, 300, 150, 300]);
+          sendTimerNotification(drillId, activeContainer);
         }
       }, 200);
     }
@@ -1393,6 +1445,11 @@ async function handleStravaConnectionToggle() {
 // Boot application
 window.addEventListener("DOMContentLoaded", () => {
   initApp();
+
+  // Request notifications permission on app initialization
+  if ("Notification" in window && Notification.permission === "default") {
+    Notification.requestPermission();
+  }
 
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('./sw.js')
