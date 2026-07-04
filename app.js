@@ -480,12 +480,6 @@ async function loadAthleteTodayScreen() {
   drillContainer.style.display = "none";
   logBtn.style.display = "none";
 }
-  
-  titleEl.textContent = "Rest Day";
-  objectiveEl.textContent = "Enjoy your recovery.";
-  drillContainer.style.display = "none";
-  logBtn.style.display = "none";
-}
 
 // Handle set-by-set steppers and background-resilient timers clicks
 function handleDrillActionsClick(e) {
