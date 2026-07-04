@@ -676,79 +676,82 @@ async function loadAthleteTodayScreen() {
         const checkBg = isCompleted ? 'background-color: rgba(16, 185, 129, 0.15); border-color: var(--accent-green);' : 'background: none; border-color: var(--border-color);';
         const cardBg = isCompleted ? 'border-color: var(--accent-green); box-shadow: 0 0 10px rgba(16, 185, 129, 0.05);' : '';
 
+        const subItems = parseSubExercises(d.notes);
+        const isWorkoutContainer = subItems.length > 0 && (
+          d.category === "Tier 4" || 
+          subItems.some(sub => sub.sets > 1 || sub.repsOrDuration !== "1 set")
+        );
+
         let subCardsHtml = '';
-        if (d.category === "Tier 4") {
-          const subItems = parseSubExercises(d.notes);
-          if (subItems.length > 0) {
-            // Check if Tier 4 parent should display completed because all sub-items are completed
-            const allSubDone = subItems.every(sub => (state.drillCompletions[sub.id] || 0) === sub.sets);
-            const tier4CheckSymbol = allSubDone ? '✓' : '';
-            const tier4CheckBg = allSubDone ? 'background-color: rgba(16, 185, 129, 0.15); border-color: var(--accent-green);' : 'background: none; border-color: var(--border-color);';
-            const tier4CardBg = allSubDone ? 'border-color: var(--accent-green);' : '';
-            
-            d.isCompletedOverride = allSubDone;
-            d.checkBgOverride = tier4CheckBg;
-            d.checkSymbolOverride = tier4CheckSymbol;
-            d.cardBgOverride = tier4CardBg;
+        if (isWorkoutContainer) {
+          // Check if parent should display completed because all sub-items are completed
+          const allSubDone = subItems.every(sub => (state.drillCompletions[sub.id] || 0) === sub.sets);
+          const parentCheckSymbol = allSubDone ? '✓' : '';
+          const parentCheckBg = allSubDone ? 'background-color: rgba(16, 185, 129, 0.15); border-color: var(--accent-green);' : 'background: none; border-color: var(--border-color);';
+          const parentCardBg = allSubDone ? 'border-color: var(--accent-green);' : '';
+          
+          d.isCompletedOverride = allSubDone;
+          d.checkBgOverride = parentCheckBg;
+          d.checkSymbolOverride = parentCheckSymbol;
+          d.cardBgOverride = parentCardBg;
 
-            subCardsHtml = `
-              <div class="sub-drills-stack" style="margin-top: 10px; display: flex; flex-direction: column; gap: 8px; width: 100%;">
-                ${subItems.map((sub, idx) => {
-                  const subTimerSecs = parseDurationText(sub.repsOrDuration);
-                  let subTimerHtml = '';
-                  if (subTimerSecs !== null) {
-                    subTimerHtml = renderTimerMarkup(sub.id, subTimerSecs, "Duration");
-                  }
-                  
-                  const isSubCompleted = (state.drillCompletions[sub.id] || 0) === sub.sets;
-                  const subCheckSymbol = isSubCompleted ? '✓' : '';
-                  const subCheckBg = isSubCompleted ? 'background-color: rgba(16, 185, 129, 0.15); border-color: var(--accent-green);' : 'background: none; border-color: var(--border-color);';
-                  const subCardBg = isSubCompleted ? 'border-color: var(--accent-green);' : '';
+          subCardsHtml = `
+            <div class="sub-drills-stack" style="margin-top: 10px; display: flex; flex-direction: column; gap: 8px; width: 100%;">
+              ${subItems.map((sub, idx) => {
+                const subTimerSecs = parseDurationText(sub.repsOrDuration);
+                let subTimerHtml = '';
+                if (subTimerSecs !== null) {
+                  subTimerHtml = renderTimerMarkup(sub.id, subTimerSecs, "Duration");
+                }
+                
+                const isSubCompleted = (state.drillCompletions[sub.id] || 0) === sub.sets;
+                const subCheckSymbol = isSubCompleted ? '✓' : '';
+                const subCheckBg = isSubCompleted ? 'background-color: rgba(16, 185, 129, 0.15); border-color: var(--accent-green);' : 'background: none; border-color: var(--border-color);';
+                const subCardBg = isSubCompleted ? 'border-color: var(--accent-green);' : '';
 
-                  // Track open/collapsed state across re-renders
-                  const isExpanded = state.expandedSubDrills && state.expandedSubDrills[sub.id];
-                  const displayStyle = isExpanded ? 'block' : 'none';
-                  const chevronChar = isExpanded ? '▼' : '▶';
+                // Track open/collapsed state across re-renders
+                const isExpanded = state.expandedSubDrills && state.expandedSubDrills[sub.id];
+                const displayStyle = isExpanded ? 'block' : 'none';
+                const chevronChar = isExpanded ? '▼' : '▶';
 
-                  return `
-                    <div class="sub-drill-card" style="background-color: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: var(--border-radius-sm); overflow: hidden; ${subCardBg}">
-                      <div class="sub-drill-header" data-sub-id="${sub.id}" style="cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 10px; background-color: rgba(255,255,255,0.02);">
-                        <div style="display: flex; align-items: center; gap: 8px;">
-                          <button class="drill-check-btn" data-drill-id="${sub.id}" style="width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid var(--border-color); display: flex; align-items: center; justify-content: center; color: var(--accent-green); font-weight: 700; cursor: pointer; transition: all 0.2s; font-size: 0.75rem; flex-shrink: 0; padding: 0; ${subCheckBg}">${subCheckSymbol}</button>
-                          <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-primary); text-align: left; padding-right: 8px;">${sub.text}</span>
-                        </div>
-                        <div style="display: flex; align-items: center; gap: 8px; flex-shrink: 0;">
-                          <span style="font-size: 0.75rem; color: var(--accent-cyan); font-weight: 500;">${sub.sets} sets</span>
-                          <span class="sub-chevron" style="font-size: 0.65rem; color: var(--text-muted);">${chevronChar}</span>
-                        </div>
+                return `
+                  <div class="sub-drill-card" style="background-color: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: var(--border-radius-sm); overflow: hidden; ${subCardBg}">
+                    <div class="sub-drill-header" data-sub-id="${sub.id}" style="cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 10px; background-color: rgba(255,255,255,0.02);">
+                      <div style="display: flex; align-items: center; gap: 8px;">
+                        <button class="drill-check-btn" data-drill-id="${sub.id}" style="width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid var(--border-color); display: flex; align-items: center; justify-content: center; color: var(--accent-green); font-weight: 700; cursor: pointer; transition: all 0.2s; font-size: 0.75rem; flex-shrink: 0; padding: 0; ${subCheckBg}">${subCheckSymbol}</button>
+                        <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-primary); text-align: left; padding-right: 8px;">${sub.text}</span>
                       </div>
-                      <div class="sub-drill-body" id="sub-body-${sub.id}" style="display: ${displayStyle}; padding: 10px; border-top: 1px solid var(--border-color); background-color: var(--bg-primary);">
-                        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; width: 100%;">
-                          <div class="stepper-container" data-drill-id="${sub.id}" data-drill-name="${sub.text}" data-max-sets="${sub.sets}">
-                            <button class="stepper-btn stepper-minus" style="padding: 2px 8px; font-size: 0.75rem;">&minus;</button>
-                            <span class="stepper-val" style="font-size: 0.75rem;">${state.drillCompletions[sub.id] || 0} / ${sub.sets} sets</span>
-                            <button class="stepper-btn stepper-plus" style="padding: 2px 8px; font-size: 0.75rem;">+</button>
-                          </div>
-                          ${subTimerHtml}
-                        </div>
+                      <div style="display: flex; align-items: center; gap: 8px; flex-shrink: 0;">
+                        <span style="font-size: 0.75rem; color: var(--accent-cyan); font-weight: 500;">${sub.sets} sets</span>
+                        <span class="sub-chevron" style="font-size: 0.65rem; color: var(--text-muted);">${chevronChar}</span>
                       </div>
                     </div>
-                  `;
-                }).join('')}
-              </div>
-            `;
-          }
+                    <div class="sub-drill-body" id="sub-body-${sub.id}" style="display: ${displayStyle}; padding: 10px; border-top: 1px solid var(--border-color); background-color: var(--bg-primary);">
+                      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; width: 100%;">
+                        <div class="stepper-container" data-drill-id="${sub.id}" data-drill-name="${sub.text}" data-max-sets="${sub.sets}">
+                          <button class="stepper-btn stepper-minus" style="padding: 2px 8px; font-size: 0.75rem;">&minus;</button>
+                          <span class="stepper-val" style="font-size: 0.75rem;">${state.drillCompletions[sub.id] || 0} / ${sub.sets} sets</span>
+                          <button class="stepper-btn stepper-plus" style="padding: 2px 8px; font-size: 0.75rem;">+</button>
+                        </div>
+                        ${subTimerHtml}
+                      </div>
+                    </div>
+                  </div>
+                `;
+              }).join('')}
+            </div>
+          `;
         }
 
-        const renderCardBg = d.category === "Tier 4" ? (d.cardBgOverride || '') : cardBg;
-        const renderCheckBg = d.category === "Tier 4" ? (d.checkBgOverride || '') : checkBg;
-        const renderCheckSymbol = d.category === "Tier 4" ? (d.checkSymbolOverride || '') : checkSymbol;
+        const renderCardBg = isWorkoutContainer ? (d.cardBgOverride || '') : cardBg;
+        const renderCheckBg = isWorkoutContainer ? (d.checkBgOverride || '') : checkBg;
+        const renderCheckSymbol = isWorkoutContainer ? (d.checkSymbolOverride || '') : checkSymbol;
 
         return `
           <div class="drill-item" id="drill-card-${d.id}" style="${renderCardBg}">
             <div class="drill-title" style="display: flex; justify-content: space-between; align-items: center; gap: 8px;">
               <div style="display: flex; align-items: center; gap: 8px;">
-                ${d.category !== "Tier 4" ? `
+                ${!isWorkoutContainer ? `
                   <button class="drill-check-btn" data-drill-id="${d.id}" style="width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--border-color); display: flex; align-items: center; justify-content: center; color: var(--accent-green); font-weight: 700; cursor: pointer; transition: all 0.2s; font-size: 0.75rem; flex-shrink: 0; padding: 0; ${renderCheckBg}">${renderCheckSymbol}</button>
                 ` : `
                   <button class="drill-check-btn" style="width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--border-color); display: flex; align-items: center; justify-content: center; color: var(--accent-green); font-weight: 700; cursor: default; transition: all 0.2s; font-size: 0.75rem; flex-shrink: 0; padding: 0; pointer-events: none; ${renderCheckBg}">${renderCheckSymbol}</button>
@@ -757,11 +760,11 @@ async function loadAthleteTodayScreen() {
               </div>
               <div style="display: flex; align-items: center; gap: 6px;">
                 <span class="badge" style="background-color: var(--bg-secondary); color: var(--accent-cyan); font-size: 0.65rem; font-weight: 600; padding: 2px 6px; border-radius: var(--border-radius-sm); border: 1px solid var(--border-color);">${d.category}</span>
-                ${d.category !== "Tier 4" ? `<span style="font-size: 0.8rem; color: var(--text-secondary); font-weight: 500;">${d.sets} sets</span>` : ''}
+                ${!isWorkoutContainer ? `<span style="font-size: 0.8rem; color: var(--text-secondary); font-weight: 500;">${d.sets} sets</span>` : ''}
               </div>
             </div>
             
-            ${d.category !== "Tier 4" ? `
+            ${!isWorkoutContainer ? `
               <div class="drill-meta">Rep/Duration: ${d.reps_or_duration} | Rest: ${d.rest}</div>
               ${d.notes ? `<div class="drill-meta" style="font-style: italic; color: var(--text-muted); white-space: pre-wrap;">Note: ${d.notes}</div>` : ''}
               
