@@ -1988,17 +1988,11 @@ const DEFAULT_FAQS = [
 
 // Helper to initialize database
 function initDB() {
-  const CURRENT_VERSION = "2.1";
+  const CURRENT_VERSION = "2.2";
   const storedVersion = localStorage.getItem("onus_db_version");
   if (storedVersion !== CURRENT_VERSION) {
     // Clear all onus-related localStorage entries to force clean re-seeding
-    const keysToRemove = [];
-    for (let i = 0; i < localStorage.length; i++) {
-      const key = localStorage.key(i);
-      if (key && key.startsWith("onus_")) {
-        keysToRemove.push(key);
-      }
-    }
+    const keysToRemove = Object.keys(localStorage).filter(key => key.startsWith("onus_"));
     keysToRemove.forEach(key => localStorage.removeItem(key));
     localStorage.setItem("onus_db_version", CURRENT_VERSION);
   }
