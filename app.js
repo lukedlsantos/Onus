@@ -1685,21 +1685,17 @@ window.addEventListener("DOMContentLoaded", () => {
 
 const WARMUP_ROUTINES = {
   breathing: {
-    title: "Breathing Prep",
-    objective: "Diaphragm mobilization and hyper-oxygenation (4 Minutes total)",
+    title: "Breathing Prep (Oxygen Advantage Protocol)",
+    objective: "Optimize oxygen delivery (Bohr Effect), elevate CO2 tolerance, and prime diaphragmatic recruitment (10 Minutes total)",
     phases: [
-      { name: "Phase A: Respiratory Activation", duration: "4:00" }
+      { name: "Phase A: Resonant Frequency (HRV Sync)", duration: "3:00" },
+      { name: "Phase B: Physiological Sigh (CNS Reset)", duration: "2:00" },
+      { name: "Phase C: Hypoxic Retentions (CO2 Tolerance)", duration: "5:00" }
     ],
     stations: [
-      { name: "Diaphragmatic Rhythmic Pacing", desc: "20s Work / 10s Rest.\nDeep nasal inhalation focusing on abdominal extension, then slow pursed-lip oral exhalation.", type: "tabata", work: 20, rest: 10, phase: "Phase A: Respiratory Activation" },
-      { name: "Box-Breathing Neurological Grounding", desc: "20s Work / 10s Rest.\nStatic retention: Inhale 5s, Hold 5s, Exhale 5s, Hold 5s.", type: "tabata", work: 20, rest: 10, phase: "Phase A: Respiratory Activation" },
-      { name: "Intercostal Lateral Expansion", desc: "20s Work / 10s Rest.\nInterlock fingers overhead, alternating deep lateral flexions to the left and right.", type: "tabata", work: 20, rest: 10, phase: "Phase A: Respiratory Activation" },
-      { name: "Hyper-Oxygenation Trigger", desc: "20s Work / 10s Rest.\nAccelerated, rhythmic nasal inhalations paired with passive oral exhalations.", type: "tabata", work: 20, rest: 10, phase: "Phase A: Respiratory Activation" },
-      // Cycle 2
-      { name: "Diaphragmatic Rhythmic Pacing (Cycle 2)", desc: "20s Work / 10s Rest.\nDeep nasal inhalation focusing on abdominal extension, then slow pursed-lip oral exhalation.", type: "tabata", work: 20, rest: 10, phase: "Phase A: Respiratory Activation" },
-      { name: "Box-Breathing Neurological Grounding (Cycle 2)", desc: "20s Work / 10s Rest.\nStatic retention: Inhale 5s, Hold 5s, Exhale 5s, Hold 5s.", type: "tabata", work: 20, rest: 10, phase: "Phase A: Respiratory Activation" },
-      { name: "Intercostal Lateral Expansion (Cycle 2)", desc: "20s Work / 10s Rest.\nInterlock fingers overhead, alternating deep lateral flexions to the left and right.", type: "tabata", work: 20, rest: 10, phase: "Phase A: Respiratory Activation" },
-      { name: "Hyper-Oxygenation Trigger (Cycle 2)", desc: "20s Work / 10s Rest.\nAccelerated, rhythmic nasal inhalations paired with passive oral exhalations.", type: "tabata", work: 20, rest: 10, phase: "Phase A: Respiratory Activation" }
+      { name: "Resonant Frequency: Nasal Breathing", desc: "HRV Synchronization & HRV Priming.\nCycle: Inhale through nose for 5s, then Exhale passively for 5s.\nTotal: 18 cycles.", type: "coherent", work: 5, rest: 5, phase: "Phase A: Resonant Frequency (HRV Sync)", cycles: 18 },
+      { name: "Physiological Sigh: Double Inhale", desc: "CNS Reset & Alveolar Priming.\nCycle: Two rapid nasal inhales (one deep, one quick top-off), followed by a slow, passive oral exhale.\nTotal: 15 cycles (8s per loop).", type: "sigh", work: 2, rest: 6, phase: "Phase B: Physiological Sigh (CNS Reset)", cycles: 15 },
+      { name: "BOLT Retentions: Nasal Breathing", desc: "Hypoxic Priming & Nitric Oxide Surge.\nCycle: Breathe normally through nose for 15s, then perform a light 15s breath hold after exhalation.\nTotal: 10 cycles (30s per loop).", type: "retention", work: 15, rest: 15, phase: "Phase C: Hypoxic Retentions (CO2 Tolerance)", cycles: 10 }
     ]
   },
   lazy: {
@@ -1951,13 +1947,17 @@ function loadWarmupStation() {
   const timerReset = document.getElementById("warmup-timer-reset");
   const timerLabel = document.getElementById("warmup-timer-label");
   const timerDigits = document.getElementById("warmup-timer-digits");
-
+ 
   timerToggle.textContent = "Start";
   timerReset.style.display = "none";
-
-  if (station.type === 'tabata') {
-    timerLabel.textContent = "Work Time";
+ 
+  if (station.work && station.rest) {
+    if (station.type === 'coherent') timerLabel.textContent = "Inhale";
+    else if (station.type === 'sigh') timerLabel.textContent = "Double Inhale";
+    else if (station.type === 'retention') timerLabel.textContent = "Nasal Breathe";
+    else timerLabel.textContent = "Work Time";
     state.warmup.timerVal = station.work;
+    state.warmup.intervalCycleCount = 0;
   } else if (station.duration) {
     timerLabel.textContent = "Timer";
     state.warmup.timerVal = station.duration;
@@ -1965,7 +1965,7 @@ function loadWarmupStation() {
     timerLabel.textContent = "Sets Focus";
     state.warmup.timerVal = 0;
   }
-
+ 
   timerDigits.textContent = formatTimerDigits(state.warmup.timerVal);
 }
 
@@ -2002,20 +2002,56 @@ function toggleWarmupTimer() {
         const routine = WARMUP_ROUTINES[state.warmup.activeType];
         const station = routine.stations[state.warmup.activeStationIdx];
 
-        if (station.type === 'tabata') {
+        if (station.work && station.rest) {
+          // It's an automated interval station (Tabata, Coherent, Sigh, Retention)
+          if (!state.warmup.intervalCycleCount) state.warmup.intervalCycleCount = 0;
+          
           if (state.warmup.tabataPhase === 'work') {
-            // Auto transition to rest
+            // Transition from Work to Rest
             state.warmup.tabataPhase = 'rest';
             state.warmup.timerVal = station.rest;
-            document.getElementById("warmup-timer-label").textContent = "Rest Time";
+            
+            // Set label
+            if (state.warmup.activeType === 'breathing') {
+              if (station.type === 'coherent') document.getElementById("warmup-timer-label").textContent = "Exhale";
+              else if (station.type === 'sigh') document.getElementById("warmup-timer-label").textContent = "Slow Exhale";
+              else if (station.type === 'retention') document.getElementById("warmup-timer-label").textContent = "Breath Hold";
+              else document.getElementById("warmup-timer-label").textContent = "Rest Time";
+            } else {
+              document.getElementById("warmup-timer-label").textContent = "Rest Time";
+            }
+            
             document.getElementById("warmup-timer-digits").textContent = formatTimerDigits(state.warmup.timerVal);
             
-            // Auto start rest timer
             state.warmup.timerRunning = true;
             state.warmup.timerInterval = setInterval(tick, 1000);
           } else {
-            // End of Tabata interval, advance to next station automatically
-            nextWarmupStation();
+            // Transition from Rest to Work
+            state.warmup.intervalCycleCount++;
+            const maxCycles = station.cycles || 1;
+            
+            if (state.warmup.intervalCycleCount < maxCycles) {
+              state.warmup.tabataPhase = 'work';
+              state.warmup.timerVal = station.work;
+              
+              if (state.warmup.activeType === 'breathing') {
+                if (station.type === 'coherent') document.getElementById("warmup-timer-label").textContent = "Inhale";
+                else if (station.type === 'sigh') document.getElementById("warmup-timer-label").textContent = "Double Inhale";
+                else if (station.type === 'retention') document.getElementById("warmup-timer-label").textContent = "Nasal Breathe";
+                else document.getElementById("warmup-timer-label").textContent = "Work Time";
+              } else {
+                document.getElementById("warmup-timer-label").textContent = "Work Time";
+              }
+              
+              document.getElementById("warmup-timer-digits").textContent = formatTimerDigits(state.warmup.timerVal);
+              
+              state.warmup.timerRunning = true;
+              state.warmup.timerInterval = setInterval(tick, 1000);
+            } else {
+              // Finished all cycles for this station, reset count and go to next
+              state.warmup.intervalCycleCount = 0;
+              nextWarmupStation();
+            }
           }
         } else {
           toggleBtn.textContent = "Done";
@@ -2037,9 +2073,12 @@ function resetWarmupTimer() {
   const routine = WARMUP_ROUTINES[state.warmup.activeType];
   const station = routine.stations[state.warmup.activeStationIdx];
 
-  if (station.type === 'tabata') {
+  if (station.work && station.rest) {
     state.warmup.timerVal = station.work;
-    document.getElementById("warmup-timer-label").textContent = "Work Time";
+    if (station.type === 'coherent') document.getElementById("warmup-timer-label").textContent = "Inhale";
+    else if (station.type === 'sigh') document.getElementById("warmup-timer-label").textContent = "Double Inhale";
+    else if (station.type === 'retention') document.getElementById("warmup-timer-label").textContent = "Nasal Breathe";
+    else document.getElementById("warmup-timer-label").textContent = "Work Time";
   } else {
     state.warmup.timerVal = station.duration || 0;
   }

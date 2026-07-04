@@ -4,21 +4,17 @@ This file serves as the absolute technical blueprint for the separate, standalon
 
 ---
 
-## 1. Sub-Tab 1: Breathing Prep (Tabata-Style Interval Engine)
-* **Objective:** Intercostal muscle activation, diaphragm mobilization, and hyper-oxygenation sequencing to prime respiratory efficiency under subsequent climbing stress.
-* **Timing Paradigm:** Hands-free automated loop matching a strict Tabata cadence (**20 seconds of work / 10 seconds of rest**). 4 distinct exercises executed sequentially over 2 cycles total.
-* **Total Duration:** 4 Minutes
+## 1. Sub-Tab 1: Breathing Prep (Oxygen Advantage Athletic Priming Protocol)
+* **Objective:** Optimize oxygen delivery via the Bohr Effect, elevate carbon dioxide tolerance, reset CNS tone, and prime the respiratory diaphragmatic slings before high-intensity loading.
+* **Total Duration:** 10 Minutes
 
 ### Strict Interval Cadence Schema:
-* **Station 1 (0:00 - 0:30): Diaphragmatic Rhythmic Pacing**
-    * *Protocol:* 20s Active / 10s Rest. Deep nasal inhalation focusing on maximal abdominal extension, followed by a slow, controlled oral exhalation through pursed lips.
-* **Station 2 (0:30 - 1:00): Box-Breathing Neurological Grounding**
-    * *Protocol:* 20s Active / 10s Rest. Static isometric retention sequencing: Inhale 5s, Hold 5s, Exhale 5s, Hold 5s.
-* **Station 3 (1:00 - 1:30): Intercostal Lateral Expansion**
-    * *Protocol:* 20s Active / 10s Rest. Interlock fingers overhead, arms extended. Alternating deep lateral flexions to the left and right, emphasizing rapid chest expansion at the end-range.
-* **Station 4 (1:30 - 2:00): Hyper-Oxygenation Trigger**
-    * *Protocol:* 20s Active / 10s Rest. Accelerated, rhythmic nasal inhalations paired with passive oral exhalations to optimize baseline bloodstream saturation.
-* *Repeat Station 1 to 4 once more to complete the 4-minute block.*
+* **Phase A: Resonant Frequency HRV Synchronization (3 Minutes / 18 Cycles)**
+    * *Protocol:* 5.0s Nasal Inhale / 5.0s Passive Exhale. Deep diaphragmatic pacing designed to maximize heart rate variability and calm neurological pre-comp anxiety.
+* **Phase B: Physiological Sigh CNS Grounding (2 Minutes / 15 Cycles)**
+    * *Protocol:* 2.0s Double-Nasal Inhale (one deep breath, then a rapid top-off) / 6.0s Passive Oral Exhale. Expands collapsed alveoli and triggers immediate parasympathetic relaxation.
+* **Phase C: BOLT Hypoxic Retentions (5 Minutes / 10 Cycles)**
+    * *Protocol:* 15.0s Normal Nasal Breathing / 15.0s Exhale Breath Hold (Retention). Restrict oxygen progressively to trigger a spleen contraction (releasing red blood cells) and elevate CO2 threshold to delay the forearm pump.
 
 ---
 
