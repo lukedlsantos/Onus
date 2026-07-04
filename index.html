@@ -58,53 +58,114 @@
             <span>Weekly Check-in</span>
             <span id="checkin-status-badge" class="badge" style="font-size: 0.7rem; display: none;"></span>
           </h2>
-          <form id="weekly-checkin-form" style="display: none; margin-top: 12px;">
-            <div class="form-group">
-              <label class="form-label" for="chk-energy">Energy Level (1-5) <span id="chk-energy-val">3</span></label>
-              <input type="range" id="chk-energy" class="form-control" min="1" max="5" value="3">
+          <form id="weekly-checkin-form" style="display: none; margin-top: 12px; flex-direction: column; gap: 14px;">
+            <!-- PART A -->
+            <div style="border-bottom: 1px solid var(--border-color); padding-bottom: 8px;">
+              <h3 style="font-size: 0.95rem; color: var(--accent-cyan); margin-bottom: 8px;">Part A: Weekly Training Volume & Technical Yield</h3>
+              
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px;">
+                <div class="form-group">
+                  <label class="form-label" for="chk-planned-sessions">Planned Sessions</label>
+                  <input type="number" id="chk-planned-sessions" class="form-control" min="0" value="3" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="chk-completed-sessions">Completed Sessions</label>
+                  <input type="number" id="chk-completed-sessions" class="form-control" min="0" value="3" required>
+                </div>
+              </div>
+
+              <div class="form-group" style="margin-bottom: 10px;">
+                <label class="form-label" for="chk-missed-reason">Missed Sessions / Reason (Time, Fatigue, Skin, Injury)</label>
+                <textarea id="chk-missed-reason" class="form-control" style="min-height: 50px;" placeholder="Leave blank if none missed..."></textarea>
+              </div>
+
+              <div class="form-group" style="margin-bottom: 10px;">
+                <label class="form-label" for="chk-intensity-rpe">Climbing Intensity RPE (1-5) <span id="chk-intensity-rpe-val">3</span></label>
+                <input type="range" id="chk-intensity-rpe" class="form-control" min="1" max="5" value="3">
+                <small class="text-muted" style="font-size: 0.75rem;">1 = Easy, 5 = Absolute Maximum Effort/Failure</small>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="chk-movement-precision">Movement Precision (1-5) <span id="chk-movement-precision-val">3</span></label>
+                <input type="range" id="chk-movement-precision" class="form-control" min="1" max="5" value="3">
+                <small class="text-muted" style="font-size: 0.75rem;">1 = Sloppy/Heavy, 5 = Flawless/Quiet Feet</small>
+              </div>
             </div>
 
-            <div class="form-group">
-              <label class="form-label" for="chk-sleep">Sleep Quality (1-5) <span id="chk-sleep-val">3</span></label>
-              <input type="range" id="chk-sleep" class="form-control" min="1" max="5" value="3">
+            <!-- PART B -->
+            <div style="border-bottom: 1px solid var(--border-color); padding-bottom: 8px;">
+              <h3 style="font-size: 0.95rem; color: var(--accent-cyan); margin-bottom: 8px;">Part B: Systemic Recovery & Biomarkers</h3>
+              
+              <div class="form-group" style="margin-bottom: 10px;">
+                <label class="form-label" for="chk-energy">Energy & CNS Readiness (1-5) <span id="chk-energy-val">3</span></label>
+                <input type="range" id="chk-energy" class="form-control" min="1" max="5" value="3">
+                <small class="text-muted" style="font-size: 0.75rem;">1 = Systemically exhausted; 5 = Hyper-reactive, light on feet</small>
+              </div>
+
+              <div class="form-group" style="margin-bottom: 10px;">
+                <label class="form-label" for="chk-sleep">Sleep Efficiency (1-5) <span id="chk-sleep-val">3</span></label>
+                <input type="range" id="chk-sleep" class="form-control" min="1" max="5" value="3">
+                <small class="text-muted" style="font-size: 0.75rem;">1 = Broken sleep/Poor recovery; 5 = Deep, restful sleep</small>
+              </div>
+
+              <div class="form-group" style="margin-bottom: 10px;">
+                <label class="form-label" for="chk-stress">External Life Stress (1-5) <span id="chk-stress-val">3</span></label>
+                <input type="range" id="chk-stress" class="form-control" min="1" max="5" value="3">
+                <small class="text-muted" style="font-size: 0.75rem;">1 = High cognitive stress; 5 = Mind clear and relaxed</small>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="chk-skin">Skin Condition (1-5) <span id="chk-skin-val">5</span></label>
+                <input type="range" id="chk-skin" class="form-control" min="1" max="5" value="5">
+                <small class="text-muted" style="font-size: 0.75rem;">1 = Raw, split, bleeding; 5 = Thick, hard, glassy calluses</small>
+              </div>
             </div>
 
-            <div class="form-group">
-              <label class="form-label" for="chk-stress">Stress Levels (1-5) <span id="chk-stress-val">3</span></label>
-              <input type="range" id="chk-stress" class="form-control" min="1" max="5" value="3">
+            <!-- PART C -->
+            <div style="border-bottom: 1px solid var(--border-color); padding-bottom: 8px;">
+              <h3 style="font-size: 0.95rem; color: var(--accent-cyan); margin-bottom: 8px;">Part C: Orthopedic Safety Checks (Red Flags)</h3>
+              
+              <p class="text-muted" style="font-size: 0.8rem; margin-bottom: 8px;">Did you experience acute or lingering aches in these regions?</p>
+              
+              <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px;">
+                <label style="display: flex; align-items: center; gap: 8px; font-size: 0.9rem;">
+                  <input type="checkbox" id="chk-pain-pulleys"> Finger Pulleys Pain
+                </label>
+                <label style="display: flex; align-items: center; gap: 8px; font-size: 0.9rem;">
+                  <input type="checkbox" id="chk-pain-elbows"> Elbow Tendons Pain (Medial/Lateral)
+                </label>
+                <label style="display: flex; align-items: center; gap: 8px; font-size: 0.9rem;">
+                  <input type="checkbox" id="chk-pain-shoulders"> Shoulder Girdle Pain
+                </label>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="chk-pain-details">Ache / Pain Details</label>
+                <textarea id="chk-pain-details" class="form-control" style="min-height: 50px;" placeholder="If yes, describe pain triggers (crimping, open-handing, pulling hard, lock-offs)..."></textarea>
+              </div>
             </div>
 
-            <div class="form-group">
-              <label class="form-label" for="chk-motivation">Motivation (1-5) <span id="chk-motivation-val">3</span></label>
-              <input type="range" id="chk-motivation" class="form-control" min="1" max="5" value="3">
+            <!-- PART D -->
+            <div>
+              <h3 style="font-size: 0.95rem; color: var(--accent-cyan); margin-bottom: 8px;">Part D: Narrative Context & Feedback</h3>
+
+              <div class="form-group" style="margin-bottom: 10px;">
+                <label class="form-label" for="chk-send-milestone">The Technical Send Milestone</label>
+                <textarea id="chk-send-milestone" class="form-control" style="min-height: 60px;" placeholder="Best send, hard attempt, or breakthrough (wall angle, hold type)..." required></textarea>
+              </div>
+
+              <div class="form-group" style="margin-bottom: 10px;">
+                <label class="form-label" for="chk-project-bottleneck">The Project Bottleneck</label>
+                <textarea id="chk-project-bottleneck" class="form-control" style="min-height: 60px;" placeholder="What move, style, or sequence felt confusing or weak?" required></textarea>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="chk-coach-question">Primary Question for the Coach</label>
+                <textarea id="chk-coach-question" class="form-control" style="min-height: 60px;" placeholder="What specific performance element do we need to address?" required></textarea>
+              </div>
             </div>
 
-            <div class="form-group">
-              <label class="form-label" for="chk-finger-pain">Finger Pain (0-10) <span id="chk-finger-pain-val">0</span></label>
-              <input type="range" id="chk-finger-pain" class="form-control" min="0" max="10" value="0">
-            </div>
-
-            <div class="form-group">
-              <label class="form-label" for="chk-skin">Skin Condition (1-5) <span id="chk-skin-val">5</span></label>
-              <input type="range" id="chk-skin" class="form-control" min="1" max="5" value="5">
-            </div>
-
-            <div class="form-group">
-              <label class="form-label" for="chk-good">What felt good this week?</label>
-              <textarea id="chk-good" class="form-control" placeholder="Sends, high energy, good recovery..."></textarea>
-            </div>
-
-            <div class="form-group">
-              <label class="form-label" for="chk-bad">What felt bad or needs work?</label>
-              <textarea id="chk-bad" class="form-control" placeholder="Tweaks, lack of sleep, missed sessions..."></textarea>
-            </div>
-
-            <div class="form-group">
-              <label class="form-label" for="chk-notes">Message for Coach</label>
-              <textarea id="chk-notes" class="form-control" placeholder="Anything else your coach should know?"></textarea>
-            </div>
-
-            <button type="submit" class="btn btn-primary">Submit Weekly Check-in</button>
+            <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Submit Performance Log</button>
           </form>
         </div>
       </section>

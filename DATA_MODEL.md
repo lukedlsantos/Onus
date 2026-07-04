@@ -101,22 +101,35 @@ interface SessionLog {
 }
 ```
 
-### Weekly Check-ins
-```typescript
 interface WeeklyCheckin {
   id: string;
   athlete_id: string;
   week_start_date: string;
   submitted_at: string;
-  energy: number; // 1-5
-  sleep: number; // 1-5
-  stress: number; // 1-5
-  motivation: number; // 1-5
-  finger_pain: number; // 0-10
+  
+  // Part A: Weekly Training Volume & Technical Yield
+  planned_sessions: number;
+  completed_sessions: number;
+  missed_sessions_reason?: string;
+  climbing_intensity_rpe: number; // 1-5
+  movement_precision: number; // 1-5
+  
+  // Part B: Systemic Recovery & Biomarker Sliders
+  energy_readiness: number; // 1-5
+  sleep_efficiency: number; // 1-5
+  external_stress: number; // 1-5
   skin_condition: number; // 1-5
-  what_felt_good?: string;
-  what_felt_bad?: string;
-  notes?: string;
+  
+  // Part C: Orthopedic Safety Checks (Red Flags)
+  pain_finger_pulleys: boolean;
+  pain_elbow_tendons: boolean;
+  pain_shoulder_girdle: boolean;
+  pain_details?: string;
+  
+  // Part D: Narrative Context & Feedback Workflow
+  send_milestone?: string;
+  project_bottleneck?: string;
+  question_for_coach?: string;
 }
 ```
 

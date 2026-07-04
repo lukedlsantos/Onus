@@ -297,11 +297,11 @@ function setupSliderIndicators() {
     { id: 'log-fatigue', valId: 'fatigue-val' },
     { id: 'log-finger-pain', valId: 'finger-pain-val' },
     { id: 'log-skin', valId: 'skin-val' },
+    { id: 'chk-intensity-rpe', valId: 'chk-intensity-rpe-val' },
+    { id: 'chk-movement-precision', valId: 'chk-movement-precision-val' },
     { id: 'chk-energy', valId: 'chk-energy-val' },
     { id: 'chk-sleep', valId: 'chk-sleep-val' },
     { id: 'chk-stress', valId: 'chk-stress-val' },
-    { id: 'chk-motivation', valId: 'chk-motivation-val' },
-    { id: 'chk-finger-pain', valId: 'chk-finger-pain-val' },
     { id: 'chk-skin', valId: 'chk-skin-val' }
   ];
   sliders.forEach(slider => {
@@ -643,15 +643,22 @@ async function handleCheckinSubmit(e) {
   const checkinData = {
     athlete_id: state.currentUser.id,
     week_start_date: new Date().toISOString().split('T')[0],
-    energy: parseInt(document.getElementById("chk-energy").value),
-    sleep: parseInt(document.getElementById("chk-sleep").value),
-    stress: parseInt(document.getElementById("chk-stress").value),
-    motivation: parseInt(document.getElementById("chk-motivation").value),
-    finger_pain: parseInt(document.getElementById("chk-finger-pain").value),
+    planned_sessions: parseInt(document.getElementById("chk-planned-sessions").value) || 0,
+    completed_sessions: parseInt(document.getElementById("chk-completed-sessions").value) || 0,
+    missed_sessions_reason: document.getElementById("chk-missed-reason").value,
+    climbing_intensity_rpe: parseInt(document.getElementById("chk-intensity-rpe").value),
+    movement_precision: parseInt(document.getElementById("chk-movement-precision").value),
+    energy_readiness: parseInt(document.getElementById("chk-energy").value),
+    sleep_efficiency: parseInt(document.getElementById("chk-sleep").value),
+    external_stress: parseInt(document.getElementById("chk-stress").value),
     skin_condition: parseInt(document.getElementById("chk-skin").value),
-    what_felt_good: document.getElementById("chk-good").value,
-    what_felt_bad: document.getElementById("chk-bad").value,
-    notes: document.getElementById("chk-notes").value
+    pain_finger_pulleys: document.getElementById("chk-pain-pulleys").checked,
+    pain_elbow_tendons: document.getElementById("chk-pain-elbows").checked,
+    pain_shoulder_girdle: document.getElementById("chk-pain-shoulders").checked,
+    pain_details: document.getElementById("chk-pain-details").value,
+    send_milestone: document.getElementById("chk-send-milestone").value,
+    project_bottleneck: document.getElementById("chk-project-bottleneck").value,
+    question_for_coach: document.getElementById("chk-coach-question").value
   };
 
   await db.addWeeklyCheckin(checkinData);
@@ -936,24 +943,62 @@ async function loadAdminCheckins() {
   let html = '';
   for (const chk of checkins) {
     const athlete = await db.getProfile(chk.athlete_id);
+    
+    // Check if any orthopedic red flags are checked
+    const hasFlags = chk.pain_finger_pulleys || chk.pain_elbow_tendons || chk.pain_shoulder_girdle;
+    const flags = [];
+    if (chk.pain_finger_pulleys) flags.push("Finger Pulleys");
+    if (chk.pain_elbow_tendons) flags.push("Elbow Tendons");
+    if (chk.pain_shoulder_girdle) flags.push("Shoulder Girdle");
+
     html += `
-      <div style="padding: 12px; background-color: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: var(--border-radius-md);">
-        <strong style="color: var(--accent-cyan);">${athlete ? athlete.full_name : 'Unknown Athlete'}</strong>
-        <span class="text-muted" style="font-size: 0.75rem; margin-left: 8px;">Check-in on ${chk.submitted_at.split('T')[0]}</span>
-        
-        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-top: 8px; font-size: 0.8rem;">
-          <div>Energy: <strong>${chk.energy}/5</strong></div>
-          <div>Sleep: <strong>${chk.sleep}/5</strong></div>
-          <div>Stress: <strong>${chk.stress}/5</strong></div>
-          <div>Motivation: <strong>${chk.motivation}/5</strong></div>
-          <div>Pain: <strong style="color: ${chk.finger_pain >= 5 ? 'var(--accent-red)' : 'inherit'};">${chk.finger_pain}/10</strong></div>
-          <div>Skin: <strong>${chk.skin_condition}/5</strong></div>
+      <div style="padding: 14px; background-color: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: var(--border-radius-lg); display: flex; flex-direction: column; gap: 8px;">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <strong style="color: var(--accent-cyan); font-size: 1rem;">${athlete ? athlete.full_name : 'Unknown Athlete'}</strong>
+          <span class="text-muted" style="font-size: 0.75rem;">${chk.submitted_at.split('T')[0]}</span>
         </div>
 
-        <div style="font-size: 0.85rem; margin-top: 8px;">
-          <div><strong>Felt Good:</strong> <span class="text-muted">${chk.what_felt_good || 'None'}</span></div>
-          <div><strong>Felt Bad:</strong> <span class="text-muted">${chk.what_felt_bad || 'None'}</span></div>
-          <div><strong>Coach Notes:</strong> <span class="text-muted">${chk.notes || 'None'}</span></div>
+        <!-- Part A -->
+        <div style="font-size: 0.85rem; padding: 6px 10px; background-color: var(--bg-primary); border-radius: var(--border-radius-sm);">
+          <strong style="display: block; margin-bottom: 4px; color: var(--text-primary);">Part A: Volume & Technical Yield</strong>
+          <div>Sessions: Completed <strong>${chk.completed_sessions}</strong> of <strong>${chk.planned_sessions}</strong> planned</div>
+          ${chk.missed_sessions_reason ? `<div style="font-style: italic; color: var(--accent-red); margin-top: 2px;">Missed: ${chk.missed_sessions_reason}</div>` : ''}
+          <div style="margin-top: 4px; display: grid; grid-template-columns: 1fr 1fr; gap: 6px;">
+            <div>Intensity RPE: <strong>${chk.climbing_intensity_rpe}/5</strong></div>
+            <div>Movement Precision: <strong>${chk.movement_precision}/5</strong></div>
+          </div>
+        </div>
+
+        <!-- Part B -->
+        <div style="font-size: 0.85rem; padding: 6px 10px; background-color: var(--bg-primary); border-radius: var(--border-radius-sm);">
+          <strong style="display: block; margin-bottom: 4px; color: var(--text-primary);">Part B: Recovery Biomarkers</strong>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px;">
+            <div>Energy: <strong>${chk.energy_readiness}/5</strong></div>
+            <div>Sleep: <strong>${chk.sleep_efficiency}/5</strong></div>
+            <div>Stress: <strong>${chk.external_stress}/5</strong></div>
+            <div>Skin: <strong>${chk.skin_condition}/5</strong></div>
+          </div>
+        </div>
+
+        <!-- Part C -->
+        <div style="font-size: 0.85rem; padding: 6px 10px; background-color: ${hasFlags ? 'rgba(239, 68, 68, 0.08)' : 'var(--bg-primary)'}; border-radius: var(--border-radius-sm); border: 1px solid ${hasFlags ? 'var(--accent-red)' : 'transparent'};">
+          <strong style="display: block; margin-bottom: 4px; color: ${hasFlags ? 'var(--accent-red)' : 'var(--text-primary)'};">Part C: Orthopedic Safety Checks (Red Flags)</strong>
+          ${hasFlags ? `
+            <div style="color: var(--accent-red); font-weight: 600; margin-bottom: 4px;">Aches detected in: ${flags.join(', ')}</div>
+            ${chk.pain_details ? `<div style="font-style: italic; margin-top: 2px;">Details: ${chk.pain_details}</div>` : ''}
+          ` : `
+            <div style="color: var(--accent-green);">No orthopedic pain reported.</div>
+          `}
+        </div>
+
+        <!-- Part D -->
+        <div style="font-size: 0.85rem; padding: 6px 10px; background-color: var(--bg-primary); border-radius: var(--border-radius-sm);">
+          <strong style="display: block; margin-bottom: 4px; color: var(--text-primary);">Part D: Narrative Context</strong>
+          <div style="margin-top: 4px;"><strong>Send Milestone:</strong> <span class="text-secondary">${chk.send_milestone || 'None'}</span></div>
+          <div style="margin-top: 4px;"><strong>Project Bottleneck:</strong> <span class="text-secondary">${chk.project_bottleneck || 'None'}</span></div>
+          <div style="margin-top: 4px; padding-top: 4px; border-top: 1px dashed var(--border-color); color: var(--accent-amber);">
+            <strong>Question for Coach:</strong> "${chk.question_for_coach || 'None'}"
+          </div>
         </div>
       </div>
     `;
