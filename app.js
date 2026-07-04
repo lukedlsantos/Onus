@@ -705,6 +705,11 @@ async function loadAthleteTodayScreen() {
                   const subCheckBg = isSubCompleted ? 'background-color: rgba(16, 185, 129, 0.15); border-color: var(--accent-green);' : 'background: none; border-color: var(--border-color);';
                   const subCardBg = isSubCompleted ? 'border-color: var(--accent-green);' : '';
 
+                  // Track open/collapsed state across re-renders
+                  const isExpanded = state.expandedSubDrills && state.expandedSubDrills[sub.id];
+                  const displayStyle = isExpanded ? 'block' : 'none';
+                  const chevronChar = isExpanded ? '▼' : '▶';
+
                   return `
                     <div class="sub-drill-card" style="background-color: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: var(--border-radius-sm); overflow: hidden; ${subCardBg}">
                       <div class="sub-drill-header" data-sub-id="${sub.id}" style="cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 10px; background-color: rgba(255,255,255,0.02);">
@@ -714,10 +719,10 @@ async function loadAthleteTodayScreen() {
                         </div>
                         <div style="display: flex; align-items: center; gap: 8px; flex-shrink: 0;">
                           <span style="font-size: 0.75rem; color: var(--accent-cyan); font-weight: 500;">${sub.sets} sets</span>
-                          <span class="sub-chevron" style="font-size: 0.65rem; color: var(--text-muted);">▶</span>
+                          <span class="sub-chevron" style="font-size: 0.65rem; color: var(--text-muted);">${chevronChar}</span>
                         </div>
                       </div>
-                      <div class="sub-drill-body" id="sub-body-${sub.id}" style="display: none; padding: 10px; border-top: 1px solid var(--border-color); background-color: var(--bg-primary);">
+                      <div class="sub-drill-body" id="sub-body-${sub.id}" style="display: ${displayStyle}; padding: 10px; border-top: 1px solid var(--border-color); background-color: var(--bg-primary);">
                         <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; width: 100%;">
                           <div class="stepper-container" data-drill-id="${sub.id}" data-drill-name="${sub.text}" data-max-sets="${sub.sets}">
                             <button class="stepper-btn stepper-minus" style="padding: 2px 8px; font-size: 0.75rem;">&minus;</button>
@@ -779,12 +784,17 @@ async function loadAthleteTodayScreen() {
           const subId = header.dataset.subId;
           const body = document.getElementById(`sub-body-${subId}`);
           const chevron = header.querySelector(".sub-chevron");
+          
+          if (!state.expandedSubDrills) state.expandedSubDrills = {};
+          
           if (body.style.display === "none") {
             body.style.display = "block";
             chevron.textContent = "▼";
+            state.expandedSubDrills[subId] = true;
           } else {
             body.style.display = "none";
             chevron.textContent = "▶";
+            state.expandedSubDrills[subId] = false;
           }
         });
       });
