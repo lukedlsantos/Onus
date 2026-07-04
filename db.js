@@ -437,7 +437,7 @@ const DEFAULT_EXERCISES = [
     "reps_or_duration": "1 set",
     "intensity": "RPE 6",
     "rest": "Self-paced",
-    "notes": "Care, Advanced Core & Lower-Body Plyometrics [10 Mins]:**\n* *Climbing Core & Upper Push:* 2 sets \u00d7 max time hanging static L-sits. 2 sets \u00d7 15 deep diamond push-ups. 2 sets \u00d7 8 deep bench dips.\n* *Wrist, Shoulder & Lower Plyos:* 2 sets \u00d7 15 reverse wrist curls with a light dumbbell. 1 min deep dead-hang shoulder decompression. 3 sets \u00d7 6 explosive box jumps with soft, controlled landing mechanics to activate leg drive."
+    "notes": "Care, Advanced Core & Lower-Body Plyometrics [10 Mins]:**\n* *Climbing Core & Upper Push:* 2 sets \u00d7 max time hanging static L-sits. 2 sets \u00d7 15 deep diamond push-ups. 2 sets \u00d7 8 deep bench dips.\n* *Wrist, Shoulder & Lower Plyos:* 2 sets \u00d7 15 reverse wrist curls with a light dumbbell. 1 min deep dead-hang shoulder decompression. 3 sets \u00d7 6 explosive countermovement squat jumps with soft, controlled landing mechanics to activate leg drive."
   },
   {
     "id": "ex-w1-d2-1",
@@ -690,7 +690,7 @@ const DEFAULT_EXERCISES = [
     "reps_or_duration": "1 set",
     "intensity": "RPE 6",
     "rest": "Self-paced",
-    "notes": "Dynamic Care, Advanced Core & Lower-Body Plyometrics [10 Mins]:**\n* *Climbing Core & Upper Push:* 2 sets \u00d7 max time hanging static L-sits. 2 sets \u00d7 18 deep diamond push-ups. 2 sets \u00d7 10 deep bench dips.\n* *Wrist, Shoulder & Lower Plyos:* 2 sets \u00d7 15 reverse wrist curls. 1 min deep dead-hang. 3 sets \u00d7 6 explosive box jumps (increase target box height by 2 inches from Week 1)."
+    "notes": "Dynamic Care, Advanced Core & Lower-Body Plyometrics [10 Mins]:**\n* *Climbing Core & Upper Push:* 2 sets \u00d7 max time hanging static L-sits. 2 sets \u00d7 18 deep diamond push-ups. 2 sets \u00d7 10 deep bench dips.\n* *Wrist, Shoulder & Lower Plyos:* 2 sets \u00d7 15 reverse wrist curls. 1 min deep dead-hang. 3 sets \u00d7 6 explosive countermovement squat jumps (increase target box height by 2 inches from Week 1)."
   },
   {
     "id": "ex-w2-d2-1",
@@ -932,7 +932,7 @@ const DEFAULT_EXERCISES = [
     "reps_or_duration": "1 set",
     "intensity": "RPE 6",
     "rest": "Self-paced",
-    "notes": "Dynamic Care, Advanced Core & Lower-Body Plyometrics [10 Mins]:**\n* *Climbing Core & Upper Push:* 2 sets \u00d7 max time hanging static L-sits. 2 sets \u00d7 20 deep diamond push-ups. 2 sets \u00d7 12 deep bench dips.\n* *Wrist, Shoulder & Lower Plyos:* 2 sets \u00d7 15 reverse wrist curls. 1 min deep dead-hang. 3 sets \u00d7 6 explosive box jumps at absolute maximum target height."
+    "notes": "Dynamic Care, Advanced Core & Lower-Body Plyometrics [10 Mins]:**\n* *Climbing Core & Upper Push:* 2 sets \u00d7 max time hanging static L-sits. 2 sets \u00d7 20 deep diamond push-ups. 2 sets \u00d7 12 deep bench dips.\n* *Wrist, Shoulder & Lower Plyos:* 2 sets \u00d7 15 reverse wrist curls. 1 min deep dead-hang. 3 sets \u00d7 6 explosive countermovement squat jumps at absolute maximum target height."
   },
   {
     "id": "ex-w3-d2-1",
@@ -1416,7 +1416,7 @@ const DEFAULT_FAQS = [
 
 // Helper to initialize database
 function initDB() {
-  const CURRENT_VERSION = "2.5";
+  const CURRENT_VERSION = "2.6";
   const storedVersion = localStorage.getItem("onus_db_version");
   if (storedVersion !== CURRENT_VERSION) {
     // Clear all onus-related localStorage entries to force clean re-seeding
