@@ -12,6 +12,7 @@ const state = {
   currentAccess: null,
   activeTab: null,
   todaySession: null,
+  startedSessionId: null, // Track if current session has been started by user
   drillCompletions: {}, // { drillId: completedSets }
   activeTimers: {}, // { drillId: { intervalId, remainingSeconds, originalSeconds, running, startTime } }
   wakeLockObj: null
@@ -88,6 +89,17 @@ async function initApp() {
 
   // Auto-acquire wake lock when tab visibility changes back to visible
   document.addEventListener('visibilitychange', handleVisibilityChange);
+
+  // Start Session Button Handler
+  document.getElementById("start-session-btn").addEventListener("click", () => {
+    if (state.todaySession) {
+      state.startedSessionId = state.todaySession.id;
+      document.getElementById("today-drills-container").style.display = "block";
+      document.getElementById("log-today-btn").style.display = "block";
+      document.getElementById("start-session-btn").style.display = "none";
+      requestWakeLock();
+    }
+  });
 }
 
 // Verify locks and lock app if account status is expired
@@ -211,7 +223,7 @@ function switchTab(tabId) {
   }
 
   // Manage Wake Lock based on screens
-  if (state.currentUser.role === "athlete" && tabId === "today") {
+  if (state.currentUser.role === "athlete" && tabId === "today" && state.todaySession && state.startedSessionId === state.todaySession.id) {
     requestWakeLock();
   } else {
     releaseWakeLock();
@@ -427,7 +439,18 @@ async function loadAthleteTodayScreen() {
     state.todaySession = session;
     titleEl.textContent = `${session.day_label}: ${session.title}`;
     objectiveEl.textContent = session.objective;
-    logBtn.style.display = "block";
+
+    // Toggle view components based on started state
+    const isStarted = state.startedSessionId === session.id;
+    if (isStarted) {
+      document.getElementById("start-session-btn").style.display = "none";
+      drillContainer.style.display = "block";
+      logBtn.style.display = "block";
+    } else {
+      document.getElementById("start-session-btn").style.display = "block";
+      drillContainer.style.display = "none";
+      logBtn.style.display = "none";
+    }
 
     const drills = await db.getExercisesForSession(session.id);
     if (drills.length > 0) {
@@ -465,18 +488,18 @@ async function loadAthleteTodayScreen() {
           </div>
         `;
       }).join('');
-      drillContainer.style.display = "block";
     } else {
-      drillContainer.style.display = "none";
+      drillList.innerHTML = '';
     }
 
-    // Auto request lock on Today load
-    if (state.activeTab === "today") requestWakeLock();
+    // Auto request lock on Today load if already started
+    if (state.activeTab === "today" && isStarted) requestWakeLock();
     return;
   }
   
   titleEl.textContent = "Rest Day";
   objectiveEl.textContent = "Enjoy your recovery.";
+  document.getElementById("start-session-btn").style.display = "none";
   drillContainer.style.display = "none";
   logBtn.style.display = "none";
 }
