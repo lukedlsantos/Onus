@@ -359,9 +359,9 @@ async function setupSessionSelectDropdown() {
 // Parse duration text strings into absolute seconds (e.g. "15 min" -> 900, "60 seconds" -> 60)
 function parseDurationText(text) {
   if (!text) return null;
-  let match = text.match(/(\d+)\s*(?:min|minute)/i);
+  let match = text.match(/(\d+)\s*(?:min|minute)s?\b/i);
   if (match) return parseInt(match[1]) * 60;
-  match = text.match(/(\d+)\s*(?:s|sec|second)/i);
+  match = text.match(/(\d+)\s*(?:s|sec|second)s?\b/i);
   if (match) return parseInt(match[1]);
   return null;
 }
