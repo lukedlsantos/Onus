@@ -636,30 +636,64 @@ async function loadTrainingCalendar() {
     calendarHtml += `<h3 style="margin-top: 14px; font-size: 1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 4px;">${phase.title}</h3>`;
     const weeks = await db.getWeeksForPhase(phase.id);
     for (const week of weeks) {
-      calendarHtml += `<h4 style="font-size: 0.85rem; color: var(--accent-cyan); margin-top: 8px;">Week ${week.week_number}</h4>`;
-      const sessions = await db.getSessionsForWeek(week.id);
+      const isCurrentWeek = state.todaySession && state.todaySession.week_id === week.id;
+      const displayStyle = isCurrentWeek ? 'block' : 'none';
+      const chevronChar = isCurrentWeek ? '▼' : '▶';
       
+      calendarHtml += `
+        <div class="calendar-week-block" style="margin-top: 8px;">
+          <div class="calendar-week-header" data-week-id="${week.id}" style="cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 10px; background-color: var(--bg-secondary); border-radius: var(--border-radius-sm); border: 1px solid var(--border-color);">
+            <span style="font-weight: 600; font-size: 0.85rem; color: var(--accent-cyan);">Week ${week.week_number}</span>
+            <span class="chevron" style="font-size: 0.75rem; color: var(--text-muted);">${chevronChar}</span>
+          </div>
+          <div class="calendar-days-container" id="days-container-${week.id}" style="display: ${displayStyle}; margin-top: 4px;">
+      `;
+
+      const sessions = await db.getSessionsForWeek(week.id);
       sessions.forEach(sess => {
         const log = logs.find(l => l.session_id === sess.id);
         const status = log ? log.status : 'pending';
         
         calendarHtml += `
-          <div class="calendar-day-row" data-session-id="${sess.id}" style="cursor: pointer;">
+          <div class="calendar-day-row" data-session-id="${sess.id}" style="cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 8px; margin-top: 4px; background-color: var(--bg-primary); border-radius: var(--border-radius-sm); border: 1px solid var(--border-color);">
             <div class="calendar-day-info">
-              <span class="calendar-day-name">${sess.day_label}: ${sess.title}</span>
-              <span class="calendar-session-title">${sess.objective}</span>
+              <span class="calendar-day-name" style="font-weight: 500; font-size: 0.8rem;">${sess.day_label}: ${sess.title}</span>
+              <span class="calendar-session-title" style="display: block; font-size: 0.75rem; color: var(--text-secondary); margin-top: 2px;">${sess.objective}</span>
             </div>
             <span class="status-badge ${status}">${status}</span>
           </div>
         `;
       });
+
+      calendarHtml += `
+          </div>
+        </div>
+      `;
     }
   }
   calendarList.innerHTML = calendarHtml;
 
+  // Bind toggle handlers for week headers
+  calendarList.querySelectorAll(".calendar-week-header").forEach(header => {
+    header.addEventListener("click", () => {
+      const weekId = header.dataset.weekId;
+      const container = document.getElementById(`days-container-${weekId}`);
+      const chevron = header.querySelector(".chevron");
+      if (container.style.display === "none") {
+        container.style.display = "block";
+        chevron.textContent = "▼";
+      } else {
+        container.style.display = "none";
+        chevron.textContent = "▶";
+      }
+    });
+  });
+
   // Bind click handlers to session rows
   calendarList.querySelectorAll(".calendar-day-row").forEach(row => {
-    row.addEventListener("click", () => {
+    row.addEventListener("click", (e) => {
+      // Prevent parent trigger
+      e.stopPropagation();
       const sessionId = row.dataset.sessionId;
       localStorage.setItem("onus_selected_today_session_id", sessionId);
       switchTab("today");
