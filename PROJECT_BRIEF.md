@@ -13,7 +13,7 @@ Build a simple private coaching dashboard for 10–20 climbing clients. The app 
 
 ## Tech Stack
 - Frontend: Single Page Application (HTML5, Vanilla CSS, JavaScript)
-- Deployment: Netlify-ready (static assets)
+- Deployment: Vercel-ready (static assets)
 - Database/Backend (Future): Supabase (Auth + Postgres)
 - Mock Layer: Local storage based mock database for local development and offline-first simulation.
 
