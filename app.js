@@ -427,7 +427,7 @@ function renderTimerMarkup(timerId, originalSecs, label) {
 }
 
 /// Parse text into individual sets/reps workouts for Tier 4
-function parseSubExercises(notes) {
+function parseSubExercises(notes, parentId) {
   if (!notes) return [];
   const lines = notes.split('\n');
   const subItems = [];
@@ -481,7 +481,7 @@ function parseSubExercises(notes) {
       cleanName = cleanName.charAt(0).toUpperCase() + cleanName.slice(1);
       
       subItems.push({
-        id: `sub-ex-${index}-${subIndex}`,
+        id: `${parentId}-sub-${index}-${subIndex}`,
         category: categoryHeader || "Exercise",
         text: cleanName,
         sets: sets,
@@ -684,7 +684,7 @@ async function loadAthleteTodayScreen() {
         const checkBg = isCompleted ? 'background-color: rgba(16, 185, 129, 0.15); border-color: var(--accent-green);' : 'background: none; border-color: var(--border-color);';
         const cardBg = isCompleted ? 'border-color: var(--accent-green); box-shadow: 0 0 10px rgba(16, 185, 129, 0.05);' : '';
 
-        const subItems = parseSubExercises(d.notes);
+        const subItems = parseSubExercises(d.notes, d.id);
         const isWorkoutContainer = subItems.length > 0 && (
           d.category === "Tier 4" || 
           subItems.some(sub => sub.sets > 1 || sub.repsOrDuration !== "1 set")
@@ -1110,7 +1110,7 @@ async function submitQuickLog() {
   const completions = [];
   
   for (const d of sessionDrills) {
-    const subItems = parseSubExercises(d.notes);
+    const subItems = parseSubExercises(d.notes, d.id);
     const isWorkoutContainer = subItems.length > 0 && (
       d.category === "Tier 4" || 
       subItems.some(sub => sub.sets > 1 || sub.repsOrDuration !== "1 set")
