@@ -22,6 +22,7 @@ const state = {
 const NAVIGATION_CONFIG = {
   athlete: [
     { id: 'today', label: 'Today', screen: 'screen-today', icon: `<svg viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>` },
+    { id: 'warmup', label: 'Warm-Up', screen: 'screen-warmup', icon: `<svg viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>` },
     { id: 'calendar', label: 'Calendar', screen: 'screen-calendar', icon: `<svg viewBox="0 0 24 24"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>` },
     { id: 'log', label: 'Log', screen: 'screen-log', icon: `<svg viewBox="0 0 24 24"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>` },
     { id: 'review', label: 'Review', screen: 'screen-review', icon: `<svg viewBox="0 0 24 24"><path d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>` },
@@ -124,6 +125,9 @@ async function initApp() {
       requestWakeLock();
     }
   });
+
+  // Initialize Warm-Up Module UI event listeners
+  initWarmupModule();
 }
 
 // Verify locks and lock app if account status is expired
@@ -257,6 +261,7 @@ function switchTab(tabId) {
   if (state.currentUser.role === "athlete") {
     if (tabId === 'calendar') loadTrainingCalendar();
     else if (tabId === 'review') loadVideoReviews();
+    else if (tabId === 'warmup') loadWarmupScreen();
   } else {
     if (tabId === 'athletes') loadAdminAthletes();
     else if (tabId === 'programs') loadAdminPrograms();
@@ -1673,3 +1678,408 @@ window.addEventListener("DOMContentLoaded", () => {
       .catch(err => console.error('ServiceWorker registration failed:', err));
   }
 });
+
+// ==========================================
+// OFF-THE-WALL WARM-UP MODULE SPECIFICATION
+// ==========================================
+
+const WARMUP_ROUTINES = {
+  breathing: {
+    title: "Breathing Prep",
+    objective: "Diaphragm mobilization and hyper-oxygenation (4 Minutes total)",
+    phases: [
+      { name: "Phase A: Respiratory Activation", duration: "4:00" }
+    ],
+    stations: [
+      { name: "Diaphragmatic Rhythmic Pacing", desc: "20s Work / 10s Rest.\nDeep nasal inhalation focusing on abdominal extension, then slow pursed-lip oral exhalation.", type: "tabata", work: 20, rest: 10, phase: "Phase A: Respiratory Activation" },
+      { name: "Box-Breathing Neurological Grounding", desc: "20s Work / 10s Rest.\nStatic retention: Inhale 5s, Hold 5s, Exhale 5s, Hold 5s.", type: "tabata", work: 20, rest: 10, phase: "Phase A: Respiratory Activation" },
+      { name: "Intercostal Lateral Expansion", desc: "20s Work / 10s Rest.\nInterlock fingers overhead, alternating deep lateral flexions to the left and right.", type: "tabata", work: 20, rest: 10, phase: "Phase A: Respiratory Activation" },
+      { name: "Hyper-Oxygenation Trigger", desc: "20s Work / 10s Rest.\nAccelerated, rhythmic nasal inhalations paired with passive oral exhalations.", type: "tabata", work: 20, rest: 10, phase: "Phase A: Respiratory Activation" },
+      // Cycle 2
+      { name: "Diaphragmatic Rhythmic Pacing (Cycle 2)", desc: "20s Work / 10s Rest.\nDeep nasal inhalation focusing on abdominal extension, then slow pursed-lip oral exhalation.", type: "tabata", work: 20, rest: 10, phase: "Phase A: Respiratory Activation" },
+      { name: "Box-Breathing Neurological Grounding (Cycle 2)", desc: "20s Work / 10s Rest.\nStatic retention: Inhale 5s, Hold 5s, Exhale 5s, Hold 5s.", type: "tabata", work: 20, rest: 10, phase: "Phase A: Respiratory Activation" },
+      { name: "Intercostal Lateral Expansion (Cycle 2)", desc: "20s Work / 10s Rest.\nInterlock fingers overhead, alternating deep lateral flexions to the left and right.", type: "tabata", work: 20, rest: 10, phase: "Phase A: Respiratory Activation" },
+      { name: "Hyper-Oxygenation Trigger (Cycle 2)", desc: "20s Work / 10s Rest.\nAccelerated, rhythmic nasal inhalations paired with passive oral exhalations.", type: "tabata", work: 20, rest: 10, phase: "Phase A: Respiratory Activation" }
+    ]
+  },
+  lazy: {
+    title: "Lazy Warm-Up",
+    objective: "Systemic temperature elevation and global joint lubrication without static stretching (15 Minutes)",
+    phases: [
+      { name: "Phase A: Head-to-Toe Joint Matrix", duration: "7:00" },
+      { name: "Phase B: Core Dynamic Bodyweight Links", duration: "4:00" },
+      { name: "Phase C: Low-Load Banded Slings", duration: "4:00" }
+    ],
+    stations: [
+      // Joint Matrix (1 min each)
+      { name: "Cervical Pivot (Neck CARs)", desc: "Slow, deliberate circular neck rotations. Keep posture straight.", duration: 60, phase: "Phase A: Joint Matrix" },
+      { name: "Shoulder Girdle Rotations", desc: "Arm Circles. Progressive scaling from tight rotations to wide loops (forward and reverse).", duration: 60, phase: "Phase A: Joint Matrix" },
+      { name: "Wrist & Forearm Rolls", desc: "Wrist Rolls and Waves. Flex and extend wrist continuously to pool fluid into forearms.", duration: 60, phase: "Phase A: Joint Matrix" },
+      { name: "Thoracic Spine Sweeps", desc: "Standing Torso Twists with wide-set stance and completely relaxed, sweeping arms.", duration: 60, phase: "Phase A: Joint Matrix" },
+      { name: "Cat-Cow Pelvic Tilts", desc: "Pelvic tilts in quadruped stance. Flex and extend spine fluidly.", duration: 60, phase: "Phase A: Joint Matrix" },
+      { name: "Dynamic Hip Gate Openers", desc: "Lifting knee to chest, rotating outward 90°, tapping ground, and reversing path.", duration: 60, phase: "Phase A: Joint Matrix" },
+      { name: "Ankle & Knee Circles", desc: "Standing ankle circles combined with unweighted, shallow dynamic knee bends.", duration: 60, phase: "Phase A: Joint Matrix" },
+      // Core dynamic bodyweight
+      { name: "High Knees / Jumping Jacks (Set 1)", desc: "Continuous rhythmic coordination to elevate pulse rate.", duration: 60, phase: "Phase B: Bodyweight Links" },
+      { name: "Dynamic Walking Inchworms (Set 1)", desc: "Hinge forward, walk hands out to high plank, step feet back to hands. No static holds.", duration: 60, phase: "Phase B: Bodyweight Links" },
+      { name: "High Knees / Jumping Jacks (Set 2)", desc: "Continuous rhythmic coordination to elevate pulse rate.", duration: 60, phase: "Phase B: Bodyweight Links" },
+      { name: "Dynamic Walking Inchworms (Set 2)", desc: "Hinge forward, walk hands out to high plank, step feet back to hands. No static holds.", duration: 60, phase: "Phase B: Bodyweight Links" },
+      // Low Load banded
+      { name: "Banded Pull-Aparts", desc: "Focus on strict middle-trapezius and rhomboid activation. Maintain stacked posture.\nPerform 2 sets × 15 reps.", type: "reps", sets: 2, phase: "Phase C: Banded Slings" },
+      { name: "Banded External Rotations", desc: "Pin elbows firmly to ribs, pulse hands outward to activate infraspinatus/teres minor.\nPerform 2 sets × 15 reps.", type: "reps", sets: 2, phase: "Phase C: Banded Slings" }
+    ]
+  },
+  standard: {
+    title: "Standard Warm-Up",
+    objective: "Stabilize joint capsules under light bodyweight loads and prime pulley isometric structures off-wall (30 Minutes)",
+    phases: [
+      { name: "Phase A: Multi-Joint Mobility & Core Slings", duration: "10:00" },
+      { name: "Phase B: Scapular & Spinal Stabilization", duration: "10:00" },
+      { name: "Phase C: Diagnostic Isometric Tendon Influx", duration: "10:00" }
+    ],
+    stations: [
+      // Phase A
+      { name: "World's Greatest Stretch Matrix", desc: "Deep lunge forward, rotate thoracic spine overhead toward front leg, step back, and lateral lunge.\nDo 2 sets of 2 minutes total.", duration: 240, sets: 2, type: "timer", phase: "Phase A: Mobility" },
+      { name: "Deep Goblet Squat with Thoracic Rotation", desc: "Drop into deep squat cavity, anchor elbow inside knee, sweep opposite hand to sky. Alternate sides.\nDo 2 sets of 1.5 minutes total.", duration: 180, sets: 2, type: "timer", phase: "Phase A: Mobility" },
+      { name: "Dynamic 90/90 Hip Switches", desc: "Seated with knees bent at 90°, rotate knees flat to left, then pivot over heels to the right.\nDo 2 sets of 1.5 minutes total.", duration: 180, sets: 2, type: "timer", phase: "Phase A: Mobility" },
+      // Phase B
+      { name: "Prone Y-T-W Floor Raises", desc: "Face down on mat. Lift chest slightly and pulse arms into Y, T, and W positions.\nHold apex for 2 seconds.\nPerform 3 sets × 10 reps.", type: "reps", sets: 3, phase: "Phase B: Stabilization" },
+      { name: "Scapular Push-Ups to Downward Dog Shifting", desc: "Retract and protract shoulder blades in high plank, then drive hips back to downward dog.\nPerform 3 sets × 12 reps.", type: "reps", sets: 3, phase: "Phase B: Stabilization" },
+      { name: "Banded Pallof Press", desc: "Anchor band at chest height, step out for tension, hold at sternum and press straight out.\nPerform 3 sets × 12 reps per side.", type: "reps", sets: 3, phase: "Phase B: Stabilization" },
+      // Phase C
+      { name: "Tendon Pull Set 1: Half-Crimp Hold (50% Effort)", desc: "Perform 3 reps × 10 seconds half-crimp hold against static ground block at 50% perceived max pull effort.\nRest 60 seconds between pulls.", duration: 60, type: "pulls", pullsCount: 3, pullDuration: 10, phase: "Phase C: Tendon Influx" },
+      { name: "Tendon Pull Set 2: Open-Hand Hold (70% Effort)", desc: "Perform 3 reps × 7 seconds open-hand hold profile at 70% perceived max pull effort.\nRest 60 seconds between pulls.", duration: 60, type: "pulls", pullsCount: 3, pullDuration: 7, phase: "Phase C: Tendon Influx" },
+      { name: "Tendon Pull Set 3: Target Edge Profile (90% Effort)", desc: "Perform 2 reps × 5 seconds target session edge profile at 90% perceived max pull effort.\nRest 60 seconds between pulls.", duration: 60, type: "pulls", pullsCount: 2, pullDuration: 5, phase: "Phase C: Tendon Influx" }
+    ]
+  },
+  comp: {
+    title: "Competition Warm-Up",
+    objective: "Mock comps, sends, or maximum effort send states activation protocol (60 Minutes)",
+    phases: [
+      { name: "Phase A: Myofascial Tissue Flushing & Pulse", duration: "15:00" },
+      { name: "Phase B: Integrated Bodywork & Cross-Sling Stability", duration: "15:00" },
+      { name: "Phase C: Max Force Ceilings Triggering (Fmax)", duration: "15:00" },
+      { name: "Phase D: Plyometric & Nervous Acceleration", duration: "15:00" }
+    ],
+    stations: [
+      // Phase A
+      { name: "Systemic Pulse Elevation", desc: "High-knee skipping, directional footwork agility, and lateral shuffling to flood body with circulation.", duration: 300, phase: "Phase A: Tissue Flushing" },
+      { name: "Fascial Release & Self-Massage", desc: "Massage latissimus dorsi, thoracic spine column, hip flexors, and forearm brachioradialis with foam roller.", duration: 600, phase: "Phase A: Tissue Flushing" },
+      // Phase B
+      { name: "Bodyweight Turkish Get-Ups", desc: "Slow floor-to-standing transition. Keep vertical shoulder locked.\nPerform 3 sets × 3 reps per side.", type: "reps", sets: 3, phase: "Phase B: Cross-Sling" },
+      { name: "Dynamic Copenhagen Side Planks", desc: "Anchor top foot on bench, drive hips upward into side plank using adductor/core bracing.\nPerform 3 sets × 8 reps per side.", type: "reps", sets: 3, phase: "Phase B: Cross-Sling" },
+      { name: "Banded Face Pulls with Dynamic Overhead Press", desc: "Pull band to nose, retract scapula, then press straight overhead.\nPerform 3 sets × 15 reps.", type: "reps", sets: 3, phase: "Phase B: Cross-Sling" },
+      { name: "Single-Leg Romanian Deadlifts", desc: "Hinge at hips with straight trailing leg to fire hamstrings/glutes/ankle stabilization.\nPerform 3 sets × 10 reps per side.", type: "reps", sets: 3, phase: "Phase B: Cross-Sling" },
+      // Phase C
+      { name: "Crane Pull Ramp-Up Sequence", desc: "Pull 3 distinct sets × 5 seconds at progressive effort thresholds (60% -> 75% -> 85%).\nRest 2 minutes between pulls.", duration: 120, type: "pulls", pullsCount: 3, pullDuration: 5, phase: "Phase C: Max Force" },
+      { name: "Peak Recruitment Pulls (100% Downward Effort)", desc: "Perform 3 sets × 5 seconds absolute max downward pull on 20mm frame edge half-crimp.\nRest 2 minutes between pulls.", duration: 120, type: "pulls", pullsCount: 3, pullDuration: 5, phase: "Phase C: Max Force" },
+      // Phase D
+      { name: "Plyometric Push-Ups", desc: "Explode off floor so hands completely break contact.\nPerform 3 sets × 5 reps.\nRest 60s between sets.", duration: 60, type: "timer", sets: 3, phase: "Phase D: Plyometric" },
+      { name: "High-Velocity Band Slams", desc: "Pull high-tension band overhead downward through core sling at max speed.\nPerform 3 sets × 6 reps.\nRest 60s between sets.", duration: 60, type: "timer", sets: 3, phase: "Phase D: Plyometric" },
+      { name: "Neurological Fast-Twitch Finger Flashes", desc: "Extend arms forward, cycle hands between absolute tight fist and wide open fingers at max speed.\nPerform 3 sets × 20 seconds.", duration: 20, type: "timer", sets: 3, phase: "Phase D: Plyometric" },
+      { name: "Pre-Comp Taper Rest", desc: "Rest completely seated with deep box breathing for 4 minutes before your first attempt.", duration: 240, phase: "Phase D: Plyometric" }
+    ]
+  }
+};
+
+// Initialize warm-up event listeners
+function initWarmupModule() {
+  // Sub-tabs listeners
+  const screenWarmup = document.getElementById("screen-warmup");
+  if (!screenWarmup) return;
+
+  const subTabBtns = screenWarmup.querySelectorAll(".sub-tab-btn");
+  subTabBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      subTabBtns.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      state.warmup.activeType = btn.dataset.warmupType;
+      state.warmup.activeStationIdx = 0;
+      loadWarmupScreen();
+    });
+  });
+
+  // Start routine button
+  document.getElementById("start-warmup-btn").addEventListener("click", startWarmupRoutine);
+
+  // Stepper sets buttons
+  document.getElementById("warmup-set-plus").addEventListener("click", () => {
+    const routine = WARMUP_ROUTINES[state.warmup.activeType];
+    const station = routine.stations[state.warmup.activeStationIdx];
+    const key = `${state.warmup.activeType}-${state.warmup.activeStationIdx}`;
+    let val = state.warmup.completions[key] || 0;
+    if (val < (station.sets || 1)) val++;
+    state.warmup.completions[key] = val;
+    document.getElementById("warmup-set-val").textContent = `${val} / ${station.sets || 1}`;
+  });
+
+  document.getElementById("warmup-set-minus").addEventListener("click", () => {
+    const key = `${state.warmup.activeType}-${state.warmup.activeStationIdx}`;
+    let val = state.warmup.completions[key] || 0;
+    if (val > 0) val--;
+    state.warmup.completions[key] = val;
+    const routine = WARMUP_ROUTINES[state.warmup.activeType];
+    const station = routine.stations[state.warmup.activeStationIdx];
+    document.getElementById("warmup-set-val").textContent = `${val} / ${station.sets || 1}`;
+  });
+
+  // Timer play/pause and reset
+  document.getElementById("warmup-timer-toggle").addEventListener("click", toggleWarmupTimer);
+  document.getElementById("warmup-timer-reset").addEventListener("click", resetWarmupTimer);
+
+  // Wizard nav buttons
+  document.getElementById("warmup-prev-btn").addEventListener("click", prevWarmupStation);
+  document.getElementById("warmup-next-btn").addEventListener("click", nextWarmupStation);
+  document.getElementById("exit-warmup-btn").addEventListener("click", exitWarmupRoutine);
+}
+
+// Load warm-up routing view
+async function loadWarmupScreen() {
+  if (!state.warmup) {
+    state.warmup = {
+      activeType: 'breathing',
+      activeStationIdx: 0,
+      timerVal: 0,
+      timerRunning: false,
+      timerInterval: null,
+      tabataPhase: 'work',
+      completions: {}
+    };
+  }
+
+  const type = state.warmup.activeType;
+  const routine = WARMUP_ROUTINES[type];
+
+  // 1. Adaptive Highlighting Check (Flag 2)
+  const alertEl = document.getElementById("warmup-recommendation");
+  try {
+    const checkins = await db.getCheckinsForAthlete(state.currentUser.id);
+    const lastCheckin = checkins && checkins.length > 0 ? checkins[checkins.length - 1] : null;
+    if (lastCheckin && lastCheckin.energy_readiness <= 2) {
+      alertEl.style.display = "block";
+      // Auto highlight Lazy warm-up
+      if (!state.warmup.hasAutoHighlighted) {
+        state.warmup.activeType = 'lazy';
+        state.warmup.hasAutoHighlighted = true;
+        loadWarmupScreen();
+        return;
+      }
+    } else {
+      alertEl.style.display = "none";
+    }
+  } catch (e) {
+    alertEl.style.display = "none";
+  }
+
+  // Peak Phase check (Month 6)
+  try {
+    const assigned = await db.getAssignedProgram(state.currentUser.id);
+    if (assigned && (assigned.title.includes("Month 6") || assigned.title.includes("Peak")) && !state.warmup.hasAutoPresetComp) {
+      state.warmup.activeType = 'comp';
+      state.warmup.hasAutoPresetComp = true;
+      loadWarmupScreen();
+      return;
+    }
+  } catch (e) {}
+
+  // Update active sub-tab styling
+  document.querySelectorAll("#screen-warmup .sub-tab-btn").forEach(btn => {
+    if (btn.dataset.warmupType === type) {
+      btn.classList.add("active");
+    } else {
+      btn.classList.remove("active");
+    }
+  });
+
+  // Render overview details
+  document.getElementById("warmup-routine-title").textContent = routine.title;
+  document.getElementById("warmup-routine-objective").textContent = routine.objective;
+
+  const phasesList = document.getElementById("warmup-phases-list");
+  phasesList.innerHTML = routine.phases.map(p => `
+    <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); padding: 8px 12px; border-radius: var(--border-radius-sm);">
+      <span style="font-size: 0.8rem; font-weight: 500; color: var(--text-primary);">${p.name}</span>
+      <span style="font-size: 0.75rem; color: var(--accent-cyan); font-weight: 600;">${p.duration}</span>
+    </div>
+  `).join('');
+
+  document.getElementById("warmup-overview").style.display = "block";
+  document.getElementById("warmup-wizard-card").style.display = "none";
+}
+
+// Start routine wizard
+function startWarmupRoutine() {
+  document.getElementById("warmup-overview").style.display = "none";
+  document.getElementById("warmup-wizard-card").style.display = "block";
+  state.warmup.activeStationIdx = 0;
+  loadWarmupStation();
+}
+
+// Load active wizard station
+function loadWarmupStation() {
+  if (state.warmup.timerInterval) {
+    clearInterval(state.warmup.timerInterval);
+    state.warmup.timerInterval = null;
+  }
+  state.warmup.timerRunning = false;
+  state.warmup.tabataPhase = 'work';
+
+  const type = state.warmup.activeType;
+  const routine = WARMUP_ROUTINES[type];
+  const idx = state.warmup.activeStationIdx;
+  const station = routine.stations[idx];
+
+  // Title & phase info
+  document.getElementById("warmup-wizard-phase").textContent = station.phase || routine.phases[0].name;
+  document.getElementById("warmup-wizard-progress").textContent = `Station ${idx + 1} / ${routine.stations.length}`;
+  document.getElementById("warmup-station-name").textContent = station.name;
+  document.getElementById("warmup-station-desc").textContent = station.desc;
+
+  // Stepper config
+  const setsBox = document.getElementById("warmup-station-sets-box");
+  if (station.sets || station.type === 'reps') {
+    setsBox.style.display = "flex";
+    const key = `${type}-${idx}`;
+    const completedSets = state.warmup.completions[key] || 0;
+    document.getElementById("warmup-set-val").textContent = `${completedSets} / ${station.sets || 1}`;
+  } else {
+    setsBox.style.display = "none";
+  }
+
+  // Timer setup
+  const timerToggle = document.getElementById("warmup-timer-toggle");
+  const timerReset = document.getElementById("warmup-timer-reset");
+  const timerLabel = document.getElementById("warmup-timer-label");
+  const timerDigits = document.getElementById("warmup-timer-digits");
+
+  timerToggle.textContent = "Start";
+  timerReset.style.display = "none";
+
+  if (station.type === 'tabata') {
+    timerLabel.textContent = "Work Time";
+    state.warmup.timerVal = station.work;
+  } else if (station.duration) {
+    timerLabel.textContent = "Timer";
+    state.warmup.timerVal = station.duration;
+  } else {
+    timerLabel.textContent = "Sets Focus";
+    state.warmup.timerVal = 0;
+  }
+
+  timerDigits.textContent = formatTimerDigits(state.warmup.timerVal);
+}
+
+// Timer control logic
+function toggleWarmupTimer() {
+  const toggleBtn = document.getElementById("warmup-timer-toggle");
+  const resetBtn = document.getElementById("warmup-timer-reset");
+
+  if (state.warmup.timerRunning) {
+    // Pause
+    state.warmup.timerRunning = false;
+    clearInterval(state.warmup.timerInterval);
+    state.warmup.timerInterval = null;
+    toggleBtn.textContent = "Resume";
+  } else {
+    // Start/Resume
+    state.warmup.timerRunning = true;
+    toggleBtn.textContent = "Pause";
+    resetBtn.style.display = "inline-block";
+
+    const tick = () => {
+      if (state.warmup.timerVal > 0) {
+        state.warmup.timerVal--;
+        document.getElementById("warmup-timer-digits").textContent = formatTimerDigits(state.warmup.timerVal);
+      } else {
+        // Timer alarm triggered
+        clearInterval(state.warmup.timerInterval);
+        state.warmup.timerInterval = null;
+        state.warmup.timerRunning = false;
+        
+        playAlarmSound();
+        if (navigator.vibrate) navigator.vibrate([300, 150, 300]);
+
+        const routine = WARMUP_ROUTINES[state.warmup.activeType];
+        const station = routine.stations[state.warmup.activeStationIdx];
+
+        if (station.type === 'tabata') {
+          if (state.warmup.tabataPhase === 'work') {
+            // Auto transition to rest
+            state.warmup.tabataPhase = 'rest';
+            state.warmup.timerVal = station.rest;
+            document.getElementById("warmup-timer-label").textContent = "Rest Time";
+            document.getElementById("warmup-timer-digits").textContent = formatTimerDigits(state.warmup.timerVal);
+            
+            // Auto start rest timer
+            state.warmup.timerRunning = true;
+            state.warmup.timerInterval = setInterval(tick, 1000);
+          } else {
+            // End of Tabata interval, advance to next station automatically
+            nextWarmupStation();
+          }
+        } else {
+          toggleBtn.textContent = "Done";
+        }
+      }
+    };
+
+    state.warmup.timerInterval = setInterval(tick, 1000);
+  }
+}
+
+function resetWarmupTimer() {
+  if (state.warmup.timerInterval) {
+    clearInterval(state.warmup.timerInterval);
+    state.warmup.timerInterval = null;
+  }
+  state.warmup.timerRunning = false;
+
+  const routine = WARMUP_ROUTINES[state.warmup.activeType];
+  const station = routine.stations[state.warmup.activeStationIdx];
+
+  if (station.type === 'tabata') {
+    state.warmup.timerVal = station.work;
+    document.getElementById("warmup-timer-label").textContent = "Work Time";
+  } else {
+    state.warmup.timerVal = station.duration || 0;
+  }
+
+  document.getElementById("warmup-timer-digits").textContent = formatTimerDigits(state.warmup.timerVal);
+  document.getElementById("warmup-timer-toggle").textContent = "Start";
+  document.getElementById("warmup-timer-reset").style.display = "none";
+}
+
+// Next station navigation
+function nextWarmupStation() {
+  const routine = WARMUP_ROUTINES[state.warmup.activeType];
+  if (state.warmup.activeStationIdx < routine.stations.length - 1) {
+    state.warmup.activeStationIdx++;
+    loadWarmupStation();
+  } else {
+    // Complete warm-up
+    localStorage.setItem("warm_up_completed", "true");
+    alert("Congratulations! Warm-up routine completed successfully. Time to climb!");
+    exitWarmupRoutine();
+  }
+}
+
+// Previous station navigation
+function prevWarmupStation() {
+  if (state.warmup.activeStationIdx > 0) {
+    state.warmup.activeStationIdx--;
+    loadWarmupStation();
+  }
+}
+
+// Exit warm-up wizard
+function exitWarmupRoutine() {
+  if (state.warmup.timerInterval) {
+    clearInterval(state.warmup.timerInterval);
+    state.warmup.timerInterval = null;
+  }
+  state.warmup.timerRunning = false;
+  state.warmup.activeStationIdx = 0;
+  
+  loadWarmupScreen();
+  switchTab("today");
+}

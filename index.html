@@ -311,6 +311,82 @@
         </div>
       </section>
 
+      <!-- WARM-UP SCREEN -->
+      <section id="screen-warmup" class="screen">
+        <div class="card">
+          <h2 class="card-title" style="margin-bottom: 4px;">Off-The-Wall Warm-Up Engine</h2>
+          <p class="text-muted" style="font-size: 0.8rem; margin-bottom: 12px;">Prime your joints, lungs, and tendons before touching the wall. Engaging this engine tracks independent compliance.</p>
+          
+          <!-- Recommendation pill -->
+          <div id="warmup-recommendation" class="alert alert-info" style="display: none; padding: 8px 12px; margin-bottom: 12px; font-size: 0.8rem;">
+            <strong>Recommendation:</strong> Based on your low readiness score, we recommend the <strong>Lazy Warm-Up</strong> today.
+          </div>
+
+          <!-- Warm-up sub-tabs selector -->
+          <div class="sub-tabs-container" style="display: flex; gap: 4px; overflow-x: auto; margin-bottom: 16px; border-bottom: 1px solid var(--border-color); padding-bottom: 8px; scrollbar-width: none;">
+            <button class="sub-tab-btn active" data-warmup-type="breathing" style="flex: 1; padding: 8px 12px; font-size: 0.75rem; font-weight: 600; white-space: nowrap; border-radius: var(--border-radius-sm); border: 1px solid var(--border-color); background: var(--bg-primary); color: var(--text-secondary); cursor: pointer; transition: all 0.2s;">Breathing</button>
+            <button class="sub-tab-btn" data-warmup-type="lazy" style="flex: 1; padding: 8px 12px; font-size: 0.75rem; font-weight: 600; white-space: nowrap; border-radius: var(--border-radius-sm); border: 1px solid var(--border-color); background: var(--bg-primary); color: var(--text-secondary); cursor: pointer; transition: all 0.2s;">Lazy</button>
+            <button class="sub-tab-btn" data-warmup-type="standard" style="flex: 1; padding: 8px 12px; font-size: 0.75rem; font-weight: 600; white-space: nowrap; border-radius: var(--border-radius-sm); border: 1px solid var(--border-color); background: var(--bg-primary); color: var(--text-secondary); cursor: pointer; transition: all 0.2s;">Standard</button>
+            <button class="sub-tab-btn" data-warmup-type="comp" style="flex: 1; padding: 8px 12px; font-size: 0.75rem; font-weight: 600; white-space: nowrap; border-radius: var(--border-radius-sm); border: 1px solid var(--border-color); background: var(--bg-primary); color: var(--text-secondary); cursor: pointer; transition: all 0.2s;">Comp Max</button>
+          </div>
+
+          <!-- Routine Overview Block -->
+          <div id="warmup-overview" style="margin-bottom: 16px;">
+            <h3 id="warmup-routine-title" style="font-size: 1rem; color: var(--text-primary); margin-bottom: 4px;">Breathing Prep</h3>
+            <p id="warmup-routine-objective" class="text-muted" style="font-size: 0.8rem; margin-bottom: 12px;">Interval breathing to hyper-oxygenate the muscles.</p>
+            
+            <div id="warmup-phases-list" style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px;">
+              <!-- Dynamic phases details -->
+            </div>
+            
+            <button class="btn btn-primary" id="start-warmup-btn" style="width: 100%;">Start Warm-Up Routine</button>
+          </div>
+
+          <!-- Active Station Engine Wizard Card -->
+          <div id="warmup-wizard-card" style="display: none; border-top: 1px solid var(--border-color); padding-top: 16px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <span id="warmup-wizard-phase" style="font-size: 0.7rem; font-weight: 700; color: var(--accent-cyan); text-transform: uppercase;">Phase A: Diaphragm Mobilization</span>
+              <span id="warmup-wizard-progress" style="font-size: 0.7rem; color: var(--text-muted);">Station 1 / 4</span>
+            </div>
+            
+            <div class="wizard-station-box" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: var(--border-radius-md); padding: 16px; margin-bottom: 16px; display: flex; flex-direction: column; gap: 10px;">
+              <div>
+                <h4 id="warmup-station-name" style="margin: 0; font-size: 0.95rem; color: var(--text-primary);">Diaphragmatic Rhythmic Pacing</h4>
+                <p id="warmup-station-desc" class="text-muted" style="margin: 4px 0 0 0; font-size: 0.75rem; line-height: 1.4; white-space: pre-wrap;">Deep nasal inhalation, focusing on abdominal extension.</p>
+              </div>
+
+              <div id="warmup-station-sets-box" style="display: flex; align-items: center; justify-content: space-between; font-size: 0.8rem; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 8px; display: none;">
+                <span>Completed Sets:</span>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <button id="warmup-set-minus" class="stepper-btn" style="padding: 2px 8px; font-size: 0.75rem;">&minus;</button>
+                  <span id="warmup-set-val" style="font-weight: 600; color: var(--accent-green);">0 / 2</span>
+                  <button id="warmup-set-plus" class="stepper-btn" style="padding: 2px 8px; font-size: 0.75rem;">+</button>
+                </div>
+              </div>
+              
+              <!-- Station Countdown Timer display -->
+              <div id="warmup-timer-container" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; padding: 10px 0; background: rgba(0,0,0,0.15); border-radius: var(--border-radius-sm); border: 1px dashed rgba(255,255,255,0.05);">
+                <span id="warmup-timer-label" style="font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; font-weight: 600;">Work Time</span>
+                <span id="warmup-timer-digits" style="font-family: monospace; font-size: 2.2rem; font-weight: 700; color: var(--text-primary); letter-spacing: 2px; line-height: 1;">00:20</span>
+                
+                <div style="display: flex; gap: 8px; margin-top: 6px;">
+                  <button id="warmup-timer-toggle" class="btn" style="padding: 4px 12px; font-size: 0.7rem; background: var(--bg-tertiary); color: var(--text-primary);">Start</button>
+                  <button id="warmup-timer-reset" class="btn" style="padding: 4px 12px; font-size: 0.7rem; background: none; color: var(--text-muted); border: 1px solid var(--border-color); display: none;">Reset</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Controls row -->
+            <div style="display: flex; gap: 10px; width: 100%;">
+              <button id="warmup-prev-btn" class="btn" style="flex: 1; padding: 10px; font-size: 0.8rem; background: var(--bg-tertiary); color: var(--text-primary);">Previous</button>
+              <button id="warmup-next-btn" class="btn btn-primary" style="flex: 1; padding: 10px; font-size: 0.8rem;">Next Station</button>
+            </div>
+            
+            <button id="exit-warmup-btn" class="btn" style="width: 100%; margin-top: 10px; background: none; color: var(--accent-red); border: 1px solid rgba(239, 68, 68, 0.2); font-size: 0.75rem; padding: 6px;">End & Exit Warm-up</button>
+          </div>
+        </div>
+      </section>
+
       <section id="screen-resources" class="screen">
         <div class="card">
           <h2 class="card-title">Resource Files & Links</h2>
