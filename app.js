@@ -70,7 +70,7 @@ async function initApp() {
   document.getElementById("close-quick-log-btn").addEventListener("click", closeQuickLogModal);
   
   const quickLogModal = document.getElementById("quick-log-modal");
-  quickLogModal.addEventListener("click", (e) => {
+  quickLogModal.addEventListener("mousedown", (e) => {
     if (e.target === quickLogModal) closeQuickLogModal();
   });
   
