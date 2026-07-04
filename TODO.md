@@ -32,3 +32,9 @@
 - [x] Clean up structure and prepare for Netlify deployment
 - [x] Service worker and manifest configurations for PWA compliance
 - [x] End-to-end user manual test validations
+
+## Phase 6: Workout Curriculum Integration & Navigation Enhancements (Completed)
+- [x] Parse and seed the 4-week Capacity & Base Phase macrocycle block workouts into `db.js`
+- [x] Implement dynamic Today session loading from local storage
+- [x] Enable interactive calendar rows to switch to selected workouts on click
+

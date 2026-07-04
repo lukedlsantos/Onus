@@ -393,66 +393,93 @@ async function loadAthleteTodayScreen() {
   }
 
   const phases = await db.getPhasesForProgram(assigned.program_id);
-  if (phases.length > 0) {
+  let session = null;
+  const storedSessionId = localStorage.getItem("onus_selected_today_session_id");
+
+  if (storedSessionId && phases.length > 0) {
+    for (const phase of phases) {
+      const weeks = await db.getWeeksForPhase(phase.id);
+      for (const week of weeks) {
+        const sessions = await db.getSessionsForWeek(week.id);
+        const found = sessions.find(s => s.id === storedSessionId);
+        if (found) {
+          session = found;
+          phaseWeekLabel.textContent = `${phase.title} — Week ${week.week_number}`;
+          break;
+        }
+      }
+      if (session) break;
+    }
+  }
+
+  if (!session && phases.length > 0) {
     const weeks = await db.getWeeksForPhase(phases[0].id);
     if (weeks.length > 0) {
       const sessions = await db.getSessionsForWeek(weeks[0].id);
       if (sessions.length > 0) {
-        const session = sessions[0];
-        state.todaySession = session;
-
+        session = sessions[0];
         phaseWeekLabel.textContent = `${phases[0].title} — Week ${weeks[0].week_number}`;
-        titleEl.textContent = `${session.day_label}: ${session.title}`;
-        objectiveEl.textContent = session.objective;
-        logBtn.style.display = "block";
-
-        const drills = await db.getExercisesForSession(session.id);
-        if (drills.length > 0) {
-          drillList.innerHTML = drills.map(d => {
-            const timerSecs = parseDurationText(d.reps_or_duration);
-            let timerHtml = '';
-            
-            if (timerSecs !== null) {
-              timerHtml = `
-                <div class="timer-container" data-drill-id="${d.id}" data-seconds="${timerSecs}">
-                  <span class="timer-display">${formatTime(timerSecs)}</span>
-                  <button class="timer-btn timer-start-btn">Start</button>
-                  <button class="timer-btn timer-reset-btn" style="display: none;">Reset</button>
-                </div>
-              `;
-            }
-
-            return `
-              <div class="drill-item" id="drill-card-${d.id}">
-                <div class="drill-title">
-                  <span>${d.name}</span>
-                  <span style="font-size: 0.8rem; color: var(--accent-cyan); font-weight: 500;">${d.sets} sets</span>
-                </div>
-                <div class="drill-meta">Rep/Duration: ${d.reps_or_duration} | Rest: ${d.rest}</div>
-                ${d.notes ? `<div class="drill-meta" style="font-style: italic; color: var(--text-muted);">Note: ${d.notes}</div>` : ''}
-                
-                <div class="drill-actions">
-                  <div class="stepper-container" data-drill-id="${d.id}" data-drill-name="${d.name}" data-max-sets="${d.sets}">
-                    <button class="stepper-btn stepper-minus">&minus;</button>
-                    <span class="stepper-val">0 / ${d.sets} sets</span>
-                    <button class="stepper-btn stepper-plus">+</button>
-                  </div>
-                  ${timerHtml}
-                </div>
-              </div>
-            `;
-          }).join('');
-          drillContainer.style.display = "block";
-        } else {
-          drillContainer.style.display = "none";
-        }
-
-        // Auto request lock on Today load
-        if (state.activeTab === "today") requestWakeLock();
-        return;
       }
     }
   }
+
+  if (session) {
+    state.todaySession = session;
+    titleEl.textContent = `${session.day_label}: ${session.title}`;
+    objectiveEl.textContent = session.objective;
+    logBtn.style.display = "block";
+
+    const drills = await db.getExercisesForSession(session.id);
+    if (drills.length > 0) {
+      drillList.innerHTML = drills.map(d => {
+        const timerSecs = parseDurationText(d.reps_or_duration);
+        let timerHtml = '';
+        
+        if (timerSecs !== null) {
+          timerHtml = `
+            <div class="timer-container" data-drill-id="${d.id}" data-seconds="${timerSecs}">
+              <span class="timer-display">${formatTime(timerSecs)}</span>
+              <button class="timer-btn timer-start-btn">Start</button>
+              <button class="timer-btn timer-reset-btn" style="display: none;">Reset</button>
+            </div>
+          `;
+        }
+
+        return `
+          <div class="drill-item" id="drill-card-${d.id}">
+            <div class="drill-title">
+              <span>${d.name}</span>
+              <span style="font-size: 0.8rem; color: var(--accent-cyan); font-weight: 500;">${d.sets} sets</span>
+            </div>
+            <div class="drill-meta">Rep/Duration: ${d.reps_or_duration} | Rest: ${d.rest}</div>
+            ${d.notes ? `<div class="drill-meta" style="font-style: italic; color: var(--text-muted);">Note: ${d.notes}</div>` : ''}
+            
+            <div class="drill-actions">
+              <div class="stepper-container" data-drill-id="${d.id}" data-drill-name="${d.name}" data-max-sets="${d.sets}">
+                <button class="stepper-btn stepper-minus">&minus;</button>
+                <span class="stepper-val">0 / ${d.sets} sets</span>
+                <button class="stepper-btn stepper-plus">+</button>
+              </div>
+              ${timerHtml}
+            </div>
+          </div>
+        `;
+      }).join('');
+      drillContainer.style.display = "block";
+    } else {
+      drillContainer.style.display = "none";
+    }
+
+    // Auto request lock on Today load
+    if (state.activeTab === "today") requestWakeLock();
+    return;
+  }
+  
+  titleEl.textContent = "Rest Day";
+  objectiveEl.textContent = "Enjoy your recovery.";
+  drillContainer.style.display = "none";
+  logBtn.style.display = "none";
+}
   
   titleEl.textContent = "Rest Day";
   objectiveEl.textContent = "Enjoy your recovery.";
@@ -576,7 +603,7 @@ async function loadTrainingCalendar() {
         const status = log ? log.status : 'pending';
         
         calendarHtml += `
-          <div class="calendar-day-row">
+          <div class="calendar-day-row" data-session-id="${sess.id}" style="cursor: pointer;">
             <div class="calendar-day-info">
               <span class="calendar-day-name">${sess.day_label}: ${sess.title}</span>
               <span class="calendar-session-title">${sess.objective}</span>
@@ -588,6 +615,16 @@ async function loadTrainingCalendar() {
     }
   }
   calendarList.innerHTML = calendarHtml;
+
+  // Bind click handlers to session rows
+  calendarList.querySelectorAll(".calendar-day-row").forEach(row => {
+    row.addEventListener("click", () => {
+      const sessionId = row.dataset.sessionId;
+      localStorage.setItem("onus_selected_today_session_id", sessionId);
+      switchTab("today");
+      loadAthleteTodayScreen();
+    });
+  });
 }
 
 // Handle session logs submission form
