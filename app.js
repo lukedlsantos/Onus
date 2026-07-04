@@ -53,24 +53,40 @@ async function initApp() {
   document.getElementById("toggle-checkin-header").addEventListener("click", toggleWeeklyCheckinForm);
 
   document.getElementById("log-today-btn").addEventListener("click", () => {
-    switchTab("log");
+    const modal = document.getElementById("quick-log-modal");
+    const sheet = modal.querySelector(".quick-log-sheet");
+    
     if (state.todaySession) {
-      document.getElementById("log-session-select").value = state.todaySession.id;
-      
-      // Auto-populate workout notes with granular set progress
-      const notesEl = document.getElementById("log-notes");
-      const summaryList = [];
-      document.querySelectorAll(".stepper-container").forEach(container => {
-        const name = container.dataset.drillName;
-        const val = state.drillCompletions[container.dataset.drillId] || 0;
-        const max = container.dataset.maxSets;
-        summaryList.push(`- ${name}: ${val}/${max} sets completed`);
-      });
-      if (summaryList.length > 0) {
-        notesEl.value = `Workout Performance:\n` + summaryList.join("\n") + `\n\nNotes: `;
-      }
+      document.getElementById("quick-log-title").textContent = `Log: ${state.todaySession.day_label} - ${state.todaySession.title}`;
     }
+    
+    modal.style.display = "flex";
+    setTimeout(() => {
+      sheet.style.transform = "translateY(0)";
+    }, 50);
   });
+
+  // Bind Quick Log overlay triggers
+  document.getElementById("close-quick-log-btn").addEventListener("click", closeQuickLogModal);
+  
+  const quickLogModal = document.getElementById("quick-log-modal");
+  quickLogModal.addEventListener("click", (e) => {
+    if (e.target === quickLogModal) closeQuickLogModal();
+  });
+  
+  document.getElementById("quick-log-rpe").addEventListener("input", (e) => {
+    document.getElementById("quick-rpe-val").textContent = `${e.target.value} / 10`;
+  });
+  
+  document.getElementById("quick-log-fatigue").addEventListener("input", (e) => {
+    document.getElementById("quick-fatigue-val").textContent = `${e.target.value} / 5`;
+  });
+  
+  document.getElementById("quick-log-pain").addEventListener("input", (e) => {
+    document.getElementById("quick-pain-val").textContent = `${e.target.value} / 5`;
+  });
+  
+  document.getElementById("submit-quick-log-btn").addEventListener("click", submitQuickLog);
 
   // Admin access card handlers
   document.getElementById("admin-access-form").addEventListener("submit", handleAdminAccessSubmit);
@@ -638,7 +654,6 @@ async function loadAthleteTodayScreen() {
           `;
         } else if (d.category === "Tier 3") {
           const workSecs = parseDurationText(d.reps_or_duration) || 2400; // 40 min default
-          // Rest timer: 90s for Day 3, 60s for Day 1 and 5
           const dayNumMatch = d.id.match(/-d(\d+)-/);
           const dayNum = dayNumMatch ? parseInt(dayNumMatch[1]) : 1;
           const restSecs = (dayNum === 3) ? 90 : 60;
@@ -655,10 +670,27 @@ async function loadAthleteTodayScreen() {
           }
         }
 
+        // Check if main drill is completed
+        const isCompleted = (state.drillCompletions[d.id] || 0) === d.sets;
+        const checkSymbol = isCompleted ? '✓' : '';
+        const checkBg = isCompleted ? 'background-color: rgba(16, 185, 129, 0.15); border-color: var(--accent-green);' : 'background: none; border-color: var(--border-color);';
+        const cardBg = isCompleted ? 'border-color: var(--accent-green); box-shadow: 0 0 10px rgba(16, 185, 129, 0.05);' : '';
+
         let subCardsHtml = '';
         if (d.category === "Tier 4") {
           const subItems = parseSubExercises(d.notes);
           if (subItems.length > 0) {
+            // Check if Tier 4 parent should display completed because all sub-items are completed
+            const allSubDone = subItems.every(sub => (state.drillCompletions[sub.id] || 0) === sub.sets);
+            const tier4CheckSymbol = allSubDone ? '✓' : '';
+            const tier4CheckBg = allSubDone ? 'background-color: rgba(16, 185, 129, 0.15); border-color: var(--accent-green);' : 'background: none; border-color: var(--border-color);';
+            const tier4CardBg = allSubDone ? 'border-color: var(--accent-green);' : '';
+            
+            d.isCompletedOverride = allSubDone;
+            d.checkBgOverride = tier4CheckBg;
+            d.checkSymbolOverride = tier4CheckSymbol;
+            d.cardBgOverride = tier4CardBg;
+
             subCardsHtml = `
               <div class="sub-drills-stack" style="margin-top: 10px; display: flex; flex-direction: column; gap: 8px; width: 100%;">
                 ${subItems.map((sub, idx) => {
@@ -668,10 +700,18 @@ async function loadAthleteTodayScreen() {
                     subTimerHtml = renderTimerMarkup(sub.id, subTimerSecs, "Duration");
                   }
                   
+                  const isSubCompleted = (state.drillCompletions[sub.id] || 0) === sub.sets;
+                  const subCheckSymbol = isSubCompleted ? '✓' : '';
+                  const subCheckBg = isSubCompleted ? 'background-color: rgba(16, 185, 129, 0.15); border-color: var(--accent-green);' : 'background: none; border-color: var(--border-color);';
+                  const subCardBg = isSubCompleted ? 'border-color: var(--accent-green);' : '';
+
                   return `
-                    <div class="sub-drill-card" style="background-color: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: var(--border-radius-sm); overflow: hidden;">
+                    <div class="sub-drill-card" style="background-color: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: var(--border-radius-sm); overflow: hidden; ${subCardBg}">
                       <div class="sub-drill-header" data-sub-id="${sub.id}" style="cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 10px; background-color: rgba(255,255,255,0.02);">
-                        <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-primary); text-align: left; padding-right: 8px;">${sub.text}</span>
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                          <button class="drill-check-btn" data-drill-id="${sub.id}" style="width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid var(--border-color); display: flex; align-items: center; justify-content: center; color: var(--accent-green); font-weight: 700; cursor: pointer; transition: all 0.2s; font-size: 0.75rem; flex-shrink: 0; padding: 0; ${subCheckBg}">${subCheckSymbol}</button>
+                          <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-primary); text-align: left; padding-right: 8px;">${sub.text}</span>
+                        </div>
                         <div style="display: flex; align-items: center; gap: 8px; flex-shrink: 0;">
                           <span style="font-size: 0.75rem; color: var(--accent-cyan); font-weight: 500;">${sub.sets} sets</span>
                           <span class="sub-chevron" style="font-size: 0.65rem; color: var(--text-muted);">▶</span>
@@ -681,7 +721,7 @@ async function loadAthleteTodayScreen() {
                         <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; width: 100%;">
                           <div class="stepper-container" data-drill-id="${sub.id}" data-drill-name="${sub.text}" data-max-sets="${sub.sets}">
                             <button class="stepper-btn stepper-minus" style="padding: 2px 8px; font-size: 0.75rem;">&minus;</button>
-                            <span class="stepper-val" style="font-size: 0.75rem;">0 / ${sub.sets} sets</span>
+                            <span class="stepper-val" style="font-size: 0.75rem;">${state.drillCompletions[sub.id] || 0} / ${sub.sets} sets</span>
                             <button class="stepper-btn stepper-plus" style="padding: 2px 8px; font-size: 0.75rem;">+</button>
                           </div>
                           ${subTimerHtml}
@@ -695,10 +735,21 @@ async function loadAthleteTodayScreen() {
           }
         }
 
+        const renderCardBg = d.category === "Tier 4" ? (d.cardBgOverride || '') : cardBg;
+        const renderCheckBg = d.category === "Tier 4" ? (d.checkBgOverride || '') : checkBg;
+        const renderCheckSymbol = d.category === "Tier 4" ? (d.checkSymbolOverride || '') : checkSymbol;
+
         return `
-          <div class="drill-item" id="drill-card-${d.id}">
+          <div class="drill-item" id="drill-card-${d.id}" style="${renderCardBg}">
             <div class="drill-title" style="display: flex; justify-content: space-between; align-items: center; gap: 8px;">
-              <span style="font-weight: 600;">${d.name}</span>
+              <div style="display: flex; align-items: center; gap: 8px;">
+                ${d.category !== "Tier 4" ? `
+                  <button class="drill-check-btn" data-drill-id="${d.id}" style="width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--border-color); display: flex; align-items: center; justify-content: center; color: var(--accent-green); font-weight: 700; cursor: pointer; transition: all 0.2s; font-size: 0.75rem; flex-shrink: 0; padding: 0; ${renderCheckBg}">${renderCheckSymbol}</button>
+                ` : `
+                  <button class="drill-check-btn" style="width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--border-color); display: flex; align-items: center; justify-content: center; color: var(--accent-green); font-weight: 700; cursor: default; transition: all 0.2s; font-size: 0.75rem; flex-shrink: 0; padding: 0; pointer-events: none; ${renderCheckBg}">${renderCheckSymbol}</button>
+                `}
+                <span style="font-weight: 600;">${d.name}</span>
+              </div>
               <div style="display: flex; align-items: center; gap: 6px;">
                 <span class="badge" style="background-color: var(--bg-secondary); color: var(--accent-cyan); font-size: 0.65rem; font-weight: 600; padding: 2px 6px; border-radius: var(--border-radius-sm); border: 1px solid var(--border-color);">${d.category}</span>
                 ${d.category !== "Tier 4" ? `<span style="font-size: 0.8rem; color: var(--text-secondary); font-weight: 500;">${d.sets} sets</span>` : ''}
@@ -712,7 +763,7 @@ async function loadAthleteTodayScreen() {
               <div class="drill-actions">
                 <div class="stepper-container" data-drill-id="${d.id}" data-drill-name="${d.name}" data-max-sets="${d.sets}">
                   <button class="stepper-btn stepper-minus">&minus;</button>
-                  <span class="stepper-val">0 / ${d.sets} sets</span>
+                  <span class="stepper-val">${state.drillCompletions[d.id] || 0} / ${d.sets} sets</span>
                   <button class="stepper-btn stepper-plus">+</button>
                 </div>
                 ${timerHtml}
@@ -757,6 +808,36 @@ async function loadAthleteTodayScreen() {
 function handleDrillActionsClick(e) {
   const target = e.target;
 
+  // Handle Checkmark completions
+  if (target.classList.contains("drill-check-btn") || target.closest(".drill-check-btn")) {
+    const btn = target.classList.contains("drill-check-btn") ? target : target.closest(".drill-check-btn");
+    const drillId = btn.dataset.drillId;
+    
+    // Find sets limit
+    let container = btn.closest(".drill-item");
+    let max = 1;
+    let stepper = container ? container.querySelector(`.stepper-container[data-drill-id="${drillId}"]`) : null;
+    
+    if (!stepper) {
+      container = btn.closest(".sub-drill-card");
+      stepper = container ? container.querySelector(`.stepper-container[data-drill-id="${drillId}"]`) : null;
+    }
+    
+    if (stepper) {
+      max = parseInt(stepper.dataset.maxSets) || 1;
+    }
+    
+    let val = state.drillCompletions[drillId] || 0;
+    if (val === max) {
+      state.drillCompletions[drillId] = 0;
+    } else {
+      state.drillCompletions[drillId] = max;
+    }
+    
+    loadAthleteTodayScreen();
+    return;
+  }
+
   // Handle Steppers
   if (target.classList.contains("stepper-btn")) {
     const container = target.closest(".stepper-container");
@@ -772,6 +853,7 @@ function handleDrillActionsClick(e) {
 
     state.drillCompletions[drillId] = val;
     container.querySelector(".stepper-val").textContent = `${val} / ${max} sets`;
+    loadAthleteTodayScreen(); // Refresh to sync check status instantly
     return;
   }
 
@@ -978,6 +1060,83 @@ async function handleLogSubmit(e) {
   document.getElementById("finger-pain-val").textContent = "0";
   document.getElementById("skin-val").textContent = "5";
 
+  switchTab("calendar");
+}
+
+// Close quick log modal sheet
+function closeQuickLogModal() {
+  const modal = document.getElementById("quick-log-modal");
+  const sheet = modal.querySelector(".quick-log-sheet");
+  sheet.style.transform = "translateY(100%)";
+  setTimeout(() => {
+    modal.style.display = "none";
+  }, 300);
+}
+
+// Submit quick log details synced with checkbox/stepper states
+async function submitQuickLog() {
+  if (!state.todaySession) return;
+  
+  const rpe = parseInt(document.getElementById("quick-log-rpe").value) || 6;
+  const fatigue = parseInt(document.getElementById("quick-log-fatigue").value) || 3;
+  const pain = parseInt(document.getElementById("quick-log-pain").value) || 0;
+  
+  // Calculate completed exercises details
+  const sessionDrills = await db.getExercisesForSession(state.todaySession.id);
+  const completions = [];
+  
+  for (const d of sessionDrills) {
+    if (d.category === "Tier 4") {
+      const subItems = parseSubExercises(d.notes);
+      subItems.forEach(sub => {
+        const completed = state.drillCompletions[sub.id] || 0;
+        completions.push({
+          name: sub.text,
+          category: d.category,
+          sets_completed: completed,
+          sets_total: sub.sets
+        });
+      });
+    } else {
+      const completed = state.drillCompletions[d.id] || 0;
+      completions.push({
+        name: d.name,
+        category: d.category,
+        sets_completed: completed,
+        sets_total: d.sets
+      });
+    }
+  }
+  
+  const logData = {
+    athlete_id: state.currentUser.id,
+    session_id: state.todaySession.id,
+    status: "completed",
+    duration_minutes: state.todaySession.estimated_duration_minutes || 60,
+    rpe: rpe,
+    fatigue: fatigue,
+    finger_pain: pain,
+    skin_condition: 5,
+    video_url: "",
+    notes: `Quick Log. Completed exercises details: ` + completions.map(c => `${c.name} (${c.sets_completed}/${c.sets_total})`).join(", ")
+  };
+  
+  await db.addLog(logData);
+  
+  // Clear active selection and advance
+  localStorage.removeItem("onus_selected_today_session_id");
+  state.startedSessionId = null;
+  
+  closeQuickLogModal();
+  
+  // Reset fields to defaults
+  document.getElementById("quick-log-rpe").value = "6";
+  document.getElementById("quick-rpe-val").textContent = "6 / 10";
+  document.getElementById("quick-log-fatigue").value = "3";
+  document.getElementById("quick-fatigue-val").textContent = "3 / 5";
+  document.getElementById("quick-log-pain").value = "0";
+  document.getElementById("quick-pain-val").textContent = "0 / 5";
+  
   switchTab("calendar");
 }
 
