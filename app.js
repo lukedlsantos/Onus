@@ -398,7 +398,7 @@ async function loadAthleteTodayScreen() {
   const assigned = await db.getAssignedProgram(state.currentUser.id);
   if (!assigned) {
     titleEl.textContent = "No program assigned.";
-    objectiveEl.textContent = "Ask your coach to assign a plan.";
+    objectiveEl.style.display = "none";
     drillContainer.style.display = "none";
     logBtn.style.display = "none";
     return;
@@ -416,7 +416,7 @@ async function loadAthleteTodayScreen() {
         const found = sessions.find(s => s.id === storedSessionId);
         if (found) {
           session = found;
-          phaseWeekLabel.textContent = `${phase.title} — Week ${week.week_number}`;
+          phaseWeekLabel.textContent = `Week ${week.week_number} - ${phase.title}`;
           break;
         }
       }
@@ -436,7 +436,7 @@ async function loadAthleteTodayScreen() {
           const logged = logs.some(l => l.session_id === sess.id);
           if (!logged) {
             session = sess;
-            phaseWeekLabel.textContent = `${phase.title} — Week ${week.week_number}`;
+            phaseWeekLabel.textContent = `Week ${week.week_number} - ${phase.title}`;
             foundUnlogged = true;
             break;
           }
@@ -453,7 +453,7 @@ async function loadAthleteTodayScreen() {
         const sessions = await db.getSessionsForWeek(weeks[0].id);
         if (sessions.length > 0) {
           session = sessions[0];
-          phaseWeekLabel.textContent = `${phases[0].title} — Week ${weeks[0].week_number}`;
+          phaseWeekLabel.textContent = `Week ${weeks[0].week_number} - ${phases[0].title}`;
         }
       }
     }
@@ -462,7 +462,7 @@ async function loadAthleteTodayScreen() {
   if (session) {
     state.todaySession = session;
     titleEl.textContent = `${session.day_label}: ${session.title}`;
-    objectiveEl.textContent = session.objective;
+    objectiveEl.style.display = "none"; // Do not show objective/description anymore
 
     // Toggle view components based on started state
     const isStarted = state.startedSessionId === session.id;
@@ -522,7 +522,7 @@ async function loadAthleteTodayScreen() {
   }
   
   titleEl.textContent = "Rest Day";
-  objectiveEl.textContent = "Enjoy your recovery.";
+  objectiveEl.style.display = "none"; // Do not show objective/description anymore
   document.getElementById("start-session-btn").style.display = "none";
   drillContainer.style.display = "none";
   logBtn.style.display = "none";
