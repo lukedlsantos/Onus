@@ -402,47 +402,64 @@ function renderTimerMarkup(timerId, originalSecs, label) {
   `;
 }
 
-// Parse text into individual sets/reps workouts for Tier 4
+/// Parse text into individual sets/reps workouts for Tier 4
 function parseSubExercises(notes) {
   if (!notes) return [];
   const lines = notes.split('\n');
   const subItems = [];
   
   lines.forEach((line, index) => {
-    let cleanLine = line.replace(/^[\*\-\s]+/, '').trim();
+    let cleanLine = line.replace(/^[\*\-\s\d\.)]+/, '').trim();
     if (!cleanLine) return;
     
     let categoryHeader = "";
-    const headerMatch = cleanLine.match(/^\*\*([^*]+)\*\*:\s*(.*)/);
+    const headerMatch = cleanLine.match(/^\**([^*:]+)\**[:\*]+\s*(.*)/);
     if (headerMatch) {
-      categoryHeader = headerMatch[1].trim();
-      cleanLine = headerMatch[2].trim();
+      const potentialHeader = headerMatch[1].trim();
+      if (!potentialHeader.match(/\d+\s*set/i)) {
+        categoryHeader = potentialHeader;
+        cleanLine = headerMatch[2].trim();
+      }
     }
     
-    // Split exercises using period or semicolon separation (ignoring decimals)
     const parts = cleanLine.split(/(?<=\D\.)\s+|(?<=;)\s+/);
     parts.forEach((part, subIndex) => {
-      const text = part.trim();
+      let text = part.trim();
+      if (!text) return;
+      
+      text = text.replace(/^[\*\-\s\:\,]+/, '').replace(/[\*]+$/, '').trim();
       if (!text) return;
       
       let sets = 1;
       let repsOrDuration = "1 set";
+      let cleanName = text;
       
-      const setMatch = text.match(/(\d+)\s*sets?\s*[×x*]\s*([^.]+)/i);
-      if (setMatch) {
-        sets = parseInt(setMatch[1]);
-        repsOrDuration = setMatch[2].strip ? setMatch[2].strip() : setMatch[2].trim();
+      const setRepMatch = text.match(/^(\d+)\s*sets?\s*[×x*]\s*([\w\-]+(?:\s+[\w\-]+)?)\s+(.*)/i);
+      if (setRepMatch) {
+        sets = parseInt(setRepMatch[1]);
+        repsOrDuration = setRepMatch[2].trim();
+        cleanName = setRepMatch[3].trim();
       } else {
-        const durMatch = text.match(/(\d+)\s*(?:min|minute|sec|second|s)\b/i);
-        if (durMatch) {
-          repsOrDuration = text;
+        const setOfMatch = text.match(/^(\d+)\s*sets?\s+of\s+([^,]+),\s*(.*)/i);
+        if (setOfMatch) {
+          sets = parseInt(setOfMatch[1]);
+          repsOrDuration = setOfMatch[2].trim();
+          cleanName = setOfMatch[3].trim();
+        } else {
+          const durMatch = text.match(/^(\d+)\s*(?:min|minute|sec|second|s)\b\s*(.*)/i);
+          if (durMatch) {
+            repsOrDuration = text.match(/^(\d+)\s*(?:min|minute|sec|second|s)\b/i)[0];
+            cleanName = durMatch[2].trim();
+          }
         }
       }
+      
+      cleanName = cleanName.charAt(0).toUpperCase() + cleanName.slice(1);
       
       subItems.push({
         id: `sub-ex-${index}-${subIndex}`,
         category: categoryHeader || "Exercise",
-        text: text,
+        text: cleanName,
         sets: sets,
         repsOrDuration: repsOrDuration
       });
