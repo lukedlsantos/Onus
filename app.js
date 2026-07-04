@@ -517,7 +517,7 @@ async function loadAthleteTodayScreen() {
               </div>
             </div>
             <div class="drill-meta">Rep/Duration: ${d.reps_or_duration} | Rest: ${d.rest}</div>
-            ${d.notes ? `<div class="drill-meta" style="font-style: italic; color: var(--text-muted);">Note: ${d.notes}</div>` : ''}
+            ${d.notes ? `<div class="drill-meta" style="font-style: italic; color: var(--text-muted); white-space: pre-wrap;">Note: ${d.notes}</div>` : ''}
             
             <div class="drill-actions">
               <div class="stepper-container" data-drill-id="${d.id}" data-drill-name="${d.name}" data-max-sets="${d.sets}">

@@ -89,7 +89,7 @@ const DEFAULT_SESSIONS = [
     "week_id": "week-1",
     "day_label": "Day 1",
     "title": "Low-Neural / High-Volume Capacity",
-    "objective": "Warm-Up & Prep [40 Mins]:** Execute Standard 40-Minute Prep Container exactly.",
+    "objective": "Continuous, slow bouldering movement entirely on vertical or moderate slab terrain. Keep heart rate low and focus on ...",
     "session_type": "climbing",
     "estimated_duration_minutes": 180,
     "target_intensity": 6,
@@ -111,7 +111,7 @@ const DEFAULT_SESSIONS = [
     "week_id": "week-1",
     "day_label": "Day 3",
     "title": "Structural Capacity & Base Off-Wall Stability",
-    "objective": "Warm-Up & Prep [40 Mins]:** Execute Standard 40-Minute Prep Container exactly.",
+    "objective": "10 minutes of progressive vertical climbing ending with 3 unweighted static isometric hangs (10s on a 20mm edge, rest...",
     "session_type": "strength",
     "estimated_duration_minutes": 180,
     "target_intensity": 7,
@@ -133,7 +133,7 @@ const DEFAULT_SESSIONS = [
     "week_id": "week-1",
     "day_label": "Day 5",
     "title": "Density Volume & Technical Capacity",
-    "objective": "Warm-Up & Prep [40 Mins]:** Execute Standard 40-Minute Prep Container exactly.",
+    "objective": "Continuous slow bouldering on vertical/slab angles. Prioritize silent feet placements and zero hand readjustments to ...",
     "session_type": "climbing",
     "estimated_duration_minutes": 180,
     "target_intensity": 7,
@@ -155,7 +155,7 @@ const DEFAULT_SESSIONS = [
     "week_id": "week-1",
     "day_label": "Day 7",
     "title": "Absolute Rest Day",
-    "objective": "* Zero physical training stressors. Complete off-load to dissipate central nervous system fatigue entirely.",
+    "objective": "* Zero physical training stressors. Complete off-load to dissipate central nervous system fatigue entirely.\n---",
     "session_type": "rest",
     "estimated_duration_minutes": 180,
     "target_intensity": 1,
@@ -166,7 +166,7 @@ const DEFAULT_SESSIONS = [
     "week_id": "week-2",
     "day_label": "Day 1",
     "title": "Low-Neural / High-Volume Capacity",
-    "objective": "Warm-Up & Prep [40 Mins]:** Execute Standard 40-Minute Prep Container exactly.",
+    "objective": "Continuous, slow bouldering movement entirely on vertical or moderate slab terrain. Keep heart rate low and focus on ...",
     "session_type": "climbing",
     "estimated_duration_minutes": 180,
     "target_intensity": 6,
@@ -188,7 +188,7 @@ const DEFAULT_SESSIONS = [
     "week_id": "week-2",
     "day_label": "Day 3",
     "title": "Structural Capacity & Base Off-Wall Stability",
-    "objective": "Warm-Up & Prep [40 Mins]:** Execute Standard 40-Minute Prep Container exactly.",
+    "objective": "10 minutes of progressive vertical climbing ending with 3 unweighted static isometric hangs (10s on a 20mm edge, rest...",
     "session_type": "strength",
     "estimated_duration_minutes": 180,
     "target_intensity": 7,
@@ -210,7 +210,7 @@ const DEFAULT_SESSIONS = [
     "week_id": "week-2",
     "day_label": "Day 5",
     "title": "Density Volume & Technical Capacity",
-    "objective": "Warm-Up & Prep [40 Mins]:** Execute Standard 40-Minute Prep Container exactly.",
+    "objective": "Continuous slow bouldering on vertical/slab angles. Prioritize silent feet placements and zero hand readjustments to ...",
     "session_type": "climbing",
     "estimated_duration_minutes": 180,
     "target_intensity": 7,
@@ -232,7 +232,7 @@ const DEFAULT_SESSIONS = [
     "week_id": "week-2",
     "day_label": "Day 7",
     "title": "Absolute Rest Day",
-    "objective": "* Full systemic off-load. Maximum recovery priority.",
+    "objective": "* Full systemic off-load. Maximum recovery priority.\n---",
     "session_type": "rest",
     "estimated_duration_minutes": 180,
     "target_intensity": 1,
@@ -243,7 +243,7 @@ const DEFAULT_SESSIONS = [
     "week_id": "week-3",
     "day_label": "Day 1",
     "title": "Low-Neural / High-Volume Capacity",
-    "objective": "Warm-Up & Prep [40 Mins]:** Execute Standard 40-Minute Prep Container exactly.",
+    "objective": "Continuous, slow bouldering movement entirely on vertical or moderate slab terrain. Keep heart rate low and focus on ...",
     "session_type": "climbing",
     "estimated_duration_minutes": 180,
     "target_intensity": 6,
@@ -265,7 +265,7 @@ const DEFAULT_SESSIONS = [
     "week_id": "week-3",
     "day_label": "Day 3",
     "title": "Structural Capacity & Base Off-Wall Stability",
-    "objective": "Warm-Up & Prep [40 Mins]:** Execute Standard 40-Minute Prep Container exactly.",
+    "objective": "10 minutes of progressive vertical climbing ending with 3 unweighted static isometric hangs (10s on a 20mm edge, rest...",
     "session_type": "strength",
     "estimated_duration_minutes": 180,
     "target_intensity": 7,
@@ -287,7 +287,7 @@ const DEFAULT_SESSIONS = [
     "week_id": "week-3",
     "day_label": "Day 5",
     "title": "Density Volume & Technical Capacity",
-    "objective": "Warm-Up & Prep [40 Mins]:** Execute Standard 40-Minute Prep Container exactly.",
+    "objective": "Continuous slow bouldering on vertical/slab angles. Prioritize silent feet placements and zero hand readjustments to ...",
     "session_type": "climbing",
     "estimated_duration_minutes": 180,
     "target_intensity": 7,
@@ -309,7 +309,7 @@ const DEFAULT_SESSIONS = [
     "week_id": "week-3",
     "day_label": "Day 7",
     "title": "Absolute Rest Day",
-    "objective": "* Full systemic off-load. Zero activity.",
+    "objective": "* Full systemic off-load. Zero activity.\n---",
     "session_type": "rest",
     "estimated_duration_minutes": 180,
     "target_intensity": 1,
@@ -320,7 +320,7 @@ const DEFAULT_SESSIONS = [
     "week_id": "week-4",
     "day_label": "Day 1",
     "title": "Low-Volume Fluidity Check",
-    "objective": "Warm-Up & Prep [40 Mins]:** Execute Standard 40-Minute Prep Container exactly.",
+    "objective": "Continuous, slow bouldering movement entirely on vertical or moderate slab terrain. Keep heart rate low and focus on ...",
     "session_type": "climbing",
     "estimated_duration_minutes": 180,
     "target_intensity": 6,
@@ -342,7 +342,7 @@ const DEFAULT_SESSIONS = [
     "week_id": "week-4",
     "day_label": "Day 3",
     "title": "Low-Volume Base Stability",
-    "objective": "Warm-Up & Prep [40 Mins]:** Execute Standard 40-Minute Prep Container exactly.",
+    "objective": "10 minutes of progressive vertical climbing ending with 3 unweighted static isometric hangs (10s on a 20mm edge, rest...",
     "session_type": "strength",
     "estimated_duration_minutes": 180,
     "target_intensity": 7,
@@ -364,7 +364,7 @@ const DEFAULT_SESSIONS = [
     "week_id": "week-4",
     "day_label": "Day 5",
     "title": "Low-Volume Fluidity Check",
-    "objective": "Warm-Up & Prep [40 Mins]:** Duplicate Day 1 Week 4 deload warm-up exactly.",
+    "objective": "Continuous slow bouldering on vertical/slab angles. Prioritize silent feet placements and zero hand readjustments to ...",
     "session_type": "climbing",
     "estimated_duration_minutes": 180,
     "target_intensity": 7,
@@ -415,32 +415,10 @@ const DEFAULT_EXERCISES = [
     "reps_or_duration": "20 problems",
     "intensity": "RPE 6",
     "rest": "90 seconds",
-    "notes": "Core Driver \u2014 High Mileage Volume [90 Mins]:**"
+    "notes": "Core Driver \u2014 High Mileage Volume [90 Mins]:**\n* *Protocol:* Execute 20 unique vertical to gentle-slab boulder problems at low-to-moderate physical intensity.\n* *Pacing:* Rest strictly limited to 90 seconds between problems to drive vascular capillarization."
   },
   {
     "id": "ex-w1-d1-3",
-    "session_id": "session-w1-d1",
-    "name": "Protocol",
-    "category": "General",
-    "sets": 1,
-    "reps_or_duration": "1 set",
-    "intensity": "RPE 6",
-    "rest": "Self-paced",
-    "notes": "* Execute 20 unique vertical to gentle-slab boulder problems at low-to-moderate physical intensity."
-  },
-  {
-    "id": "ex-w1-d1-4",
-    "session_id": "session-w1-d1",
-    "name": "Pacing",
-    "category": "General",
-    "sets": 1,
-    "reps_or_duration": "1 set",
-    "intensity": "RPE 6",
-    "rest": "Self-paced",
-    "notes": "* Rest strictly limited to 90 seconds between problems to drive vascular capillarization."
-  },
-  {
-    "id": "ex-w1-d1-5",
     "session_id": "session-w1-d1",
     "name": "Tier 3",
     "category": "Tier 3",
@@ -448,21 +426,10 @@ const DEFAULT_EXERCISES = [
     "reps_or_duration": "1 set",
     "intensity": "RPE 6",
     "rest": "Self-paced",
-    "notes": "Progress Hook \u2014 Technique Base & Core Tension [40 Mins]:**"
+    "notes": "Progress Hook \u2014 Technique Base & Core Tension [40 Mins]:**\n* *Protocol:* Movement library saturation. Complete repetitive paths on flash-grade terrain. Focus on zero foot readjustments, silent feet placements, precision hip tracking, and strict flagging extension."
   },
   {
-    "id": "ex-w1-d1-6",
-    "session_id": "session-w1-d1",
-    "name": "Protocol",
-    "category": "General",
-    "sets": 1,
-    "reps_or_duration": "1 set",
-    "intensity": "RPE 6",
-    "rest": "Self-paced",
-    "notes": "* Movement library saturation. Complete repetitive paths on flash-grade terrain. Focus on zero foot readjustments, silent feet placements, precision hip tracking, and strict flagging extension."
-  },
-  {
-    "id": "ex-w1-d1-7",
+    "id": "ex-w1-d1-4",
     "session_id": "session-w1-d1",
     "name": "Tier 4",
     "category": "Tier 4",
@@ -470,29 +437,7 @@ const DEFAULT_EXERCISES = [
     "reps_or_duration": "1 set",
     "intensity": "RPE 6",
     "rest": "Self-paced",
-    "notes": "Care, Advanced Core & Lower-Body Plyometrics [10 Mins]:**"
-  },
-  {
-    "id": "ex-w1-d1-8",
-    "session_id": "session-w1-d1",
-    "name": "Climbing Core & Upper Push",
-    "category": "Core",
-    "sets": 2,
-    "reps_or_duration": "max time hanging static L-sits",
-    "intensity": "RPE 6",
-    "rest": "Self-paced",
-    "notes": "* 2 sets \u00d7 max time hanging static L-sits. 2 sets \u00d7 15 deep diamond push-ups. 2 sets \u00d7 8 deep bench dips."
-  },
-  {
-    "id": "ex-w1-d1-9",
-    "session_id": "session-w1-d1",
-    "name": "Wrist, Shoulder & Lower Plyos",
-    "category": "Mobility",
-    "sets": 2,
-    "reps_or_duration": "15 reverse wrist curls with a light dumbbell",
-    "intensity": "RPE 6",
-    "rest": "Self-paced",
-    "notes": "* 2 sets \u00d7 15 reverse wrist curls with a light dumbbell. 1 min deep dead-hang shoulder decompression. 3 sets \u00d7 6 explosive box jumps with soft, controlled landing mechanics to activate leg drive."
+    "notes": "Care, Advanced Core & Lower-Body Plyometrics [10 Mins]:**\n* *Climbing Core & Upper Push:* 2 sets \u00d7 max time hanging static L-sits. 2 sets \u00d7 15 deep diamond push-ups. 2 sets \u00d7 8 deep bench dips.\n* *Wrist, Shoulder & Lower Plyos:* 2 sets \u00d7 15 reverse wrist curls with a light dumbbell. 1 min deep dead-hang shoulder decompression. 3 sets \u00d7 6 explosive box jumps with soft, controlled landing mechanics to activate leg drive."
   },
   {
     "id": "ex-w1-d2-1",
@@ -514,21 +459,10 @@ const DEFAULT_EXERCISES = [
     "reps_or_duration": "1 set",
     "intensity": "RPE 3",
     "rest": "Self-paced",
-    "notes": "**"
+    "notes": "**\n* *Exercises:* 3 sets \u00d7 45-second anti-rotational cable Pallof presses per side. 3 sets \u00d7 12 reps single-arm kettlebell farmer's carries per side to lock down lateral stability chains. 3 sets \u00d7 10 slow, high-tension Swiss-ball rollouts."
   },
   {
     "id": "ex-w1-d2-3",
-    "session_id": "session-w1-d2",
-    "name": "Exercises",
-    "category": "General",
-    "sets": 3,
-    "reps_or_duration": "45-second anti-rotational cable Pallof presses per side",
-    "intensity": "RPE 3",
-    "rest": "Self-paced",
-    "notes": "* 3 sets \u00d7 45-second anti-rotational cable Pallof presses per side. 3 sets \u00d7 12 reps single-arm kettlebell farmer's carries per side to lock down lateral stability chains. 3 sets \u00d7 10 slow, high-tension Swiss-ball rollouts."
-  },
-  {
-    "id": "ex-w1-d2-4",
     "session_id": "session-w1-d2",
     "name": "Deep Shoulder, Spine & Mobility Matrix [50 Mins]",
     "category": "Mobility",
@@ -536,18 +470,7 @@ const DEFAULT_EXERCISES = [
     "reps_or_duration": "1 set",
     "intensity": "RPE 3",
     "rest": "Self-paced",
-    "notes": "**"
-  },
-  {
-    "id": "ex-w1-d2-5",
-    "session_id": "session-w1-d2",
-    "name": "Exercises",
-    "category": "General",
-    "sets": 3,
-    "reps_or_duration": "15 seconds passive sleeper stretch for posterior rotator cuff tracking",
-    "intensity": "RPE 3",
-    "rest": "Self-paced",
-    "notes": "* 3 sets \u00d7 15 seconds passive sleeper stretch for posterior rotator cuff tracking. 3 sets \u00d7 10 reps prone standard Y-T-W arm raises on floor. 3 sets \u00d7 45 seconds deep puppy pose shoulder/lat stretch. 3 sets \u00d7 60 seconds cross-legged spine twists."
+    "notes": "**\n* *Exercises:* 3 sets \u00d7 15 seconds passive sleeper stretch for posterior rotator cuff tracking. 3 sets \u00d7 10 reps prone standard Y-T-W arm raises on floor. 3 sets \u00d7 45 seconds deep puppy pose shoulder/lat stretch. 3 sets \u00d7 60 seconds cross-legged spine twists."
   },
   {
     "id": "ex-w1-d3-1",
@@ -569,21 +492,10 @@ const DEFAULT_EXERCISES = [
     "reps_or_duration": "4 blocks of 4 problems",
     "intensity": "RPE 7",
     "rest": "3 mins",
-    "notes": "Core Driver \u2014 On-Wall Density Ladders [90 Mins]:**"
+    "notes": "Core Driver \u2014 On-Wall Density Ladders [90 Mins]:**\n* *Protocol:* Style variety density ladders. Complete 4 distinct blocks of 4 different moderate boulder problems back-to-back across sloper, crimp, and compression angle layouts. Rest 3 minutes between major blocks."
   },
   {
     "id": "ex-w1-d3-3",
-    "session_id": "session-w1-d3",
-    "name": "Protocol",
-    "category": "General",
-    "sets": 1,
-    "reps_or_duration": "1 set",
-    "intensity": "RPE 7",
-    "rest": "Self-paced",
-    "notes": "* Style variety density ladders. Complete 4 distinct blocks of 4 different moderate boulder problems back-to-back across sloper, crimp, and compression angle layouts. Rest 3 minutes between major blocks."
-  },
-  {
-    "id": "ex-w1-d3-4",
     "session_id": "session-w1-d3",
     "name": "Tier 3",
     "category": "Tier 3",
@@ -591,21 +503,10 @@ const DEFAULT_EXERCISES = [
     "reps_or_duration": "1 set",
     "intensity": "RPE 7",
     "rest": "Self-paced",
-    "notes": "Progress Hook \u2014 Highly Optimal Off-Wall Foundation [40 Mins]:**"
+    "notes": "Progress Hook \u2014 Highly Optimal Off-Wall Foundation [40 Mins]:**\n* *Protocol:* Structural alignment overload. 3 sets \u00d7 8 reps strict overhead dumbbell press. 3 sets \u00d7 8 reps heavy kettlebell goblet squats. 3 sets \u00d7 12 reps cable face-pulls with high contraction hold to counter active climbing shoulder slouch."
   },
   {
-    "id": "ex-w1-d3-5",
-    "session_id": "session-w1-d3",
-    "name": "Protocol",
-    "category": "General",
-    "sets": 3,
-    "reps_or_duration": "8 reps strict overhead dumbbell press",
-    "intensity": "RPE 7",
-    "rest": "Self-paced",
-    "notes": "* Structural alignment overload. 3 sets \u00d7 8 reps strict overhead dumbbell press. 3 sets \u00d7 8 reps heavy kettlebell goblet squats. 3 sets \u00d7 12 reps cable face-pulls with high contraction hold to counter active climbing shoulder slouch."
-  },
-  {
-    "id": "ex-w1-d3-6",
+    "id": "ex-w1-d3-4",
     "session_id": "session-w1-d3",
     "name": "Tier 4",
     "category": "Tier 4",
@@ -613,18 +514,7 @@ const DEFAULT_EXERCISES = [
     "reps_or_duration": "1 set",
     "intensity": "RPE 7",
     "rest": "Self-paced",
-    "notes": "Postural Care & Plyometric Booster [10 Mins]:**"
-  },
-  {
-    "id": "ex-w1-d3-7",
-    "session_id": "session-w1-d3",
-    "name": "Protocol",
-    "category": "General",
-    "sets": 3,
-    "reps_or_duration": "6 explosive broad jumps emphasizing complete hip extension",
-    "intensity": "RPE 7",
-    "rest": "Self-paced",
-    "notes": "* 5 minutes targeted deep forearm rolling and cross-friction finger tissue massage. 3 sets \u00d7 6 explosive broad jumps emphasizing complete hip extension."
+    "notes": "Postural Care & Plyometric Booster [10 Mins]:**\n* *Protocol:* 5 minutes targeted deep forearm rolling and cross-friction finger tissue massage. 3 sets \u00d7 6 explosive broad jumps emphasizing complete hip extension."
   },
   {
     "id": "ex-w1-d4-1",
@@ -679,21 +569,10 @@ const DEFAULT_EXERCISES = [
     "reps_or_duration": "10-12 problems",
     "intensity": "RPE 7",
     "rest": "2 mins",
-    "notes": "Core Driver \u2014 Medium-Volume Coordination [90 Mins]:**"
+    "notes": "Core Driver \u2014 Medium-Volume Coordination [90 Mins]:**\n* *Protocol:* Complete 10\u201312 mid-tier problems focusing on coordination steps, dynamic drop-knees, and directional tracking on sub-optimal foot placements. Rest 2 minutes between attempts."
   },
   {
     "id": "ex-w1-d5-3",
-    "session_id": "session-w1-d5",
-    "name": "Protocol",
-    "category": "General",
-    "sets": 1,
-    "reps_or_duration": "1 set",
-    "intensity": "RPE 7",
-    "rest": "Self-paced",
-    "notes": "* Complete 10\u201312 mid-tier problems focusing on coordination steps, dynamic drop-knees, and directional tracking on sub-optimal foot placements. Rest 2 minutes between attempts."
-  },
-  {
-    "id": "ex-w1-d5-4",
     "session_id": "session-w1-d5",
     "name": "Tier 3",
     "category": "Tier 3",
@@ -701,21 +580,10 @@ const DEFAULT_EXERCISES = [
     "reps_or_duration": "1 set",
     "intensity": "RPE 7",
     "rest": "Self-paced",
-    "notes": "Progress Hook \u2014 Under-Load Technical Repeats [40 Mins]:**"
+    "notes": "Progress Hook \u2014 Under-Load Technical Repeats [40 Mins]:**\n* *Protocol:* Re-climb flash-grade problems under climbing fatigue while actively working through a localized forearm pump to reinforce technical precision when exhausted."
   },
   {
-    "id": "ex-w1-d5-5",
-    "session_id": "session-w1-d5",
-    "name": "Protocol",
-    "category": "General",
-    "sets": 1,
-    "reps_or_duration": "1 set",
-    "intensity": "RPE 7",
-    "rest": "Self-paced",
-    "notes": "* Re-climb flash-grade problems under climbing fatigue while actively working through a localized forearm pump to reinforce technical precision when exhausted."
-  },
-  {
-    "id": "ex-w1-d5-6",
+    "id": "ex-w1-d5-4",
     "session_id": "session-w1-d5",
     "name": "Tier 4",
     "category": "Tier 4",
@@ -745,21 +613,10 @@ const DEFAULT_EXERCISES = [
     "reps_or_duration": "1 set",
     "intensity": "RPE 6",
     "rest": "Self-paced",
-    "notes": "**"
+    "notes": "**\n* *Exercises:* 3 sets \u00d7 10 reps of eccentric pull-ups (4-second lowering phase) and 3 sets \u00d7 12 reps cable face-pulls to reinforce posterior structural tracks."
   },
   {
     "id": "ex-w1-d6-3",
-    "session_id": "session-w1-d6",
-    "name": "Exercises",
-    "category": "General",
-    "sets": 3,
-    "reps_or_duration": "10 reps of eccentric pull-ups (4-second lowering phase) and 3 sets \u00d7 12 reps cable face-pulls to reinforce posterior structural tracks",
-    "intensity": "RPE 6",
-    "rest": "Self-paced",
-    "notes": "* 3 sets \u00d7 10 reps of eccentric pull-ups (4-second lowering phase) and 3 sets \u00d7 12 reps cable face-pulls to reinforce posterior structural tracks."
-  },
-  {
-    "id": "ex-w1-d6-4",
     "session_id": "session-w1-d6",
     "name": "Pushing & Anterior Posture Corrections [30 Mins]",
     "category": "Strength",
@@ -767,21 +624,10 @@ const DEFAULT_EXERCISES = [
     "reps_or_duration": "1 set",
     "intensity": "RPE 6",
     "rest": "Self-paced",
-    "notes": "**"
+    "notes": "**\n* *Exercises:* 3 sets \u00d7 8 reps kettlebell floor press (shoulder joint capsule safety) and 3 sets \u00d7 8 reps single-arm dumbbell overhead presses."
   },
   {
-    "id": "ex-w1-d6-5",
-    "session_id": "session-w1-d6",
-    "name": "Exercises",
-    "category": "General",
-    "sets": 3,
-    "reps_or_duration": "8 reps kettlebell floor press (shoulder joint capsule safety) and 3 sets \u00d7 8 reps single-arm dumbbell overhead presses",
-    "intensity": "RPE 6",
-    "rest": "Self-paced",
-    "notes": "* 3 sets \u00d7 8 reps kettlebell floor press (shoulder joint capsule safety) and 3 sets \u00d7 8 reps single-arm dumbbell overhead presses."
-  },
-  {
-    "id": "ex-w1-d6-6",
+    "id": "ex-w1-d6-4",
     "session_id": "session-w1-d6",
     "name": "Core Integration [10 Mins]",
     "category": "Core",
@@ -800,7 +646,7 @@ const DEFAULT_EXERCISES = [
     "reps_or_duration": "1 set",
     "intensity": "RPE 1",
     "rest": "Self-paced",
-    "notes": "* Zero physical training stressors. Complete off-load to dissipate central nervous system fatigue entirely."
+    "notes": "* Zero physical training stressors. Complete off-load to dissipate central nervous system fatigue entirely.\n---"
   },
   {
     "id": "ex-w2-d1-1",
@@ -822,32 +668,10 @@ const DEFAULT_EXERCISES = [
     "reps_or_duration": "22 problems",
     "intensity": "RPE 6",
     "rest": "75 seconds",
-    "notes": "Core Driver \u2014 High Mileage Volume [90 Mins]:**"
+    "notes": "Core Driver \u2014 High Mileage Volume [90 Mins]:**\n* *Protocol:* Volume overload. Target 22 unique boulder problems.\n* *Pacing:* Rest strictly limited to 75 seconds between problems to increase aerobic tax."
   },
   {
     "id": "ex-w2-d1-3",
-    "session_id": "session-w2-d1",
-    "name": "Protocol",
-    "category": "General",
-    "sets": 1,
-    "reps_or_duration": "1 set",
-    "intensity": "RPE 6",
-    "rest": "Self-paced",
-    "notes": "* Volume overload. Target 22 unique boulder problems."
-  },
-  {
-    "id": "ex-w2-d1-4",
-    "session_id": "session-w2-d1",
-    "name": "Pacing",
-    "category": "General",
-    "sets": 1,
-    "reps_or_duration": "1 set",
-    "intensity": "RPE 6",
-    "rest": "Self-paced",
-    "notes": "* Rest strictly limited to 75 seconds between problems to increase aerobic tax."
-  },
-  {
-    "id": "ex-w2-d1-5",
     "session_id": "session-w2-d1",
     "name": "Tier 3",
     "category": "Tier 3",
@@ -855,21 +679,10 @@ const DEFAULT_EXERCISES = [
     "reps_or_duration": "1 set",
     "intensity": "RPE 6",
     "rest": "Self-paced",
-    "notes": "Progress Hook \u2014 Technique Base & Core Tension [40 Mins]:**"
+    "notes": "Progress Hook \u2014 Technique Base & Core Tension [40 Mins]:**\n* *Protocol:* Execute technical precision loops on steep, overhanging walls. Focus on maximum toe hook engagement, core frame rigidity, and minimizing torso swing."
   },
   {
-    "id": "ex-w2-d1-6",
-    "session_id": "session-w2-d1",
-    "name": "Protocol",
-    "category": "General",
-    "sets": 1,
-    "reps_or_duration": "1 set",
-    "intensity": "RPE 6",
-    "rest": "Self-paced",
-    "notes": "* Execute technical precision loops on steep, overhanging walls. Focus on maximum toe hook engagement, core frame rigidity, and minimizing torso swing."
-  },
-  {
-    "id": "ex-w2-d1-7",
+    "id": "ex-w2-d1-4",
     "session_id": "session-w2-d1",
     "name": "Tier 4",
     "category": "Tier 4",
@@ -877,29 +690,7 @@ const DEFAULT_EXERCISES = [
     "reps_or_duration": "1 set",
     "intensity": "RPE 6",
     "rest": "Self-paced",
-    "notes": "Dynamic Care, Advanced Core & Lower-Body Plyometrics [10 Mins]:**"
-  },
-  {
-    "id": "ex-w2-d1-8",
-    "session_id": "session-w2-d1",
-    "name": "Climbing Core & Upper Push",
-    "category": "Core",
-    "sets": 2,
-    "reps_or_duration": "max time hanging static L-sits",
-    "intensity": "RPE 6",
-    "rest": "Self-paced",
-    "notes": "* 2 sets \u00d7 max time hanging static L-sits. 2 sets \u00d7 18 deep diamond push-ups. 2 sets \u00d7 10 deep bench dips."
-  },
-  {
-    "id": "ex-w2-d1-9",
-    "session_id": "session-w2-d1",
-    "name": "Wrist, Shoulder & Lower Plyos",
-    "category": "Mobility",
-    "sets": 2,
-    "reps_or_duration": "15 reverse wrist curls",
-    "intensity": "RPE 6",
-    "rest": "Self-paced",
-    "notes": "* 2 sets \u00d7 15 reverse wrist curls. 1 min deep dead-hang. 3 sets \u00d7 6 explosive box jumps (increase target box height by 2 inches from Week 1)."
+    "notes": "Dynamic Care, Advanced Core & Lower-Body Plyometrics [10 Mins]:**\n* *Climbing Core & Upper Push:* 2 sets \u00d7 max time hanging static L-sits. 2 sets \u00d7 18 deep diamond push-ups. 2 sets \u00d7 10 deep bench dips.\n* *Wrist, Shoulder & Lower Plyos:* 2 sets \u00d7 15 reverse wrist curls. 1 min deep dead-hang. 3 sets \u00d7 6 explosive box jumps (increase target box height by 2 inches from Week 1)."
   },
   {
     "id": "ex-w2-d2-1",
@@ -921,21 +712,10 @@ const DEFAULT_EXERCISES = [
     "reps_or_duration": "1 set",
     "intensity": "RPE 3",
     "rest": "Self-paced",
-    "notes": "**"
+    "notes": "**\n* *Exercises:* 3 sets \u00d7 45-second anti-rotational cable Pallof presses. 3 sets \u00d7 12 reps single-arm farmer's carries (increase kettlebell load by one increment). 3 sets \u00d7 12 slow, high-tension Swiss-ball rollouts."
   },
   {
     "id": "ex-w2-d2-3",
-    "session_id": "session-w2-d2",
-    "name": "Exercises",
-    "category": "General",
-    "sets": 3,
-    "reps_or_duration": "45-second anti-rotational cable Pallof presses",
-    "intensity": "RPE 3",
-    "rest": "Self-paced",
-    "notes": "* 3 sets \u00d7 45-second anti-rotational cable Pallof presses. 3 sets \u00d7 12 reps single-arm farmer's carries (increase kettlebell load by one increment). 3 sets \u00d7 12 slow, high-tension Swiss-ball rollouts."
-  },
-  {
-    "id": "ex-w2-d2-4",
     "session_id": "session-w2-d2",
     "name": "Deep Shoulder, Spine & Mobility Matrix [50 Mins]",
     "category": "Mobility",
@@ -943,18 +723,7 @@ const DEFAULT_EXERCISES = [
     "reps_or_duration": "1 set",
     "intensity": "RPE 3",
     "rest": "Self-paced",
-    "notes": "**"
-  },
-  {
-    "id": "ex-w2-d2-5",
-    "session_id": "session-w2-d2",
-    "name": "Exercises",
-    "category": "General",
-    "sets": 3,
-    "reps_or_duration": "15 seconds sleeper stretch",
-    "intensity": "RPE 3",
-    "rest": "Self-paced",
-    "notes": "* 3 sets \u00d7 15 seconds sleeper stretch. 3 sets \u00d7 12 reps prone floor Y-T-W raises. 3 sets \u00d7 45 seconds puppy pose lat stretch. 3 sets \u00d7 60 seconds cross-legged spine twists."
+    "notes": "**\n* *Exercises:* 3 sets \u00d7 15 seconds sleeper stretch. 3 sets \u00d7 12 reps prone floor Y-T-W raises. 3 sets \u00d7 45 seconds puppy pose lat stretch. 3 sets \u00d7 60 seconds cross-legged spine twists."
   },
   {
     "id": "ex-w2-d3-1",
@@ -976,21 +745,10 @@ const DEFAULT_EXERCISES = [
     "reps_or_duration": "4 blocks of 5 problems",
     "intensity": "RPE 7",
     "rest": "3 mins",
-    "notes": "Core Driver \u2014 On-Wall Density Ladders [90 Mins]:**"
+    "notes": "Core Driver \u2014 On-Wall Density Ladders [90 Mins]:**\n* *Protocol:* Density volume overload. Complete 4 distinct blocks of 5 different moderate problems back-to-back. Rest 3 minutes between major blocks."
   },
   {
     "id": "ex-w2-d3-3",
-    "session_id": "session-w2-d3",
-    "name": "Protocol",
-    "category": "General",
-    "sets": 1,
-    "reps_or_duration": "1 set",
-    "intensity": "RPE 7",
-    "rest": "Self-paced",
-    "notes": "* Density volume overload. Complete 4 distinct blocks of 5 different moderate problems back-to-back. Rest 3 minutes between major blocks."
-  },
-  {
-    "id": "ex-w2-d3-4",
     "session_id": "session-w2-d3",
     "name": "Tier 3",
     "category": "Tier 3",
@@ -998,21 +756,10 @@ const DEFAULT_EXERCISES = [
     "reps_or_duration": "1 set",
     "intensity": "RPE 7",
     "rest": "Self-paced",
-    "notes": "Progress Hook \u2014 Highly Optimal Off-Wall Foundation [40 Mins]:**"
+    "notes": "Progress Hook \u2014 Highly Optimal Off-Wall Foundation [40 Mins]:**\n* *Protocol:* Linear loading progression. 3 sets \u00d7 8 reps strict overhead dumbbell press (increase load). 3 sets \u00d7 8 reps heavy goblet squats (increase load). 3 sets \u00d7 12 reps face-pulls with extended static holds."
   },
   {
-    "id": "ex-w2-d3-5",
-    "session_id": "session-w2-d3",
-    "name": "Protocol",
-    "category": "General",
-    "sets": 3,
-    "reps_or_duration": "8 reps strict overhead dumbbell press (increase load)",
-    "intensity": "RPE 7",
-    "rest": "Self-paced",
-    "notes": "* Linear loading progression. 3 sets \u00d7 8 reps strict overhead dumbbell press (increase load). 3 sets \u00d7 8 reps heavy goblet squats (increase load). 3 sets \u00d7 12 reps face-pulls with extended static holds."
-  },
-  {
-    "id": "ex-w2-d3-6",
+    "id": "ex-w2-d3-4",
     "session_id": "session-w2-d3",
     "name": "Tier 4",
     "category": "Tier 4",
@@ -1020,18 +767,7 @@ const DEFAULT_EXERCISES = [
     "reps_or_duration": "1 set",
     "intensity": "RPE 7",
     "rest": "Self-paced",
-    "notes": "Postural Care & Plyometric Booster [10 Mins]:**"
-  },
-  {
-    "id": "ex-w2-d3-7",
-    "session_id": "session-w2-d3",
-    "name": "Protocol",
-    "category": "General",
-    "sets": 3,
-    "reps_or_duration": "6 explosive broad jumps targeting max forward trajectory",
-    "intensity": "RPE 7",
-    "rest": "Self-paced",
-    "notes": "* Forearm foam rolling and pulley tissue flossing. 3 sets \u00d7 6 explosive broad jumps targeting max forward trajectory."
+    "notes": "Postural Care & Plyometric Booster [10 Mins]:**\n* *Protocol:* Forearm foam rolling and pulley tissue flossing. 3 sets \u00d7 6 explosive broad jumps targeting max forward trajectory."
   },
   {
     "id": "ex-w2-d4-1",
@@ -1075,21 +811,10 @@ const DEFAULT_EXERCISES = [
     "reps_or_duration": "12-14 problems",
     "intensity": "RPE 7",
     "rest": "2 mins",
-    "notes": "Core Driver \u2014 Medium-Volume Coordination [90 Mins]:**"
+    "notes": "Core Driver \u2014 Medium-Volume Coordination [90 Mins]:**\n* *Protocol:* Complete 12\u201314 mid-tier problems focusing on rapid coordination steps and skate-style dynamic moves. Rest 2 minutes between attempts."
   },
   {
     "id": "ex-w2-d5-3",
-    "session_id": "session-w2-d5",
-    "name": "Protocol",
-    "category": "General",
-    "sets": 1,
-    "reps_or_duration": "1 set",
-    "intensity": "RPE 7",
-    "rest": "Self-paced",
-    "notes": "* Complete 12\u201314 mid-tier problems focusing on rapid coordination steps and skate-style dynamic moves. Rest 2 minutes between attempts."
-  },
-  {
-    "id": "ex-w2-d5-4",
     "session_id": "session-w2-d5",
     "name": "Tier 3",
     "category": "Tier 3",
@@ -1097,21 +822,10 @@ const DEFAULT_EXERCISES = [
     "reps_or_duration": "1 set",
     "intensity": "RPE 7",
     "rest": "Self-paced",
-    "notes": "Progress Hook \u2014 Under-Load Technical Repeats [40 Mins]:**"
+    "notes": "Progress Hook \u2014 Under-Load Technical Repeats [40 Mins]:**\n* *Protocol:* Re-climb flash-grade routes while sustaining an active, deep forearm pump. Focus on clean hand tracking and loose grip tension."
   },
   {
-    "id": "ex-w2-d5-5",
-    "session_id": "session-w2-d5",
-    "name": "Protocol",
-    "category": "General",
-    "sets": 1,
-    "reps_or_duration": "1 set",
-    "intensity": "RPE 7",
-    "rest": "Self-paced",
-    "notes": "* Re-climb flash-grade routes while sustaining an active, deep forearm pump. Focus on clean hand tracking and loose grip tension."
-  },
-  {
-    "id": "ex-w2-d5-6",
+    "id": "ex-w2-d5-4",
     "session_id": "session-w2-d5",
     "name": "Tier 4",
     "category": "Tier 4",
@@ -1141,21 +855,10 @@ const DEFAULT_EXERCISES = [
     "reps_or_duration": "1 set",
     "intensity": "RPE 6",
     "rest": "Self-paced",
-    "notes": "**"
+    "notes": "**\n* *Exercises:* 3 sets \u00d7 10 reps of eccentric pull-ups (5-second lowering phase) and 3 sets \u00d7 12 reps cable face-pulls."
   },
   {
     "id": "ex-w2-d6-3",
-    "session_id": "session-w2-d6",
-    "name": "Exercises",
-    "category": "General",
-    "sets": 3,
-    "reps_or_duration": "10 reps of eccentric pull-ups (5-second lowering phase) and 3 sets \u00d7 12 reps cable face-pulls",
-    "intensity": "RPE 6",
-    "rest": "Self-paced",
-    "notes": "* 3 sets \u00d7 10 reps of eccentric pull-ups (5-second lowering phase) and 3 sets \u00d7 12 reps cable face-pulls."
-  },
-  {
-    "id": "ex-w2-d6-4",
     "session_id": "session-w2-d6",
     "name": "Pushing & Anterior Posture Corrections [30 Mins]",
     "category": "Strength",
@@ -1163,21 +866,10 @@ const DEFAULT_EXERCISES = [
     "reps_or_duration": "1 set",
     "intensity": "RPE 6",
     "rest": "Self-paced",
-    "notes": "**"
+    "notes": "**\n* *Exercises:* 3 sets \u00d7 8 reps kettlebell floor press and 3 sets \u00d7 8 reps single-arm dumbbell overhead presses."
   },
   {
-    "id": "ex-w2-d6-5",
-    "session_id": "session-w2-d6",
-    "name": "Exercises",
-    "category": "General",
-    "sets": 3,
-    "reps_or_duration": "8 reps kettlebell floor press and 3 sets \u00d7 8 reps single-arm dumbbell overhead presses",
-    "intensity": "RPE 6",
-    "rest": "Self-paced",
-    "notes": "* 3 sets \u00d7 8 reps kettlebell floor press and 3 sets \u00d7 8 reps single-arm dumbbell overhead presses."
-  },
-  {
-    "id": "ex-w2-d6-6",
+    "id": "ex-w2-d6-4",
     "session_id": "session-w2-d6",
     "name": "Core Integration [10 Mins]",
     "category": "Core",
@@ -1196,7 +888,7 @@ const DEFAULT_EXERCISES = [
     "reps_or_duration": "1 set",
     "intensity": "RPE 1",
     "rest": "Self-paced",
-    "notes": "* Full systemic off-load. Maximum recovery priority."
+    "notes": "* Full systemic off-load. Maximum recovery priority.\n---"
   },
   {
     "id": "ex-w3-d1-1",
@@ -1218,32 +910,10 @@ const DEFAULT_EXERCISES = [
     "reps_or_duration": "25 problems",
     "intensity": "RPE 6",
     "rest": "60 seconds",
-    "notes": "Core Driver \u2014 High Mileage Volume [90 Mins]:**"
+    "notes": "Core Driver \u2014 High Mileage Volume [90 Mins]:**\n* *Protocol:* Peak volume overload. Target 25 unique boulder problems.\n* *Pacing:* Rest strictly limited to 60 seconds between problems to maximize aerobic tolerance boundaries."
   },
   {
     "id": "ex-w3-d1-3",
-    "session_id": "session-w3-d1",
-    "name": "Protocol",
-    "category": "General",
-    "sets": 1,
-    "reps_or_duration": "1 set",
-    "intensity": "RPE 6",
-    "rest": "Self-paced",
-    "notes": "* Peak volume overload. Target 25 unique boulder problems."
-  },
-  {
-    "id": "ex-w3-d1-4",
-    "session_id": "session-w3-d1",
-    "name": "Pacing",
-    "category": "General",
-    "sets": 1,
-    "reps_or_duration": "1 set",
-    "intensity": "RPE 6",
-    "rest": "Self-paced",
-    "notes": "* Rest strictly limited to 60 seconds between problems to maximize aerobic tolerance boundaries."
-  },
-  {
-    "id": "ex-w3-d1-5",
     "session_id": "session-w3-d1",
     "name": "Tier 3",
     "category": "Tier 3",
@@ -1251,21 +921,10 @@ const DEFAULT_EXERCISES = [
     "reps_or_duration": "1 set",
     "intensity": "RPE 6",
     "rest": "Self-paced",
-    "notes": "Progress Hook \u2014 Technique Base & Core Tension [40 Mins]:**"
+    "notes": "Progress Hook \u2014 Technique Base & Core Tension [40 Mins]:**\n* *Protocol:* Technical execution under maximum systemic exhaustion. Run technique drills on multi-directional coordination tracks. Focus on absolute kinetic stillness."
   },
   {
-    "id": "ex-w3-d1-6",
-    "session_id": "session-w3-d1",
-    "name": "Protocol",
-    "category": "General",
-    "sets": 1,
-    "reps_or_duration": "1 set",
-    "intensity": "RPE 6",
-    "rest": "Self-paced",
-    "notes": "* Technical execution under maximum systemic exhaustion. Run technique drills on multi-directional coordination tracks. Focus on absolute kinetic stillness."
-  },
-  {
-    "id": "ex-w3-d1-7",
+    "id": "ex-w3-d1-4",
     "session_id": "session-w3-d1",
     "name": "Tier 4",
     "category": "Tier 4",
@@ -1273,29 +932,7 @@ const DEFAULT_EXERCISES = [
     "reps_or_duration": "1 set",
     "intensity": "RPE 6",
     "rest": "Self-paced",
-    "notes": "Dynamic Care, Advanced Core & Lower-Body Plyometrics [10 Mins]:**"
-  },
-  {
-    "id": "ex-w3-d1-8",
-    "session_id": "session-w3-d1",
-    "name": "Climbing Core & Upper Push",
-    "category": "Core",
-    "sets": 2,
-    "reps_or_duration": "max time hanging static L-sits",
-    "intensity": "RPE 6",
-    "rest": "Self-paced",
-    "notes": "* 2 sets \u00d7 max time hanging static L-sits. 2 sets \u00d7 20 deep diamond push-ups. 2 sets \u00d7 12 deep bench dips."
-  },
-  {
-    "id": "ex-w3-d1-9",
-    "session_id": "session-w3-d1",
-    "name": "Wrist, Shoulder & Lower Plyos",
-    "category": "Mobility",
-    "sets": 2,
-    "reps_or_duration": "15 reverse wrist curls",
-    "intensity": "RPE 6",
-    "rest": "Self-paced",
-    "notes": "* 2 sets \u00d7 15 reverse wrist curls. 1 min deep dead-hang. 3 sets \u00d7 6 explosive box jumps at absolute maximum target height."
+    "notes": "Dynamic Care, Advanced Core & Lower-Body Plyometrics [10 Mins]:**\n* *Climbing Core & Upper Push:* 2 sets \u00d7 max time hanging static L-sits. 2 sets \u00d7 20 deep diamond push-ups. 2 sets \u00d7 12 deep bench dips.\n* *Wrist, Shoulder & Lower Plyos:* 2 sets \u00d7 15 reverse wrist curls. 1 min deep dead-hang. 3 sets \u00d7 6 explosive box jumps at absolute maximum target height."
   },
   {
     "id": "ex-w3-d2-1",
@@ -1317,21 +954,10 @@ const DEFAULT_EXERCISES = [
     "reps_or_duration": "1 set",
     "intensity": "RPE 3",
     "rest": "Self-paced",
-    "notes": "**"
+    "notes": "**\n* *Exercises:* 3 sets \u00d7 45-second anti-rotational cable Pallof presses. 3 sets \u00d7 12 reps single-arm farmer's carries (peak kettlebell load). 3 sets \u00d7 15 slow, high-tension Swiss-ball rollouts."
   },
   {
     "id": "ex-w3-d2-3",
-    "session_id": "session-w3-d2",
-    "name": "Exercises",
-    "category": "General",
-    "sets": 3,
-    "reps_or_duration": "45-second anti-rotational cable Pallof presses",
-    "intensity": "RPE 3",
-    "rest": "Self-paced",
-    "notes": "* 3 sets \u00d7 45-second anti-rotational cable Pallof presses. 3 sets \u00d7 12 reps single-arm farmer's carries (peak kettlebell load). 3 sets \u00d7 15 slow, high-tension Swiss-ball rollouts."
-  },
-  {
-    "id": "ex-w3-d2-4",
     "session_id": "session-w3-d2",
     "name": "Deep Shoulder, Spine & Mobility Matrix [50 Mins]",
     "category": "Mobility",
@@ -1339,18 +965,7 @@ const DEFAULT_EXERCISES = [
     "reps_or_duration": "1 set",
     "intensity": "RPE 3",
     "rest": "Self-paced",
-    "notes": "**"
-  },
-  {
-    "id": "ex-w3-d2-5",
-    "session_id": "session-w3-d2",
-    "name": "Exercises",
-    "category": "General",
-    "sets": 3,
-    "reps_or_duration": "15 seconds sleeper stretch",
-    "intensity": "RPE 3",
-    "rest": "Self-paced",
-    "notes": "* 3 sets \u00d7 15 seconds sleeper stretch. 3 sets \u00d7 15 reps prone floor Y-T-W raises. 3 sets \u00d7 45 seconds puppy pose lat stretch. 3 sets \u00d7 60 seconds cross-legged spine twists."
+    "notes": "**\n* *Exercises:* 3 sets \u00d7 15 seconds sleeper stretch. 3 sets \u00d7 15 reps prone floor Y-T-W raises. 3 sets \u00d7 45 seconds puppy pose lat stretch. 3 sets \u00d7 60 seconds cross-legged spine twists."
   },
   {
     "id": "ex-w3-d3-1",
@@ -1372,21 +987,10 @@ const DEFAULT_EXERCISES = [
     "reps_or_duration": "5 blocks of 4 problems",
     "intensity": "RPE 7",
     "rest": "3 mins",
-    "notes": "Core Driver \u2014 On-Wall Density Ladders [90 Mins]:**"
+    "notes": "Core Driver \u2014 On-Wall Density Ladders [90 Mins]:**\n* *Protocol:* Peak structural density accumulation. Complete 5 distinct blocks of 4 different moderate problems back-to-back. Rest 3 minutes between major blocks."
   },
   {
     "id": "ex-w3-d3-3",
-    "session_id": "session-w3-d3",
-    "name": "Protocol",
-    "category": "General",
-    "sets": 1,
-    "reps_or_duration": "1 set",
-    "intensity": "RPE 7",
-    "rest": "Self-paced",
-    "notes": "* Peak structural density accumulation. Complete 5 distinct blocks of 4 different moderate problems back-to-back. Rest 3 minutes between major blocks."
-  },
-  {
-    "id": "ex-w3-d3-4",
     "session_id": "session-w3-d3",
     "name": "Tier 3",
     "category": "Tier 3",
@@ -1394,21 +998,10 @@ const DEFAULT_EXERCISES = [
     "reps_or_duration": "1 set",
     "intensity": "RPE 7",
     "rest": "Self-paced",
-    "notes": "Progress Hook \u2014 Highly Optimal Off-Wall Foundation [40 Mins]:**"
+    "notes": "Progress Hook \u2014 Highly Optimal Off-Wall Foundation [40 Mins]:**\n* *Protocol:* Peak block intensity loading. 3 sets \u00d7 8 reps strict overhead dumbbell press (peak weight tracking). 3 sets \u00d7 8 reps heavy goblet squats (peak weight tracking). 3 sets \u00d7 15 reps face-pulls."
   },
   {
-    "id": "ex-w3-d3-5",
-    "session_id": "session-w3-d3",
-    "name": "Protocol",
-    "category": "General",
-    "sets": 3,
-    "reps_or_duration": "8 reps strict overhead dumbbell press (peak weight tracking)",
-    "intensity": "RPE 7",
-    "rest": "Self-paced",
-    "notes": "* Peak block intensity loading. 3 sets \u00d7 8 reps strict overhead dumbbell press (peak weight tracking). 3 sets \u00d7 8 reps heavy goblet squats (peak weight tracking). 3 sets \u00d7 15 reps face-pulls."
-  },
-  {
-    "id": "ex-w3-d3-6",
+    "id": "ex-w3-d3-4",
     "session_id": "session-w3-d3",
     "name": "Tier 4",
     "category": "Tier 4",
@@ -1416,18 +1009,7 @@ const DEFAULT_EXERCISES = [
     "reps_or_duration": "1 set",
     "intensity": "RPE 7",
     "rest": "Self-paced",
-    "notes": "Postural Care & Plyometric Booster [10 Mins]:**"
-  },
-  {
-    "id": "ex-w3-d3-7",
-    "session_id": "session-w3-d3",
-    "name": "Protocol",
-    "category": "General",
-    "sets": 3,
-    "reps_or_duration": "6 explosive broad jumps focusing on dynamic velocity out of a deep stance",
-    "intensity": "RPE 7",
-    "rest": "Self-paced",
-    "notes": "* Forearm rolling and targeted joint tissue mobilization. 3 sets \u00d7 6 explosive broad jumps focusing on dynamic velocity out of a deep stance."
+    "notes": "Postural Care & Plyometric Booster [10 Mins]:**\n* *Protocol:* Forearm rolling and targeted joint tissue mobilization. 3 sets \u00d7 6 explosive broad jumps focusing on dynamic velocity out of a deep stance."
   },
   {
     "id": "ex-w3-d4-1",
@@ -1471,21 +1053,10 @@ const DEFAULT_EXERCISES = [
     "reps_or_duration": "14-16 problems",
     "intensity": "RPE 7",
     "rest": "2 mins",
-    "notes": "Core Driver \u2014 Medium-Volume Coordination [90 Mins]:**"
+    "notes": "Core Driver \u2014 Medium-Volume Coordination [90 Mins]:**\n* *Protocol:* Complete 14\u201316 mid-tier problems focusing on multi-step lateral coordination moves and directional toe catches. Rest 2 minutes between attempts."
   },
   {
     "id": "ex-w3-d5-3",
-    "session_id": "session-w3-d5",
-    "name": "Protocol",
-    "category": "General",
-    "sets": 1,
-    "reps_or_duration": "1 set",
-    "intensity": "RPE 7",
-    "rest": "Self-paced",
-    "notes": "* Complete 14\u201316 mid-tier problems focusing on multi-step lateral coordination moves and directional toe catches. Rest 2 minutes between attempts."
-  },
-  {
-    "id": "ex-w3-d5-4",
     "session_id": "session-w3-d5",
     "name": "Tier 3",
     "category": "Tier 3",
@@ -1493,21 +1064,10 @@ const DEFAULT_EXERCISES = [
     "reps_or_duration": "1 set",
     "intensity": "RPE 7",
     "rest": "Self-paced",
-    "notes": "Progress Hook \u2014 Under-Load Technical Repeats [40 Mins]:**"
+    "notes": "Progress Hook \u2014 Under-Load Technical Repeats [40 Mins]:**\n* *Protocol:* Re-climb flash-grade routes while sustaining an active, deep forearm pump. Focus on clean hand tracking and loose grip tension."
   },
   {
-    "id": "ex-w3-d5-5",
-    "session_id": "session-w3-d5",
-    "name": "Protocol",
-    "category": "General",
-    "sets": 1,
-    "reps_or_duration": "1 set",
-    "intensity": "RPE 7",
-    "rest": "Self-paced",
-    "notes": "* Re-climb flash-grade routes while sustaining an active, deep forearm pump. Focus on clean hand tracking and loose grip tension."
-  },
-  {
-    "id": "ex-w3-d5-6",
+    "id": "ex-w3-d5-4",
     "session_id": "session-w3-d5",
     "name": "Tier 4",
     "category": "Tier 4",
@@ -1537,21 +1097,10 @@ const DEFAULT_EXERCISES = [
     "reps_or_duration": "1 set",
     "intensity": "RPE 6",
     "rest": "Self-paced",
-    "notes": "**"
+    "notes": "**\n* *Exercises:* 3 sets \u00d7 10 reps of eccentric pull-ups (6-second lowering phase) and 3 sets \u00d7 12 reps cable face-pulls."
   },
   {
     "id": "ex-w3-d6-3",
-    "session_id": "session-w3-d6",
-    "name": "Exercises",
-    "category": "General",
-    "sets": 3,
-    "reps_or_duration": "10 reps of eccentric pull-ups (6-second lowering phase) and 3 sets \u00d7 12 reps cable face-pulls",
-    "intensity": "RPE 6",
-    "rest": "Self-paced",
-    "notes": "* 3 sets \u00d7 10 reps of eccentric pull-ups (6-second lowering phase) and 3 sets \u00d7 12 reps cable face-pulls."
-  },
-  {
-    "id": "ex-w3-d6-4",
     "session_id": "session-w3-d6",
     "name": "Pushing & Anterior Posture Corrections [30 Mins]",
     "category": "Strength",
@@ -1559,21 +1108,10 @@ const DEFAULT_EXERCISES = [
     "reps_or_duration": "1 set",
     "intensity": "RPE 6",
     "rest": "Self-paced",
-    "notes": "**"
+    "notes": "**\n* *Exercises:* 3 sets \u00d7 8 reps kettlebell floor press and 3 sets \u00d7 8 reps single-arm dumbbell overhead presses."
   },
   {
-    "id": "ex-w3-d6-5",
-    "session_id": "session-w3-d6",
-    "name": "Exercises",
-    "category": "General",
-    "sets": 3,
-    "reps_or_duration": "8 reps kettlebell floor press and 3 sets \u00d7 8 reps single-arm dumbbell overhead presses",
-    "intensity": "RPE 6",
-    "rest": "Self-paced",
-    "notes": "* 3 sets \u00d7 8 reps kettlebell floor press and 3 sets \u00d7 8 reps single-arm dumbbell overhead presses."
-  },
-  {
-    "id": "ex-w3-d6-6",
+    "id": "ex-w3-d6-4",
     "session_id": "session-w3-d6",
     "name": "Core Integration [10 Mins]",
     "category": "Core",
@@ -1592,7 +1130,7 @@ const DEFAULT_EXERCISES = [
     "reps_or_duration": "1 set",
     "intensity": "RPE 1",
     "rest": "Self-paced",
-    "notes": "* Full systemic off-load. Zero activity."
+    "notes": "* Full systemic off-load. Zero activity.\n---"
   },
   {
     "id": "ex-w4-d1-1",
@@ -1614,21 +1152,10 @@ const DEFAULT_EXERCISES = [
     "reps_or_duration": "8-10 low-grade climbs",
     "intensity": "RPE 6",
     "rest": "Lifts/fluid",
-    "notes": "Core Driver \u2014 Technical Clearance [45 Mins]:**"
+    "notes": "Core Driver \u2014 Technical Clearance [45 Mins]:**\n* *Protocol:* Cut total training parameters in half. Execute 8 to 10 low-grade technical climbs. Focus strictly on smooth weight transfer, silent feet, and minimal hold gripping force."
   },
   {
     "id": "ex-w4-d1-3",
-    "session_id": "session-w4-d1",
-    "name": "Protocol",
-    "category": "General",
-    "sets": 1,
-    "reps_or_duration": "1 set",
-    "intensity": "RPE 6",
-    "rest": "Self-paced",
-    "notes": "* Cut total training parameters in half. Execute 8 to 10 low-grade technical climbs. Focus strictly on smooth weight transfer, silent feet, and minimal hold gripping force."
-  },
-  {
-    "id": "ex-w4-d1-4",
     "session_id": "session-w4-d1",
     "name": "Tier 3",
     "category": "Tier 3",
@@ -1636,21 +1163,10 @@ const DEFAULT_EXERCISES = [
     "reps_or_duration": "1 set",
     "intensity": "RPE 6",
     "rest": "Self-paced",
-    "notes": "Progress Hook \u2014 Technical Visualization Check [45 Mins]:**"
+    "notes": "Progress Hook \u2014 Technical Visualization Check [45 Mins]:**\n* *Protocol:* Visual mapping sequences. Review gym routes, work on finger read patterns, and traverse low-angle lines to keep the technical library active without fatiguing muscles."
   },
   {
-    "id": "ex-w4-d1-5",
-    "session_id": "session-w4-d1",
-    "name": "Protocol",
-    "category": "General",
-    "sets": 1,
-    "reps_or_duration": "1 set",
-    "intensity": "RPE 6",
-    "rest": "Self-paced",
-    "notes": "* Visual mapping sequences. Review gym routes, work on finger read patterns, and traverse low-angle lines to keep the technical library active without fatiguing muscles."
-  },
-  {
-    "id": "ex-w4-d1-6",
+    "id": "ex-w4-d1-4",
     "session_id": "session-w4-d1",
     "name": "Tier 4",
     "category": "Tier 4",
@@ -1680,21 +1196,10 @@ const DEFAULT_EXERCISES = [
     "reps_or_duration": "1 set",
     "intensity": "RPE 3",
     "rest": "Self-paced",
-    "notes": "**"
+    "notes": "**\n* *Exercises:* 3 sets \u00d7 10 reps deadbugs. 3 sets \u00d7 10 reps bird-dogs. Avoid any maximal isometric bracing or loading."
   },
   {
     "id": "ex-w4-d2-3",
-    "session_id": "session-w4-d2",
-    "name": "Exercises",
-    "category": "General",
-    "sets": 3,
-    "reps_or_duration": "10 reps deadbugs",
-    "intensity": "RPE 3",
-    "rest": "Self-paced",
-    "notes": "* 3 sets \u00d7 10 reps deadbugs. 3 sets \u00d7 10 reps bird-dogs. Avoid any maximal isometric bracing or loading."
-  },
-  {
-    "id": "ex-w4-d2-4",
     "session_id": "session-w4-d2",
     "name": "Deep Mobility Extension [50 Mins]",
     "category": "Mobility",
@@ -1724,21 +1229,10 @@ const DEFAULT_EXERCISES = [
     "reps_or_duration": "5 easy blocks of 2 problems",
     "intensity": "RPE 7",
     "rest": "4 mins",
-    "notes": "Core Driver \u2014 Low-Volume Style Variety [45 Mins]:**"
+    "notes": "Core Driver \u2014 Low-Volume Style Variety [45 Mins]:**\n* *Protocol:* Complete 5 easy blocks of 2 moderate, continuous boulder problems. Long 4-minute rests between blocks to eliminate any metabolic build-up."
   },
   {
     "id": "ex-w4-d3-3",
-    "session_id": "session-w4-d3",
-    "name": "Protocol",
-    "category": "General",
-    "sets": 1,
-    "reps_or_duration": "1 set",
-    "intensity": "RPE 7",
-    "rest": "Self-paced",
-    "notes": "* Complete 5 easy blocks of 2 moderate, continuous boulder problems. Long 4-minute rests between blocks to eliminate any metabolic build-up."
-  },
-  {
-    "id": "ex-w4-d3-4",
     "session_id": "session-w4-d3",
     "name": "Tier 3",
     "category": "Tier 3",
@@ -1746,21 +1240,10 @@ const DEFAULT_EXERCISES = [
     "reps_or_duration": "1 set",
     "intensity": "RPE 7",
     "rest": "Self-paced",
-    "notes": "Progress Hook \u2014 Posture Maintenance [45 Mins]:**"
+    "notes": "Progress Hook \u2014 Posture Maintenance [45 Mins]:**\n* *Protocol:* Light off-wall mechanics. Submaximal kettlebell overhead presses and unweighted squats to preserve movement patterns without adding neural fatigue."
   },
   {
-    "id": "ex-w4-d3-5",
-    "session_id": "session-w4-d3",
-    "name": "Protocol",
-    "category": "General",
-    "sets": 1,
-    "reps_or_duration": "1 set",
-    "intensity": "RPE 7",
-    "rest": "Self-paced",
-    "notes": "* Light off-wall mechanics. Submaximal kettlebell overhead presses and unweighted squats to preserve movement patterns without adding neural fatigue."
-  },
-  {
-    "id": "ex-w4-d3-6",
+    "id": "ex-w4-d3-4",
     "session_id": "session-w4-d3",
     "name": "Tier 4",
     "category": "Tier 4",
@@ -1801,21 +1284,10 @@ const DEFAULT_EXERCISES = [
     "reps_or_duration": "5 easy climbs",
     "intensity": "RPE 7",
     "rest": "Lifts/fluid",
-    "notes": "Core Driver \u2014 Technical Coordination Clearance [45 Mins]:**"
+    "notes": "Core Driver \u2014 Technical Coordination Clearance [45 Mins]:**\n* *Protocol:* Execute 5 low-grade technical climbs. Focus strictly on smooth weight transfer, silent feet, and minimal hold gripping force."
   },
   {
     "id": "ex-w4-d5-3",
-    "session_id": "session-w4-d5",
-    "name": "Protocol",
-    "category": "General",
-    "sets": 1,
-    "reps_or_duration": "1 set",
-    "intensity": "RPE 7",
-    "rest": "Self-paced",
-    "notes": "* Execute 5 low-grade technical climbs. Focus strictly on smooth weight transfer, silent feet, and minimal hold gripping force."
-  },
-  {
-    "id": "ex-w4-d5-4",
     "session_id": "session-w4-d5",
     "name": "Tier 3",
     "category": "Tier 3",
@@ -1823,21 +1295,10 @@ const DEFAULT_EXERCISES = [
     "reps_or_duration": "1 set",
     "intensity": "RPE 7",
     "rest": "Self-paced",
-    "notes": "Progress Hook \u2014 Technical Visualization Check [45 Mins]:**"
+    "notes": "Progress Hook \u2014 Technical Visualization Check [45 Mins]:**\n* *Protocol:* Visual mapping sequences. Reviewing gym routes, working on finger read patterns, and traversing low-angle lines to keep the technical library active without fatiguing muscles."
   },
   {
-    "id": "ex-w4-d5-5",
-    "session_id": "session-w4-d5",
-    "name": "Protocol",
-    "category": "General",
-    "sets": 1,
-    "reps_or_duration": "1 set",
-    "intensity": "RPE 7",
-    "rest": "Self-paced",
-    "notes": "* Visual mapping sequences. Reviewing gym routes, working on finger read patterns, and traversing low-angle lines to keep the technical library active without fatiguing muscles."
-  },
-  {
-    "id": "ex-w4-d5-6",
+    "id": "ex-w4-d5-4",
     "session_id": "session-w4-d5",
     "name": "Tier 4",
     "category": "Tier 4",
@@ -1867,21 +1328,10 @@ const DEFAULT_EXERCISES = [
     "reps_or_duration": "1 set",
     "intensity": "RPE 6",
     "rest": "Self-paced",
-    "notes": "**"
+    "notes": "**\n* *Exercises:* Light band-loaded external rotations and serratus presses \u2013 2 sets \u00d7 12 reps. No failure parameters."
   },
   {
     "id": "ex-w4-d6-3",
-    "session_id": "session-w4-d6",
-    "name": "Exercises",
-    "category": "General",
-    "sets": 2,
-    "reps_or_duration": "12 reps",
-    "intensity": "RPE 6",
-    "rest": "Self-paced",
-    "notes": "* Light band-loaded external rotations and serratus presses \u2013 2 sets \u00d7 12 reps. No failure parameters."
-  },
-  {
-    "id": "ex-w4-d6-4",
     "session_id": "session-w4-d6",
     "name": "Lower Body Restoration Sling [25 Mins]",
     "category": "Rest",
@@ -1889,21 +1339,10 @@ const DEFAULT_EXERCISES = [
     "reps_or_duration": "1 set",
     "intensity": "RPE 6",
     "rest": "Self-paced",
-    "notes": "**"
+    "notes": "**\n* *Exercises:* Unweighted single-leg hinges and gentle glute bridges \u2013 2 sets \u00d7 10 reps."
   },
   {
-    "id": "ex-w4-d6-5",
-    "session_id": "session-w4-d6",
-    "name": "Exercises",
-    "category": "General",
-    "sets": 2,
-    "reps_or_duration": "10 reps",
-    "intensity": "RPE 6",
-    "rest": "Self-paced",
-    "notes": "* Unweighted single-leg hinges and gentle glute bridges \u2013 2 sets \u00d7 10 reps."
-  },
-  {
-    "id": "ex-w4-d6-6",
+    "id": "ex-w4-d6-4",
     "session_id": "session-w4-d6",
     "name": "Posterior Posture Alignment [20 Mins]",
     "category": "General",
@@ -1911,18 +1350,7 @@ const DEFAULT_EXERCISES = [
     "reps_or_duration": "1 set",
     "intensity": "RPE 6",
     "rest": "Self-paced",
-    "notes": "**"
-  },
-  {
-    "id": "ex-w4-d6-7",
-    "session_id": "session-w4-d6",
-    "name": "Exercises",
-    "category": "General",
-    "sets": 1,
-    "reps_or_duration": "1 set",
-    "intensity": "RPE 6",
-    "rest": "Self-paced",
-    "notes": "* Face-pulls using very light cable loads and child's pose breathing sequences."
+    "notes": "**\n* *Exercises:* Face-pulls using very light cable loads and child's pose breathing sequences."
   },
   {
     "id": "ex-w4-d7-1",
@@ -1988,7 +1416,7 @@ const DEFAULT_FAQS = [
 
 // Helper to initialize database
 function initDB() {
-  const CURRENT_VERSION = "2.4";
+  const CURRENT_VERSION = "2.5";
   const storedVersion = localStorage.getItem("onus_db_version");
   if (storedVersion !== CURRENT_VERSION) {
     // Clear all onus-related localStorage entries to force clean re-seeding
