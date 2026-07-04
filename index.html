@@ -29,7 +29,13 @@
       <section id="screen-today" class="screen active">
         <!-- Today's Session Card -->
         <div class="card">
-          <h2 class="card-title" id="today-session-phase-week">Today's Session</h2>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <h2 class="card-title" id="today-session-phase-week" style="margin: 0;">Today's Session</h2>
+            <div id="wake-lock-status" style="font-size: 0.7rem; color: var(--text-secondary); display: flex; align-items: center; gap: 6px; background-color: var(--bg-primary); padding: 4px 8px; border-radius: var(--border-radius-sm); border: 1px solid var(--border-color);">
+              <span id="wake-lock-indicator" style="width: 6px; height: 6px; border-radius: 50%; background-color: var(--text-muted); display: inline-block;"></span>
+              <span id="wake-lock-label">Dim Safe</span>
+            </div>
+          </div>
           <div id="today-session-header">
             <h3 id="today-session-title" style="margin-bottom: 4px;">Rest Day</h3>
             <p id="today-session-objective" class="text-muted" style="font-size: 0.9rem; margin-bottom: 8px;">Enjoy your recovery.</p>

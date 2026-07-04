@@ -13,7 +13,8 @@ const state = {
   activeTab: null,
   todaySession: null,
   drillCompletions: {}, // { drillId: completedSets }
-  activeTimers: {} // { drillId: { intervalId, remainingSeconds, originalSeconds, running, startTime } }
+  activeTimers: {}, // { drillId: { intervalId, remainingSeconds, originalSeconds, running, startTime } }
+  wakeLockObj: null
 };
 
 // Navigation Tab Configuration
@@ -84,6 +85,9 @@ async function initApp() {
   if (todayDrillsList) {
     todayDrillsList.addEventListener("click", handleDrillActionsClick);
   }
+
+  // Auto-acquire wake lock when tab visibility changes back to visible
+  document.addEventListener('visibilitychange', handleVisibilityChange);
 }
 
 // Verify locks and lock app if account status is expired
@@ -108,6 +112,9 @@ async function switchUser(userId) {
   });
   state.activeTimers = {};
   state.drillCompletions = {};
+  
+  // Clear any active wake lock
+  releaseWakeLock();
 
   // Apply visual expired lock
   verifyAccessLock();
@@ -203,6 +210,13 @@ function switchTab(tabId) {
     targetScreenEl.classList.add("active");
   }
 
+  // Manage Wake Lock based on screens
+  if (state.currentUser.role === "athlete" && tabId === "today") {
+    requestWakeLock();
+  } else {
+    releaseWakeLock();
+  }
+
   // Reload lists on routing
   if (state.currentUser.role === "athlete") {
     if (tabId === 'calendar') loadTrainingCalendar();
@@ -212,6 +226,67 @@ function switchTab(tabId) {
     else if (tabId === 'programs') loadAdminPrograms();
     else if (tabId === 'reviews-queue') loadAdminReviewsQueue();
     else if (tabId === 'checkins') loadAdminCheckins();
+  }
+}
+
+// Request browser Wake Lock (prevents screen lock during training)
+async function requestWakeLock() {
+  if ('wakeLock' in navigator && !state.wakeLockObj) {
+    try {
+      state.wakeLockObj = await navigator.wakeLock.request('screen');
+      updateWakeLockUI(true);
+      
+      state.wakeLockObj.addEventListener('release', () => {
+        state.wakeLockObj = null;
+        updateWakeLockUI(false);
+      });
+    } catch (err) {
+      console.warn("Screen Wake Lock failed to initialize:", err);
+      updateWakeLockUI(false);
+    }
+  }
+}
+
+// Release Wake Lock (allows screen sleep again)
+async function releaseWakeLock() {
+  if (state.wakeLockObj) {
+    try {
+      await state.wakeLockObj.release();
+      state.wakeLockObj = null;
+    } catch (err) {
+      console.warn("Error releasing Screen Wake Lock:", err);
+    }
+  }
+  updateWakeLockUI(false);
+}
+
+// Handle Page Visibility Changes (re-acquire lock if returning to app)
+function handleVisibilityChange() {
+  if (state.currentUser && state.currentUser.role === "athlete" && state.activeTab === "today") {
+    if (document.visibilityState === 'visible') {
+      requestWakeLock();
+    } else {
+      state.wakeLockObj = null;
+      updateWakeLockUI(false);
+    }
+  }
+}
+
+// Update Screen Wake Lock indicators in UI
+function updateWakeLockUI(isActive) {
+  const indicator = document.getElementById("wake-lock-indicator");
+  const label = document.getElementById("wake-lock-label");
+
+  if (!indicator || !label) return;
+
+  if (isActive) {
+    indicator.style.backgroundColor = "var(--accent-green)";
+    label.textContent = "Keep Awake";
+    label.style.color = "var(--accent-green)";
+  } else {
+    indicator.style.backgroundColor = "var(--text-muted)";
+    label.textContent = "Dim Safe";
+    label.style.color = "var(--text-secondary)";
   }
 }
 
@@ -371,6 +446,9 @@ async function loadAthleteTodayScreen() {
         } else {
           drillContainer.style.display = "none";
         }
+
+        // Auto request lock on Today load
+        if (state.activeTab === "today") requestWakeLock();
         return;
       }
     }
@@ -423,12 +501,10 @@ function handleDrillActionsClick(e) {
     const resetBtn = container.querySelector(".timer-reset-btn");
 
     if (timer.running) {
-      // Pause
       clearInterval(timer.intervalId);
       timer.running = false;
       target.textContent = "Start";
     } else {
-      // Start
       timer.running = true;
       timer.startTime = Date.now();
       timer.originalRemaining = timer.remainingSeconds;
