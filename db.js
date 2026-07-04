@@ -1988,14 +1988,18 @@ const DEFAULT_FAQS = [
 
 // Helper to initialize database
 function initDB() {
-  const CURRENT_VERSION = "2.0";
+  const CURRENT_VERSION = "2.1";
   const storedVersion = localStorage.getItem("onus_db_version");
   if (storedVersion !== CURRENT_VERSION) {
-    localStorage.removeItem("onus_weeks");
-    localStorage.removeItem("onus_sessions");
-    localStorage.removeItem("onus_exercises");
-    localStorage.removeItem("onus_programs");
-    localStorage.removeItem("onus_phases");
+    // Clear all onus-related localStorage entries to force clean re-seeding
+    const keysToRemove = [];
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (key && key.startsWith("onus_")) {
+        keysToRemove.push(key);
+      }
+    }
+    keysToRemove.forEach(key => localStorage.removeItem(key));
     localStorage.setItem("onus_db_version", CURRENT_VERSION);
   }
   const store = (key, data) => {
