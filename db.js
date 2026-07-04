@@ -398,13 +398,13 @@ const DEFAULT_EXERCISES = [
   {
     "id": "ex-w1-d1-1",
     "session_id": "session-w1-d1",
-    "name": "Tier 1",
+    "name": "Tier 1: On-Wall Warm-up & Ramp",
     "category": "Tier 1",
     "sets": 1,
-    "reps_or_duration": "1 set",
+    "reps_or_duration": "10 Mins",
     "intensity": "RPE 6",
-    "rest": "Self-paced",
-    "notes": "Warm-Up & Prep [40 Mins]:** Execute Standard 40-Minute Prep Container exactly."
+    "rest": "None",
+    "notes": "Continuous, slow bouldering movement entirely on vertical or moderate slab terrain. Keep heart rate low and focus on crisp hold engagement to lubricate finger joints and build light vascular blood flow."
   },
   {
     "id": "ex-w1-d1-2",
@@ -552,13 +552,13 @@ const DEFAULT_EXERCISES = [
   {
     "id": "ex-w1-d3-1",
     "session_id": "session-w1-d3",
-    "name": "Tier 1",
+    "name": "Tier 1: On-Wall Warm-up & Edge Activation",
     "category": "Tier 1",
     "sets": 1,
-    "reps_or_duration": "1 set",
+    "reps_or_duration": "10 Mins",
     "intensity": "RPE 7",
-    "rest": "Self-paced",
-    "notes": "Warm-Up & Prep [40 Mins]:** Execute Standard 40-Minute Prep Container exactly."
+    "rest": "None",
+    "notes": "10 minutes of progressive vertical climbing ending with 3 unweighted static isometric hangs (10s on a 20mm edge, rest 60s) to safely load the finger tendons without generating fatigue before density ladders."
   },
   {
     "id": "ex-w1-d3-2",
@@ -662,13 +662,13 @@ const DEFAULT_EXERCISES = [
   {
     "id": "ex-w1-d5-1",
     "session_id": "session-w1-d5",
-    "name": "Tier 1",
+    "name": "Tier 1: On-Wall Warm-up & Technical Ramp",
     "category": "Tier 1",
     "sets": 1,
-    "reps_or_duration": "1 set",
+    "reps_or_duration": "10 Mins",
     "intensity": "RPE 7",
-    "rest": "Self-paced",
-    "notes": "Warm-Up & Prep [40 Mins]:** Execute Standard 40-Minute Prep Container exactly."
+    "rest": "None",
+    "notes": "Continuous slow bouldering on vertical/slab angles. Prioritize silent feet placements and zero hand readjustments to warm up the motor coordination patterns for the session."
   },
   {
     "id": "ex-w1-d5-2",
@@ -805,13 +805,13 @@ const DEFAULT_EXERCISES = [
   {
     "id": "ex-w2-d1-1",
     "session_id": "session-w2-d1",
-    "name": "Tier 1",
+    "name": "Tier 1: On-Wall Warm-up & Ramp",
     "category": "Tier 1",
     "sets": 1,
-    "reps_or_duration": "1 set",
+    "reps_or_duration": "10 Mins",
     "intensity": "RPE 6",
-    "rest": "Self-paced",
-    "notes": "Warm-Up & Prep [40 Mins]:** Execute Standard 40-Minute Prep Container exactly."
+    "rest": "None",
+    "notes": "Continuous, slow bouldering movement entirely on vertical or moderate slab terrain. Keep heart rate low and focus on crisp hold engagement to lubricate finger joints and build light vascular blood flow."
   },
   {
     "id": "ex-w2-d1-2",
@@ -959,13 +959,13 @@ const DEFAULT_EXERCISES = [
   {
     "id": "ex-w2-d3-1",
     "session_id": "session-w2-d3",
-    "name": "Tier 1",
+    "name": "Tier 1: On-Wall Warm-up & Edge Activation",
     "category": "Tier 1",
     "sets": 1,
-    "reps_or_duration": "1 set",
+    "reps_or_duration": "10 Mins",
     "intensity": "RPE 7",
-    "rest": "Self-paced",
-    "notes": "Warm-Up & Prep [40 Mins]:** Execute Standard 40-Minute Prep Container exactly."
+    "rest": "None",
+    "notes": "10 minutes of progressive vertical climbing ending with 3 unweighted static isometric hangs (10s on a 20mm edge, rest 60s) to safely load the finger tendons without generating fatigue before density ladders."
   },
   {
     "id": "ex-w2-d3-2",
@@ -1058,13 +1058,13 @@ const DEFAULT_EXERCISES = [
   {
     "id": "ex-w2-d5-1",
     "session_id": "session-w2-d5",
-    "name": "Tier 1",
+    "name": "Tier 1: On-Wall Warm-up & Technical Ramp",
     "category": "Tier 1",
     "sets": 1,
-    "reps_or_duration": "1 set",
+    "reps_or_duration": "10 Mins",
     "intensity": "RPE 7",
-    "rest": "Self-paced",
-    "notes": "Warm-Up & Prep [40 Mins]:** Execute Standard 40-Minute Prep Container exactly."
+    "rest": "None",
+    "notes": "Continuous slow bouldering on vertical/slab angles. Prioritize silent feet placements and zero hand readjustments to warm up the motor coordination patterns for the session."
   },
   {
     "id": "ex-w2-d5-2",
@@ -1201,13 +1201,13 @@ const DEFAULT_EXERCISES = [
   {
     "id": "ex-w3-d1-1",
     "session_id": "session-w3-d1",
-    "name": "Tier 1",
+    "name": "Tier 1: On-Wall Warm-up & Ramp",
     "category": "Tier 1",
     "sets": 1,
-    "reps_or_duration": "1 set",
+    "reps_or_duration": "10 Mins",
     "intensity": "RPE 6",
-    "rest": "Self-paced",
-    "notes": "Warm-Up & Prep [40 Mins]:** Execute Standard 40-Minute Prep Container exactly."
+    "rest": "None",
+    "notes": "Continuous, slow bouldering movement entirely on vertical or moderate slab terrain. Keep heart rate low and focus on crisp hold engagement to lubricate finger joints and build light vascular blood flow."
   },
   {
     "id": "ex-w3-d1-2",
@@ -1355,13 +1355,13 @@ const DEFAULT_EXERCISES = [
   {
     "id": "ex-w3-d3-1",
     "session_id": "session-w3-d3",
-    "name": "Tier 1",
+    "name": "Tier 1: On-Wall Warm-up & Edge Activation",
     "category": "Tier 1",
     "sets": 1,
-    "reps_or_duration": "1 set",
+    "reps_or_duration": "10 Mins",
     "intensity": "RPE 7",
-    "rest": "Self-paced",
-    "notes": "Warm-Up & Prep [40 Mins]:** Execute Standard 40-Minute Prep Container exactly."
+    "rest": "None",
+    "notes": "10 minutes of progressive vertical climbing ending with 3 unweighted static isometric hangs (10s on a 20mm edge, rest 60s) to safely load the finger tendons without generating fatigue before density ladders."
   },
   {
     "id": "ex-w3-d3-2",
@@ -1454,13 +1454,13 @@ const DEFAULT_EXERCISES = [
   {
     "id": "ex-w3-d5-1",
     "session_id": "session-w3-d5",
-    "name": "Tier 1",
+    "name": "Tier 1: On-Wall Warm-up & Technical Ramp",
     "category": "Tier 1",
     "sets": 1,
-    "reps_or_duration": "1 set",
+    "reps_or_duration": "10 Mins",
     "intensity": "RPE 7",
-    "rest": "Self-paced",
-    "notes": "Warm-Up & Prep [40 Mins]:** Execute Standard 40-Minute Prep Container exactly."
+    "rest": "None",
+    "notes": "Continuous slow bouldering on vertical/slab angles. Prioritize silent feet placements and zero hand readjustments to warm up the motor coordination patterns for the session."
   },
   {
     "id": "ex-w3-d5-2",
@@ -1597,13 +1597,13 @@ const DEFAULT_EXERCISES = [
   {
     "id": "ex-w4-d1-1",
     "session_id": "session-w4-d1",
-    "name": "Tier 1",
+    "name": "Tier 1: On-Wall Warm-up & Ramp",
     "category": "Tier 1",
     "sets": 1,
-    "reps_or_duration": "1 set",
+    "reps_or_duration": "10 Mins",
     "intensity": "RPE 6",
-    "rest": "Self-paced",
-    "notes": "Warm-Up & Prep [40 Mins]:** Execute Standard 40-Minute Prep Container exactly."
+    "rest": "None",
+    "notes": "Continuous, slow bouldering movement entirely on vertical or moderate slab terrain. Keep heart rate low and focus on crisp hold engagement to lubricate finger joints and build light vascular blood flow."
   },
   {
     "id": "ex-w4-d1-2",
@@ -1707,13 +1707,13 @@ const DEFAULT_EXERCISES = [
   {
     "id": "ex-w4-d3-1",
     "session_id": "session-w4-d3",
-    "name": "Tier 1",
+    "name": "Tier 1: On-Wall Warm-up & Edge Activation",
     "category": "Tier 1",
     "sets": 1,
-    "reps_or_duration": "1 set",
+    "reps_or_duration": "10 Mins",
     "intensity": "RPE 7",
-    "rest": "Self-paced",
-    "notes": "Warm-Up & Prep [40 Mins]:** Execute Standard 40-Minute Prep Container exactly."
+    "rest": "None",
+    "notes": "10 minutes of progressive vertical climbing ending with 3 unweighted static isometric hangs (10s on a 20mm edge, rest 60s) to safely load the finger tendons without generating fatigue before density ladders."
   },
   {
     "id": "ex-w4-d3-2",
@@ -1784,13 +1784,13 @@ const DEFAULT_EXERCISES = [
   {
     "id": "ex-w4-d5-1",
     "session_id": "session-w4-d5",
-    "name": "Tier 1",
+    "name": "Tier 1: On-Wall Warm-up & Technical Ramp",
     "category": "Tier 1",
     "sets": 1,
-    "reps_or_duration": "1 set",
+    "reps_or_duration": "10 Mins",
     "intensity": "RPE 7",
-    "rest": "Self-paced",
-    "notes": "Warm-Up & Prep [40 Mins]:** Duplicate Day 1 Week 4 deload warm-up exactly."
+    "rest": "None",
+    "notes": "Continuous slow bouldering on vertical/slab angles. Prioritize silent feet placements and zero hand readjustments to warm up the motor coordination patterns for the session."
   },
   {
     "id": "ex-w4-d5-2",
@@ -1988,7 +1988,7 @@ const DEFAULT_FAQS = [
 
 // Helper to initialize database
 function initDB() {
-  const CURRENT_VERSION = "2.3";
+  const CURRENT_VERSION = "2.4";
   const storedVersion = localStorage.getItem("onus_db_version");
   if (storedVersion !== CURRENT_VERSION) {
     // Clear all onus-related localStorage entries to force clean re-seeding
