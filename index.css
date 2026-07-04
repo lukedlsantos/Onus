@@ -426,4 +426,74 @@ input[type="range"].form-control::-webkit-slider-thumb:hover {
   margin-bottom: 16px;
 }
 
+/* Drills Timers and Steppers */
+.drill-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.stepper-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  padding: 4px 8px;
+  border-radius: var(--border-radius-md);
+}
+
+.stepper-btn {
+  background: none;
+  border: none;
+  color: var(--accent-cyan);
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0 6px;
+}
+
+.stepper-val {
+  font-size: 0.85rem;
+  font-weight: 600;
+  min-width: 50px;
+  text-align: center;
+}
+
+.timer-container {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  padding: 4px 8px;
+  border-radius: var(--border-radius-md);
+}
+
+.timer-display {
+  font-family: monospace;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--accent-amber);
+  min-width: 44px;
+}
+
+.timer-btn {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  cursor: pointer;
+  padding: 0 4px;
+  transition: var(--transition-fast);
+}
+
+.timer-btn:hover {
+  color: var(--accent-cyan);
+}
+
+
 

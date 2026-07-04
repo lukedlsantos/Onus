@@ -50,7 +50,7 @@
         <div class="card" id="weekly-checkin-card">
           <h2 class="card-title" style="cursor: pointer;" id="toggle-checkin-header">
             <span>Weekly Check-in</span>
-            <span id="checkin-status-badge" class="badge active" style="font-size: 0.7rem; background-color: rgba(6, 182, 212, 0.15); color: var(--accent-cyan);">Start</span>
+            <span id="checkin-status-badge" class="badge" style="font-size: 0.7rem; display: none;"></span>
           </h2>
           <form id="weekly-checkin-form" style="display: none; margin-top: 12px;">
             <div class="form-group">
@@ -180,9 +180,14 @@
             <li>Use short, trimmed clips (under 60 seconds) when possible.</li>
             <li>Paste the shareable link in the form below.</li>
           </ul>
-          <a href="https://t.me/coach_john" target="_blank" class="btn btn-primary" style="margin-top: 6px; background-color: var(--accent-blue); color: white;">
-            Open Telegram Review Chat
-          </a>
+          <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 8px;">
+            <a href="https://t.me/coach_john" id="review-telegram-link" target="_blank" class="btn btn-primary" style="background-color: var(--accent-blue); color: white;">
+              Open Telegram with Coach
+            </a>
+            <a href="" id="review-drive-link" target="_blank" class="btn" style="background-color: var(--bg-tertiary); color: var(--text-primary); border: 1px solid var(--border-color);">
+              Upload Training Videos Here
+            </a>
+          </div>
         </div>
 
         <!-- Submit Request Card -->

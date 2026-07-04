@@ -11,7 +11,9 @@ const state = {
   currentUser: null,
   currentAccess: null,
   activeTab: null,
-  todaySession: null
+  todaySession: null,
+  drillCompletions: {}, // { drillId: completedSets }
+  activeTimers: {} // { drillId: { intervalId, remainingSeconds, originalSeconds, running, startTime } }
 };
 
 // Navigation Tab Configuration
@@ -52,6 +54,19 @@ async function initApp() {
     switchTab("log");
     if (state.todaySession) {
       document.getElementById("log-session-select").value = state.todaySession.id;
+      
+      // Auto-populate workout notes with granular set progress
+      const notesEl = document.getElementById("log-notes");
+      const summaryList = [];
+      document.querySelectorAll(".stepper-container").forEach(container => {
+        const name = container.dataset.drillName;
+        const val = state.drillCompletions[container.dataset.drillId] || 0;
+        const max = container.dataset.maxSets;
+        summaryList.push(`- ${name}: ${val}/${max} sets completed`);
+      });
+      if (summaryList.length > 0) {
+        notesEl.value = `Workout Performance:\n` + summaryList.join("\n") + `\n\nNotes: `;
+      }
     }
   });
 
@@ -63,6 +78,12 @@ async function initApp() {
 
   // Strava integration trigger
   document.getElementById("connect-strava-btn").addEventListener("click", handleStravaConnectionToggle);
+
+  // Bind Exercise Stepper & Timer Events via Delegation
+  const todayDrillsList = document.getElementById("today-drills-list");
+  if (todayDrillsList) {
+    todayDrillsList.addEventListener("click", handleDrillActionsClick);
+  }
 }
 
 // Verify locks and lock app if account status is expired
@@ -80,6 +101,13 @@ function verifyAccessLock() {
 async function switchUser(userId) {
   state.currentUser = await db.getProfile(userId);
   state.currentAccess = await db.getAccess(userId);
+
+  // Clear timers state
+  Object.values(state.activeTimers).forEach(timer => {
+    if (timer.intervalId) clearInterval(timer.intervalId);
+  });
+  state.activeTimers = {};
+  state.drillCompletions = {};
 
   // Apply visual expired lock
   verifyAccessLock();
@@ -104,6 +132,12 @@ async function switchUser(userId) {
   loadResources();
   loadFAQs();
   
+  // Set dynamic links based on user profile
+  const tgLink = document.getElementById("review-telegram-link");
+  const driveLink = document.getElementById("review-drive-link");
+  if (tgLink) tgLink.href = state.currentUser.telegram_link || "https://t.me/coach_john";
+  if (driveLink) driveLink.href = state.currentUser.google_drive_folder_url || "#";
+
   if (state.currentUser.role === "athlete") {
     loadAthleteTodayScreen();
     loadProfileScreen();
@@ -235,6 +269,23 @@ async function setupSessionSelectDropdown() {
   select.innerHTML = optionsHtml;
 }
 
+// Parse duration text strings into absolute seconds (e.g. "15 min" -> 900, "60 seconds" -> 60)
+function parseDurationText(text) {
+  if (!text) return null;
+  let match = text.match(/(\d+)\s*(?:min|minute)/i);
+  if (match) return parseInt(match[1]) * 60;
+  match = text.match(/(\d+)\s*(?:s|sec|second)/i);
+  if (match) return parseInt(match[1]);
+  return null;
+}
+
+// Format seconds into MM:SS
+function formatTime(totalSeconds) {
+  const m = Math.floor(totalSeconds / 60);
+  const s = totalSeconds % 60;
+  return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+}
+
 // Load content onto Athlete dashboard
 async function loadAthleteTodayScreen() {
   if (state.currentUser.role !== "athlete") return;
@@ -252,10 +303,9 @@ async function loadAthleteTodayScreen() {
     badge.textContent = "Done";
     badge.style.backgroundColor = "rgba(16, 185, 129, 0.15)";
     badge.style.color = "var(--accent-green)";
+    badge.style.display = "inline-block";
   } else {
-    badge.textContent = "Start";
-    badge.style.backgroundColor = "rgba(6, 182, 212, 0.15)";
-    badge.style.color = "var(--accent-cyan)";
+    badge.style.display = "none";
   }
 
   const assigned = await db.getAssignedProgram(state.currentUser.id);
@@ -283,16 +333,40 @@ async function loadAthleteTodayScreen() {
 
         const drills = await db.getExercisesForSession(session.id);
         if (drills.length > 0) {
-          drillList.innerHTML = drills.map(d => `
-            <div class="drill-item">
-              <div class="drill-title">
-                <span>${d.name}</span>
-                <span style="font-size: 0.8rem; color: var(--accent-cyan); font-weight: 500;">${d.sets} sets</span>
+          drillList.innerHTML = drills.map(d => {
+            const timerSecs = parseDurationText(d.reps_or_duration);
+            let timerHtml = '';
+            
+            if (timerSecs !== null) {
+              timerHtml = `
+                <div class="timer-container" data-drill-id="${d.id}" data-seconds="${timerSecs}">
+                  <span class="timer-display">${formatTime(timerSecs)}</span>
+                  <button class="timer-btn timer-start-btn">Start</button>
+                  <button class="timer-btn timer-reset-btn" style="display: none;">Reset</button>
+                </div>
+              `;
+            }
+
+            return `
+              <div class="drill-item" id="drill-card-${d.id}">
+                <div class="drill-title">
+                  <span>${d.name}</span>
+                  <span style="font-size: 0.8rem; color: var(--accent-cyan); font-weight: 500;">${d.sets} sets</span>
+                </div>
+                <div class="drill-meta">Rep/Duration: ${d.reps_or_duration} | Rest: ${d.rest}</div>
+                ${d.notes ? `<div class="drill-meta" style="font-style: italic; color: var(--text-muted);">Note: ${d.notes}</div>` : ''}
+                
+                <div class="drill-actions">
+                  <div class="stepper-container" data-drill-id="${d.id}" data-drill-name="${d.name}" data-max-sets="${d.sets}">
+                    <button class="stepper-btn stepper-minus">&minus;</button>
+                    <span class="stepper-val">0 / ${d.sets} sets</span>
+                    <button class="stepper-btn stepper-plus">+</button>
+                  </div>
+                  ${timerHtml}
+                </div>
               </div>
-              <div class="drill-meta">Rep/Duration: ${d.reps_or_duration} | Rest: ${d.rest}</div>
-              ${d.notes ? `<div class="drill-meta" style="font-style: italic; color: var(--text-muted);">Note: ${d.notes}</div>` : ''}
-            </div>
-          `).join('');
+            `;
+          }).join('');
           drillContainer.style.display = "block";
         } else {
           drillContainer.style.display = "none";
@@ -306,6 +380,94 @@ async function loadAthleteTodayScreen() {
   objectiveEl.textContent = "Enjoy your recovery.";
   drillContainer.style.display = "none";
   logBtn.style.display = "none";
+}
+
+// Handle set-by-set steppers and background-resilient timers clicks
+function handleDrillActionsClick(e) {
+  const target = e.target;
+
+  // Handle Steppers
+  if (target.classList.contains("stepper-btn")) {
+    const container = target.closest(".stepper-container");
+    const drillId = container.dataset.drillId;
+    const max = parseInt(container.dataset.maxSets);
+    let val = state.drillCompletions[drillId] || 0;
+
+    if (target.classList.contains("stepper-plus")) {
+      if (val < max) val++;
+    } else if (target.classList.contains("stepper-minus")) {
+      if (val > 0) val--;
+    }
+
+    state.drillCompletions[drillId] = val;
+    container.querySelector(".stepper-val").textContent = `${val} / ${max} sets`;
+    return;
+  }
+
+  // Handle Timers (Start/Pause)
+  if (target.classList.contains("timer-start-btn")) {
+    const container = target.closest(".timer-container");
+    const drillId = container.dataset.drillId;
+    const originalSecs = parseInt(container.dataset.seconds);
+    
+    if (!state.activeTimers[drillId]) {
+      state.activeTimers[drillId] = {
+        intervalId: null,
+        remainingSeconds: originalSecs,
+        originalSeconds: originalSecs,
+        running: false
+      };
+    }
+
+    const timer = state.activeTimers[drillId];
+    const resetBtn = container.querySelector(".timer-reset-btn");
+
+    if (timer.running) {
+      // Pause
+      clearInterval(timer.intervalId);
+      timer.running = false;
+      target.textContent = "Start";
+    } else {
+      // Start
+      timer.running = true;
+      timer.startTime = Date.now();
+      timer.originalRemaining = timer.remainingSeconds;
+      target.textContent = "Pause";
+      resetBtn.style.display = "inline-block";
+
+      timer.intervalId = setInterval(() => {
+        const elapsed = Math.floor((Date.now() - timer.startTime) / 1000);
+        timer.remainingSeconds = Math.max(0, timer.originalRemaining - elapsed);
+        
+        container.querySelector(".timer-display").textContent = formatTime(timer.remainingSeconds);
+
+        if (timer.remainingSeconds <= 0) {
+          clearInterval(timer.intervalId);
+          timer.running = false;
+          target.textContent = "Start";
+          resetBtn.style.display = "none";
+          if (navigator.vibrate) navigator.vibrate([200, 100, 200]);
+        }
+      }, 200);
+    }
+    return;
+  }
+
+  // Handle Timers (Reset)
+  if (target.classList.contains("timer-reset-btn")) {
+    const container = target.closest(".timer-container");
+    const drillId = container.dataset.drillId;
+    const timer = state.activeTimers[drillId];
+
+    if (timer) {
+      clearInterval(timer.intervalId);
+      timer.running = false;
+      timer.remainingSeconds = timer.originalSeconds;
+      container.querySelector(".timer-display").textContent = formatTime(timer.originalSeconds);
+      container.querySelector(".timer-start-btn").textContent = "Start";
+      target.style.display = "none";
+    }
+  }
 }
 
 // Load Training Calendar View
@@ -422,6 +584,7 @@ async function handleCheckinSubmit(e) {
   badge.textContent = "Done";
   badge.style.backgroundColor = "rgba(16, 185, 129, 0.15)";
   badge.style.color = "var(--accent-green)";
+  badge.style.display = "inline-block";
 
   document.getElementById("weekly-checkin-form").reset();
   setupSliderIndicators();
@@ -506,16 +669,13 @@ async function loadAdminAthletes() {
     const logs = await db.getLogsForAthlete(athlete.id);
     const reviews = await db.getVideoReviewsForAthlete(athlete.id);
 
-    // Calculate Adherence rate (out of 3 seeded sessions in default program)
     const completedCount = logs.filter(l => l.status === "completed").length;
     const adherence = completedCount > 0 ? Math.round((completedCount / 3) * 100) : 0;
     
-    // Find latest pain / fatigue scores
     const latestLog = logs[logs.length - 1];
     const latestPain = latestLog ? latestLog.finger_pain : 0;
     const latestFatigue = latestLog ? latestLog.fatigue : 1;
 
-    // Check Red Flag indicators
     let hasRedFlags = false;
     let flagsList = [];
 
@@ -561,7 +721,6 @@ async function loadAdminAthletes() {
   }
   container.innerHTML = html;
 
-  // Bind Manage Access buttons
   container.querySelectorAll(".manage-access-trigger").forEach(btn => {
     btn.addEventListener("click", () => {
       openAccessManagement(btn.dataset.athleteId);
@@ -584,7 +743,6 @@ async function openAccessManagement(athleteId) {
     document.getElementById("access-notes").value = access.notes || '';
   }
 
-  // Display edit card
   document.getElementById("admin-access-card").style.display = "block";
   document.getElementById("admin-access-card").scrollIntoView({ behavior: 'smooth' });
 }
@@ -605,11 +763,7 @@ async function handleAdminAccessSubmit(e) {
   };
 
   await db.updateAccess(updatedAccess);
-
-  // Close card
   document.getElementById("admin-access-card").style.display = "none";
-  
-  // Refresh lists
   loadAdminAthletes();
 }
 
@@ -673,7 +827,6 @@ async function loadAdminReviewsQueue() {
   }
   container.innerHTML = html;
 
-  // Bind feedbacks forms submits
   container.querySelectorAll(".coach-feedback-form").forEach(form => {
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
@@ -807,13 +960,10 @@ function loadProfileScreen() {
 // Toggle Strava state and simulate activities fetch (mock Garmin/Apple Sync)
 async function handleStravaConnectionToggle() {
   if (state.currentUser.strava_connected) {
-    // Disconnect
     await db.disconnectStrava(state.currentUser.id);
   } else {
-    // Connect and simulate syncing Garmin/Apple workout via Strava
     await db.connectStrava(state.currentUser.id);
     
-    // Add mock synced log
     await db.addLog({
       athlete_id: state.currentUser.id,
       session_id: "session-w1-d2", // Active Recovery
@@ -827,7 +977,6 @@ async function handleStravaConnectionToggle() {
     });
   }
 
-  // Refresh profile user state
   state.currentUser = await db.getProfile(state.currentUser.id);
   loadProfileScreen();
   loadTrainingCalendar();
@@ -837,7 +986,6 @@ async function handleStravaConnectionToggle() {
 window.addEventListener("DOMContentLoaded", () => {
   initApp();
 
-  // Register Service Worker for PWA offline capability
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('./sw.js')
       .then(reg => console.log('ServiceWorker registered successfully:', reg.scope))
