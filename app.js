@@ -1966,7 +1966,7 @@ function loadWarmupStation() {
     state.warmup.timerVal = 0;
   }
  
-  timerDigits.textContent = formatTimerDigits(state.warmup.timerVal);
+  timerDigits.textContent = formatTime(state.warmup.timerVal);
 }
 
 // Timer control logic
@@ -1989,7 +1989,7 @@ function toggleWarmupTimer() {
     const tick = () => {
       if (state.warmup.timerVal > 0) {
         state.warmup.timerVal--;
-        document.getElementById("warmup-timer-digits").textContent = formatTimerDigits(state.warmup.timerVal);
+        document.getElementById("warmup-timer-digits").textContent = formatTime(state.warmup.timerVal);
       } else {
         // Timer alarm triggered
         clearInterval(state.warmup.timerInterval);
@@ -2021,7 +2021,7 @@ function toggleWarmupTimer() {
               document.getElementById("warmup-timer-label").textContent = "Rest Time";
             }
             
-            document.getElementById("warmup-timer-digits").textContent = formatTimerDigits(state.warmup.timerVal);
+            document.getElementById("warmup-timer-digits").textContent = formatTime(state.warmup.timerVal);
             
             state.warmup.timerRunning = true;
             state.warmup.timerInterval = setInterval(tick, 1000);
@@ -2043,7 +2043,7 @@ function toggleWarmupTimer() {
                 document.getElementById("warmup-timer-label").textContent = "Work Time";
               }
               
-              document.getElementById("warmup-timer-digits").textContent = formatTimerDigits(state.warmup.timerVal);
+              document.getElementById("warmup-timer-digits").textContent = formatTime(state.warmup.timerVal);
               
               state.warmup.timerRunning = true;
               state.warmup.timerInterval = setInterval(tick, 1000);
@@ -2083,7 +2083,7 @@ function resetWarmupTimer() {
     state.warmup.timerVal = station.duration || 0;
   }
 
-  document.getElementById("warmup-timer-digits").textContent = formatTimerDigits(state.warmup.timerVal);
+  document.getElementById("warmup-timer-digits").textContent = formatTime(state.warmup.timerVal);
   document.getElementById("warmup-timer-toggle").textContent = "Start";
   document.getElementById("warmup-timer-reset").style.display = "none";
 }
