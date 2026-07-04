@@ -373,6 +373,85 @@ function formatTime(totalSeconds) {
   return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
 }
 
+// Generate the HTML for a single timer container
+function renderTimerMarkup(timerId, originalSecs, label) {
+  let remainingSecs = originalSecs;
+  let startText = "Start";
+  let resetStyle = "display: none;";
+  
+  if (state.activeTimers[timerId]) {
+    const activeTimer = state.activeTimers[timerId];
+    remainingSecs = activeTimer.remainingSeconds;
+    if (activeTimer.running) {
+      startText = "Pause";
+      resetStyle = "display: inline-block;";
+    } else if (activeTimer.remainingSeconds < activeTimer.originalSeconds) {
+      resetStyle = "display: inline-block;";
+    }
+  }
+
+  return `
+    <div class="timer-container" data-drill-id="${timerId}" data-seconds="${originalSecs}" style="flex: 1; min-width: 120px; background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); padding: 6px; border-radius: var(--border-radius-sm); display: flex; flex-direction: column; align-items: center; gap: 4px;">
+      <span style="font-size: 0.6rem; color: var(--text-secondary); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">${label}</span>
+      <span class="timer-display" style="font-size: 1rem; font-weight: 700; color: var(--accent-cyan); font-family: monospace;">${formatTime(remainingSecs)}</span>
+      <div style="display: flex; gap: 4px; width: 100%;">
+        <button class="timer-btn timer-start-btn" style="flex: 1; padding: 2px 4px; font-size: 0.65rem;">${startText}</button>
+        <button class="timer-btn timer-reset-btn" style="flex: 1; padding: 2px 4px; font-size: 0.65rem; ${resetStyle}">Reset</button>
+      </div>
+    </div>
+  `;
+}
+
+// Parse text into individual sets/reps workouts for Tier 4
+function parseSubExercises(notes) {
+  if (!notes) return [];
+  const lines = notes.split('\n');
+  const subItems = [];
+  
+  lines.forEach((line, index) => {
+    let cleanLine = line.replace(/^[\*\-\s]+/, '').trim();
+    if (!cleanLine) return;
+    
+    let categoryHeader = "";
+    const headerMatch = cleanLine.match(/^\*\*([^*]+)\*\*:\s*(.*)/);
+    if (headerMatch) {
+      categoryHeader = headerMatch[1].trim();
+      cleanLine = headerMatch[2].trim();
+    }
+    
+    // Split exercises using period or semicolon separation (ignoring decimals)
+    const parts = cleanLine.split(/(?<=\D\.)\s+|(?<=;)\s+/);
+    parts.forEach((part, subIndex) => {
+      const text = part.trim();
+      if (!text) return;
+      
+      let sets = 1;
+      let repsOrDuration = "1 set";
+      
+      const setMatch = text.match(/(\d+)\s*sets?\s*[×x*]\s*([^.]+)/i);
+      if (setMatch) {
+        sets = parseInt(setMatch[1]);
+        repsOrDuration = setMatch[2].strip ? setMatch[2].strip() : setMatch[2].trim();
+      } else {
+        const durMatch = text.match(/(\d+)\s*(?:min|minute|sec|second|s)\b/i);
+        if (durMatch) {
+          repsOrDuration = text;
+        }
+      }
+      
+      subItems.push({
+        id: `sub-ex-${index}-${subIndex}`,
+        category: categoryHeader || "Exercise",
+        text: text,
+        sets: sets,
+        repsOrDuration: repsOrDuration
+      });
+    });
+  });
+  
+  return subItems;
+}
+
 // Load content onto Athlete dashboard
 async function loadAthleteTodayScreen() {
   if (state.currentUser.role !== "athlete") return;
@@ -479,32 +558,76 @@ async function loadAthleteTodayScreen() {
     const drills = await db.getExercisesForSession(session.id);
     if (drills.length > 0) {
       drillList.innerHTML = drills.map(d => {
-        const timerSecs = parseDurationText(d.rest);
         let timerHtml = '';
         
-        if (timerSecs !== null) {
-          let remainingSecs = timerSecs;
-          let startText = "Start";
-          let resetStyle = "display: none;";
-          
-          if (state.activeTimers[d.id]) {
-            const activeTimer = state.activeTimers[d.id];
-            remainingSecs = activeTimer.remainingSeconds;
-            if (activeTimer.running) {
-              startText = "Pause";
-              resetStyle = "display: inline-block;";
-            } else if (activeTimer.remainingSeconds < activeTimer.originalSeconds) {
-              resetStyle = "display: inline-block;";
-            }
-          }
-
+        if (d.category === "Tier 1") {
+          timerHtml = renderTimerMarkup(d.id + "-warmup", 600, "Warm-up Timer");
+        } else if (d.category === "Tier 2") {
+          const workSecs = parseDurationText(d.reps_or_duration) || 5400; // 90 min default
+          const restSecs = parseDurationText(d.rest) || 90; // 90s default
           timerHtml = `
-            <div class="timer-container" data-drill-id="${d.id}" data-seconds="${timerSecs}">
-              <span class="timer-display">${formatTime(remainingSecs)}</span>
-              <button class="timer-btn timer-start-btn">${startText}</button>
-              <button class="timer-btn timer-reset-btn" style="${resetStyle}">Reset</button>
+            <div style="display: flex; gap: 8px; margin-top: 6px; width: 100%; flex-wrap: wrap;">
+              ${renderTimerMarkup(d.id + "-work", workSecs, "Block Timer")}
+              ${renderTimerMarkup(d.id + "-rest", restSecs, "Rest Timer")}
             </div>
           `;
+        } else if (d.category === "Tier 3") {
+          const workSecs = parseDurationText(d.reps_or_duration) || 2400; // 40 min default
+          // Rest timer: 90s for Day 3, 60s for Day 1 and 5
+          const dayNumMatch = d.id.match(/-d(\d+)-/);
+          const dayNum = dayNumMatch ? parseInt(dayNumMatch[1]) : 1;
+          const restSecs = (dayNum === 3) ? 90 : 60;
+          timerHtml = `
+            <div style="display: flex; gap: 8px; margin-top: 6px; width: 100%; flex-wrap: wrap;">
+              ${renderTimerMarkup(d.id + "-work", workSecs, "Block Timer")}
+              ${renderTimerMarkup(d.id + "-rest", restSecs, "Rest Timer")}
+            </div>
+          `;
+        } else if (d.category !== "Tier 4") {
+          const timerSecs = parseDurationText(d.reps_or_duration);
+          if (timerSecs !== null) {
+            timerHtml = renderTimerMarkup(d.id, timerSecs, "Duration Timer");
+          }
+        }
+
+        let subCardsHtml = '';
+        if (d.category === "Tier 4") {
+          const subItems = parseSubExercises(d.notes);
+          if (subItems.length > 0) {
+            subCardsHtml = `
+              <div class="sub-drills-stack" style="margin-top: 10px; display: flex; flex-direction: column; gap: 8px; width: 100%;">
+                ${subItems.map((sub, idx) => {
+                  const subTimerSecs = parseDurationText(sub.repsOrDuration);
+                  let subTimerHtml = '';
+                  if (subTimerSecs !== null) {
+                    subTimerHtml = renderTimerMarkup(sub.id, subTimerSecs, "Duration");
+                  }
+                  
+                  return `
+                    <div class="sub-drill-card" style="background-color: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: var(--border-radius-sm); overflow: hidden;">
+                      <div class="sub-drill-header" data-sub-id="${sub.id}" style="cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 10px; background-color: rgba(255,255,255,0.02);">
+                        <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-primary); text-align: left; padding-right: 8px;">${sub.text}</span>
+                        <div style="display: flex; align-items: center; gap: 8px; flex-shrink: 0;">
+                          <span style="font-size: 0.75rem; color: var(--accent-cyan); font-weight: 500;">${sub.sets} sets</span>
+                          <span class="sub-chevron" style="font-size: 0.65rem; color: var(--text-muted);">▶</span>
+                        </div>
+                      </div>
+                      <div class="sub-drill-body" id="sub-body-${sub.id}" style="display: none; padding: 10px; border-top: 1px solid var(--border-color); background-color: var(--bg-primary);">
+                        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; width: 100%;">
+                          <div class="stepper-container" data-drill-id="${sub.id}" data-drill-name="${sub.text}" data-max-sets="${sub.sets}">
+                            <button class="stepper-btn stepper-minus" style="padding: 2px 8px; font-size: 0.75rem;">&minus;</button>
+                            <span class="stepper-val" style="font-size: 0.75rem;">0 / ${sub.sets} sets</span>
+                            <button class="stepper-btn stepper-plus" style="padding: 2px 8px; font-size: 0.75rem;">+</button>
+                          </div>
+                          ${subTimerHtml}
+                        </div>
+                      </div>
+                    </div>
+                  `;
+                }).join('')}
+              </div>
+            `;
+          }
         }
 
         return `
@@ -513,23 +636,42 @@ async function loadAthleteTodayScreen() {
               <span style="font-weight: 600;">${d.name}</span>
               <div style="display: flex; align-items: center; gap: 6px;">
                 <span class="badge" style="background-color: var(--bg-secondary); color: var(--accent-cyan); font-size: 0.65rem; font-weight: 600; padding: 2px 6px; border-radius: var(--border-radius-sm); border: 1px solid var(--border-color);">${d.category}</span>
-                <span style="font-size: 0.8rem; color: var(--text-secondary); font-weight: 500;">${d.sets} sets</span>
+                ${d.category !== "Tier 4" ? `<span style="font-size: 0.8rem; color: var(--text-secondary); font-weight: 500;">${d.sets} sets</span>` : ''}
               </div>
             </div>
-            <div class="drill-meta">Rep/Duration: ${d.reps_or_duration} | Rest: ${d.rest}</div>
-            ${d.notes ? `<div class="drill-meta" style="font-style: italic; color: var(--text-muted); white-space: pre-wrap;">Note: ${d.notes}</div>` : ''}
             
-            <div class="drill-actions">
-              <div class="stepper-container" data-drill-id="${d.id}" data-drill-name="${d.name}" data-max-sets="${d.sets}">
-                <button class="stepper-btn stepper-minus">&minus;</button>
-                <span class="stepper-val">0 / ${d.sets} sets</span>
-                <button class="stepper-btn stepper-plus">+</button>
+            ${d.category !== "Tier 4" ? `
+              <div class="drill-meta">Rep/Duration: ${d.reps_or_duration} | Rest: ${d.rest}</div>
+              ${d.notes ? `<div class="drill-meta" style="font-style: italic; color: var(--text-muted); white-space: pre-wrap;">Note: ${d.notes}</div>` : ''}
+              
+              <div class="drill-actions">
+                <div class="stepper-container" data-drill-id="${d.id}" data-drill-name="${d.name}" data-max-sets="${d.sets}">
+                  <button class="stepper-btn stepper-minus">&minus;</button>
+                  <span class="stepper-val">0 / ${d.sets} sets</span>
+                  <button class="stepper-btn stepper-plus">+</button>
+                </div>
+                ${timerHtml}
               </div>
-              ${timerHtml}
-            </div>
+            ` : subCardsHtml}
           </div>
         `;
       }).join('');
+
+      // Bind toggle handlers for Tier 4 sub-drills
+      drillList.querySelectorAll(".sub-drill-header").forEach(header => {
+        header.addEventListener("click", () => {
+          const subId = header.dataset.subId;
+          const body = document.getElementById(`sub-body-${subId}`);
+          const chevron = header.querySelector(".sub-chevron");
+          if (body.style.display === "none") {
+            body.style.display = "block";
+            chevron.textContent = "▼";
+          } else {
+            body.style.display = "none";
+            chevron.textContent = "▶";
+          }
+        });
+      });
     } else {
       drillList.innerHTML = '';
     }
