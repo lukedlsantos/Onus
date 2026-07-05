@@ -365,13 +365,23 @@
               </div>
               
               <!-- Station Countdown Timer display -->
-              <div id="warmup-timer-container" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; padding: 10px 0; background: rgba(0,0,0,0.15); border-radius: var(--border-radius-sm); border: 1px dashed rgba(255,255,255,0.05);">
-                <span id="warmup-timer-label" style="font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; font-weight: 600;">Work Time</span>
-                <span id="warmup-timer-digits" style="font-family: monospace; font-size: 2.2rem; font-weight: 700; color: var(--text-primary); letter-spacing: 2px; line-height: 1;">00:20</span>
+              <div id="warmup-timer-container" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; padding: 24px 10px; background: rgba(255,255,255,0.02); border-radius: var(--border-radius-md); border: 1px solid var(--border-color); position: relative; overflow: hidden; width: 100%; box-sizing: border-box;">
                 
-                <div style="display: flex; gap: 8px; margin-top: 6px;">
-                  <button id="warmup-timer-toggle" class="btn" style="padding: 4px 12px; font-size: 0.7rem; background: var(--bg-tertiary); color: var(--text-primary);">Start</button>
-                  <button id="warmup-timer-reset" class="btn" style="padding: 4px 12px; font-size: 0.7rem; background: none; color: var(--text-muted); border: 1px solid var(--border-color); display: none;">Reset</button>
+                <!-- Breathing Guidance Ring -->
+                <div id="breathing-circle-outer" style="width: 100px; height: 100px; border-radius: 50%; background: rgba(16, 185, 129, 0.05); border: 2px dashed rgba(16, 185, 129, 0.2); display: flex; align-items: center; justify-content: center; transition: all 1s ease-in-out;">
+                  <div id="breathing-circle-inner" style="width: 60px; height: 60px; border-radius: 50%; background: radial-gradient(circle, var(--accent-green) 0%, rgba(16, 185, 129, 0.4) 100%); transition: all 1s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 0 15px rgba(16, 185, 129, 0.3); display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                    <span id="warmup-timer-digits" style="font-family: monospace; font-size: 1.25rem; font-weight: 700; color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,0.5);">00:00</span>
+                  </div>
+                </div>
+
+                <div style="text-align: center; z-index: 2;">
+                  <span id="warmup-timer-label" style="font-size: 0.75rem; color: var(--accent-green); text-transform: uppercase; font-weight: 700; letter-spacing: 1px; display: block; margin-bottom: 2px;">Inhale</span>
+                  <span id="warmup-breathing-cue" style="font-size: 0.65rem; color: var(--text-secondary); font-style: italic; display: block;">Get ready</span>
+                </div>
+                
+                <div style="display: flex; gap: 8px; margin-top: 4px; z-index: 2;">
+                  <button id="warmup-timer-toggle" class="btn btn-primary" style="padding: 6px 16px; font-size: 0.75rem;">Start</button>
+                  <button id="warmup-timer-reset" class="btn" style="padding: 6px 16px; font-size: 0.75rem; background: none; color: var(--text-muted); border: 1px solid var(--border-color); display: none;">Reset</button>
                 </div>
               </div>
             </div>

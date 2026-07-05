@@ -1967,6 +1967,72 @@ function loadWarmupStation() {
   }
  
   timerDigits.textContent = formatTime(state.warmup.timerVal);
+  updateBreathingVisual(timerLabel.textContent);
+}
+
+// Play a soft meditative bell chime / ding (528Hz Solfeggio frequency with smooth decay)
+function playSoftDing() {
+  try {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    
+    osc.type = "sine";
+    osc.frequency.setValueAtTime(528, ctx.currentTime); // Solfeggio 528Hz (Calming Transformation frequency)
+    
+    gain.gain.setValueAtTime(0, ctx.currentTime);
+    gain.gain.linearRampToValueAtTime(0.3, ctx.currentTime + 0.03); // Quick clean strike
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 1.2); // Smooth trailing ring
+    
+    osc.start(ctx.currentTime);
+    osc.stop(ctx.currentTime + 1.2);
+  } catch (e) {
+    console.warn("AudioContext failed to start soft ding:", e);
+  }
+}
+
+// Update the visual breathing guide bubble states (Inhale / Exhale / Hold)
+function updateBreathingVisual(label) {
+  const outer = document.getElementById("breathing-circle-outer");
+  const inner = document.getElementById("breathing-circle-inner");
+  const cue = document.getElementById("warmup-breathing-cue");
+  const labelEl = document.getElementById("warmup-timer-label");
+  
+  if (!outer || !inner) return;
+  
+  if (label === "Inhale" || label === "Double Inhale") {
+    inner.style.transform = "scale(1.35)";
+    inner.style.background = "radial-gradient(circle, var(--accent-green) 0%, rgba(16, 185, 129, 0.4) 100%)";
+    inner.style.boxShadow = "0 0 15px rgba(16, 185, 129, 0.4)";
+    outer.style.borderColor = "var(--accent-green)";
+    labelEl.style.color = "var(--accent-green)";
+    cue.textContent = label === "Inhale" ? "Fill your lungs deeply" : "Sniff twice rapidly!";
+  } else if (label === "Exhale" || label === "Slow Exhale") {
+    inner.style.transform = "scale(0.85)";
+    inner.style.background = "radial-gradient(circle, var(--accent-green) 0%, rgba(16, 185, 129, 0.2) 100%)";
+    inner.style.boxShadow = "0 0 10px rgba(16, 185, 129, 0.2)";
+    outer.style.borderColor = "rgba(16, 185, 129, 0.2)";
+    labelEl.style.color = "var(--accent-green)";
+    cue.textContent = label === "Exhale" ? "Let the air fall out" : "Sigh out slowly through pursed lips";
+  } else if (label === "Breath Hold" || label === "Nasal Breathe") {
+    inner.style.transform = "scale(1.0)";
+    inner.style.background = "radial-gradient(circle, var(--accent-cyan) 0%, rgba(6, 182, 212, 0.4) 100%)";
+    inner.style.boxShadow = "0 0 15px rgba(6, 182, 212, 0.4)";
+    outer.style.borderColor = "var(--accent-cyan)";
+    labelEl.style.color = "var(--accent-cyan)";
+    cue.textContent = label === "Breath Hold" ? "Hold still, relax your mind" : "Breathe light, calm nasal flow";
+  } else {
+    // Normal timer
+    inner.style.transform = "scale(1.0)";
+    inner.style.background = "radial-gradient(circle, var(--accent-cyan) 0%, rgba(6, 182, 212, 0.4) 100%)";
+    inner.style.boxShadow = "0 0 10px rgba(6, 182, 212, 0.2)";
+    outer.style.borderColor = "var(--border-color)";
+    labelEl.style.color = "var(--text-primary)";
+    cue.textContent = "Maintain focus";
+  }
 }
 
 // Timer control logic
@@ -1990,14 +2056,22 @@ function toggleWarmupTimer() {
       if (state.warmup.timerVal > 0) {
         state.warmup.timerVal--;
         document.getElementById("warmup-timer-digits").textContent = formatTime(state.warmup.timerVal);
+        
+        // Pulse bubble slightly on each tick to feel alive
+        const inner = document.getElementById("breathing-circle-inner");
+        if (inner && state.warmup.activeType === 'breathing') {
+          inner.style.opacity = "0.9";
+          setTimeout(() => { inner.style.opacity = "1"; }, 150);
+        }
       } else {
         // Timer alarm triggered
         clearInterval(state.warmup.timerInterval);
         state.warmup.timerInterval = null;
         state.warmup.timerRunning = false;
         
-        playAlarmSound();
-        if (navigator.vibrate) navigator.vibrate([300, 150, 300]);
+        // Play relaxing ding and pulse haptics on transitions
+        playSoftDing();
+        if (navigator.vibrate) navigator.vibrate(100); // Gentle 100ms haptic tap
 
         const routine = WARMUP_ROUTINES[state.warmup.activeType];
         const station = routine.stations[state.warmup.activeStationIdx];
@@ -2012,16 +2086,15 @@ function toggleWarmupTimer() {
             state.warmup.timerVal = station.rest;
             
             // Set label
+            let nextLabel = "Rest Time";
             if (state.warmup.activeType === 'breathing') {
-              if (station.type === 'coherent') document.getElementById("warmup-timer-label").textContent = "Exhale";
-              else if (station.type === 'sigh') document.getElementById("warmup-timer-label").textContent = "Slow Exhale";
-              else if (station.type === 'retention') document.getElementById("warmup-timer-label").textContent = "Breath Hold";
-              else document.getElementById("warmup-timer-label").textContent = "Rest Time";
-            } else {
-              document.getElementById("warmup-timer-label").textContent = "Rest Time";
+              if (station.type === 'coherent') nextLabel = "Exhale";
+              else if (station.type === 'sigh') nextLabel = "Slow Exhale";
+              else if (station.type === 'retention') nextLabel = "Breath Hold";
             }
             
-            document.getElementById("warmup-timer-digits").textContent = formatTime(state.warmup.timerVal);
+            document.getElementById("warmup-timer-label").textContent = nextLabel;
+            updateBreathingVisual(nextLabel);
             
             state.warmup.timerRunning = true;
             state.warmup.timerInterval = setInterval(tick, 1000);
@@ -2034,16 +2107,15 @@ function toggleWarmupTimer() {
               state.warmup.tabataPhase = 'work';
               state.warmup.timerVal = station.work;
               
+              let nextLabel = "Work Time";
               if (state.warmup.activeType === 'breathing') {
-                if (station.type === 'coherent') document.getElementById("warmup-timer-label").textContent = "Inhale";
-                else if (station.type === 'sigh') document.getElementById("warmup-timer-label").textContent = "Double Inhale";
-                else if (station.type === 'retention') document.getElementById("warmup-timer-label").textContent = "Nasal Breathe";
-                else document.getElementById("warmup-timer-label").textContent = "Work Time";
-              } else {
-                document.getElementById("warmup-timer-label").textContent = "Work Time";
+                if (station.type === 'coherent') nextLabel = "Inhale";
+                else if (station.type === 'sigh') nextLabel = "Double Inhale";
+                else if (station.type === 'retention') nextLabel = "Nasal Breathe";
               }
               
-              document.getElementById("warmup-timer-digits").textContent = formatTime(state.warmup.timerVal);
+              document.getElementById("warmup-timer-label").textContent = nextLabel;
+              updateBreathingVisual(nextLabel);
               
               state.warmup.timerRunning = true;
               state.warmup.timerInterval = setInterval(tick, 1000);
@@ -2075,12 +2147,17 @@ function resetWarmupTimer() {
 
   if (station.work && station.rest) {
     state.warmup.timerVal = station.work;
-    if (station.type === 'coherent') document.getElementById("warmup-timer-label").textContent = "Inhale";
-    else if (station.type === 'sigh') document.getElementById("warmup-timer-label").textContent = "Double Inhale";
-    else if (station.type === 'retention') document.getElementById("warmup-timer-label").textContent = "Nasal Breathe";
-    else document.getElementById("warmup-timer-label").textContent = "Work Time";
+    let nextLabel = "Work Time";
+    if (state.warmup.activeType === 'breathing') {
+      if (station.type === 'coherent') nextLabel = "Inhale";
+      else if (station.type === 'sigh') nextLabel = "Double Inhale";
+      else if (station.type === 'retention') nextLabel = "Nasal Breathe";
+    }
+    document.getElementById("warmup-timer-label").textContent = nextLabel;
+    updateBreathingVisual(nextLabel);
   } else {
     state.warmup.timerVal = station.duration || 0;
+    updateBreathingVisual("Timer");
   }
 
   document.getElementById("warmup-timer-digits").textContent = formatTime(state.warmup.timerVal);
