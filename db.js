@@ -257,7 +257,7 @@ function generateWorkouts() {
               { name: "Warm-up & Prep", category: "Warm-up & Prep", sets: 1, reps_or_duration: "10 Mins", intensity: "RPE 6", rest: "None", notes: "Standard Prep Container + Tindeq screening." },
               { name: "Low-Intensity Volume Accrual & Mileage", category: "Core Driver", sets: 12, reps_or_duration: "12-15 problems", intensity: "RPE 6", rest: "2 mins", notes: isDeload ? "Core Driver: Cut volume by 50%." : "Core Driver: Clear 12-15 easy vertical/slab grade problems. Rest 2 mins." },
               { name: "Eccentric Down-Climbing", category: "Progress Hook", sets: 1, reps_or_duration: "1 set", intensity: "RPE 6", rest: "Self-paced", notes: "Progress Hook: Eccentric Down-Climbing. Climb up a low-tier problem and completely down-climb using identical foot coordinates." },
-              { name: "Postural Realignment & Scapular Release", category: "Care & Restoration", sets: 1, reps_or_duration: "1 set", intensity: "RPE 6", rest: "Self-paced", notes: "Postural Realignment & Scapular Release: Cat & Camel, Spine Rolls, passive overhead Hang Right holds." }
+              { name: "Postural Realignment & Scapular Release", category: "Care & Restoration", sets: 1, reps_or_duration: "1 set", intensity: "RPE 6", rest: "Self-paced", notes: "Postural Realignment & Scapular Release:\n2 sets x 10 reps Cat & Camel\n2 sets x 10 reps Spine Rolls\n2 sets x 30s passive overhead Hang Right holds" }
             ];
           } else if (phaseNum === 2) {
             title = "Modern Dynamic Coordination Volumes";
@@ -414,7 +414,7 @@ const DEFAULT_FAQS = [
 
 // Helper to initialize database
 function initDB() {
-  const CURRENT_VERSION = "3.0";
+  const CURRENT_VERSION = "3.1";
   const storedVersion = localStorage.getItem("onus_db_version");
   if (storedVersion !== CURRENT_VERSION) {
     // Clear all onus-related localStorage entries to force clean re-seeding

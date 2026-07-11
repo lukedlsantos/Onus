@@ -77,6 +77,13 @@ async function initApp() {
   document.getElementById("switch-role-btn").addEventListener("click", handleRoleSwitchToggle);
   setupSliderIndicators();
 
+  const backToCalendarBtn = document.getElementById("back-to-calendar-btn");
+  if (backToCalendarBtn) {
+    backToCalendarBtn.addEventListener("click", () => {
+      switchTab("calendar");
+    });
+  }
+
   document.getElementById("session-log-form").addEventListener("submit", handleLogSubmit);
   document.getElementById("weekly-checkin-form").addEventListener("submit", handleCheckinSubmit);
   document.getElementById("video-review-form").addEventListener("submit", handleVideoReviewSubmit);
@@ -609,6 +616,8 @@ async function loadAthleteTodayScreen() {
     objectiveEl.style.display = "none";
     drillContainer.style.display = "none";
     logBtn.style.display = "none";
+    const backBtn = document.getElementById("back-to-calendar-btn");
+    if (backBtn) backBtn.style.display = "none";
     return;
   }
 
@@ -671,6 +680,9 @@ async function loadAthleteTodayScreen() {
     state.todaySession = session;
     titleEl.textContent = `${session.day_label}: ${session.title}`;
     objectiveEl.style.display = "none"; // Do not show objective/description anymore
+
+    const backBtn = document.getElementById("back-to-calendar-btn");
+    if (backBtn) backBtn.style.display = "inline-flex";
 
     // Toggle view components based on started state
     const isStarted = state.startedSessionId === session.id;
@@ -932,6 +944,8 @@ async function loadAthleteTodayScreen() {
   document.getElementById("start-session-btn").style.display = "none";
   drillContainer.style.display = "none";
   logBtn.style.display = "none";
+  const backBtn = document.getElementById("back-to-calendar-btn");
+  if (backBtn) backBtn.style.display = "inline-flex";
 }
 
 // Handle set-by-set steppers and background-resilient timers clicks
