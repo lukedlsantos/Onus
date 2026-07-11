@@ -41,15 +41,15 @@ To automate the training block progression via the codebase, adjust the global v
 ## WEEK 1: BASELINE PROFILE BLOCK
 
 ### Week 1 - Day 1: High-Neural / Dynamic Power Board (3 Hours)
-*   **Tier 1: Warm-Up & Prep [40 Mins]:** Standard Prep Container with neural screening.
-*   **Tier 2: Core Driver — Explosive Board & Coordination Power [90 Mins]:**
+*   **Warm-Up & Prep [40 Mins]:** Standard Prep Container with neural screening.
+*   **Core Driver: Explosive Board & Coordination Power [90 Mins]:**
     *   *Protocol:* High-velocity coordination jumps, running dynos, and dynamic deadpoint sequences on system board ($30\text{–}45^\circ$).
     *   *Execution:* Complete 8 distinct dynamic board climbs. Focus on explosive launches from the pelvic engine and straight-arm skeletal stacking on catch.
     *   *Pacing:* Rest 3.5 minutes between attempts to preserve high neural drive and velocity.
-*   **Tier 3: Progress Hook — Force Ceiling Defense & Max Pull-ups [40 Mins]:**
+*   **Progress Hook: Force Ceiling Defense & Max Pull-ups [40 Mins]:**
     *   *Protocol:* Maintain absolute maximum force capability.
     *   *Execution:* 2 high-intensity recruitment pulls against Tindeq gauge at 90% MVC. Rest 3 mins. Follow with weighted pull-ups (3 sets $\times$ 5 reps at heavy load).
-*   **Tier 4: Chiba Tore Core & Ankle Springs [10 Mins]:**
+*   **Care & Restoration: Chiba Tore Core & Ankle Springs [10 Mins]:**
     *   *Execution:* 2 sets $\times$ 10 reps Supine Hand-to-Toe Alternating Touch and 2 sets $\times$ 30 seconds Weighted Pogo Jumps (ankle compliance for sloper smear traction).
 
 ### Week 1 - Day 2: Physical Therapy Core & Recovery (2 Hours)
@@ -60,15 +60,15 @@ To automate the training block progression via the codebase, adjust the global v
     *   *Exercises:* Thoracic Extensions over foam roller (5 Mins), sleeper stretch, prone Y-T-W-L rises, and Lat/shoulder capsule flossing.
 
 ### Week 1 - Day 3: Fingerboard Structural & Gym Power/Plyos (3 Hours)
-*   **Tier 1: Warm-Up & Prep [40 Mins]:** Standard Prep Container with neural screening.
-*   **Tier 2: Core Driver — Fingerboard Recruitment & Campus Basics [90 Mins]:**
+*   **Warm-Up & Prep [40 Mins]:** Standard Prep Container with neural screening.
+*   **Core Driver: Fingerboard Recruitment & Campus Basics [90 Mins]:**
     *   *Protocol:* High Rate of Force Development (RFD) recruitment.
     *   *Execution:* Perform 5 reps of 7-second active half-crimp curls against force gauge at 90% MVC. Campus board hand-swaps or submaximal rung bumps (3 sets $\times$ 6 reps, RPE 9).
     *   *Constraints:* Rest 4 minutes between sets.
-*   **Tier 3: Progress Hook — Compound Strength Retention [40 Mins]:**
+*   **Progress Hook: Compound Strength Retention [40 Mins]:**
     *   *Protocol:* Force maintenance.
     *   *Execution:* 3 sets $\times$ 5 reps of heavy dumbbell overhead press, heavy goblet squats, and cable face-pulls.
-*   **Tier 4: Antagonist Balance & Plyo [10 Mins]:**
+*   **Care & Restoration: Antagonist Balance & Plyo [10 Mins]:**
     *   *Execution:* Forearm rolling, extensor bands, and **Depth Jumps to Max Vertical Box Jumps** (3 sets $\times$ 5 reps; focus on quick floor rebound).
 
 ### Week 1 - Day 4: Asynchronous Recovery Selector
@@ -76,15 +76,15 @@ To automate the training block progression via the codebase, adjust the global v
 *   **Option B (Passive Rest):** Complete off-load. Zero physical stress to maximize skin repair and clear finger pulley inflammation.
 
 ### Week 1 - Day 5: Speed & Contact Bouldering (3 Hours)
-*   **Tier 1: Warm-Up & Prep [40 Mins]:** Standard Prep Container with neural screening.
-*   **Tier 2: Core Driver — Speed & Contact Bouldering [90 Mins]:**
+*   **Warm-Up & Prep [40 Mins]:** Standard Prep Container with neural screening.
+*   **Core Driver: Speed & Contact Bouldering [90 Mins]:**
     *   *Protocol:* Speed-centric coordination moves and bouldering volume.
     *   *Execution:* Complete 10 problems focusing on dynamic coordinate feet placement, running starts (parkour), and the "Tomoa Skip" foot bypassing sequences.
     *   *Constraints:* Rest exactly 3 minutes between attempts.
-*   **Tier 3: Progress Hook — Under-Pump Coordination repeats [40 Mins]:**
+*   **Progress Hook: Under-Pump Coordination repeats [40 Mins]:**
     *   *Protocol:* Technical accuracy under metabolic fatigue.
     *   *Execution:* Complete 8 flash-grade problems on overhanging terrain ($15\text{–}30^\circ$). Maintain a flush pelvis to shrink handhold moment arms.
-*   **Tier 4: Antagonist Decompression [10 Mins]:**
+*   **Care & Restoration: Antagonist Decompression [10 Mins]:**
     *   *Execution:* Wrist extensor bands, pec minor massage with tennis ball, and passive centrated "Hang Right" shoulder hangs.
 
 ### Week 1 - Day 6: Climbing-Specific PT Gym Session (90 Mins)
@@ -104,39 +104,39 @@ To automate the training block progression via the codebase, adjust the global v
 ## WEEK 2: ACCUMULATION BLOCK
 
 ### Week 2 - Day 1: High-Neural / Dynamic Power Board (3 Hours)
-*   **Tier 1: Warm-Up & Prep [40 Mins]:** Standard Prep Container. Priming edge decreased to 18mm.
-*   **Tier 2: Core Driver — Explosive Board & Coordination Power [90 Mins]:**
+*   **Warm-Up & Prep [40 Mins]:** Standard Prep Container. Priming edge decreased to 18mm.
+*   **Core Driver: Explosive Board & Coordination Power [90 Mins]:**
     *   *Execution:* Complete 10 distinct dynamic board climbs. Focus on hip launch and straight-arm catches.
     *   *Pacing:* Rest 3 minutes between attempts.
-*   **Tier 3: Progress Hook — Force Ceiling Defense & Max Pull-ups [40 Mins]:**
+*   **Progress Hook: Force Ceiling Defense & Max Pull-ups [40 Mins]:**
     *   *Execution:* 2 high-intensity recruitment pulls at 90% MVC. Follow with weighted pull-ups (4 sets $\times$ 5 reps).
-*   **Tier 4: Chiba Tore Core & Ankle Springs [10 Mins]:**
+*   **Care & Restoration: Chiba Tore Core & Ankle Springs [10 Mins]:**
     *   *Execution:* 3 sets $\times$ 10 reps Supine Hand-to-Toe Alternating Touch and 3 sets $\times$ 30 seconds Weighted Pogo Jumps.
 
 ### Week 2 - Day 2: Physical Therapy Core & Recovery (2 Hours)
 *   *Exercises:* Same as Week 1 Day 2, incrementing plank holds to 50s.
 
 ### Week 2 - Day 3: Fingerboard Structural & Gym Power/Plyos (3 Hours)
-*   **Tier 1: Warm-Up & Prep [40 Mins]:** Standard Prep Container.
-*   **Tier 2: Core Driver — Fingerboard Recruitment & Campus Basics [90 Mins]:**
+*   **Warm-Up & Prep [40 Mins]:** Standard Prep Container.
+*   **Core Driver: Fingerboard Recruitment & Campus Basics [90 Mins]:**
     *   *Execution:* Perform 5 reps of 7-second active half-crimp pulls at 90% MVC. Campus board hand-swaps or bumps (4 sets $\times$ 6 reps).
     *   *Constraints:* Rest 4 minutes between sets.
-*   **Tier 3: Progress Hook — Compound Strength Retention [40 Mins]:**
+*   **Progress Hook: Compound Strength Retention [40 Mins]:**
     *   *Execution:* 3 sets $\times$ 5 reps of dumbbell overhead press, goblet squats, and face-pulls.
-*   **Tier 4: Antagonist Balance & Plyo [10 Mins]:**
+*   **Care & Restoration: Antagonist Balance & Plyo [10 Mins]:**
     *   *Execution:* Forearm rolling, extensor bands, and **Depth Jumps to Max Vertical Box Jumps** (3 sets $\times$ 5 reps).
 
 ### Week 2 - Day 4: Asynchronous Recovery Selector
 *   Same as Week 1 Day 4.
 
 ### Week 2 - Day 5: Speed & Contact Bouldering (3 Hours)
-*   **Tier 1: Warm-Up & Prep [40 Mins]:** Standard Prep Container.
-*   **Tier 2: Core Driver — Speed & Contact Bouldering [90 Mins]:**
+*   **Warm-Up & Prep [40 Mins]:** Standard Prep Container.
+*   **Core Driver: Speed & Contact Bouldering [90 Mins]:**
     *   *Execution:* Complete 12 coordination dynos and speed problems.
     *   *Constraints:* Rest 3 minutes between attempts.
-*   **Tier 3: Progress Hook — Under-Pump Coordination repeats [40 Mins]:**
+*   **Progress Hook: Under-Pump Coordination repeats [40 Mins]:**
     *   *Execution:* Complete 8 flash problems on overhanging terrain ($15\text{–}30^\circ$). Pelvis flush.
-*   **Tier 4: Antagonist Decompression [10 Mins]:**
+*   **Care & Restoration: Antagonist Decompression [10 Mins]:**
     *   *Execution:* Wrist extensor bands, pec minor ball release, and passive shoulder hangs.
 
 ### Week 2 - Day 6: Climbing-Specific PT Gym Session (90 Mins)
@@ -150,39 +150,39 @@ To automate the training block progression via the codebase, adjust the global v
 ## WEEK 3: PEAK STRAIN MATRIX BLOCK
 
 ### Week 3 - Day 1: High-Neural / Dynamic Power Board (3 Hours)
-*   **Tier 1: Warm-Up & Prep [40 Mins]:** Standard Prep Container. Priming edge decreased to 15mm.
-*   **Tier 2: Core Driver — Explosive Board & Coordination Power [90 Mins]:**
+*   **Warm-Up & Prep [40 Mins]:** Standard Prep Container. Priming edge decreased to 15mm.
+*   **Core Driver: Explosive Board & Coordination Power [90 Mins]:**
     *   *Execution:* Complete 12 distinct dynamic board climbs. Pelvic engine drive, catching grips with locked shoulder anchors.
     *   *Pacing:* Rest 3 minutes between attempts.
-*   **Tier 3: Progress Hook — Force Ceiling Defense & Max Pull-ups [40 Mins]:**
+*   **Progress Hook: Force Ceiling Defense & Max Pull-ups [40 Mins]:**
     *   *Execution:* 2 high-intensity recruitment pulls at 90% MVC. Follow with weighted pull-ups (4 sets $\times$ 5 reps, peak load).
-*   **Tier 4: Chiba Tore Core & Ankle Springs [10 Mins]:**
+*   **Care & Restoration: Chiba Tore Core & Ankle Springs [10 Mins]:**
     *   *Execution:* 3 sets $\times$ 10 reps Supine Hand-to-Toe Alternating Touch and 3 sets $\times$ 30 seconds Weighted Pogo Jumps.
 
 ### Week 3 - Day 2: Physical Therapy Core & Recovery (2 Hours)
 *   *Exercises:* Same as Week 1 Day 2, incrementing plank holds to 60s.
 
 ### Week 3 - Day 3: Fingerboard Structural & Gym Power/Plyos (3 Hours)
-*   **Tier 1: Warm-Up & Prep [40 Mins]:** Standard Prep Container.
-*   **Tier 2: Core Driver — Fingerboard Recruitment & Campus Basics [90 Mins]:**
+*   **Warm-Up & Prep [40 Mins]:** Standard Prep Container.
+*   **Core Driver: Fingerboard Recruitment & Campus Basics [90 Mins]:**
     *   *Execution:* Perform 5 reps of 7-second active half-crimp pulls at 90% MVC. Campus board hand-swaps or bumps (4 sets $\times$ 8 reps, peak rung bumps).
     *   *Constraints:* Rest 4 minutes between sets.
-*   **Tier 3: Progress Hook — Compound Strength Retention [40 Mins]:**
+*   **Progress Hook: Compound Strength Retention [40 Mins]:**
     *   *Execution:* 3 sets $\times$ 5 reps of dumbbell overhead press, goblet squats, and face-pulls.
-*   **Tier 4: Antagonist Balance & Plyo [10 Mins]:**
+*   **Care & Restoration: Antagonist Balance & Plyo [10 Mins]:**
     *   *Execution:* Forearm rolling, extensor bands, and **Depth Jumps to Max Vertical Box Jumps** (3 sets $\times$ 5 reps).
 
 ### Week 3 - Day 4: Asynchronous Recovery Selector
 *   Same as Week 1 Day 4.
 
 ### Week 3 - Day 5: Speed & Contact Bouldering (3 Hours)
-*   **Tier 1: Warm-Up & Prep [40 Mins]:** Standard Prep Container.
-*   **Tier 2: Core Driver — Speed & Contact Bouldering [90 Mins]:**
+*   **Warm-Up & Prep [40 Mins]:** Standard Prep Container.
+*   **Core Driver: Speed & Contact Bouldering [90 Mins]:**
     *   *Execution:* Complete 14 coordination dynos and speed problems.
     *   *Constraints:* Rest 3 minutes between attempts.
-*   **Tier 3: Progress Hook — Under-Pump Coordination repeats [40 Mins]:**
+*   **Progress Hook: Under-Pump Coordination repeats [40 Mins]:**
     *   *Execution:* Complete 10 flash problems on overhanging terrain ($15\text{–}30^\circ$). Pelvis flush.
-*   **Tier 4: Antagonist Decompression [10 Mins]:**
+*   **Care & Restoration: Antagonist Decompression [10 Mins]:**
     *   *Execution:* Wrist extensor bands, pec minor ball release, and passive shoulder hangs.
 
 ### Week 3 - Day 6: Climbing-Specific PT Gym Session (90 Mins)
@@ -196,37 +196,37 @@ To automate the training block progression via the codebase, adjust the global v
 ## WEEK 4: AUTOMATED DELOAD WINDOW
 
 ### Week 4 - Day 1: Low-Neural / Active Recovery Flush (3 Hours)
-*   **Tier 1: Warm-Up & Prep [40 Mins]:** Prep container using light, slow patterns. Fingerboard limited to zero-load passive hanging.
-*   **Tier 2: Core Driver — Low-Intensity Active Recovery [90 Mins]:**
+*   **Warm-Up & Prep [40 Mins]:** Prep container using light, slow patterns. Fingerboard limited to zero-load passive hanging.
+*   **Core Driver: Low-Intensity Active Recovery [90 Mins]:**
     *   *Execution:* Complete exactly 10 problems on simple vertical faces or slabs. Avoid crimps, edges, or dynamic lunges.
     *   *Constraints:* Rest 3 minutes between completions to flush joint inflammation.
-*   **Tier 3: Progress Hook — Mobility Regeneration Track [40 Mins]:**
+*   **Progress Hook: Mobility Regeneration Track [40 Mins]:**
     *   *Execution:* Climb easy paths focusing on high-steps, deep drop-knees, and pelvic proximity.
-*   **Tier 4: Gentle Posture Care [10 Mins]:**
+*   **Care & Restoration: Gentle Posture Care [10 Mins]:**
     *   *Execution:* 2 sets of: push-ups (8 reps), bodyweight dips (5 reps), passive deadhangs (30s).
 
 ### Week 4 - Day 2: Deep Mobility & Parasympathetic Sync (2 Hours)
 *   *Exercises:* 2 sets slow bird-dogs, deadbugs, and low-load standing cable presses.
 
 ### Week 4 - Day 3: Structural Maintenance & Joint Off-Load (3 Hours)
-*   **Tier 1: Warm-Up & Prep [40 Mins]:** Deload prep container.
-*   **Tier 2: Core Driver — Reduced Density Work [90 Mins]:**
+*   **Warm-Up & Prep [40 Mins]:** Deload prep container.
+*   **Core Driver: Reduced Density Work [90 Mins]:**
     *   *Execution:* Complete 2 style blocks containing 3 easy vertical problems. Rest 4 minutes.
-*   **Tier 3: Progress Hook — Joint Articulation & Alignment [40 Mins]:**
+*   **Progress Hook: Joint Articulation & Alignment [40 Mins]:**
     *   *Execution:* Single-leg balance stands, quad stretches, passive shoulder circles, and wall slides.
-*   **Tier 4: Light Antagonist Care [10 Mins]:**
+*   **Care & Restoration: Light Antagonist Care [10 Mins]:**
     *   *Execution:* Unloaded wrist circles and forearm foam rolling.
 
 ### Week 4 - Day 4: Absolute Rest Day
 *   *Protocol:* Complete structural reset. No active recovery.
 
 ### Week 4 - Day 5: Low-Volume Fluidity Check (3 Hours)
-*   **Tier 1: Warm-Up & Prep [40 Mins]:** Deload prep container.
-*   **Tier 2: Core Driver — Technical Coordination Clearance [90 Mins]:**
+*   **Warm-Up & Prep [40 Mins]:** Deload prep container.
+*   **Core Driver: Technical Coordination Clearance [90 Mins]:**
     *   *Execution:* Perform 5 low-grade technical climbs. Zero hand readjustments.
-*   **Tier 3: Progress Hook — Technical Visualization Check [40 Mins]:**
+*   **Progress Hook: Technical Visualization Check [40 Mins]:**
     *   *Execution:* Traverse low-angle terrain, focus on straight-arm skeletal hanging postures.
-*   **Tier 4: Structural Care [10 Mins]:**
+*   **Care & Restoration: Structural Care [10 Mins]:**
     *   *Execution:* Wrist extensor bands and chest releases.
 
 ### Week 4 - Day 6: Restorative Full Body PT Gym Session (90 Mins)

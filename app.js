@@ -689,9 +689,9 @@ async function loadAthleteTodayScreen() {
       drillList.innerHTML = drills.map(d => {
         let timerHtml = '';
         
-        if (d.category === "Tier 1") {
+        if (d.category === "Warm-up & Prep") {
           timerHtml = renderTimerMarkup(d.id + "-warmup", 600, "Warm-up Timer");
-        } else if (d.category === "Tier 2") {
+        } else if (d.category === "Core Driver") {
           const workSecs = parseDurationText(d.reps_or_duration) || 5400; // 90 min default
           const restSecs = parseDurationText(d.rest) || 90; // 90s default
           timerHtml = `
@@ -700,7 +700,7 @@ async function loadAthleteTodayScreen() {
               ${renderTimerMarkup(d.id + "-rest", restSecs, "Rest Timer")}
             </div>
           `;
-        } else if (d.category === "Tier 3") {
+        } else if (d.category === "Progress Hook") {
           const workSecs = parseDurationText(d.reps_or_duration) || 2400; // 40 min default
           const dayNumMatch = d.id.match(/-d(\d+)-/);
           const dayNum = dayNumMatch ? parseInt(dayNumMatch[1]) : 1;
@@ -711,7 +711,7 @@ async function loadAthleteTodayScreen() {
               ${renderTimerMarkup(d.id + "-rest", restSecs, "Rest Timer")}
             </div>
           `;
-        } else if (d.category !== "Tier 4") {
+        } else if (d.category !== "Care & Restoration") {
           const timerSecs = parseDurationText(d.reps_or_duration);
           if (timerSecs !== null) {
             timerHtml = renderTimerMarkup(d.id, timerSecs, "Duration Timer");
@@ -726,7 +726,7 @@ async function loadAthleteTodayScreen() {
 
         const subItems = parseSubExercises(d.notes, d.id);
         const isWorkoutContainer = subItems.length > 0 && (
-          d.category === "Tier 4" || 
+          d.category === "Care & Restoration" || 
           subItems.some(sub => sub.sets > 1 || sub.repsOrDuration !== "1 set")
         );
 
@@ -1153,7 +1153,7 @@ async function submitQuickLog() {
   for (const d of sessionDrills) {
     const subItems = parseSubExercises(d.notes, d.id);
     const isWorkoutContainer = subItems.length > 0 && (
-      d.category === "Tier 4" || 
+      d.category === "Care & Restoration" || 
       subItems.some(sub => sub.sets > 1 || sub.repsOrDuration !== "1 set")
     );
     

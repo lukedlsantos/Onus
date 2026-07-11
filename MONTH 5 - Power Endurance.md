@@ -41,15 +41,15 @@ To automate the training block progression via the codebase, adjust the global v
 ## WEEK 1: BASELINE PROFILE BLOCK
 
 ### Week 1 - Day 1: High-Neural Trigger into Lactic Capacity (3 Hours)
-*   **Tier 1: Warm-Up & Prep [40 Mins]:** Standard Prep Container with neural screening.
-*   **Tier 2: Core Driver — Lactic Circuits & Capacity [90 Mins]:**
+*   **Warm-Up & Prep [40 Mins]:** Standard Prep Container with neural screening.
+*   **Core Driver: Lactic Circuits & Capacity [90 Mins]:**
     *   *Protocol:* Concentrated anaerobic lactic tolerance circuits (4x4s).
     *   *Execution:* Choose 4 distinct boulder problems at flash-grade. Climb all 4 back-to-back with no rest. Rest exactly 4 minutes between blocks. Complete 4 blocks total. Focus on maintaining silent foot placements and pelvic drive under severe pump.
     *   *Constraints:* Rest strictly 4 minutes between blocks. RPE 8.5.
-*   **Tier 3: Progress Hook — Neuro-Power Defense [40 Mins]:**
+*   **Progress Hook: Neuro-Power Defense [40 Mins]:**
     *   *Protocol:* Maintain high-velocity rate of force development.
     *   *Execution:* Execute 2 maximum-velocity limit board attempts at the absolute start of the session while fresh, immediately before moving into the high-fatigue circuits.
-*   **Tier 4: Forearm Flush & Core Restoration [10 Mins]:**
+*   **Care & Restoration: Forearm Flush & Core Restoration [10 Mins]:**
     *   *Execution:* Rice bucket hand drills (3 Mins), pen rolling (2 Mins), and Supine Hand-to-Toe Alternating Touches (5 Mins).
 
 ### Week 1 - Day 2: Technique Under Pump & Recovery (2 Hours)
@@ -60,15 +60,15 @@ To automate the training block progression via the codebase, adjust the global v
     *   *Execution:* Climb easy slab and vertical terrain under local forearm fatigue. Focus on silent feet, precise weight transfers, and straight-arm skeletal hanging postures.
 
 ### Week 1 - Day 3: High-Fatigue Link Sessions & Lifting (3 Hours)
-*   **Tier 1: Warm-Up & Prep [40 Mins]:** Standard Prep Container with neural screening.
-*   **Tier 2: Core Driver — High-Fatigue Link Sessions [90 Mins]:**
+*   **Warm-Up & Prep [40 Mins]:** Standard Prep Container with neural screening.
+*   **Core Driver: High-Fatigue Link Sessions [90 Mins]:**
     *   *Protocol:* Overlapping sport climb links or extended bouldering loops.
     *   *Execution:* Climb overlapping segments of hard sport climbs or bouldering sequences. Link two 15-move blocks together with 10s shakeout on wall. Complete 5 reps.
     *   *Constraints:* Rest 3 minutes between repetitions.
-*   **Tier 3: Progress Hook — Base Strength Maintenance [40 Mins]:**
+*   **Progress Hook: Base Strength Maintenance [40 Mins]:**
     *   *Protocol:* Maintain compound strength baseline.
     *   *Execution:* 3 sets $\times$ 5 reps of strict weighted pull-ups and heavy goblet squats.
-*   **Tier 4: Antagonist Balance & Plyos [10 Mins]:**
+*   **Care & Restoration: Antagonist Balance & Plyos [10 Mins]:**
     *   *Execution:* Depth Jumps to Max Vertical Vector (3 sets $\times$ 5 reps), forearm foam rolling, and extensor bands.
 
 ### Week 1 - Day 4: Asynchronous Recovery Selector
@@ -76,15 +76,15 @@ To automate the training block progression via the codebase, adjust the global v
 *   **Option B (Passive Rest):** Complete off-load. Zero physical stress to maximize skin repair and clear finger pulley inflammation.
 
 ### Week 1 - Day 5: Power Endurance Peak Overload (4x4s) (3 Hours)
-*   **Tier 1: Warm-Up & Prep [40 Mins]:** Standard Prep Container with neural screening.
-*   **Tier 2: Core Driver — Power Endurance Overload / 4x4s [90 Mins]:**
+*   **Warm-Up & Prep [40 Mins]:** Standard Prep Container with neural screening.
+*   **Core Driver: Power Endurance Overload / 4x4s [90 Mins]:**
     *   *Protocol:* Structured 4x4 intervals.
     *   *Execution:* Run 4x4 boulder intervals. Choose 4 distinct problems. Climb them back-to-back with no rest. Rest 4 minutes between blocks. RPE 9.
     *   *Constraints:* Rest exactly 4 minutes between blocks.
-*   **Tier 3: Progress Hook — Friction Coordination Repeats [40 Mins]:**
+*   **Progress Hook: Friction Coordination Repeats [40 Mins]:**
     *   *Protocol:* Volume coordination and foot placement accuracy under pump.
     *   *Execution:* Slab volume stepping drills under pump. Focus on keeping feet flat and externally rotating hips.
-*   **Tier 4: Gentle Posture Decompression [10 Mins]:**
+*   **Care & Restoration: Gentle Posture Decompression [10 Mins]:**
     *   *Execution:* Cat & Camel, Spine Rolls, and passive centrated "Hang Right" shoulder hangs.
 
 ### Week 1 - Day 6: Full Body PT Gym Session (90 Mins)
@@ -104,38 +104,38 @@ To automate the training block progression via the codebase, adjust the global v
 ## WEEK 2: ACCUMULATION BLOCK
 
 ### Week 2 - Day 1: High-Neural Trigger into Lactic Capacity (3 Hours)
-*   **Tier 1: Warm-Up & Prep [40 Mins]:** Standard Prep Container. Decrease edge depth to 18mm for screening.
-*   **Tier 2: Core Driver — Lactic Circuits & Capacity [90 Mins]:**
+*   **Warm-Up & Prep [40 Mins]:** Standard Prep Container. Decrease edge depth to 18mm for screening.
+*   **Core Driver: Lactic Circuits & Capacity [90 Mins]:**
     *   *Execution:* Complete 4 blocks of 5 climbs. Maintain silent foot placement and straight arms.
     *   *Pacing:* Rest 45s between climbs, 4 minutes between blocks. RPE 9.
-*   **Tier 3: Progress Hook — Neuro-Power Defense [40 Mins]:**
+*   **Progress Hook: Neuro-Power Defense [40 Mins]:**
     *   *Execution:* 2 max-velocity limit board attempts at the absolute start while fresh.
-*   **Tier 4: Forearm Flush & Core Restoration [10 Mins]:**
+*   **Care & Restoration: Forearm Flush & Core Restoration [10 Mins]:**
     *   *Execution:* Rice bucket hand drills and Supine Hand-to-Toe touches.
 
 ### Week 2 - Day 2: Technique Under Pump & Recovery (2 Hours)
 *   *Exercises:* Same as Week 1 Day 2, incrementing plank holds to 50s.
 
 ### Week 2 - Day 3: High-Fatigue Link Sessions & Lifting (3 Hours)
-*   **Tier 1: Warm-Up & Prep [40 Mins]:** Standard Prep Container.
-*   **Tier 2: Core Driver — High-Fatigue Link Sessions [90 Mins]:**
+*   **Warm-Up & Prep [40 Mins]:** Standard Prep Container.
+*   **Core Driver: High-Fatigue Link Sessions [90 Mins]:**
     *   *Execution:* Link overlapping segments of sport climbs. Two 20-move blocks together with 10s shakeout on wall. Complete 6 reps.
     *   *Constraints:* Rest 3 minutes between reps.
-*   **Tier 3: Progress Hook — Base Strength Maintenance [40 Mins]:**
+*   **Progress Hook: Base Strength Maintenance [40 Mins]:**
     *   *Execution:* 3 sets $\times$ 5 reps weighted pull-ups and heavy squats.
-*   **Tier 4: Antagonist Balance & Plyos [10 Mins]:**
+*   **Care & Restoration: Antagonist Balance & Plyos [10 Mins]:**
     *   *Execution:* Depth Jumps to Max Vertical Vector (3 sets $\times$ 5 reps), forearm rolling, and extensor bands.
 
 ### Week 2 - Day 4: Asynchronous Recovery Selector
 *   Same as Week 1 Day 4.
 
 ### Week 2 - Day 5: Power Endurance Peak Overload (4x4s) (3 Hours)
-*   **Tier 1: Warm-Up & Prep [40 Mins]:** Standard Prep Container.
-*   **Tier 2: Core Driver — Power Endurance Overload / 4x4s [90 Mins]:**
+*   **Warm-Up & Prep [40 Mins]:** Standard Prep Container.
+*   **Core Driver: Power Endurance Overload / 4x4s [90 Mins]:**
     *   *Execution:* 4x4 intervals. Choose 4 distinct problems. Climb them back-to-back with no rest. Rest 4 minutes between blocks. RPE 9.
-*   **Tier 3: Progress Hook — Friction Coordination Repeats [40 Mins]:**
+*   **Progress Hook: Friction Coordination Repeats [40 Mins]:**
     *   *Execution:* Slab volume stepping drills under pump. Pelvic rotation.
-*   **Tier 4: Gentle Posture Decompression [10 Mins]:**
+*   **Care & Restoration: Gentle Posture Decompression [10 Mins]:**
     *   *Execution:* Cat & Camel, Spine Rolls, and passive overhead hangs.
 
 ### Week 2 - Day 6: Climbing-Specific PT Gym Session (90 Mins)
@@ -149,38 +149,38 @@ To automate the training block progression via the codebase, adjust the global v
 ## WEEK 3: PEAK STRAIN MATRIX BLOCK
 
 ### Week 3 - Day 1: High-Neural Trigger into Lactic Capacity (3 Hours)
-*   **Tier 1: Warm-Up & Prep [40 Mins]:** Standard Prep Container. Priming edge decreased to 15mm.
-*   **Tier 2: Core Driver — Lactic Circuits & Capacity [90 Mins]:**
+*   **Warm-Up & Prep [40 Mins]:** Standard Prep Container. Priming edge decreased to 15mm.
+*   **Core Driver: Lactic Circuits & Capacity [90 Mins]:**
     *   *Execution:* Complete 5 blocks of 4 climbs (RPE 9.5). Drive force through the hips.
     *   *Pacing:* Rest 45s between climbs, 4 minutes between blocks.
-*   **Tier 3: Progress Hook — Neuro-Power Defense [40 Mins]:**
+*   **Progress Hook: Neuro-Power Defense [40 Mins]:**
     *   *Execution:* 2 max-velocity limit board attempts at the absolute start while fresh.
-*   **Tier 4: Forearm Flush & Core Restoration [10 Mins]:**
+*   **Care & Restoration: Forearm Flush & Core Restoration [10 Mins]:**
     *   *Execution:* Rice bucket hand drills and Supine Hand-to-Toe touches.
 
 ### Week 3 - Day 2: Technique Under Pump & Recovery (2 Hours)
 *   *Exercises:* Same as Week 1 Day 2, incrementing plank holds to 60s.
 
 ### Week 3 - Day 3: High-Fatigue Link Sessions & Lifting (3 Hours)
-*   **Tier 1: Warm-Up & Prep [40 Mins]:** Standard Prep Container.
-*   **Tier 2: Core Driver — High-Fatigue Link Sessions [90 Mins]:**
+*   **Warm-Up & Prep [40 Mins]:** Standard Prep Container.
+*   **Core Driver: High-Fatigue Link Sessions [90 Mins]:**
     *   *Execution:* Link overlapping segments of sport climbs. Two 25-move blocks together with 10s shakeout on wall. Complete 7 reps.
     *   *Constraints:* Rest 3 minutes between reps.
-*   **Tier 3: Progress Hook — Base Strength Maintenance [40 Mins]:**
+*   **Progress Hook: Base Strength Maintenance [40 Mins]:**
     *   *Execution:* 3 sets $\times$ 5 reps weighted pull-ups and heavy squats.
-*   **Tier 4: Antagonist Balance & Plyos [10 Mins]:**
+*   **Care & Restoration: Antagonist Balance & Plyos [10 Mins]:**
     *   *Execution:* Depth Jumps to Max Vertical Vector (3 sets $\times$ 5 reps), forearm rolling, and extensor bands.
 
 ### Week 3 - Day 4: Asynchronous Recovery Selector
 *   Same as Week 1 Day 4.
 
 ### Week 3 - Day 5: Power Endurance Peak Overload (4x4s) (3 Hours)
-*   **Tier 1: Warm-Up & Prep [40 Mins]:** Standard Prep Container.
-*   **Tier 2: Core Driver — Power Endurance Overload / 4x4s [90 Mins]:**
+*   **Warm-Up & Prep [40 Mins]:** Standard Prep Container.
+*   **Core Driver: Power Endurance Overload / 4x4s [90 Mins]:**
     *   *Execution:* 4x4 intervals. Choose 4 distinct problems. Climb them back-to-back with no rest. Rest 4 minutes between blocks. RPE 9.5.
-*   **Tier 3: Progress Hook — Friction Coordination Repeats [40 Mins]:**
+*   **Progress Hook: Friction Coordination Repeats [40 Mins]:**
     *   *Execution:* Slab volume stepping drills under pump.
-*   **Tier 4: Gentle Posture Decompression [10 Mins]:**
+*   **Care & Restoration: Gentle Posture Decompression [10 Mins]:**
     *   *Execution:* Cat & Camel, Spine Rolls, and passive overhead hangs.
 
 ### Week 3 - Day 6: Climbing-Specific PT Gym Session (90 Mins)
@@ -194,37 +194,37 @@ To automate the training block progression via the codebase, adjust the global v
 ## WEEK 4: AUTOMATED DELOAD WINDOW
 
 ### Week 4 - Day 1: Low-Neural / Active Recovery Flush (3 Hours)
-*   **Tier 1: Warm-Up & Prep [40 Mins]:** Prep container using light, slow patterns. Fingerboard limited to zero-load passive hanging.
-*   **Tier 2: Core Driver — Low-Intensity Active Recovery [90 Mins]:**
+*   **Warm-Up & Prep [40 Mins]:** Prep container using light, slow patterns. Fingerboard limited to zero-load passive hanging.
+*   **Core Driver: Low-Intensity Active Recovery [90 Mins]:**
     *   *Execution:* Complete exactly 10 problems on simple vertical faces or slabs. Avoid crimps, edges, or dynamic lunges.
     *   *Constraints:* Rest 3 minutes between completions to flush joint inflammation.
-*   **Tier 3: Progress Hook — Mobility Regeneration Track [40 Mins]:**
+*   **Progress Hook: Mobility Regeneration Track [40 Mins]:**
     *   *Execution:* Climb easy paths focusing on high-steps, deep drop-knees, and pelvic proximity.
-*   **Tier 4: Gentle Posture Care [10 Mins]:**
+*   **Care & Restoration: Gentle Posture Care [10 Mins]:**
     *   *Execution:* 2 sets of: push-ups (8 reps), bodyweight dips (5 reps), passive deadhangs (30s).
 
 ### Week 4 - Day 2: Deep Mobility & Parasympathetic Sync (2 Hours)
 *   *Exercises:* 2 sets slow bird-dogs, deadbugs, and low-load standing cable presses.
 
 ### Week 4 - Day 3: Structural Maintenance & Joint Off-Load (3 Hours)
-*   **Tier 1: Warm-Up & Prep [40 Mins]:** Deload prep container.
-*   **Tier 2: Core Driver — Reduced Density Work [90 Mins]:**
+*   **Warm-Up & Prep [40 Mins]:** Deload prep container.
+*   **Core Driver: Reduced Density Work [90 Mins]:**
     *   *Execution:* Complete 2 style blocks containing 3 easy vertical problems. Rest 4 minutes.
-*   **Tier 3: Progress Hook — Joint Articulation & Alignment [40 Mins]:**
+*   **Progress Hook: Joint Articulation & Alignment [40 Mins]:**
     *   *Execution:* Single-leg balance stands, quad stretches, passive shoulder circles, and wall slides.
-*   **Tier 4: Light Antagonist Care [10 Mins]:**
+*   **Care & Restoration: Light Antagonist Care [10 Mins]:**
     *   *Execution:* Unloaded wrist circles and forearm foam rolling.
 
 ### Week 4 - Day 4: Absolute Rest Day
 *   *Protocol:* Complete structural reset. No active recovery.
 
 ### Week 4 - Day 5: Low-Volume Fluidity Check (3 Hours)
-*   **Tier 1: Warm-Up & Prep [40 Mins]:** Deload prep container.
-*   **Tier 2: Core Driver — Technical Coordination Clearance [90 Mins]:**
+*   **Warm-Up & Prep [40 Mins]:** Deload prep container.
+*   **Core Driver: Technical Coordination Clearance [90 Mins]:**
     *   *Execution:* Perform 5 low-grade technical climbs. Zero hand readjustments.
-*   **Tier 3: Progress Hook — Technical Visualization Check [40 Mins]:**
+*   **Progress Hook: Technical Visualization Check [40 Mins]:**
     *   *Execution:* Traverse low-angle terrain, focus on straight-arm skeletal hanging postures.
-*   **Tier 4: Structural Care [10 Mins]:**
+*   **Care & Restoration: Structural Care [10 Mins]:**
     *   *Execution:* Wrist extensor bands and chest releases.
 
 ### Week 4 - Day 6: Restorative Full Body PT Gym Session (90 Mins)
