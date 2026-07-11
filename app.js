@@ -684,9 +684,63 @@ async function loadAthleteTodayScreen() {
       logBtn.style.display = "none";
     }
 
-    const drills = await db.getExercisesForSession(session.id);
-    if (drills.length > 0) {
-      drillList.innerHTML = drills.map(d => {
+    const isDay4 = session.day_label === "Day 4";
+    const choiceKey = "onus_recovery_choice_" + session.id;
+    const recoveryChoice = localStorage.getItem(choiceKey) || "";
+
+    let drills = [];
+    if (isDay4) {
+      if (recoveryChoice === "A") {
+        const day2SessionId = session.id.replace("-d4", "-d2");
+        drills = await db.getExercisesForSession(day2SessionId);
+      } else if (recoveryChoice === "B") {
+        const d4Drills = await db.getExercisesForSession(session.id);
+        drills = d4Drills.filter(d => d.name.includes("Option B") || d.name.includes("Passive"));
+      } else {
+        drills = [];
+      }
+    } else {
+      drills = await db.getExercisesForSession(session.id);
+    }
+
+    let drillsHtml = "";
+    if (isDay4) {
+      drillsHtml += `
+        <div class="recovery-selector-container" style="margin-bottom: 24px; width: 100%;">
+          <div style="font-size: 0.8rem; font-weight: 700; color: var(--text-secondary); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.05em;">
+            Select Recovery Strategy
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <div class="recovery-option-card" 
+                 data-option="A" 
+                 style="padding: 16px; border-radius: var(--border-radius); border: 2px solid ${recoveryChoice === 'A' ? 'var(--accent-cyan)' : 'var(--border-color)'}; background: ${recoveryChoice === 'A' ? 'rgba(6, 182, 212, 0.08)' : 'var(--bg-secondary)'}; cursor: pointer; transition: all 0.2s ease; box-shadow: ${recoveryChoice === 'A' ? '0 0 12px rgba(6, 182, 212, 0.15)' : 'none'}; text-align: left;">
+              <div style="font-size: 1rem; font-weight: 700; color: ${recoveryChoice === 'A' ? 'var(--accent-cyan)' : 'var(--text-primary)'}; margin-bottom: 4px;">Option A</div>
+              <div style="font-size: 0.85rem; font-weight: 600; color: var(--text-primary); margin-bottom: 6px;">Active Flush</div>
+              <div style="font-size: 0.75rem; color: var(--text-muted); line-height: 1.3;">Re-execute Day 2's deep mobility and PT core container.</div>
+            </div>
+            <div class="recovery-option-card" 
+                 data-option="B" 
+                 style="padding: 16px; border-radius: var(--border-radius); border: 2px solid ${recoveryChoice === 'B' ? 'var(--accent-green)' : 'var(--border-color)'}; background: ${recoveryChoice === 'B' ? 'rgba(16, 185, 129, 0.08)' : 'var(--bg-secondary)'}; cursor: pointer; transition: all 0.2s ease; box-shadow: ${recoveryChoice === 'B' ? '0 0 12px rgba(16, 185, 129, 0.15)' : 'none'}; text-align: left;">
+              <div style="font-size: 1rem; font-weight: 700; color: ${recoveryChoice === 'B' ? 'var(--accent-green)' : 'var(--text-primary)'}; margin-bottom: 4px;">Option B</div>
+              <div style="font-size: 0.85rem; font-weight: 600; color: var(--text-primary); margin-bottom: 6px;">Passive Rest</div>
+              <div style="font-size: 0.75rem; color: var(--text-muted); line-height: 1.3;">Complete off-load. Zero physical stress to allow skin & pulley recovery.</div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    if (isDay4 && !recoveryChoice) {
+      drillsHtml += `
+        <div style="padding: 32px 16px; text-align: center; border: 2px dashed var(--border-color); border-radius: var(--border-radius); color: var(--text-muted); background: var(--bg-secondary); width: 100%; box-sizing: border-box;">
+          <div style="font-size: 1.5rem; margin-bottom: 8px;">⏳</div>
+          <div style="font-size: 0.9rem; font-weight: 600; color: var(--text-primary); margin-bottom: 4px;">No Choice Selected</div>
+          <div style="font-size: 0.8rem;">Select Option A or Option B above to view your training parameters.</div>
+        </div>
+      `;
+      drillList.innerHTML = drillsHtml;
+    } else if (drills.length > 0) {
+      drillsHtml += drills.map(d => {
         let timerHtml = '';
         
         if (d.category === "Warm-up & Prep") {
@@ -828,6 +882,21 @@ async function loadAthleteTodayScreen() {
           </div>
         `;
       }).join('');
+      drillList.innerHTML = drillsHtml;
+    } else {
+      drillList.innerHTML = isDay4 ? drillsHtml : '';
+    }
+
+    // Bind event listeners for Recovery options if Day 4
+    if (isDay4) {
+      drillList.querySelectorAll(".recovery-option-card").forEach(card => {
+        card.addEventListener("click", () => {
+          const option = card.dataset.option;
+          localStorage.setItem(choiceKey, option);
+          loadAthleteTodayScreen();
+        });
+      });
+    }
 
       // Bind toggle handlers for Tier 4 sub-drills
       drillList.querySelectorAll(".sub-drill-header").forEach(header => {
@@ -1147,7 +1216,18 @@ async function submitQuickLog() {
   const painDesc = document.getElementById("quick-log-pain-desc").value.trim();
   
   // Calculate completed exercises details
-  const sessionDrills = await db.getExercisesForSession(state.todaySession.id);
+  let sessionDrills = await db.getExercisesForSession(state.todaySession.id);
+  const isDay4 = state.todaySession.day_label === "Day 4";
+  if (isDay4) {
+    const choiceKey = "onus_recovery_choice_" + state.todaySession.id;
+    const choice = localStorage.getItem(choiceKey) || "";
+    if (choice === "A") {
+      const day2SessionId = state.todaySession.id.replace("-d4", "-d2");
+      sessionDrills = await db.getExercisesForSession(day2SessionId);
+    } else {
+      sessionDrills = sessionDrills.filter(d => d.name.includes("Option B") || d.name.includes("Passive"));
+    }
+  }
   const completions = [];
   
   for (const d of sessionDrills) {
