@@ -18,6 +18,35 @@ const state = {
   wakeLockObj: null
 };
 
+// Helper to escape HTML characters to prevent Stored XSS injection
+function escapeHTML(str) {
+  if (typeof str !== 'string') return str === undefined || str === null ? '' : String(str);
+  return str.replace(/[&<>'"]/g, (tag) => {
+    const chars = {
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      "'": '&#39;',
+      '"': '&quot;'
+    };
+    return chars[tag] || tag;
+  });
+}
+
+// Re-usable AudioContext helper initialized on user gesture to bypass browser security blocks
+function initAudioContext() {
+  try {
+    if (!state.audioContext) {
+      state.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    if (state.audioContext.state === 'suspended') {
+      state.audioContext.resume();
+    }
+  } catch (e) {
+    console.warn("AudioContext initialization failed:", e);
+  }
+}
+
 // Navigation Tab Configuration
 const NAVIGATION_CONFIG = {
   athlete: [
@@ -118,6 +147,7 @@ async function initApp() {
   // Start Session Button Handler
   document.getElementById("start-session-btn").addEventListener("click", () => {
     if (state.todaySession) {
+      initAudioContext(); // Initialize audio context on user gesture
       state.startedSessionId = state.todaySession.id;
       document.getElementById("today-drills-container").style.display = "block";
       document.getElementById("log-today-btn").style.display = "block";
@@ -130,15 +160,17 @@ async function initApp() {
   initWarmupModule();
 }
 
-// Verify locks and lock app if account status is expired
+// Verify locks and lock app using a default-deny validation structure
 function verifyAccessLock() {
   const lockedScreen = document.getElementById("locked-screen");
   
-  if (state.currentUser.role === "athlete" && state.currentAccess && state.currentAccess.status === "expired") {
-    lockedScreen.style.display = "flex";
-  } else {
-    lockedScreen.style.display = "none";
+  if (state.currentUser && state.currentUser.role === "athlete") {
+    if (!state.currentAccess || state.currentAccess.status !== "active") {
+      lockedScreen.style.display = "flex";
+      return;
+    }
   }
+  lockedScreen.style.display = "none";
 }
 
 // Switch User & Update State
@@ -182,7 +214,7 @@ async function switchUser(userId) {
   // Set dynamic links based on user profile
   const tgLink = document.getElementById("review-telegram-link");
   const driveLink = document.getElementById("review-drive-link");
-  if (tgLink) tgLink.href = state.currentUser.telegram_link || "https://t.me/coach_john";
+  if (tgLink) tgLink.href = state.currentUser.telegram_link || "https://t.me/+2HunNy7a_XpiZTg1";
   if (driveLink) driveLink.href = state.currentUser.google_drive_folder_url || "#";
 
   if (state.currentUser.role === "athlete") {
@@ -304,7 +336,7 @@ async function releaseWakeLock() {
 // Handle Page Visibility Changes (re-acquire lock if returning to app)
 function handleVisibilityChange() {
   if (state.currentUser && state.currentUser.role === "athlete" && state.activeTab === "today") {
-    if (document.visibilityState === 'visible') {
+    if (document.visibilityState === 'visible' && state.startedSessionId === state.todaySession?.id) {
       requestWakeLock();
     } else {
       state.wakeLockObj = null;
@@ -378,7 +410,7 @@ async function setupSessionSelectDropdown() {
     for (const week of weeks) {
       const sessions = await db.getSessionsForWeek(week.id);
       sessions.forEach(sess => {
-        optionsHtml += `<option value="${sess.id}">${phase.title} (W${week.week_number}) - ${sess.day_label}: ${sess.title}</option>`;
+        optionsHtml += `<option value="${escapeHTML(sess.id)}">${escapeHTML(phase.title)} (W${week.week_number}) - ${escapeHTML(sess.day_label)}: ${escapeHTML(sess.title)}</option>`;
       });
     }
   }
@@ -501,7 +533,10 @@ function parseSubExercises(notes, parentId) {
 // Play an audible double-beep alarm using Web Audio API (cross-browser compatible)
 function playAlarmSound() {
   try {
-    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    initAudioContext();
+    const ctx = state.audioContext;
+    if (!ctx) return;
+    
     const osc = ctx.createOscillator();
     const gain = ctx.createGain();
     
@@ -729,19 +764,19 @@ async function loadAthleteTodayScreen() {
 
                 return `
                   <div class="sub-drill-card" style="background-color: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: var(--border-radius-sm); overflow: hidden; ${subCardBg}">
-                    <div class="sub-drill-header" data-sub-id="${sub.id}" style="cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 10px; background-color: rgba(255,255,255,0.02);">
+                    <div class="sub-drill-header" data-sub-id="${escapeHTML(sub.id)}" style="cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 10px; background-color: rgba(255,255,255,0.02);">
                       <div style="display: flex; align-items: center; gap: 8px;">
-                        <button class="drill-check-btn" data-drill-id="${sub.id}" style="width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid var(--border-color); display: flex; align-items: center; justify-content: center; color: var(--accent-green); font-weight: 700; cursor: pointer; transition: all 0.2s; font-size: 0.75rem; flex-shrink: 0; padding: 0; ${subCheckBg}">${subCheckSymbol}</button>
-                        <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-primary); text-align: left; padding-right: 8px;">${sub.text}</span>
+                        <button class="drill-check-btn" data-drill-id="${escapeHTML(sub.id)}" style="width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid var(--border-color); display: flex; align-items: center; justify-content: center; color: var(--accent-green); font-weight: 700; cursor: pointer; transition: all 0.2s; font-size: 0.75rem; flex-shrink: 0; padding: 0; ${subCheckBg}">${subCheckSymbol}</button>
+                        <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-primary); text-align: left; padding-right: 8px;">${escapeHTML(sub.text)}</span>
                       </div>
                       <div style="display: flex; align-items: center; gap: 8px; flex-shrink: 0;">
                         <span style="font-size: 0.75rem; color: var(--accent-cyan); font-weight: 500;">${sub.sets} sets</span>
                         <span class="sub-chevron" style="font-size: 0.65rem; color: var(--text-muted);">${chevronChar}</span>
                       </div>
                     </div>
-                    <div class="sub-drill-body" id="sub-body-${sub.id}" style="display: ${displayStyle}; padding: 10px; border-top: 1px solid var(--border-color); background-color: var(--bg-primary);">
+                    <div class="sub-drill-body" id="sub-body-${escapeHTML(sub.id)}" style="display: ${displayStyle}; padding: 10px; border-top: 1px solid var(--border-color); background-color: var(--bg-primary);">
                       <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; width: 100%;">
-                        <div class="stepper-container" data-drill-id="${sub.id}" data-drill-name="${sub.text}" data-max-sets="${sub.sets}">
+                        <div class="stepper-container" data-drill-id="${escapeHTML(sub.id)}" data-drill-name="${escapeHTML(sub.text)}" data-max-sets="${sub.sets}">
                           <button class="stepper-btn stepper-minus" style="padding: 2px 8px; font-size: 0.75rem;">&minus;</button>
                           <span class="stepper-val" style="font-size: 0.75rem;">${state.drillCompletions[sub.id] || 0} / ${sub.sets} sets</span>
                           <button class="stepper-btn stepper-plus" style="padding: 2px 8px; font-size: 0.75rem;">+</button>
@@ -761,28 +796,28 @@ async function loadAthleteTodayScreen() {
         const renderCheckSymbol = isWorkoutContainer ? (d.checkSymbolOverride || '') : checkSymbol;
 
         return `
-          <div class="drill-item" id="drill-card-${d.id}" style="${renderCardBg}">
+          <div class="drill-item" id="drill-card-${escapeHTML(d.id)}" style="${renderCardBg}">
             <div class="drill-title" style="display: flex; justify-content: space-between; align-items: center; gap: 8px;">
               <div style="display: flex; align-items: center; gap: 8px;">
                 ${!isWorkoutContainer ? `
-                  <button class="drill-check-btn" data-drill-id="${d.id}" style="width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--border-color); display: flex; align-items: center; justify-content: center; color: var(--accent-green); font-weight: 700; cursor: pointer; transition: all 0.2s; font-size: 0.75rem; flex-shrink: 0; padding: 0; ${renderCheckBg}">${renderCheckSymbol}</button>
+                  <button class="drill-check-btn" data-drill-id="${escapeHTML(d.id)}" style="width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--border-color); display: flex; align-items: center; justify-content: center; color: var(--accent-green); font-weight: 700; cursor: pointer; transition: all 0.2s; font-size: 0.75rem; flex-shrink: 0; padding: 0; ${renderCheckBg}">${renderCheckSymbol}</button>
                 ` : `
                   <button class="drill-check-btn" style="width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--border-color); display: flex; align-items: center; justify-content: center; color: var(--accent-green); font-weight: 700; cursor: default; transition: all 0.2s; font-size: 0.75rem; flex-shrink: 0; padding: 0; pointer-events: none; ${renderCheckBg}">${renderCheckSymbol}</button>
                 `}
-                <span style="font-weight: 600;">${d.name}</span>
+                <span style="font-weight: 600;">${escapeHTML(d.name)}</span>
               </div>
               <div style="display: flex; align-items: center; gap: 6px;">
-                <span class="badge" style="background-color: var(--bg-secondary); color: var(--accent-cyan); font-size: 0.65rem; font-weight: 600; padding: 2px 6px; border-radius: var(--border-radius-sm); border: 1px solid var(--border-color);">${d.category}</span>
+                <span class="badge" style="background-color: var(--bg-secondary); color: var(--accent-cyan); font-size: 0.65rem; font-weight: 600; padding: 2px 6px; border-radius: var(--border-radius-sm); border: 1px solid var(--border-color);">${escapeHTML(d.category)}</span>
                 ${!isWorkoutContainer ? `<span style="font-size: 0.8rem; color: var(--text-secondary); font-weight: 500;">${d.sets} sets</span>` : ''}
               </div>
             </div>
             
             ${!isWorkoutContainer ? `
-              <div class="drill-meta">Rep/Duration: ${d.reps_or_duration} | Rest: ${d.rest}</div>
-              ${d.notes ? `<div class="drill-meta" style="font-style: italic; color: var(--text-muted); white-space: pre-wrap;">Note: ${d.notes}</div>` : ''}
+              <div class="drill-meta">Rep/Duration: ${escapeHTML(d.reps_or_duration)} | Rest: ${escapeHTML(d.rest)}</div>
+              ${d.notes ? `<div class="drill-meta" style="font-style: italic; color: var(--text-muted); white-space: pre-wrap;">Note: ${escapeHTML(d.notes)}</div>` : ''}
               
               <div class="drill-actions">
-                <div class="stepper-container" data-drill-id="${d.id}" data-drill-name="${d.name}" data-max-sets="${d.sets}">
+                <div class="stepper-container" data-drill-id="${escapeHTML(d.id)}" data-drill-name="${escapeHTML(d.name)}" data-max-sets="${d.sets}">
                   <button class="stepper-btn stepper-minus">&minus;</button>
                   <span class="stepper-val">${state.drillCompletions[d.id] || 0} / ${d.sets} sets</span>
                   <button class="stepper-btn stepper-plus">+</button>
@@ -885,6 +920,7 @@ function handleDrillActionsClick(e) {
 
   // Handle Timers (Start/Pause)
   if (target.classList.contains("timer-start-btn")) {
+    initAudioContext(); // Initialize audio context on user gesture
     const container = target.closest(".timer-container");
     const drillId = container.dataset.drillId;
     const originalSecs = parseInt(container.dataset.seconds);
@@ -981,7 +1017,7 @@ async function loadTrainingCalendar() {
   let calendarHtml = '';
 
   for (const phase of phases) {
-    calendarHtml += `<h3 style="margin-top: 14px; font-size: 1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 4px;">${phase.title}</h3>`;
+    calendarHtml += `<h3 style="margin-top: 14px; font-size: 1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 4px;">${escapeHTML(phase.title)}</h3>`;
     const weeks = await db.getWeeksForPhase(phase.id);
     for (const week of weeks) {
       const isCurrentWeek = state.todaySession && state.todaySession.week_id === week.id;
@@ -990,11 +1026,11 @@ async function loadTrainingCalendar() {
       
       calendarHtml += `
         <div class="calendar-week-block" style="margin-top: 8px;">
-          <div class="calendar-week-header" data-week-id="${week.id}" style="cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 10px; background-color: var(--bg-secondary); border-radius: var(--border-radius-sm); border: 1px solid var(--border-color);">
+          <div class="calendar-week-header" data-week-id="${escapeHTML(week.id)}" style="cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 10px; background-color: var(--bg-secondary); border-radius: var(--border-radius-sm); border: 1px solid var(--border-color);">
             <span style="font-weight: 600; font-size: 0.85rem; color: var(--accent-cyan);">Week ${week.week_number}</span>
             <span class="chevron" style="font-size: 0.75rem; color: var(--text-muted);">${chevronChar}</span>
           </div>
-          <div class="calendar-days-container" id="days-container-${week.id}" style="display: ${displayStyle}; margin-top: 4px;">
+          <div class="calendar-days-container" id="days-container-${escapeHTML(week.id)}" style="display: ${displayStyle}; margin-top: 4px;">
       `;
 
       const sessions = await db.getSessionsForWeek(week.id);
@@ -1003,12 +1039,12 @@ async function loadTrainingCalendar() {
         const status = log ? log.status : 'pending';
         
         calendarHtml += `
-          <div class="calendar-day-row" data-session-id="${sess.id}" style="cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 8px; margin-top: 4px; background-color: var(--bg-primary); border-radius: var(--border-radius-sm); border: 1px solid var(--border-color);">
+          <div class="calendar-day-row" data-session-id="${escapeHTML(sess.id)}" style="cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 8px; margin-top: 4px; background-color: var(--bg-primary); border-radius: var(--border-radius-sm); border: 1px solid var(--border-color);">
             <div class="calendar-day-info">
-              <span class="calendar-day-name" style="font-weight: 500; font-size: 0.8rem;">${sess.day_label}: ${sess.title}</span>
-              <span class="calendar-session-title" style="display: block; font-size: 0.75rem; color: var(--text-secondary); margin-top: 2px;">${sess.objective}</span>
+              <span class="calendar-day-name" style="font-weight: 500; font-size: 0.8rem;">${escapeHTML(sess.day_label)}: ${escapeHTML(sess.title)}</span>
+              <span class="calendar-session-title" style="display: block; font-size: 0.75rem; color: var(--text-secondary); margin-top: 2px;">${escapeHTML(sess.objective)}</span>
             </div>
-            <span class="status-badge ${status}">${status}</span>
+            <span class="status-badge ${escapeHTML(status)}">${escapeHTML(status)}</span>
           </div>
         `;
       });
@@ -1276,16 +1312,16 @@ async function loadVideoReviews() {
     return `
       <div style="padding: 12px; margin-top: 10px; background-color: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: var(--border-radius-md);">
         <div style="display: flex; justify-content: space-between; align-items: center;">
-          <span style="font-weight: 600; font-size: 0.9rem; color: var(--accent-cyan);">${rev.climb_grade || 'Unspecified Grade'} - ${rev.climb_style || 'General Climb'}</span>
-          <span class="status-badge ${statusClass}">${rev.status}</span>
+          <span style="font-weight: 600; font-size: 0.9rem; color: var(--accent-cyan);">${escapeHTML(rev.climb_grade || 'Unspecified Grade')} - ${escapeHTML(rev.climb_style || 'General Climb')}</span>
+          <span class="status-badge ${escapeHTML(statusClass)}">${escapeHTML(rev.status)}</span>
         </div>
-        <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 4px;">Angle: ${rev.wall_angle || 'N/A'} | Source: ${rev.storage_source}</p>
-        <p style="font-size: 0.85rem; margin-top: 6px;">Q: "${rev.athlete_question || 'None'}"</p>
-        <a href="${rev.video_url}" target="_blank" style="color: var(--accent-blue); font-size: 0.85rem; text-decoration: none; display: inline-block; margin-top: 4px;">Watch Video Link &rarr;</a>
+        <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 4px;">Angle: ${escapeHTML(rev.wall_angle || 'N/A')} | Source: ${escapeHTML(rev.storage_source)}</p>
+        <p style="font-size: 0.85rem; margin-top: 6px;">Q: "${escapeHTML(rev.athlete_question || 'None')}"</p>
+        <a href="${escapeHTML(rev.video_url)}" target="_blank" style="color: var(--accent-blue); font-size: 0.85rem; text-decoration: none; display: inline-block; margin-top: 4px;">Watch Video Link &rarr;</a>
         ${rev.coach_feedback_summary ? `
           <div style="margin-top: 8px; padding-top: 8px; border-top: 1px dashed var(--border-color); font-size: 0.85rem;">
             <strong>Coach Feedback:</strong>
-            <p style="color: var(--accent-amber);">${rev.coach_feedback_summary}</p>
+            <p style="color: var(--accent-amber);">${escapeHTML(rev.coach_feedback_summary)}</p>
           </div>
         ` : ''}
       </div>
@@ -1337,26 +1373,26 @@ async function loadAdminAthletes() {
       <div style="padding: 14px; background-color: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: var(--border-radius-lg);">
         <div style="display: flex; justify-content: space-between; align-items: start;">
           <div>
-            <h3 style="font-size: 1.1rem; margin-bottom: 2px;">${athlete.full_name}</h3>
-            <small class="text-muted">Plan: ${access ? access.plan_type.replace('_', ' ') : 'None'} | Expiry: ${access ? access.access_until : 'N/A'}</small>
+            <h3 style="font-size: 1.1rem; margin-bottom: 2px;">${escapeHTML(athlete.full_name)}</h3>
+            <small class="text-muted">Plan: ${access ? escapeHTML(access.plan_type.replace('_', ' ')) : 'None'} | Expiry: ${access ? escapeHTML(access.access_until) : 'N/A'}</small>
           </div>
-          <span class="badge ${access ? access.status : 'expired'}">${access ? access.status : 'expired'}</span>
+          <span class="badge ${access ? escapeHTML(access.status) : 'expired'}">${access ? escapeHTML(access.status) : 'expired'}</span>
         </div>
 
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; font-size: 0.85rem;">
           <div><strong>Adherence:</strong> ${adherence}%</div>
           <div><strong>Pending Reviews:</strong> ${pendingReviews}</div>
           <div><strong>Last Pain Log:</strong> ${latestPain}/10</div>
-          <div><strong>Telegram:</strong> <a href="https://t.me/${athlete.telegram_username || ''}" target="_blank" style="color: var(--accent-cyan); text-decoration: none;">@${athlete.telegram_username || 'None'}</a></div>
+          <div><strong>Telegram:</strong> <a href="https://t.me/${escapeHTML(athlete.telegram_username || '')}" target="_blank" style="color: var(--accent-cyan); text-decoration: none;">@${escapeHTML(athlete.telegram_username || 'None')}</a></div>
         </div>
 
         ${hasRedFlags ? `
           <div class="alert alert-warning" style="margin-top: 10px; padding: 6px 10px; font-size: 0.8rem;">
-            <strong>Red Flags:</strong> ${flagsList.join(', ')}
+            <strong>Red Flags:</strong> ${escapeHTML(flagsList.join(', '))}
           </div>
         ` : ''}
 
-        <button class="btn btn-primary manage-access-trigger" data-athlete-id="${athlete.id}" style="margin-top: 10px; font-size: 0.8rem; padding: 6px 12px; width: auto;">
+        <button class="btn btn-primary manage-access-trigger" data-athlete-id="${escapeHTML(athlete.id)}" style="margin-top: 10px; font-size: 0.8rem; padding: 6px 12px; width: auto;">
           Edit Access Settings
         </button>
       </div>
@@ -1401,6 +1437,7 @@ async function handleAdminAccessSubmit(e) {
     athlete_id: athleteId,
     status: document.getElementById("access-status").value,
     plan_type: document.getElementById("access-plan").value,
+    start_date: accessData ? accessData.start_date : new Date().toISOString().split('T')[0],
     access_until: document.getElementById("access-until").value,
     notes: document.getElementById("access-notes").value
   };
@@ -1418,8 +1455,8 @@ async function loadAdminPrograms() {
   const programs = await db.getPrograms();
   container.innerHTML = programs.map(prog => `
     <div style="padding: 12px; background-color: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: var(--border-radius-md);">
-      <strong style="color: var(--accent-cyan); font-size: 1rem;">${prog.title}</strong>
-      <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 4px;">${prog.description || 'No description provided.'}</p>
+      <strong style="color: var(--accent-cyan); font-size: 1rem;">${escapeHTML(prog.title)}</strong>
+      <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 4px;">${escapeHTML(prog.description || 'No description provided.')}</p>
     </div>
   `).join('');
 }
@@ -1444,13 +1481,13 @@ async function loadAdminReviewsQueue() {
       <div style="padding: 14px; background-color: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: var(--border-radius-lg);">
         <div style="display: flex; justify-content: space-between; align-items: start;">
           <div>
-            <strong style="color: var(--accent-cyan);">${athlete ? athlete.full_name : 'Unknown Athlete'}</strong>
-            <p style="font-size: 0.8rem; color: var(--text-secondary);">Grade: ${rev.climb_grade || 'V?'} | Angle: ${rev.wall_angle || 'N/A'}</p>
+            <strong style="color: var(--accent-cyan);">${athlete ? escapeHTML(athlete.full_name) : 'Unknown Athlete'}</strong>
+            <p style="font-size: 0.8rem; color: var(--text-secondary);">Grade: ${escapeHTML(rev.climb_grade || 'V?')} | Angle: ${escapeHTML(rev.wall_angle || 'N/A')}</p>
           </div>
-          <span class="status-badge ${rev.status === 'needs_follow_up' ? 'modified' : 'pending'}">${rev.status}</span>
+          <span class="status-badge ${rev.status === 'needs_follow_up' ? 'modified' : 'pending'}">${escapeHTML(rev.status)}</span>
         </div>
-        <p style="font-size: 0.85rem; margin-top: 6px;">Q: "${rev.athlete_question || ''}"</p>
-        <a href="${rev.video_url}" target="_blank" style="color: var(--accent-blue); font-size: 0.85rem; text-decoration: none; display: inline-block; margin-top: 6px;">Watch Video &rarr;</a>
+        <p style="font-size: 0.85rem; margin-top: 6px;">Q: "${escapeHTML(rev.athlete_question || '')}"</p>
+        <a href="${escapeHTML(rev.video_url)}" target="_blank" style="color: var(--accent-blue); font-size: 0.85rem; text-decoration: none; display: inline-block; margin-top: 6px;">Watch Video &rarr;</a>
 
         <form class="coach-feedback-form" data-review-id="${rev.id}" style="margin-top: 12px; display: flex; flex-direction: column; gap: 6px;">
           <div class="form-group">
@@ -1514,15 +1551,15 @@ async function loadAdminCheckins() {
     html += `
       <div style="padding: 14px; background-color: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: var(--border-radius-lg); display: flex; flex-direction: column; gap: 8px;">
         <div style="display: flex; justify-content: space-between; align-items: center;">
-          <strong style="color: var(--accent-cyan); font-size: 1rem;">${athlete ? athlete.full_name : 'Unknown Athlete'}</strong>
-          <span class="text-muted" style="font-size: 0.75rem;">${chk.submitted_at.split('T')[0]}</span>
+          <strong style="color: var(--accent-cyan); font-size: 1rem;">${athlete ? escapeHTML(athlete.full_name) : 'Unknown Athlete'}</strong>
+          <span class="text-muted" style="font-size: 0.75rem;">${escapeHTML(chk.submitted_at.split('T')[0])}</span>
         </div>
 
         <!-- Part A -->
         <div style="font-size: 0.85rem; padding: 6px 10px; background-color: var(--bg-primary); border-radius: var(--border-radius-sm);">
           <strong style="display: block; margin-bottom: 4px; color: var(--text-primary);">Part A: Volume & Technical Yield</strong>
           <div>Sessions: Completed <strong>${chk.completed_sessions}</strong> of <strong>${chk.planned_sessions}</strong> planned</div>
-          ${chk.missed_sessions_reason ? `<div style="font-style: italic; color: var(--accent-red); margin-top: 2px;">Missed: ${chk.missed_sessions_reason}</div>` : ''}
+          ${chk.missed_sessions_reason ? `<div style="font-style: italic; color: var(--accent-red); margin-top: 2px;">Missed: ${escapeHTML(chk.missed_sessions_reason)}</div>` : ''}
           <div style="margin-top: 4px; display: grid; grid-template-columns: 1fr 1fr; gap: 6px;">
             <div>Intensity RPE: <strong>${chk.climbing_intensity_rpe}/5</strong></div>
             <div>Movement Precision: <strong>${chk.movement_precision}/5</strong></div>
@@ -1544,8 +1581,8 @@ async function loadAdminCheckins() {
         <div style="font-size: 0.85rem; padding: 6px 10px; background-color: ${hasFlags ? 'rgba(239, 68, 68, 0.08)' : 'var(--bg-primary)'}; border-radius: var(--border-radius-sm); border: 1px solid ${hasFlags ? 'var(--accent-red)' : 'transparent'};">
           <strong style="display: block; margin-bottom: 4px; color: ${hasFlags ? 'var(--accent-red)' : 'var(--text-primary)'};">Part C: Orthopedic Safety Checks (Red Flags)</strong>
           ${hasFlags ? `
-            <div style="color: var(--accent-red); font-weight: 600; margin-bottom: 4px;">Aches detected in: ${flags.join(', ')}</div>
-            ${chk.pain_details ? `<div style="font-style: italic; margin-top: 2px;">Details: ${chk.pain_details}</div>` : ''}
+            <div style="color: var(--accent-red); font-weight: 600; margin-bottom: 4px;">Aches detected in: ${escapeHTML(flags.join(', '))}</div>
+            ${chk.pain_details ? `<div style="font-style: italic; margin-top: 2px;">Details: ${escapeHTML(chk.pain_details)}</div>` : ''}
           ` : `
             <div style="color: var(--accent-green);">No orthopedic pain reported.</div>
           `}
@@ -1554,10 +1591,10 @@ async function loadAdminCheckins() {
         <!-- Part D -->
         <div style="font-size: 0.85rem; padding: 6px 10px; background-color: var(--bg-primary); border-radius: var(--border-radius-sm);">
           <strong style="display: block; margin-bottom: 4px; color: var(--text-primary);">Part D: Narrative Context</strong>
-          <div style="margin-top: 4px;"><strong>Send Milestone:</strong> <span class="text-secondary">${chk.send_milestone || 'None'}</span></div>
-          <div style="margin-top: 4px;"><strong>Project Bottleneck:</strong> <span class="text-secondary">${chk.project_bottleneck || 'None'}</span></div>
+          <div style="margin-top: 4px;"><strong>Send Milestone:</strong> <span class="text-secondary">${escapeHTML(chk.send_milestone || 'None')}</span></div>
+          <div style="margin-top: 4px;"><strong>Project Bottleneck:</strong> <span class="text-secondary">${escapeHTML(chk.project_bottleneck || 'None')}</span></div>
           <div style="margin-top: 4px; padding-top: 4px; border-top: 1px dashed var(--border-color); color: var(--accent-amber);">
-            <strong>Question for Coach:</strong> "${chk.question_for_coach || 'None'}"
+            <strong>Question for Coach:</strong> "${escapeHTML(chk.question_for_coach || 'None')}"
           </div>
         </div>
       </div>
@@ -1574,10 +1611,10 @@ async function loadResources() {
   const resources = await db.getResources();
   listEl.innerHTML = resources.map(res => `
     <div style="margin-top: 12px; padding: 10px; border-bottom: 1px solid var(--border-color)">
-      <strong>${res.title}</strong>
-      <span class="badge" style="background-color: var(--bg-tertiary); color: var(--accent-cyan); font-size: 0.65rem; margin-left: 8px;">${res.category}</span>
-      <p style="font-size: 0.85rem; color: var(--text-secondary); margin: 4px 0 8px 0;">${res.description || ''}</p>
-      <a href="${res.external_url}" target="_blank" style="color: var(--accent-cyan); font-size: 0.85rem; text-decoration: none;">View Document &rarr;</a>
+      <strong>${escapeHTML(res.title)}</strong>
+      <span class="badge" style="background-color: var(--bg-tertiary); color: var(--accent-cyan); font-size: 0.65rem; margin-left: 8px;">${escapeHTML(res.category)}</span>
+      <p style="font-size: 0.85rem; color: var(--text-secondary); margin: 4px 0 8px 0;">${escapeHTML(res.description || '')}</p>
+      <a href="${escapeHTML(res.external_url)}" target="_blank" style="color: var(--accent-cyan); font-size: 0.85rem; text-decoration: none;">View Document &rarr;</a>
     </div>
   `).join('');
 }
@@ -1590,8 +1627,8 @@ async function loadFAQs() {
   const faqs = await db.getFaqs();
   listEl.innerHTML = faqs.map(faq => `
     <div style="margin-top: 12px; padding: 10px; background: var(--bg-tertiary); border-radius: var(--border-radius-md);">
-      <strong style="color: var(--accent-cyan); display: block; margin-bottom: 6px;">Q: ${faq.question}</strong>
-      <p style="font-size: 0.9rem; color: var(--text-primary);">A: ${faq.answer}</p>
+      <strong style="color: var(--accent-cyan); display: block; margin-bottom: 6px;">Q: ${escapeHTML(faq.question)}</strong>
+      <p style="font-size: 0.9rem; color: var(--text-primary);">A: ${escapeHTML(faq.answer)}</p>
     </div>
   `).join('');
 }
@@ -1973,7 +2010,10 @@ function loadWarmupStation() {
 // Play a soft meditative bell chime / ding (528Hz Solfeggio frequency with smooth decay)
 function playSoftDing() {
   try {
-    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    initAudioContext();
+    const ctx = state.audioContext;
+    if (!ctx) return;
+    
     const osc = ctx.createOscillator();
     const gain = ctx.createGain();
     
@@ -2037,6 +2077,7 @@ function updateBreathingVisual(label) {
 
 // Timer control logic
 function toggleWarmupTimer() {
+  initAudioContext(); // Initialize audio context on user gesture
   const toggleBtn = document.getElementById("warmup-timer-toggle");
   const resetBtn = document.getElementById("warmup-timer-reset");
 

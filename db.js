@@ -12,7 +12,7 @@ const DEFAULT_PROFILES = [
     role: "athlete",
     full_name: "Alex Honnold",
     telegram_username: "alex_climbs",
-    telegram_link: "https://t.me/coach_john",
+    telegram_link: "https://t.me/+2HunNy7a_XpiZTg1",
     google_drive_folder_url: "https://drive.google.com/drive/folders/mock-alex-folder",
     strava_connected: false,
     strava_last_sync: null,
@@ -24,7 +24,7 @@ const DEFAULT_PROFILES = [
     role: "admin",
     full_name: "Coach John",
     telegram_username: "coach_john",
-    telegram_link: "https://t.me/coach_john",
+    telegram_link: "https://t.me/+2HunNy7a_XpiZTg1",
     google_drive_folder_url: "https://drive.google.com/drive/folders/mock-coach-folder",
     created_at: new Date().toISOString()
   }
@@ -1416,7 +1416,7 @@ const DEFAULT_FAQS = [
 
 // Helper to initialize database
 function initDB() {
-  const CURRENT_VERSION = "2.6";
+  const CURRENT_VERSION = "2.7";
   const storedVersion = localStorage.getItem("onus_db_version");
   if (storedVersion !== CURRENT_VERSION) {
     // Clear all onus-related localStorage entries to force clean re-seeding
