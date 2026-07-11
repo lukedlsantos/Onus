@@ -930,15 +930,11 @@ async function loadAthleteTodayScreen() {
           }
         });
       });
-    } else {
-      drillList.innerHTML = '';
-    }
 
-    // Auto request lock on Today load if already started
-    if (state.activeTab === "today" && isStarted) requestWakeLock();
-    return;
-  }
-  
+      // Auto request lock on Today load if already started
+      if (state.activeTab === "today" && isStarted) requestWakeLock();
+      return;
+    }
   titleEl.textContent = "Rest Day";
   objectiveEl.style.display = "none"; // Do not show objective/description anymore
   document.getElementById("start-session-btn").style.display = "none";
