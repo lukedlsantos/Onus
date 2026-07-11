@@ -477,7 +477,7 @@ function parseSubExercises(notes, parentId) {
   const subItems = [];
   
   lines.forEach((line, index) => {
-    let cleanLine = line.replace(/^[\*\-\s\d\.)]+/, '').trim();
+    let cleanLine = line.replace(/^\s*(?:[*\-•]\s*)*(?:\d+[.)\]]\s*)?/, '').trim();
     if (!cleanLine) return;
     
     let categoryHeader = "";
