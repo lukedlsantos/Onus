@@ -174,8 +174,8 @@ function generateWorkouts() {
           let plankSecs = w === 1 ? 45 : w === 2 ? 50 : w === 3 ? 60 : 30;
           exercises = [
             { name: "Aerobic Influx Flush", category: "General", sets: 1, reps_or_duration: "30 Mins", intensity: "RPE 3", rest: "None", notes: "Continuous steady-state nasal breathing jogging or cycling (<140 BPM)." },
-            { name: "Climbing-Specific PT Core", category: "Core", sets: 3, reps_or_duration: "3 sets", intensity: "RPE 3", rest: "None", notes: `Cable Pallof presses (10 reps), side planks (${plankSecs}s/side), Swiss-ball rollouts/Stir-the-Pot, and Seated Contra-Lateral Leg Raises.` },
-            { name: "Deep Shoulder & Spine Mobility", category: "Mobility", sets: 1, reps_or_duration: "50 Mins", intensity: "RPE 3", rest: "None", notes: "Thoracic extensions over foam roller, sleeper stretches, prone YTWLs, puppy pose lat stretches, and spine twists." }
+            { name: "Climbing-Specific PT Core", category: "Core", sets: 1, reps_or_duration: "1 set", intensity: "RPE 3", rest: "None", notes: `Climbing-Specific PT Core:\n3 sets x 10 reps Cable Pallof Presses\n3 sets x ${plankSecs}s Side Planks (each side)\n3 sets x 10 reps Swiss-Ball Rollouts / Stir-the-Pot\n3 sets x 10 reps Seated Contra-Lateral Leg Raises` },
+            { name: "Deep Shoulder & Spine Mobility", category: "Mobility", sets: 1, reps_or_duration: "1 set", intensity: "RPE 3", rest: "None", notes: "Deep Shoulder & Spine Mobility:\n2 sets x 60s Thoracic Extensions Over Foam Roller\n2 sets x 30s Sleeper Stretches (each side)\n2 sets x 10 reps Prone Y-T-W-L Positions\n2 sets x 30s Puppy Pose Lat Stretches\n2 sets x 30s Spine Twists (each side)" }
           ];
         } else if (d === 3) {
           // DAY 3 (Off-Wall Strength / Fingerboard)
@@ -312,9 +312,9 @@ function generateWorkouts() {
             ? "Bodyweight single-leg Romanian deadlifts (3 sets x 8 reps/leg) paired with slow bodyweight lunges."
             : "Pair Deficit Kettlebell Reverse Lunges (3 sets x 8 reps/leg) directly with Kettlebell Floating RDLs (3 sets x 10 reps/leg).";
           exercises = [
-            { name: "Rotator Cuff & Scapular Base Grid", category: "Mobility", sets: 3, reps_or_duration: "3 sets", intensity: "RPE 6", rest: "None", notes: "Prone unweighted Y-T-W-L positions (10 reps) paired with wall slides (10 reps) to promote scapular upward rotation." },
-            { name: reverseLungesName, category: "Strength", sets: 3, reps_or_duration: "3 sets", intensity: "RPE 6", rest: "None", notes: reverseLungesNotes },
-            { name: "Anti-Extension Trunk Stability", category: "Core", sets: 3, reps_or_duration: "3 sets x 12 reps", intensity: "RPE 6", rest: "None", notes: "Deadbugs paired with slow planks or ab-wheel rollouts." }
+            { name: "Rotator Cuff & Scapular Base Grid", category: "Mobility", sets: 1, reps_or_duration: "1 set", intensity: "RPE 6", rest: "None", notes: "Rotator Cuff & Scapular Base Grid:\n3 sets x 10 reps Prone Y-T-W-L Positions\n3 sets x 10 reps Wall Slides" },
+            { name: reverseLungesName, category: "Strength", sets: 1, reps_or_duration: "1 set", intensity: "RPE 6", rest: "None", notes: phaseNum === 1 ? "Lower Body Alignment:\n3 sets x 8 reps Bodyweight Single-Leg Romanian Deadlifts (each leg)\n3 sets x 10 reps Slow Bodyweight Lunges" : "Lower Body Posterior Sling:\n3 sets x 8 reps Deficit Kettlebell Reverse Lunges (each leg)\n3 sets x 10 reps Kettlebell Floating RDLs (each leg)" },
+            { name: "Anti-Extension Trunk Stability", category: "Core", sets: 1, reps_or_duration: "1 set", intensity: "RPE 6", rest: "None", notes: "Anti-Extension Trunk Stability:\n3 sets x 12 reps Deadbugs\n3 sets x 30s Slow Planks or Ab-Wheel Rollouts" }
           ];
         } else if (d === 7) {
           // DAY 7 (Rest Day)
@@ -414,7 +414,7 @@ const DEFAULT_FAQS = [
 
 // Helper to initialize database
 function initDB() {
-  const CURRENT_VERSION = "3.2";
+  const CURRENT_VERSION = "3.3";
   const storedVersion = localStorage.getItem("onus_db_version");
   if (storedVersion !== CURRENT_VERSION) {
     // Clear all onus-related localStorage entries to force clean re-seeding
