@@ -114,7 +114,7 @@ function generateWorkouts() {
               { name: "Warm-up & Ramp", category: "Warm-up & Prep", sets: 1, reps_or_duration: "10 Mins", intensity: "RPE 6", rest: "None", notes: "Standard Prep Container + Tindeq MVC neural screening." },
               { name: "Aerobic Regeneration Circuits (ARC)", category: "Core Driver", sets: probs, reps_or_duration: `${probs} problems`, intensity: "RPE 6", rest: rest, notes: isDeload ? "Core Driver: Cut volume by 50%. Run easy vertical bouldering." : `Core Driver: Execute ${probs} unique vertical to gentle overhanging problems. Rest strictly ${rest} between problems.` },
               { name: "Friction & Foot-Volume Coordination", category: "Progress Hook", sets: 1, reps_or_duration: "1 set", intensity: "RPE 6", rest: "Self-paced", notes: "Progress Hook: Friction & Foot-Volume Coordination. Direct center-of-mass matching on large sloper volumes." },
-              { name: "Chiba Tore Diagonal Core & Ankle Springs", category: "Care & Restoration", sets: 2, reps_or_duration: "2 sets", intensity: "RPE 6", rest: "Self-paced", notes: "Chiba Tore Diagonal Core & Ankle Spring: Supine hand-to-toe touches, Single-hand elevated scapular push-ups, and weighted pogo jumps." }
+              { name: "Chiba Tore Diagonal Core & Ankle Springs", category: "Care & Restoration", sets: 1, reps_or_duration: "1 set", intensity: "RPE 6", rest: "Self-paced", notes: "Chiba Tore Diagonal Core & Ankle Springs:\n2 sets x 10 reps Supine Hand-to-Toe Touches\n2 sets x 8 reps Single-Hand Elevated Scapular Push-ups\n2 sets x 20 reps Weighted Pogo Jumps" }
             ];
           } else if (phaseNum === 2) {
             title = "Advanced Board Climbing & Tension Syntax";
@@ -126,7 +126,7 @@ function generateWorkouts() {
               { name: "Warm-up & Prep", category: "Warm-up & Prep", sets: 1, reps_or_duration: "10 Mins", intensity: "RPE 7", rest: "None", notes: "Standard Prep Container + Tindeq MVC neural screening." },
               { name: "Advanced Board Climbing & Tension Syntax", category: "Core Driver", sets: climbs, reps_or_duration: `${climbs} climbs`, intensity: "RPE 8", rest: rest, notes: isDeload ? "Core Driver: Cut volume by 50%." : `Core Driver: Complete ${climbs} board climbs. Rest ${rest} between burns.` },
               { name: "1% Capillary Booster & Rotational Core", category: "Progress Hook", sets: 1, reps_or_duration: "1 set", intensity: "RPE 6", rest: "Self-paced", notes: "Progress Hook: 1% Capillary Booster & Rotational Core. ARC bouldering with 3s hover cues." },
-              { name: "Unilateral Scapular Control & Ankle Springs", category: "Care & Restoration", sets: 2, reps_or_duration: "2 sets", intensity: "RPE 6", rest: "Self-paced", notes: "Unilateral Scapular control & Ankle Springs: Single-hand elevated scap pushups, dips, and Weighted Pogo jumps." }
+              { name: "Unilateral Scapular Control & Ankle Springs", category: "Care & Restoration", sets: 1, reps_or_duration: "1 set", intensity: "RPE 6", rest: "Self-paced", notes: "Unilateral Scapular Control & Ankle Springs:\n2 sets x 8 reps Single-Hand Elevated Scap Push-ups\n2 sets x 8 reps Dips\n2 sets x 20 reps Weighted Pogo Jumps" }
             ];
           } else if (phaseNum === 3) {
             title = "High-Neural / Absolute Limit Bouldering";
@@ -138,7 +138,7 @@ function generateWorkouts() {
               { name: "Warm-up & Prep", category: "Warm-up & Prep", sets: 1, reps_or_duration: "10 Mins", intensity: "RPE 8", rest: "None", notes: "Standard Prep container + Tindeq MVC neural screening." },
               { name: "High-Neural / Absolute Limit Bouldering", category: "Core Driver", sets: climbs, reps_or_duration: `${climbs} attempts`, intensity: "RPE 9.5", rest: rest, notes: isDeload ? "Core Driver: Cut attempts by 50%." : `Core Driver: Project ${climbs} climbs. Rest ${rest} between burns.` },
               { name: "Capacity Preservation", category: "Progress Hook", sets: 1, reps_or_duration: "1 set", intensity: "RPE 6", rest: "Self-paced", notes: "Progress Hook: Capacity Preservation. Vertical ARC climbing with hover cues." },
-              { name: "Chiba Tore Core & Antagonist", category: "Care & Restoration", sets: 2, reps_or_duration: "2 sets", intensity: "RPE 6", rest: "Self-paced", notes: "Chiba Tore Core & Antagonist: Supine hand-to-toe touches and single-hand elevated scapular pushups." }
+              { name: "Chiba Tore Core & Antagonist", category: "Care & Restoration", sets: 1, reps_or_duration: "1 set", intensity: "RPE 6", rest: "Self-paced", notes: "Chiba Tore Core & Antagonist:\n2 sets x 10 reps Supine Hand-to-Toe Touches\n2 sets x 8 reps Single-Hand Elevated Scapular Push-ups" }
             ];
           } else if (phaseNum === 4) {
             title = "High-Neural / Dynamic Power Board";
@@ -149,7 +149,7 @@ function generateWorkouts() {
               { name: "Warm-up & Prep", category: "Warm-up & Prep", sets: 1, reps_or_duration: "10 Mins", intensity: "RPE 8", rest: "None", notes: "Standard Prep Container + Tindeq MVC neural screening." },
               { name: "High-Neural / Dynamic Power Board", category: "Core Driver", sets: climbs, reps_or_duration: `${climbs} attempts`, intensity: "RPE 9", rest: "3-4 mins", notes: isDeload ? "Core Driver: Cut dynamic burns by 50%." : `Core Driver: Complete ${climbs} dynamic coordination climbs. Rest 3-4 mins.` },
               { name: "Force Ceiling Defense", category: "Progress Hook", sets: 1, reps_or_duration: "1 set", intensity: "RPE 8", rest: "Self-paced", notes: "Progress Hook: Force Ceiling Defense. 2 pulls against force gauge at 90% MVC before climbing, then weighted pull-ups." },
-              { name: "Chiba Tore Core & Ankle Springs", category: "Care & Restoration", sets: 2, reps_or_duration: "2 sets", intensity: "RPE 6", rest: "Self-paced", notes: "Chiba Tore Core & Ankle Springs: Supine hand-to-toe touches and weighted pogo jumps." }
+              { name: "Chiba Tore Core & Ankle Springs", category: "Care & Restoration", sets: 1, reps_or_duration: "1 set", intensity: "RPE 6", rest: "Self-paced", notes: "Chiba Tore Core & Ankle Springs:\n2 sets x 10 reps Supine Hand-to-Toe Touches\n2 sets x 20 reps Weighted Pogo Jumps" }
             ];
           } else if (phaseNum === 5) {
             title = "High-Neural Trigger into Lactic Capacity";
@@ -161,7 +161,7 @@ function generateWorkouts() {
               { name: "Warm-up & Prep", category: "Warm-up & Prep", sets: 1, reps_or_duration: "10 Mins", intensity: "RPE 7", rest: "None", notes: "Standard Prep container + Tindeq screening." },
               { name: "Lactic Circuits & Capacity (4x4s)", category: "Core Driver", sets: blocks, reps_or_duration: `${blocks} blocks of ${climbs} climbs`, intensity: "RPE 9", rest: "45s/4m", notes: isDeload ? "Core Driver: Eliminate lactic circuits. Rest 3m between easy climbs." : `Core Driver: Complete ${blocks} blocks of ${climbs} climbs back-to-back. Rest 45s between climbs, 4m between blocks.` },
               { name: "Neuro-Power Trigger", category: "Progress Hook", sets: 2, reps_or_duration: "2 attempts", intensity: "RPE 9.5", rest: "Self-paced", notes: "Progress Hook: Neuro-Power Trigger. Execute 2 max-velocity limit board attempts at the absolute start while fresh." },
-              { name: "Forearm Flush & Core Restoration", category: "Care & Restoration", sets: 1, reps_or_duration: "1 set", intensity: "RPE 6", rest: "Self-paced", notes: "Forearm Flush & Core: Rice bucket hand drills, pen rolling, and supine hand-to-toe touches." }
+              { name: "Forearm Flush & Core Restoration", category: "Care & Restoration", sets: 1, reps_or_duration: "1 set", intensity: "RPE 6", rest: "Self-paced", notes: "Forearm Flush & Core Restoration:\n2 sets x 60s Rice Bucket Hand Drills\n2 sets x 30s Pen Rolling\n2 sets x 10 reps Supine Hand-to-Toe Touches" }
             ];
           }
         } else if (d === 2) {
@@ -189,7 +189,7 @@ function generateWorkouts() {
               { name: "Warm-up & Edge Activation", category: "Warm-up & Prep", sets: 1, reps_or_duration: "10 Mins", intensity: "RPE 6", rest: "None", notes: "Standard Prep Container + Tindeq MVC screening." },
               { name: "Compound Strength Overload", category: "Core Driver", sets: 3, reps_or_duration: "3 sets x 8 reps", intensity: "RPE 7", rest: "2 mins", notes: isDeload ? "Core Driver: Cut resistance reps by 50%." : "Core Driver: Weighted pull-ups, dumbbell floor presses, barbell rows, and Heels-Elevated Weighted Squats." },
               { name: "Active Overcoming Isometrics", category: "Progress Hook", sets: 6, reps_or_duration: "6 reps x 10s", intensity: "RPE 6", rest: "50 seconds", notes: isDeload ? "Progress Hook: Eliminated." : "Progress Hook: Active Overcoming Isometrics: 10s active pulls against Tindeq gauge at 95% MVC." },
-              { name: "Antagonist Balance & Plyos", category: "Care & Restoration", sets: 1, reps_or_duration: "1 set", intensity: "RPE 6", rest: "Self-paced", notes: "Antagonist Balance & Plyos: Extensor bands, wrist roller rolls, forearm self-massage, and Depth Jumps." }
+              { name: "Antagonist Balance & Plyos", category: "Care & Restoration", sets: 1, reps_or_duration: "1 set", intensity: "RPE 6", rest: "Self-paced", notes: "Antagonist Balance & Plyos:\n2 sets x 20 reps Extensor Bands\n2 sets x 15 reps Wrist Roller Rolls\n2 sets x 60s Forearm Self-Massage\n3 sets x 5 reps Depth Jumps" }
             ];
           } else if (phaseNum === 2) {
             title = "Heavy Compound Strength & Overcoming Finger Pulls";
@@ -199,7 +199,7 @@ function generateWorkouts() {
               { name: "Warm-up & Prep", category: "Warm-up & Prep", sets: 1, reps_or_duration: "10 Mins", intensity: "RPE 7", rest: "None", notes: "Standard Prep container + Tindeq MVC screening." },
               { name: "Max Off-Wall Compound Overload", category: "Core Driver", sets: 4, reps_or_duration: "4 sets x 6 reps", intensity: "RPE 8", rest: "3 mins", notes: isDeload ? "Core Driver: Cut reps in half." : "Core Driver: Weighted pull-ups, barbell rows, dumbbell floor presses, and strict hanging L-sits." },
               { name: "Overcoming Isometric Pulls", category: "Progress Hook", sets: 5, reps_or_duration: "5 reps x 7s", intensity: "RPE 8", rest: "53 seconds", notes: isDeload ? "Progress Hook: Eliminated." : "Progress Hook: Overcoming Isometric pulls against Tindeq gauge at 85%-90% MVC." },
-              { name: "Antagonist Care & Plyometric Extensions", category: "Care & Restoration", sets: 1, reps_or_duration: "1 set", intensity: "RPE 6", rest: "Self-paced", notes: "Antagonist Care & Plyometrics: Forearm rolling, wrist curls, and Depth Jumps to Max Box jumps." }
+              { name: "Antagonist Care & Plyometric Extensions", category: "Care & Restoration", sets: 1, reps_or_duration: "1 set", intensity: "RPE 6", rest: "Self-paced", notes: "Antagonist Care & Plyometric Extensions:\n2 sets x 60s Forearm Rolling\n2 sets x 12 reps Wrist Curls\n3 sets x 5 reps Depth Jumps to Max Box Jumps" }
             ];
           } else if (phaseNum === 3) {
             title = "Compound Max Strength & Max Fingerboard";
@@ -209,7 +209,7 @@ function generateWorkouts() {
               { name: "Warm-up & Prep", category: "Warm-up & Prep", sets: 1, reps_or_duration: "10 Mins", intensity: "RPE 8", rest: "None", notes: "Standard Prep Container + Tindeq MVC screening." },
               { name: "Compound Max Strength Overload", category: "Core Driver", sets: 4, reps_or_duration: "4 sets x 5 reps", intensity: "RPE 9", rest: "3-4 mins", notes: isDeload ? "Core Driver: Cut sets/reps by 50%." : "Core Driver: Heavy weighted pull-ups, heavy dumbbell floor presses, barbell rows, and Heels-Elevated weighted squats." },
               { name: "Max Edge Overcoming Pulls", category: "Progress Hook", sets: 5, reps_or_duration: "5 reps x 7s", intensity: "RPE 9", rest: "3 mins", notes: isDeload ? "Progress Hook: Eliminated." : "Progress Hook: Max Edge Overcoming Pulls against Tindeq gauge at 95% MVC." },
-              { name: "Antagonist Balance & Plyos", category: "Care & Restoration", sets: 1, reps_or_duration: "1 set", intensity: "RPE 6", rest: "Self-paced", notes: "Antagonist Balance & Plyos: Extensor bands, wrist rolls, and Depth Jumps to Max Vertical Vector." }
+              { name: "Antagonist Balance & Plyos", category: "Care & Restoration", sets: 1, reps_or_duration: "1 set", intensity: "RPE 6", rest: "Self-paced", notes: "Antagonist Balance & Plyos:\n2 sets x 20 reps Extensor Bands\n2 sets x 15 reps Wrist Rolls\n3 sets x 5 reps Depth Jumps to Max Vertical Vector" }
             ];
           } else if (phaseNum === 4) {
             title = "Fingerboard Structural & Gym Power/Plyos";
@@ -219,7 +219,7 @@ function generateWorkouts() {
               { name: "Warm-up & Prep", category: "Warm-up & Prep", sets: 1, reps_or_duration: "10 Mins", intensity: "RPE 8", rest: "None", notes: "Standard Prep Container + Tindeq MVC screening." },
               { name: "Fingerboard Structural & Gym Power/Plyos", category: "Core Driver", sets: 5, reps_or_duration: "5 reps x 7s", intensity: "RPE 9", rest: "4 mins", notes: isDeload ? "Core Driver: Cut volume by 50%." : "Core Driver: Fingerboard recruitment active pulls at 90% MVC + Campus board bumps." },
               { name: "Compound Strength Retention", category: "Progress Hook", sets: 3, reps_or_duration: "3 sets x 5 reps", intensity: "RPE 8", rest: "Self-paced", notes: "Progress Hook: Compound Strength Retention. Dumbbell overhead press, goblet squats, face-pulls." },
-              { name: "Antagonist Balance & Plyo", category: "Care & Restoration", sets: 1, reps_or_duration: "1 set", intensity: "RPE 6", rest: "Self-paced", notes: "Antagonist Balance & Plyo: Forearm rolling, extensor bands, and Depth Jumps to Max Vertical Box Jumps." }
+              { name: "Antagonist Balance & Plyo", category: "Care & Restoration", sets: 1, reps_or_duration: "1 set", intensity: "RPE 6", rest: "Self-paced", notes: "Antagonist Balance & Plyo:\n2 sets x 60s Forearm Rolling\n2 sets x 20 reps Extensor Bands\n3 sets x 5 reps Depth Jumps to Max Vertical Box Jumps" }
             ];
           } else if (phaseNum === 5) {
             title = "High-Fatigue Link Sessions & Lifting";
@@ -231,7 +231,7 @@ function generateWorkouts() {
               { name: "Warm-up & Prep", category: "Warm-up & Prep", sets: 1, reps_or_duration: "10 Mins", intensity: "RPE 8", rest: "None", notes: "Standard Prep container + Tindeq screening." },
               { name: "High-Fatigue Link Sessions", category: "Core Driver", sets: reps, reps_or_duration: `${reps} links`, intensity: "RPE 9", rest: "3 mins", notes: isDeload ? "Core Driver: Cut reps by 50%." : `Core Driver: High-Fatigue Link Sessions: Climb overlapping sport climb segments. Link two blocks of moves together with 10s shakeout on wall. Total ${moves} moves.` },
               { name: "Base Strength Maintenance", category: "Progress Hook", sets: 3, reps_or_duration: "3 sets x 5 reps", intensity: "RPE 8", rest: "Self-paced", notes: "Progress Hook: Base Strength Maintenance. Weighted pull-ups and heavy squats." },
-              { name: "Antagonist Balance & Plyos", category: "Care & Restoration", sets: 1, reps_or_duration: "1 set", intensity: "RPE 6", rest: "Self-paced", notes: "Antagonist Balance & Plyos: Depth Jumps, forearm rolling, extensor bands." }
+              { name: "Antagonist Balance & Plyos", category: "Care & Restoration", sets: 1, reps_or_duration: "1 set", intensity: "RPE 6", rest: "Self-paced", notes: "Antagonist Balance & Plyos:\n3 sets x 5 reps Depth Jumps\n2 sets x 60s Forearm Rolling\n2 sets x 20 reps Extensor Bands" }
             ];
           }
         } else if (d === 4) {
@@ -267,7 +267,7 @@ function generateWorkouts() {
               { name: "Warm-up & Prep", category: "Warm-up & Prep", sets: 1, reps_or_duration: "10 Mins", intensity: "RPE 7", rest: "None", notes: "Standard Prep Container with screening." },
               { name: "Modern Dynamic Coordination Volumes", category: "Core Driver", sets: 10, reps_or_duration: "10-12 problems", intensity: "RPE 7", rest: "2 mins", notes: isDeload ? "Core Driver: Cut volume by 50%." : "Core Driver: Complete 10-12 comp coordination problems. Rest 2 mins." },
               { name: "Under-Pump Coordination Repeats", category: "Progress Hook", sets: 1, reps_or_duration: "1 set", intensity: "RPE 7", rest: "Self-paced", notes: "Progress Hook: Under-Pump Coordination repeats. Run 8 flash problems on overhanging terrain." },
-              { name: "Hamstring & Ankle Restoration", category: "Care & Restoration", sets: 1, reps_or_duration: "1 set", intensity: "RPE 6", rest: "Self-paced", notes: "Hamstring & Ankle Restoration: Resisted ankle dorsiflexion, foam rolling, and toes-on-edge bridges." }
+              { name: "Hamstring & Ankle Restoration", category: "Care & Restoration", sets: 1, reps_or_duration: "1 set", intensity: "RPE 6", rest: "Self-paced", notes: "Hamstring & Ankle Restoration:\n2 sets x 15 reps Resisted Ankle Dorsiflexion\n2 sets x 60s Foam Rolling (hamstrings & calves)\n2 sets x 12 reps Toes-on-Edge Bridges" }
             ];
           } else if (phaseNum === 3) {
             title = "High-Velocity Board Work & Power";
@@ -277,7 +277,7 @@ function generateWorkouts() {
               { name: "Warm-up & Prep", category: "Warm-up & Prep", sets: 1, reps_or_duration: "10 Mins", intensity: "RPE 8", rest: "None", notes: "Standard Prep Container with screening." },
               { name: "High-Velocity Board Work & Power", category: "Core Driver", sets: 8, reps_or_duration: "8-10 problems", intensity: "RPE 8", rest: "3 mins", notes: isDeload ? "Core Driver: Cut dynamic volume by 50%." : "Core Driver: Complete 8-10 dynamic climbs on steep board. Pelvic launch, straight-arm stacking." },
               { name: "Under-Pump Technical Repeats", category: "Progress Hook", sets: 1, reps_or_duration: "1 set", intensity: "RPE 7", rest: "Self-paced", notes: "Progress Hook: Under-Pump Technical Repeats. 6 flash problems on overhanging terrain." },
-              { name: "Forearm Decompression", category: "Care & Restoration", sets: 1, reps_or_duration: "1 set", intensity: "RPE 6", rest: "Self-paced", notes: "Forearm Decompression: Rice bucket hand drills, pen rolling, and flexor massage." }
+              { name: "Forearm Decompression", category: "Care & Restoration", sets: 1, reps_or_duration: "1 set", intensity: "RPE 6", rest: "Self-paced", notes: "Forearm Decompression:\n2 sets x 60s Rice Bucket Hand Drills\n2 sets x 30s Pen Rolling\n2 sets x 60s Flexor Massage" }
             ];
           } else if (phaseNum === 4) {
             title = "Speed & Contact Bouldering";
@@ -287,7 +287,7 @@ function generateWorkouts() {
               { name: "Warm-up & Prep", category: "Warm-up & Prep", sets: 1, reps_or_duration: "10 Mins", intensity: "RPE 8", rest: "None", notes: "Standard Prep Container with screening." },
               { name: "Speed & Contact Bouldering", category: "Core Driver", sets: 10, reps_or_duration: "10-12 problems", intensity: "RPE 8", rest: "3 mins", notes: isDeload ? "Core Driver: Cut volume by 50%." : "Core Driver: Complete 10-12 speed coordination climbs, focus on running dynos (Tomoa skip)." },
               { name: "Under-Pump Coordination Repeats", category: "Progress Hook", sets: 1, reps_or_duration: "1 set", intensity: "RPE 8", rest: "Self-paced", notes: "Progress Hook: Under-Pump Coordination repeats. 8 flash problems on overhangs." },
-              { name: "Antagonist Decompression", category: "Care & Restoration", sets: 1, reps_or_duration: "1 set", intensity: "RPE 6", rest: "Self-paced", notes: "Antagonist Decompression: Wrist extensor bands, tennis-ball pec release, passive centrated Hang Right shoulder hangs." }
+              { name: "Antagonist Decompression", category: "Care & Restoration", sets: 1, reps_or_duration: "1 set", intensity: "RPE 6", rest: "Self-paced", notes: "Antagonist Decompression:\n2 sets x 20 reps Wrist Extensor Bands\n2 sets x 60s Tennis-Ball Pec Release\n2 sets x 30s Passive Centrated Hang Right Shoulder Hangs" }
             ];
           } else if (phaseNum === 5) {
             title = "Power Endurance Peak Overload (4x4s)";
@@ -297,7 +297,7 @@ function generateWorkouts() {
               { name: "Warm-up & Prep", category: "Warm-up & Prep", sets: 1, reps_or_duration: "10 Mins", intensity: "RPE 8", rest: "None", notes: "Standard Prep Container with screening." },
               { name: "Power Endurance Peak Overload (4x4s)", category: "Core Driver", sets: 4, reps_or_duration: "4 blocks of 4 climbs", intensity: "RPE 9", rest: "4 mins", notes: isDeload ? "Core Driver: Eliminate 4x4s. Run easy climbs." : "Core Driver: Run 4x4 boulder intervals. Choose 4 distinct problems. Climb them back-to-back with no rest." },
               { name: "Friction Coordination Repeats", category: "Progress Hook", sets: 1, reps_or_duration: "1 set", intensity: "RPE 8", rest: "Self-paced", notes: "Progress Hook: Friction Coordination Repeats. Slab volume stepping drills under pump." },
-              { name: "Gentle Posture Decompression", category: "Care & Restoration", sets: 1, reps_or_duration: "1 set", intensity: "RPE 6", rest: "Self-paced", notes: "Gentle Posture Decompression: Cat & Camel, Spine Rolls, and passive overhead hangs." }
+              { name: "Gentle Posture Decompression", category: "Care & Restoration", sets: 1, reps_or_duration: "1 set", intensity: "RPE 6", rest: "Self-paced", notes: "Gentle Posture Decompression:\n2 sets x 10 reps Cat & Camel\n2 sets x 10 reps Spine Rolls\n2 sets x 30s Passive Overhead Hangs" }
             ];
           }
         } else if (d === 6) {
@@ -414,7 +414,7 @@ const DEFAULT_FAQS = [
 
 // Helper to initialize database
 function initDB() {
-  const CURRENT_VERSION = "3.1";
+  const CURRENT_VERSION = "3.2";
   const storedVersion = localStorage.getItem("onus_db_version");
   if (storedVersion !== CURRENT_VERSION) {
     // Clear all onus-related localStorage entries to force clean re-seeding
