@@ -873,7 +873,6 @@ async function loadAthleteTodayScreen() {
                 <span style="font-weight: 600;">${escapeHTML(d.name)}</span>
               </div>
               <div style="display: flex; align-items: center; gap: 6px;">
-                <span class="badge" style="background-color: var(--bg-secondary); color: var(--accent-cyan); font-size: 0.65rem; font-weight: 600; padding: 2px 6px; border-radius: var(--border-radius-sm); border: 1px solid var(--border-color);">${escapeHTML(d.category)}</span>
                 ${!isWorkoutContainer ? `<span style="font-size: 0.8rem; color: var(--text-secondary); font-weight: 500;">${d.sets} sets</span>` : ''}
               </div>
             </div>
