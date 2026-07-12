@@ -872,9 +872,7 @@ async function loadAthleteTodayScreen() {
                 `}
                 <span style="font-weight: 600;">${escapeHTML(d.name)}</span>
               </div>
-              <div style="display: flex; align-items: center; gap: 6px;">
-                ${!isWorkoutContainer ? `<span style="font-size: 0.8rem; color: var(--text-secondary); font-weight: 500;">${d.sets} sets</span>` : ''}
-              </div>
+
             </div>
             
             ${!isWorkoutContainer ? `
