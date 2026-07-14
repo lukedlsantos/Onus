@@ -1,4 +1,4 @@
-const CACHE_NAME = 'onus-cache-v6';
+const CACHE_NAME = 'onus-cache-v7';
 const ASSETS = [
   './',
   './index.html',

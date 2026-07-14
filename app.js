@@ -55,17 +55,13 @@ const NAVIGATION_CONFIG = {
     { id: 'calendar', label: 'Calendar', screen: 'screen-calendar', icon: `<svg viewBox="0 0 24 24"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>` },
     { id: 'log', label: 'Log', screen: 'screen-log', icon: `<svg viewBox="0 0 24 24"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>` },
     { id: 'review', label: 'Review', screen: 'screen-review', icon: `<svg viewBox="0 0 24 24"><path d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>` },
-    { id: 'resources', label: 'Resources', screen: 'screen-resources', icon: `<svg viewBox="0 0 24 24"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>` },
-    { id: 'faqs', label: 'FAQs', screen: 'screen-faqs', icon: `<svg viewBox="0 0 24 24"><path d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>` },
     { id: 'profile', label: 'Profile', screen: 'screen-profile', icon: `<svg viewBox="0 0 24 24"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>` }
   ],
   admin: [
     { id: 'athletes', label: 'Athletes', screen: 'screen-athletes', icon: `<svg viewBox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>` },
     { id: 'programs', label: 'Programs', screen: 'screen-programs', icon: `<svg viewBox="0 0 24 24"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>` },
     { id: 'reviews-queue', label: 'Reviews', screen: 'screen-reviews-queue', icon: `<svg viewBox="0 0 24 24"><path d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>` },
-    { id: 'checkins', label: 'Check-ins', screen: 'screen-checkins', icon: `<svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>` },
-    { id: 'resources', label: 'Resources', screen: 'screen-resources', icon: `<svg viewBox="0 0 24 24"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>` },
-    { id: 'faqs', label: 'FAQs', screen: 'screen-faqs', icon: `<svg viewBox="0 0 24 24"><path d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>` }
+    { id: 'checkins', label: 'Check-ins', screen: 'screen-checkins', icon: `<svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>` }
   ]
 };
 
@@ -76,6 +72,25 @@ async function initApp() {
 
   document.getElementById("switch-role-btn").addEventListener("click", handleRoleSwitchToggle);
   setupSliderIndicators();
+
+  // Profile subtab switching
+  document.querySelectorAll(".profile-subtab").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const targetId = btn.dataset.subtab;
+      document.querySelectorAll(".profile-subtab-content").forEach(c => c.style.display = "none");
+      document.querySelectorAll(".profile-subtab").forEach(b => {
+        b.style.borderBottomColor = "transparent";
+        b.style.color = "var(--text-muted)";
+        b.style.fontWeight = "500";
+        b.classList.remove("active");
+      });
+      document.getElementById(targetId).style.display = "";
+      btn.style.borderBottomColor = "var(--accent-cyan)";
+      btn.style.color = "var(--accent-cyan)";
+      btn.style.fontWeight = "600";
+      btn.classList.add("active");
+    });
+  });
 
   const backToCalendarBtn = document.getElementById("back-to-calendar-btn");
   if (backToCalendarBtn) {
@@ -1873,24 +1888,30 @@ const WARMUP_ROUTINES = {
   },
   standard: {
     title: "Standard Warm-Up",
-    objective: "Systemic pulse raising, Chiba Tore movement screening, capsule stabilization under light bodyweight, and pulley isometric priming (30 Minutes)",
+    objective: "Systemic pulse raising, Chiba Tore movement screening, capsule stabilization under light bodyweight, progressive pulley priming, and power potentiation (35-40 Minutes)",
     phases: [
-      { name: "Phase A: Systemic Pulse & Chiba Mobility", duration: "10:00" },
-      { name: "Phase B: Scapular & Spinal Stabilization", duration: "10:00" },
-      { name: "Phase C: Off-Wall Diagnostic Tendon Influx", duration: "10:00" }
+      { name: "Phase 1: Anatomical Prep & Systemic Pulse", duration: "8:00" },
+      { name: "Phase 2: Scapular & Spinal Stabilization", duration: "10:00" },
+      { name: "Phase 3: Autoregulated Potentiation & Loading", duration: "15:00" }
     ],
     stations: [
-      // Phase A
-      { name: "Systemic Pulse Raiser", desc: "High knees or jumping jacks to elevate core temperature and promote joint lubrication.", duration: 180, type: "timer", phase: "Phase A: Pulse & Mobility" },
-      { name: "Overhead Towel Squat Screen", desc: "Hold a towel overhead with wide arms and perform unweighted deep squats to assess chest, shoulder, and hip integration.", duration: 120, type: "timer", phase: "Phase A: Pulse & Mobility" },
-      { name: "Chiba Diagonal Mobilization", desc: "Perform Staggered Squat & Elbow Circle (contralateral tracking) and Supine Hand-to-Toe Touch (coordinates obliques with opposite hip/shoulder).", duration: 300, type: "timer", phase: "Phase A: Pulse & Mobility" },
-      // Phase B
-      { name: "Prone Y-T-W Floor Raises", desc: "Face down on mat. Lift chest slightly and pulse arms into Y, T, and W positions.\nHold apex for 2 seconds.\nPerform 3 sets × 10 reps.", type: "reps", sets: 3, phase: "Phase B: Stabilization" },
-      { name: "Scapular Push-Ups to Downward Dog Shifting", desc: "Retract and protract shoulder blades in high plank, then drive hips back to downward dog.\nPerform 3 sets × 12 reps.", type: "reps", sets: 3, phase: "Phase B: Stabilization" },
-      { name: "Banded Pallof Press", desc: "Anchor band at chest height, step out for tension, hold at sternum and press straight out.\nPerform 3 sets × 12 reps per side.", type: "reps", sets: 3, phase: "Phase B: Stabilization" },
-      // Phase C
-      { name: "CNS Neural Check: 50% & 75% MVC Pulls", desc: "Perform 2 pulls × 5 seconds (one at 50%, one at 75% effort) against static ground block. Verify neural drive. Rest 60s between pulls.", duration: 60, type: "pulls", pullsCount: 2, pullDuration: 5, phase: "Phase C: Tendon Influx" },
-      { name: "Tendon Priming Set 1: Target Edge (90% Effort)", desc: "Perform 2 reps × 5 seconds target session edge profile at 90% perceived max pull effort.\nRest 60 seconds between pulls.", duration: 60, type: "pulls", pullsCount: 2, pullDuration: 5, phase: "Phase C: Tendon Influx" }
+      // Phase 1
+      { name: "Systemic Pulse Raiser", desc: "High knees or jumping jacks to elevate core temperature and promote joint lubrication.", duration: 60, type: "timer", phase: "Phase 1: Systemic Pulse" },
+      { name: "Overhead Towel Squat Screen", desc: "Hold a towel overhead with wide arms and perform unweighted deep squats to assess chest, shoulder, and hip integration.", duration: 120, type: "timer", phase: "Phase 1: Systemic Pulse" },
+      { name: "Chiba Diagonal Mobilization", desc: "Perform Staggered Squat & Elbow Circle (contralateral tracking) and Supine Hand-to-Toe Touch (coordinates obliques with opposite hip/shoulder).", duration: 300, type: "timer", phase: "Phase 1: Systemic Pulse" },
+      // Phase 2
+      { name: "Prone Y-T-W Floor Raises", desc: "Face down on mat. Lift chest slightly and pulse arms into Y, T, and W positions.\nHold apex for 2 seconds.\nPerform 3 sets × 10 reps.", type: "reps", sets: 3, phase: "Phase 2: Stabilization" },
+      { name: "Scapular Push-Ups to Downward Dog Shifting", desc: "Retract and protract shoulder blades in high plank, then drive hips back to downward dog.\nPerform 3 sets × 12 reps.", type: "reps", sets: 3, phase: "Phase 2: Stabilization" },
+      { name: "Banded Pallof Press", desc: "Anchor band at chest height, step out for tension, hold at sternum and press straight out.\nPerform 3 sets × 12 reps per side.", type: "reps", sets: 3, phase: "Phase 2: Stabilization" },
+      // Phase 3
+      { name: "CNS Neural Check: 50% & 75% MVC Pulls", desc: "Perform 2 pulls × 5 seconds (one at 50%, one at 75% effort) against static ground block. Verify neural drive. Rest 60s between pulls.", duration: 60, type: "pulls", pullsCount: 2, pullDuration: 5, phase: "Phase 3: Mechanical Loading" },
+      { name: "Tendon Priming Set 1: Target Edge (90% Effort)", desc: "Perform 2 reps × 5 seconds target session edge profile at 90% perceived max pull effort.\nRest 60 seconds between pulls.", duration: 60, type: "pulls", pullsCount: 2, pullDuration: 5, phase: "Phase 3: Mechanical Loading" },
+      // Body & Power Potentiation Drills (moved from lazy)
+      { name: "Static Block Presses", desc: "Perform slow, controlled push-ups on two small blocks to absorb force deeply into shoulders and chest.\nPerform 1 set × 3–5 reps.", type: "reps", sets: 1, phase: "Phase 3: Power Potentiation" },
+      { name: "Feet-On Campus Rung Taps", desc: "Stand in front of campus board (feet on floor/kickplate) and gently tap a higher rung with engaged shoulders.\nPerform 1 set × 3–5 reps.", type: "reps", sets: 1, phase: "Phase 3: Power Potentiation" },
+      { name: "Low-Impact Box Steps & Hops", desc: "Step onto low box, transition to light jumps, and land softly in a deep squat.\nPerform 1 set × 3–5 reps.", type: "reps", sets: 1, phase: "Phase 3: Power Potentiation" },
+      { name: "Mini Skater Bounds", desc: "Short lateral leaps foot-to-foot, landing and freezing for 2 seconds to train joint stability.\nPerform 1 set × 3–5 reps.", type: "reps", sets: 1, phase: "Phase 3: Power Potentiation" },
+      { name: "Sub-Maximal Vertical Rebounds", desc: "Dip into a quick quarter-squat and jump straight up while reaching overhead with both hands.\nPerform 1 set × 3–5 reps.", type: "reps", sets: 1, phase: "Phase 3: Power Potentiation" }
     ]
   },
   comp: {

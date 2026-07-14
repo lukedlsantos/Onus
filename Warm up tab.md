@@ -53,27 +53,31 @@ This file serves as the absolute technical blueprint for the separate, standalon
 * **8. 10mm Micro-Edge Hangs (Half-Crimp):** 1 set × 3 reps (5s hold / 15s rest). Final contact strength priming.
 ---
 
-## 3. Sub-Tab 3: Standard Warm-Up (30-Minute Universal Floor Baseline)
-* **Objective:** The core universal baseline for training days. Systematically addresses every major muscle sling, stabilizes joint capsules under light bodyweight load, screens movement competency, and prepares isometric tendon structures off the wall.
-* **Total Duration:** 30 Minutes
+## 3. Sub-Tab 3: Standard Warm-Up (33-to-38 Minute Universal Floor Baseline)
+* **Objective:** Systemic pulse raising, Chiba Tore movement screening, capsule stabilization under light bodyweight, progressive pulley priming, and power potentiation (33-38 Minutes total).
+* **Total Duration:** 33-38 Minutes
 
-### Section A: Systemic Pulse Elevation & Chiba Tore Mobility (10 Minutes)
-*Execute the following flow sequence:*
-1.  **Systemic Pulse Raiser (3 Mins):** High knees or Jumping jacks to elevate core temperature and joint lubrication.
-2.  **Overhead Towel Squat Screen (2 Mins):** Perform unweighted squats holding a towel overhead with wide arms to assess chest, shoulder, and hip integration.
-3.  **Chiba Diagonal Mobilization (5 Mins):** Execute *Staggered Squat & Elbow Circle* (contralateral limb tracking) and *Supine Hand-to-Toe Touch* (coordinates obliques with opposite hip/shoulder).
+### Phase 1: Anatomical Prep & Systemic Pulse (8 Minutes)
+* **Station 1: Systemic Pulse Raiser (1 Min):** High knees or Jumping jacks to elevate core temperature and joint lubrication.
+* **Station 2: Overhead Towel Squat Screen (2 Mins):** Perform unweighted squats holding a towel overhead with wide arms to assess chest, shoulder, and hip integration.
+* **Station 3: Chiba Diagonal Mobilization (5 Mins):** Execute *Staggered Squat & Elbow Circle* (contralateral limb tracking) and *Supine Hand-to-Toe Touch* (coordinates obliques with opposite hip/shoulder).
 
-### Section B: Scapular & Spinal Stabilization Block (10 Minutes)
+### Phase 2: Scapular & Spinal Stabilization Block (10 Minutes)
 *Execute 3 sets of the following stability constraints:*
-1.  **Prone Y-T-W Floor Raises (10 Reps per position):** Face down on mat. Lift chest slightly and systematically pulse arms into Y, T, and W structural letters, holding absolute muscular contraction for 2 seconds at the apex of each rep.
-2.  **Scapular Push-Ups to Downward Dog Shifting (12 Reps):** High plank posture. Drop the chest purely by retracting shoulder blades, push back up into deep protraction, then fluidly drive hips back into a downward dog pattern before resetting.
-3.  **Banded Pallof Press (12 Reps per side):** Connect resistance band to anchor at chest height. Step out to create horizontal tension, hold band at sternum, and press hands straight out. Prevent any rotational trunk twist.
+* **Station 4: Prone Y-T-W Floor Raises (10 Reps per position):** Face down on mat. Lift chest slightly and systematically pulse arms into Y, T, and W positions, holding contraction for 2 seconds at the apex.
+* **Station 5: Scapular Push-Ups to Downward Dog Shifting (12 Reps):** High plank posture. Drop the chest purely by retracting shoulder blades, push back up into deep protraction, then fluidly drive hips back into downward dog.
+* **Station 6: Banded Pallof Press (12 Reps per side):** Connect resistance band to anchor at chest height. Step out to create horizontal tension, hold band at sternum, and press hands straight out without rotating trunk.
 
-### Section C: Off-Wall Diagnostic Isometric Tendon Influx (10 Minutes)
-*Utilize a floor-anchored tension block or a ground-connected portable flashboard (Tindeq style). Pull downward progressively against static resistance:*
-* **Set 1 (CNS Neural Check):** 2 reps $\times$ 5 seconds pulls at 50% and 75% MVC (Maximum Voluntary Contraction) to verify neurological readiness. If daily force is down >10% from baseline, scale down the session.
-* **Set 2 (Progressive Edge Priming):** 2 reps $\times$ 5 seconds at 90% MVC target session edge profile.
-* *Rest Constraints:* Enforce a strict, hard-capped **60-second countdown timer** between every individual pull.
+### Phase 3: Autoregulated Potentiation & Loading (15 Minutes)
+* **Tendon Priming Sequence:**
+    * **CNS Neural Check (Set 1):** 2 reps $\times$ 5 seconds pulls at 50% and 75% MVC (Maximum Voluntary Contraction) to verify neurological readiness. Rest 60s between pulls.
+    * **Progressive Edge Priming (Set 2):** 2 reps $\times$ 5 seconds at 90% MVC target session edge profile. Rest 60s between pulls.
+* **Body & Power Potentiation Drills (1 set × 3-5 reps each):**
+    * **Static Block Presses:** Controlled push-ups on two small blocks to absorb force deeply into shoulders and chest.
+    * **Feet-On Campus Rung Taps:** Rung tapping with feet on floor to mimic dyno coordination.
+    * **Low-Impact Box Steps & Hops:** Step onto low box, transition to light jumps, and land softly in a deep squat.
+    * **Mini Skater Bounds (Focus on the Stick):** Short lateral leaps foot-to-foot, landing and freezing for 2s to train joint stability.
+    * **Sub-Maximal Vertical Rebounds:** Quarter-squat into explosive vertical jump, reaching overhead.
 
 ---
 
