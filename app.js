@@ -1832,11 +1832,11 @@ const WARMUP_ROUTINES = {
   },
   lazy: {
     title: "Lazy Warm-Up (Climbing Plyometrics Master Protocol)",
-    objective: "Systemic temperature elevation, closed-chain stability, and progressive fingerboard recruitment (16-18 Minutes)",
+    objective: "Systemic temperature elevation, closed-chain stability, and progressive fingerboard recruitment (11-13 Minutes)",
     phases: [
       { name: "Phase 1: Anatomical Prep & Systemic Pulse", duration: "7:00" },
       { name: "Phase 2: Streamlined Targeted Activation", duration: "3:30" },
-      { name: "Phase 3: Autoregulated Power Potentiation", duration: "7:30" }
+      { name: "Phase 3: Autoregulated Power Potentiation", duration: "5:00" }
     ],
     stations: [
       // Phase 1: Anatomical Prep & Systemic Pulse
@@ -1868,13 +1868,7 @@ const WARMUP_ROUTINES = {
       { name: "40° Decline Sloper Hangs", desc: "Maximize palm compression on a slick 40-degree sloper to fully turn on your wrist stabilizers.", type: "pulls", work: 5, rest: 15, cycles: 3, phase: "Phase 3: Fingerboard Matrix" },
       { name: "15mm Micro-Edge Hangs", desc: "Step down to a smaller edge size to increase neural recruitment in a strict half-crimp posture.", type: "pulls", work: 5, rest: 15, cycles: 3, phase: "Phase 3: Fingerboard Matrix" },
       { name: "12mm Micro-Edge Hangs", desc: "Focus on immediate tension recruitment as the hold profile shrinks.", type: "pulls", work: 5, rest: 15, cycles: 3, phase: "Phase 3: Fingerboard Matrix" },
-      { name: "10mm Micro-Edge Hangs", desc: "The final priming step for high contact strength. Ensure your posture remains completely rigid.", type: "pulls", work: 5, rest: 15, cycles: 3, phase: "Phase 3: Fingerboard Matrix" },
-      
-      { name: "Static Block Presses", desc: "Perform slow, controlled push-ups on two small blocks to absorb force deeply into shoulders and chest.\nPerform 1 set × 3–5 reps.", type: "reps", sets: 1, phase: "Phase 3: Power Potentiation" },
-      { name: "Feet-On Campus Rung Taps", desc: "Stand in front of campus board (feet on floor/kickplate) and gently tap a higher rung with engaged shoulders.\nPerform 1 set × 3–5 reps.", type: "reps", sets: 1, phase: "Phase 3: Power Potentiation" },
-      { name: "Low-Impact Box Steps & Hops", desc: "Step onto low box, transition to light jumps, and land softly in a deep squat.\nPerform 1 set × 3–5 reps.", type: "reps", sets: 1, phase: "Phase 3: Power Potentiation" },
-      { name: "Mini Skater Bounds", desc: "Short lateral leaps foot-to-foot, landing and freezing for 2 seconds to train joint stability.\nPerform 1 set × 3–5 reps.", type: "reps", sets: 1, phase: "Phase 3: Power Potentiation" },
-      { name: "Sub-Maximal Vertical Rebounds", desc: "Dip into a quick quarter-squat and jump straight up while reaching overhead with both hands.\nPerform 1 set × 3–5 reps.", type: "reps", sets: 1, phase: "Phase 3: Power Potentiation" }
+      { name: "10mm Micro-Edge Hangs", desc: "The final priming step for high contact strength. Ensure your posture remains completely rigid.", type: "pulls", work: 5, rest: 15, cycles: 3, phase: "Phase 3: Fingerboard Matrix" }
     ]
   },
   standard: {

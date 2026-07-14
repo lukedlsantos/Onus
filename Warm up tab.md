@@ -51,13 +51,6 @@ This file serves as the absolute technical blueprint for the separate, standalon
 * **6. 15mm Micro-Edge Hangs (Half-Crimp):** 1 set × 3 reps (5s hold / 15s rest). Strict half-crimp to increase neural recruitment.
 * **7. 12mm Micro-Edge Hangs (Half-Crimp):** 1 set × 3 reps (5s hold / 15s rest). Fast tension recruitment on shrinking edge profile.
 * **8. 10mm Micro-Edge Hangs (Half-Crimp):** 1 set × 3 reps (5s hold / 15s rest). Final contact strength priming.
-* **Body & Power Potentiation Drills:**
-    * **Static Block Presses (1 set × 3-5 reps):** Controlled push-ups on two small blocks to absorb force.
-    * **Feet-On Campus Rung Taps (1 set × 3-5 reps):** Rung tapping with feet on floor to mimic dyno coordination.
-    * **Low-Impact Box Steps & Hops (1 set × 3-5 reps):** Step up and hop, landing softly in deep squats.
-    * **Mini Skater Bounds (1 set × 3-5 reps):** Short lateral leaps foot-to-foot, freezing for 2s to train joint stability.
-    * **Sub-Maximal Vertical Rebounds (1 set × 3-5 reps):** Quarter-squat into explosive vertical jump, reaching overhead.
-
 ---
 
 ## 3. Sub-Tab 3: Standard Warm-Up (30-Minute Universal Floor Baseline)

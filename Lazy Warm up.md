@@ -67,17 +67,6 @@
 * **8. [cite_start]10mm Micro-Edge Hangs (Half-Crimp):** 1 set × 3 reps (5-second holds) ⏱️ **[Timer: 5s hold / 15s rest between reps]**[cite: 397]. The final priming step for high contact strength. [cite_start]Ensure your posture remains completely rigid[cite: 398].
   * [cite_start]*⏱️ 5-Second Preparation Buffer* [cite: 399]
 
-### Body & Power Potentiation Drills
-* **Static Block Presses:** 1 set × 3–5 reps[cite: 399]. Place your hands on two small blocks in a push-up position and perform slow, controlled push-ups to absorb force deeply into the shoulders and chest[cite: 400].
-  * [cite_start]*⏱️ 5-Second Preparation Buffer* [cite: 401]
-* [cite_start]**Feet-On Campus Rung Taps:** 1 set × 3–5 reps[cite: 401]. [cite_start]Stand in front of the campus board with your feet firmly on the ground or a large kickboard[cite: 402]. [cite_start]Keep straight arms with engaged shoulders and gently tap a higher rung, mimicking dyno coordination[cite: 403].
-  * *⏱️ 5-Second Preparation Buffer* [cite: 404]
-* [cite_start]**Low-Impact Box Steps & Hops:** 1 set × 3–5 reps[cite: 404]. [cite_start]Step onto a low box to establish spatial awareness, transitioning into light, unweighted jumps, landing softly in a deep squat to practice eccentric force absorption[cite: 405].
-  * *⏱️ 5-Second Preparation Buffer* [cite: 406]
-* [cite_start]**Mini Skater Bounds (Focus on the Stick):** 1 set × 3–5 reps[cite: 406]. [cite_start]Perform short lateral leaps from one foot to the other, landing and forcefully freezing for 2 seconds to train knee and ankle stability[cite: 407].
-  * *⏱️ 5-Second Preparation Buffer* [cite: 408]
-* [cite_start]**Sub-Maximal Vertical Rebounds:** 1 set × 3–5 reps[cite: 408]. [cite_start]Stand flat on the floor, dip into a quick quarter-squat, and explosively jump straight up while reaching overhead with both hands to prime your nervous system for launching speed[cite: 409].
-
 ---
 
 ## The Golden Rules of the Final Protocol
