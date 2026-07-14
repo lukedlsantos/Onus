@@ -5,7 +5,7 @@ This file serves as the absolute technical blueprint for the separate, standalon
 ---
 
 ## 1. Sub-Tab 1: Breathing Prep (Oxygen Advantage Athletic Priming Protocol)
-* **Objective:** Optimize oxygen delivery via the Bohr Effect, elevate carbon dioxide tolerance, reset CNS tone, and prime the respiratory diaphragmatic slings before high-intensity loading.
+* **Objective:** Optimize oxygen delivery via the Bohr Effect, elevate carbon dioxide tolerance, reset CNS tone, and prime the respiratory diaphragmatic slings before high-intensity loading. Note: This protocol is a static/CNS calibration best done seated and must be followed by a physical warm-up to raise core body temperature.
 * **Total Duration:** 10 Minutes
 
 ### Strict Interval Cadence Schema:
@@ -18,42 +18,57 @@ This file serves as the absolute technical blueprint for the separate, standalon
 
 ---
 
-## 2. Sub-Tab 2: Lazy Warm-Up (15-Minute Dynamic Circulation)
-* **Objective:** Quick systemic temperature elevation, global fluid circulation, and head-to-toe joint lubrication.
-* **Mandatory Constraint:** **CRITICAL SAFETY FACTOR: Absolute lockout on all static stretches.** Movements must maintain a continuous dynamic cadence.
-* **Total Duration:** 15 Minutes
+## 2. Sub-Tab 2: Lazy Warm-Up (16-to-18 Minute Master Warm-Up Protocol for Climbing Plyometrics)
+* **Objective:** Systemic temperature elevation, closed-chain stability, and progressive fingerboard recruitment (16-18 Minutes total).
+* **Total Duration:** 16-18 Minutes
 
-### Section A: Head-to-Toe Dynamic Joint Matrix (7 Minutes)
-*Execute continuously for 60 seconds per station to mobilize every major joint pivot:*
-1.  **Cervical Pivot:** Slow, deliberate circular tracking of the neck (Controlled Articular Rotations) to open posture lines.
-2.  **Shoulder Girdle:** Arm Circles, starting with small tight rotations and progressively scaling upward to wide-range forward/reverse loops.
-3.  **Wrist & Forearms:** Wrist Rolls and Waves, moving through full dynamic extension and flexion paths to pool fluid into the forearm fascia.
-4.  **Thoracic Spine:** Standing Torso Twists with wide-set stance and completely relaxed, sweeping arms.
-5.  **Lumbar & Core:** Fluid Cat-Cow transitions, focusing on deliberate flexion and extension of the pelvic tilt.
-6.  **Hip Capsule:** Dynamic Hip Gate Openers (Lifting knee to chest, rotating outward $90^\circ$, tapping ground, and reversing path).
-7.  **Ankle/Knee Links:** Standing ankle circles combined with unweighted, shallow dynamic knee bends.
+### Phase 1: Anatomical Prep & Systemic Pulse (General Movement - 7 Minutes)
+* **Station 1: Jumping Jacks (20s)** — Quick, rhythmic cardiovascular elevation.
+* **Station 2: Finger Flashes & Tendon Glides (Set 1) (20s)** — Speed finger flexing and tendon slides to prime pulleys.
+* **Station 3: Seal Jacks (20s)** — Jump feet out while clapping straight arms out to the sides and together in front of you.
+* **Station 4: Finger Flashes & Tendon Glides (Set 2) (20s)** — Secondary pulley preparation.
+* *5-Second Preparation Buffer applied between following joint matrix stations:*
+* **Station 5: Cervical Pivot (Neck CARs) (30s)** — Slow neck rotations (15s clockwise, 15s counter-clockwise).
+* **Station 6: Shoulder Girdle Rotations (30s)** — Arm circles scaling from tight to wide loops (forward and reverse).
+* **Station 7: Wrist & Forearm Rolls (30s)** — Rolls and waves to pool fluid into forearms.
+* **Station 8: Thoracic Spine Sweeps (30s)** — Standing torso twists with relaxed, sweeping arms.
+* **Station 9: Cat-Cow Pelvic Tilts (30s)** — Spine flexion and extension from a quadruped posture.
+* **Station 10: Dynamic Hip Gate Openers (30s)** — Lift knee, rotate outward 90°, tap floor, and reverse.
+* **Station 11: Ankle & Knee Circles (30s)** — Ankle circles combined with unweighted, shallow knee bends.
 
-### Section B: Core Dynamic Bodyweight Links (4 Minutes)
-*Execute 2 sets $\times$ 60 seconds with 0s rest between variants:*
-* **Variant 1 (60s):** High Knees or Jumping Jacks (Continuous rhythmic coordination to push up global pulse rate).
-* **Variant 2 (60s):** Dynamic Walking Inchworms (Forward bend, walk hands out to a high plank posture, immediately step feet back to hands. No static end-range holding allowed).
+### Phase 2: Streamlined Targeted Activation & Closed-Chain Stability (3.5 Minutes)
+* **Station 12 & 13 (Banded Slings):** Complete 1 set × 10 reps each of Banded Pull-Aparts and Banded External Rotations.
+* **Station 14: Plank to Scapular Shrugs (30s):** Hold solid plank, transitioning smoothly into hanging shoulder shrugs. *Rest for 20 seconds after this station.*
+* **Station 15: Plank Shoulder Taps (30s):** Hold push-up plank and slowly tap opposite shoulders without rocking hips.
+* **Station 16: Unweighted Hip Extension Flips (30s):** Smooth bodyweight quarter-squats driving hips forward to prime power transfer.
 
-### Section C: Low-Load Banded Slings (4 Minutes)
-*Execute 2 sets $\times$ 15 reps using a low-resistance loop band:*
-* **Exercise 1:** Band Pull-Aparts (Focus on strict middle-trapezius and rhomboid activation, maintaining stacked posture).
-* **Exercise 2:** Banded External Rotations (Pin elbows firmly to ribs; pulse hands outward away from midline to activate the infraspinatus and teres minor).
+### Phase 3: Autoregulated Power Potentiation & Mechanical Loading (7.5 Minutes)
+* **1. Controlled 20mm Edge Hangs (Half-Crimp):** 1 set × 3 reps (5s hold / 15s rest). Engage shoulders, recruit flexors without dynamic impact.
+* **2. 3-Finger Drag Hangs:** 1 set × 3 reps (5s hold / 15s rest). pinky finger dropped, relaxed open-handed drag position.
+* **3. 20° Decline Sloper Hangs:** 1 set × 3 reps (5s hold / 15s rest). Maximize skin contact to prime friction grips.
+* **4. 30° Decline Sloper Hangs:** 1 set × 3 reps (5s hold / 15s rest). Drive body tension from fingers down to toes.
+* **5. 40° Decline Sloper Hangs:** 1 set × 3 reps (5s hold / 15s rest). Maximize palm compression to activate wrist stabilizers.
+* **6. 15mm Micro-Edge Hangs (Half-Crimp):** 1 set × 3 reps (5s hold / 15s rest). Strict half-crimp to increase neural recruitment.
+* **7. 12mm Micro-Edge Hangs (Half-Crimp):** 1 set × 3 reps (5s hold / 15s rest). Fast tension recruitment on shrinking edge profile.
+* **8. 10mm Micro-Edge Hangs (Half-Crimp):** 1 set × 3 reps (5s hold / 15s rest). Final contact strength priming.
+* **Body & Power Potentiation Drills:**
+    * **Static Block Presses (1 set × 3-5 reps):** Controlled push-ups on two small blocks to absorb force.
+    * **Feet-On Campus Rung Taps (1 set × 3-5 reps):** Rung tapping with feet on floor to mimic dyno coordination.
+    * **Low-Impact Box Steps & Hops (1 set × 3-5 reps):** Step up and hop, landing softly in deep squats.
+    * **Mini Skater Bounds (1 set × 3-5 reps):** Short lateral leaps foot-to-foot, freezing for 2s to train joint stability.
+    * **Sub-Maximal Vertical Rebounds (1 set × 3-5 reps):** Quarter-squat into explosive vertical jump, reaching overhead.
 
 ---
 
 ## 3. Sub-Tab 3: Standard Warm-Up (30-Minute Universal Floor Baseline)
-* **Objective:** The core universal baseline for training days. Systematically addresses every major muscle sling, stabilizes joint capsules under light bodyweight load, and prepares isometric tendon structures off the wall.
+* **Objective:** The core universal baseline for training days. Systematically addresses every major muscle sling, stabilizes joint capsules under light bodyweight load, screens movement competency, and prepares isometric tendon structures off the wall.
 * **Total Duration:** 30 Minutes
 
-### Section A: Multi-Joint Mobility & Core Slings (10 Minutes)
-*Execute 2 sets of the following 3-movement flow sequence:*
-1.  **World's Greatest Stretch to Lateral Lunge Matrix (4 Mins):** Step forward into a deep lunge, rotate thoracic spine overhead toward front leg, step back, then step immediately into a wide lateral lunge. Alternate sides continuously at a controlled, slow tempo.
-2.  **Deep Goblet Squat with Alternating Thoracic Rotation (3 Mins):** Drop into an unweighted deep squat cavity, place left elbow inside left knee to anchor, sweep right hand vertically toward sky. Swap sides; reset to standing.
-3.  **Dynamic 90/90 Hip Switches (3 Mins):** Seated on floor with knees bent at $90^\circ$ angles, rotate pelvis and lower knees flat to left side, then fluidly pivot over the heels to drop knees flat to the right side.
+### Section A: Systemic Pulse Elevation & Chiba Tore Mobility (10 Minutes)
+*Execute the following flow sequence:*
+1.  **Systemic Pulse Raiser (3 Mins):** High knees or Jumping jacks to elevate core temperature and joint lubrication.
+2.  **Overhead Towel Squat Screen (2 Mins):** Perform unweighted squats holding a towel overhead with wide arms to assess chest, shoulder, and hip integration.
+3.  **Chiba Diagonal Mobilization (5 Mins):** Execute *Staggered Squat & Elbow Circle* (contralateral limb tracking) and *Supine Hand-to-Toe Touch* (coordinates obliques with opposite hip/shoulder).
 
 ### Section B: Scapular & Spinal Stabilization Block (10 Minutes)
 *Execute 3 sets of the following stability constraints:*
@@ -62,21 +77,21 @@ This file serves as the absolute technical blueprint for the separate, standalon
 3.  **Banded Pallof Press (12 Reps per side):** Connect resistance band to anchor at chest height. Step out to create horizontal tension, hold band at sternum, and press hands straight out. Prevent any rotational trunk twist.
 
 ### Section C: Off-Wall Diagnostic Isometric Tendon Influx (10 Minutes)
-*Utilize a floor-anchored tension block or a ground-connected portable flashboard. Do not lift feet off the ground; pull downward progressively against static resistance to prime pulley mechanics:*
-* **Set 1:** 3 reps $\times$ 10 seconds half-crimp hold profile at $50\%$ perceived maximum pulling effort.
-* **Set 2:** 3 reps $\times$ 7 seconds open-hand hold profile at $70\%$ perceived maximum pulling effort.
-* **Set 3:** 2 reps $\times$ 5 seconds target session edge profile at $90\%$ perceived maximum pulling effort.
+*Utilize a floor-anchored tension block or a ground-connected portable flashboard (Tindeq style). Pull downward progressively against static resistance:*
+* **Set 1 (CNS Neural Check):** 2 reps $\times$ 5 seconds pulls at 50% and 75% MVC (Maximum Voluntary Contraction) to verify neurological readiness. If daily force is down >10% from baseline, scale down the session.
+* **Set 2 (Progressive Edge Priming):** 2 reps $\times$ 5 seconds at 90% MVC target session edge profile.
 * *Rest Constraints:* Enforce a strict, hard-capped **60-second countdown timer** between every individual pull.
 
 ---
 
 ## 4. Sub-Tab 4: Competition Warm-Up (60-Minute Maximum Recruitment Mode)
-* **Objective:** High-fidelity peak activation for competition events, mock comps, or maximum-effort project send milestones. Covers the entire physical matrix: localized fascial flushing, deep capsule stability, absolute force ceilings ($f_{max}$), and explosive plyometric nervous system velocity acceleration.
+* **Objective:** High-fidelity peak activation for competition events, mock comps, or maximum-effort project send milestones. Covers the entire physical matrix: localized fascial release, pulse influx, deep capsule stability, absolute force ceilings ($f_{max}$), and explosive plyometric nervous system velocity acceleration.
 * **Total Duration:** 60 Minutes
 
-### Section A: Myofascial Tissue Flushing & Pulse Influx (15 Minutes)
-1.  **Systemic Pulse Elevation (5 Mins):** High-knee skipping, directional change footwork agility drills, and lateral shuffling to flood the body with circulation.
-2.  **Fascial Release & Flushing (10 Mins):** Targeted self-massage utilizing a foam roller or high-density massage ball. Target zones are restricted to: Latissimus dorsi, thoracic spine columns, hip flexor attachments, and forearm brachioradialis bands.
+### Section A: Targeted Tissue Release & Pulse Influx (15 Minutes)
+1.  **Targeted Tennis Ball Releases (3 Mins):** Focused myofascial release targeting the pectoralis minor, rhomboids, and latissimus dorsi to free scapular restrictions *before* raising core temperature.
+2.  **Systemic Pulse Elevation (5 Mins):** High-knee skipping, directional change footwork agility drills, and lateral shuffling to flood the body with circulation.
+3.  **Dynamic Joint Matrix & T-Hip Roll (7 Mins):** Dynamic mobility loops focusing on the neck, shoulder rotations, wrist rolls, thoracic twists, and Chiba's *T-Hip Roll* for pelvic-scapular integration.
 
 ### Section B: Integrated Bodywork & Cross-Sling Stability (15 Minutes)
 *Execute 3 sets with extreme technical execution parameters:*
@@ -96,7 +111,7 @@ This file serves as the absolute technical blueprint for the separate, standalon
 1.  **Plyometric Push-Ups:** 3 sets $\times$ 5 reps. Explode off the floor with enough concentric upward velocity that hands completely break floor contact.
 2.  **High-Velocity Band Slams:** 3 sets $\times$ 6 reps. Secure high-tension band overhead, pull downward through the core sling at maximum velocity.
 3.  **Neurological Fast-Twitch Finger Flashes:** 3 sets $\times$ 20 seconds. Extend arms forward and cycle hands between an absolute tight fist and wide open fingers at maximum speed.
-* *Taper Phase:* Rest completely seated with deep box breathing for 4 minutes before executing the first performance climbing attempt.
+4.  **Taper Phase:** Rest completely seated with deep box breathing for 4 minutes before executing the first performance climbing attempt.
 
 ---
 
@@ -107,7 +122,7 @@ The UI for this tab must run as a linear workflow wizard. Engaging any warm-up r
 ```
 ┌────────────────────────────────────────────────────────┐
 │ [←] OFF-THE-WALL WARM-UP ENGINE STATUS                  │
-├────────────────────────────────────────────────────────┤
+│                                                        │
 │  [BREATHING] │  [LAZY]  │  ► [STANDARD]  │   [COMP]    │
 ├────────────────────────────────────────────────────────┤
 │ CURRENT COMPONENT CLOCK: 10:00                         │

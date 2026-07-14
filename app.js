@@ -599,16 +599,9 @@ async function loadAthleteTodayScreen() {
   const logBtn = document.getElementById("log-today-btn");
   const phaseWeekLabel = document.getElementById("today-session-phase-week");
 
-  const checkins = await db.getWeeklyCheckinsForAthlete(state.currentUser.id);
-  const badge = document.getElementById("checkin-status-badge");
-  if (checkins.length > 0) {
-    badge.textContent = "Done";
-    badge.style.backgroundColor = "rgba(16, 185, 129, 0.15)";
-    badge.style.color = "var(--accent-green)";
-    badge.style.display = "inline-block";
-  } else {
-    badge.style.display = "none";
-  }
+  // Hide weekly check-in card by default; it's shown only on Day 7 after session resolution
+  const checkinCard = document.getElementById("weekly-checkin-card");
+  if (checkinCard) checkinCard.style.display = "none";
 
   const assigned = await db.getAssignedProgram(state.currentUser.id);
   if (!assigned) {
@@ -680,6 +673,21 @@ async function loadAthleteTodayScreen() {
     state.todaySession = session;
     titleEl.textContent = `${session.day_label}: ${session.title}`;
     objectiveEl.style.display = "none"; // Do not show objective/description anymore
+
+    // Show weekly check-in card only on Day 7
+    if (session.day_label === "Day 7" && checkinCard) {
+      checkinCard.style.display = "";
+      const checkins = await db.getWeeklyCheckinsForAthlete(state.currentUser.id);
+      const badge = document.getElementById("checkin-status-badge");
+      if (checkins.length > 0) {
+        badge.textContent = "Done";
+        badge.style.backgroundColor = "rgba(16, 185, 129, 0.15)";
+        badge.style.color = "var(--accent-green)";
+        badge.style.display = "inline-block";
+      } else {
+        badge.style.display = "none";
+      }
+    }
 
     const backBtn = document.getElementById("back-to-calendar-btn");
     if (backBtn) backBtn.style.display = "inline-flex";
@@ -1810,7 +1818,7 @@ window.addEventListener("DOMContentLoaded", () => {
 const WARMUP_ROUTINES = {
   breathing: {
     title: "Breathing Prep (Oxygen Advantage Protocol)",
-    objective: "Optimize oxygen delivery (Bohr Effect), elevate CO2 tolerance, and prime diaphragmatic recruitment (10 Minutes total)",
+    objective: "Optimize oxygen delivery (Bohr Effect), elevate CO2 tolerance, and prime diaphragmatic recruitment (10 Minutes total). Best done seated before physical warm-up.",
     phases: [
       { name: "Phase A: Resonant Frequency (HRV Sync)", duration: "3:00" },
       { name: "Phase B: Physiological Sigh (CNS Reset)", duration: "2:00" },
@@ -1823,80 +1831,100 @@ const WARMUP_ROUTINES = {
     ]
   },
   lazy: {
-    title: "Lazy Warm-Up",
-    objective: "Systemic temperature elevation and global joint lubrication without static stretching (15 Minutes)",
+    title: "Lazy Warm-Up (Climbing Plyometrics Master Protocol)",
+    objective: "Systemic temperature elevation, closed-chain stability, and progressive fingerboard recruitment (16-18 Minutes)",
     phases: [
-      { name: "Phase A: Head-to-Toe Joint Matrix", duration: "7:00" },
-      { name: "Phase B: Core Dynamic Bodyweight Links", duration: "4:00" },
-      { name: "Phase C: Low-Load Banded Slings", duration: "4:00" }
+      { name: "Phase 1: Anatomical Prep & Systemic Pulse", duration: "7:00" },
+      { name: "Phase 2: Streamlined Targeted Activation", duration: "3:30" },
+      { name: "Phase 3: Autoregulated Power Potentiation", duration: "7:30" }
     ],
     stations: [
-      // Joint Matrix (1 min each)
-      { name: "Cervical Pivot (Neck CARs)", desc: "Slow, deliberate circular neck rotations. Keep posture straight.", duration: 60, phase: "Phase A: Joint Matrix" },
-      { name: "Shoulder Girdle Rotations", desc: "Arm Circles. Progressive scaling from tight rotations to wide loops (forward and reverse).", duration: 60, phase: "Phase A: Joint Matrix" },
-      { name: "Wrist & Forearm Rolls", desc: "Wrist Rolls and Waves. Flex and extend wrist continuously to pool fluid into forearms.", duration: 60, phase: "Phase A: Joint Matrix" },
-      { name: "Thoracic Spine Sweeps", desc: "Standing Torso Twists with wide-set stance and completely relaxed, sweeping arms.", duration: 60, phase: "Phase A: Joint Matrix" },
-      { name: "Cat-Cow Pelvic Tilts", desc: "Pelvic tilts in quadruped stance. Flex and extend spine fluidly.", duration: 60, phase: "Phase A: Joint Matrix" },
-      { name: "Dynamic Hip Gate Openers", desc: "Lifting knee to chest, rotating outward 90°, tapping ground, and reversing path.", duration: 60, phase: "Phase A: Joint Matrix" },
-      { name: "Ankle & Knee Circles", desc: "Standing ankle circles combined with unweighted, shallow dynamic knee bends.", duration: 60, phase: "Phase A: Joint Matrix" },
-      // Core dynamic bodyweight
-      { name: "High Knees / Jumping Jacks (Set 1)", desc: "Continuous rhythmic coordination to elevate pulse rate.", duration: 60, phase: "Phase B: Bodyweight Links" },
-      { name: "Dynamic Walking Inchworms (Set 1)", desc: "Hinge forward, walk hands out to high plank, step feet back to hands. No static holds.", duration: 60, phase: "Phase B: Bodyweight Links" },
-      { name: "High Knees / Jumping Jacks (Set 2)", desc: "Continuous rhythmic coordination to elevate pulse rate.", duration: 60, phase: "Phase B: Bodyweight Links" },
-      { name: "Dynamic Walking Inchworms (Set 2)", desc: "Hinge forward, walk hands out to high plank, step feet back to hands. No static holds.", duration: 60, phase: "Phase B: Bodyweight Links" },
-      // Low Load banded
-      { name: "Banded Pull-Aparts", desc: "Focus on strict middle-trapezius and rhomboid activation. Maintain stacked posture.\nPerform 2 sets × 15 reps.", type: "reps", sets: 2, phase: "Phase C: Banded Slings" },
-      { name: "Banded External Rotations", desc: "Pin elbows firmly to ribs, pulse hands outward to activate infraspinatus/teres minor.\nPerform 2 sets × 15 reps.", type: "reps", sets: 2, phase: "Phase C: Banded Slings" }
+      // Phase 1: Anatomical Prep & Systemic Pulse
+      { name: "Jumping Jacks", desc: "Quick, rhythmic cardiovascular elevation.", duration: 20, phase: "Phase 1: Systemic Pulse" },
+      { name: "Finger Flashes & Tendon Glides (Set 1)", desc: "Speed finger flexing and tendon slides to prime pulleys without load.", duration: 20, phase: "Phase 1: Systemic Pulse" },
+      { name: "Seal Jacks", desc: "Jump feet out while clapping straight arms out to the sides and together in front to open chest/shoulder girdles.", duration: 20, phase: "Phase 1: Systemic Pulse" },
+      { name: "Finger Flashes & Tendon Glides (Set 2)", desc: "Secondary pulley preparation.", duration: 20, phase: "Phase 1: Systemic Pulse" },
+      
+      { name: "Cervical Pivot (Neck CARs)", desc: "Slow, deliberate neck rotation. Perform 15 seconds clockwise, then 15 seconds counter-clockwise.", duration: 30, phase: "Phase 1: Joint Matrix" },
+      { name: "Shoulder Girdle Rotations", desc: "Arm circles scaling from tight to wide loops, working both forward and reverse.", duration: 30, phase: "Phase 1: Joint Matrix" },
+      { name: "Wrist & Forearm Rolls", desc: "Rolls and waves to pool fluid into the forearms.", duration: 30, phase: "Phase 1: Joint Matrix" },
+      { name: "Thoracic Spine Sweeps", desc: "Standing torso twists with relaxed, sweeping arms.", duration: 30, phase: "Phase 1: Joint Matrix" },
+      { name: "Cat-Cow Pelvic Tilts", desc: "Spine flexion and extension from a quadruped posture.", duration: 30, phase: "Phase 1: Joint Matrix" },
+      { name: "Dynamic Hip Gate Openers", desc: "Lift knee, rotate outward 90°, tap the floor, and reverse.", duration: 30, phase: "Phase 1: Joint Matrix" },
+      { name: "Ankle & Knee Circles", desc: "Ankle rotations paired with shallow, controlled knee bends.", duration: 30, phase: "Phase 1: Joint Matrix" },
+
+      // Phase 2: Streamlined Targeted Activation & Closed-Chain Stability
+      { name: "Banded Pull-Aparts", desc: "Trigger the mid-trapezius and rhomboids.\nPerform 1 set × 10 reps.", type: "reps", sets: 1, phase: "Phase 2: Targeted Activation" },
+      { name: "Banded External Rotations", desc: "Pin elbows firmly to ribs and rotate hands outward to fire the rotator cuff.\nPerform 1 set × 10 reps.", type: "reps", sets: 1, phase: "Phase 2: Targeted Activation" },
+      { name: "Plank to Scapular Shrugs", desc: "Hold plank to wake up core/serratus, transitioning into hanging shoulder shrugs.\nRest 20 seconds after this station.", duration: 30, phase: "Phase 2: Targeted Activation" },
+      { name: "Plank Shoulder Taps", desc: "Hold a rigid push-up plank. Tap opposite shoulder slowly without rocking your hips.", duration: 30, phase: "Phase 2: Targeted Activation" },
+      { name: "Unweighted Hip Extension Flips", desc: "Smooth bodyweight quarter-squats, focusing on driving hips forward to prime hip-to-core power transfer.", duration: 30, phase: "Phase 2: Targeted Activation" },
+
+      // Phase 3: Autoregulated Power Potentiation & Mechanical Loading
+      { name: "Controlled 20mm Edge Hangs", desc: "Engage shoulders and keep a strict half-crimp to recruit forearm flexors without dynamic impact.", type: "pulls", work: 5, rest: 15, cycles: 3, phase: "Phase 3: Fingerboard Matrix" },
+      { name: "3-Finger Drag Hangs", desc: "Drop your pinky finger off a comfortable edge, hanging in a relaxed, open-handed drag position.", type: "pulls", work: 5, rest: 15, cycles: 3, phase: "Phase 3: Fingerboard Matrix" },
+      { name: "20° Decline Sloper Hangs", desc: "Engage wrists and maximize skin contact on a gentle 20-degree sloper to prime friction grips.", type: "pulls", work: 5, rest: 15, cycles: 3, phase: "Phase 3: Fingerboard Matrix" },
+      { name: "30° Decline Sloper Hangs", desc: "Drive body tension straight through your core down to your toes on a 30-degree sloper.", type: "pulls", work: 5, rest: 15, cycles: 3, phase: "Phase 3: Fingerboard Matrix" },
+      { name: "40° Decline Sloper Hangs", desc: "Maximize palm compression on a slick 40-degree sloper to fully turn on your wrist stabilizers.", type: "pulls", work: 5, rest: 15, cycles: 3, phase: "Phase 3: Fingerboard Matrix" },
+      { name: "15mm Micro-Edge Hangs", desc: "Step down to a smaller edge size to increase neural recruitment in a strict half-crimp posture.", type: "pulls", work: 5, rest: 15, cycles: 3, phase: "Phase 3: Fingerboard Matrix" },
+      { name: "12mm Micro-Edge Hangs", desc: "Focus on immediate tension recruitment as the hold profile shrinks.", type: "pulls", work: 5, rest: 15, cycles: 3, phase: "Phase 3: Fingerboard Matrix" },
+      { name: "10mm Micro-Edge Hangs", desc: "The final priming step for high contact strength. Ensure your posture remains completely rigid.", type: "pulls", work: 5, rest: 15, cycles: 3, phase: "Phase 3: Fingerboard Matrix" },
+      
+      { name: "Static Block Presses", desc: "Perform slow, controlled push-ups on two small blocks to absorb force deeply into shoulders and chest.\nPerform 1 set × 3–5 reps.", type: "reps", sets: 1, phase: "Phase 3: Power Potentiation" },
+      { name: "Feet-On Campus Rung Taps", desc: "Stand in front of campus board (feet on floor/kickplate) and gently tap a higher rung with engaged shoulders.\nPerform 1 set × 3–5 reps.", type: "reps", sets: 1, phase: "Phase 3: Power Potentiation" },
+      { name: "Low-Impact Box Steps & Hops", desc: "Step onto low box, transition to light jumps, and land softly in a deep squat.\nPerform 1 set × 3–5 reps.", type: "reps", sets: 1, phase: "Phase 3: Power Potentiation" },
+      { name: "Mini Skater Bounds", desc: "Short lateral leaps foot-to-foot, landing and freezing for 2 seconds to train joint stability.\nPerform 1 set × 3–5 reps.", type: "reps", sets: 1, phase: "Phase 3: Power Potentiation" },
+      { name: "Sub-Maximal Vertical Rebounds", desc: "Dip into a quick quarter-squat and jump straight up while reaching overhead with both hands.\nPerform 1 set × 3–5 reps.", type: "reps", sets: 1, phase: "Phase 3: Power Potentiation" }
     ]
   },
   standard: {
     title: "Standard Warm-Up",
-    objective: "Stabilize joint capsules under light bodyweight loads and prime pulley isometric structures off-wall (30 Minutes)",
+    objective: "Systemic pulse raising, Chiba Tore movement screening, capsule stabilization under light bodyweight, and pulley isometric priming (30 Minutes)",
     phases: [
-      { name: "Phase A: Multi-Joint Mobility & Core Slings", duration: "10:00" },
+      { name: "Phase A: Systemic Pulse & Chiba Mobility", duration: "10:00" },
       { name: "Phase B: Scapular & Spinal Stabilization", duration: "10:00" },
-      { name: "Phase C: Diagnostic Isometric Tendon Influx", duration: "10:00" }
+      { name: "Phase C: Off-Wall Diagnostic Tendon Influx", duration: "10:00" }
     ],
     stations: [
       // Phase A
-      { name: "World's Greatest Stretch Matrix", desc: "Deep lunge forward, rotate thoracic spine overhead toward front leg, step back, and lateral lunge.\nDo 2 sets of 2 minutes total.", duration: 240, sets: 2, type: "timer", phase: "Phase A: Mobility" },
-      { name: "Deep Goblet Squat with Thoracic Rotation", desc: "Drop into deep squat cavity, anchor elbow inside knee, sweep opposite hand to sky. Alternate sides.\nDo 2 sets of 1.5 minutes total.", duration: 180, sets: 2, type: "timer", phase: "Phase A: Mobility" },
-      { name: "Dynamic 90/90 Hip Switches", desc: "Seated with knees bent at 90°, rotate knees flat to left, then pivot over heels to the right.\nDo 2 sets of 1.5 minutes total.", duration: 180, sets: 2, type: "timer", phase: "Phase A: Mobility" },
+      { name: "Systemic Pulse Raiser", desc: "High knees or jumping jacks to elevate core temperature and promote joint lubrication.", duration: 180, type: "timer", phase: "Phase A: Pulse & Mobility" },
+      { name: "Overhead Towel Squat Screen", desc: "Hold a towel overhead with wide arms and perform unweighted deep squats to assess chest, shoulder, and hip integration.", duration: 120, type: "timer", phase: "Phase A: Pulse & Mobility" },
+      { name: "Chiba Diagonal Mobilization", desc: "Perform Staggered Squat & Elbow Circle (contralateral tracking) and Supine Hand-to-Toe Touch (coordinates obliques with opposite hip/shoulder).", duration: 300, type: "timer", phase: "Phase A: Pulse & Mobility" },
       // Phase B
       { name: "Prone Y-T-W Floor Raises", desc: "Face down on mat. Lift chest slightly and pulse arms into Y, T, and W positions.\nHold apex for 2 seconds.\nPerform 3 sets × 10 reps.", type: "reps", sets: 3, phase: "Phase B: Stabilization" },
       { name: "Scapular Push-Ups to Downward Dog Shifting", desc: "Retract and protract shoulder blades in high plank, then drive hips back to downward dog.\nPerform 3 sets × 12 reps.", type: "reps", sets: 3, phase: "Phase B: Stabilization" },
       { name: "Banded Pallof Press", desc: "Anchor band at chest height, step out for tension, hold at sternum and press straight out.\nPerform 3 sets × 12 reps per side.", type: "reps", sets: 3, phase: "Phase B: Stabilization" },
       // Phase C
-      { name: "Tendon Pull Set 1: Half-Crimp Hold (50% Effort)", desc: "Perform 3 reps × 10 seconds half-crimp hold against static ground block at 50% perceived max pull effort.\nRest 60 seconds between pulls.", duration: 60, type: "pulls", pullsCount: 3, pullDuration: 10, phase: "Phase C: Tendon Influx" },
-      { name: "Tendon Pull Set 2: Open-Hand Hold (70% Effort)", desc: "Perform 3 reps × 7 seconds open-hand hold profile at 70% perceived max pull effort.\nRest 60 seconds between pulls.", duration: 60, type: "pulls", pullsCount: 3, pullDuration: 7, phase: "Phase C: Tendon Influx" },
-      { name: "Tendon Pull Set 3: Target Edge Profile (90% Effort)", desc: "Perform 2 reps × 5 seconds target session edge profile at 90% perceived max pull effort.\nRest 60 seconds between pulls.", duration: 60, type: "pulls", pullsCount: 2, pullDuration: 5, phase: "Phase C: Tendon Influx" }
+      { name: "CNS Neural Check: 50% & 75% MVC Pulls", desc: "Perform 2 pulls × 5 seconds (one at 50%, one at 75% effort) against static ground block. Verify neural drive. Rest 60s between pulls.", duration: 60, type: "pulls", pullsCount: 2, pullDuration: 5, phase: "Phase C: Tendon Influx" },
+      { name: "Tendon Priming Set 1: Target Edge (90% Effort)", desc: "Perform 2 reps × 5 seconds target session edge profile at 90% perceived max pull effort.\nRest 60 seconds between pulls.", duration: 60, type: "pulls", pullsCount: 2, pullDuration: 5, phase: "Phase C: Tendon Influx" }
     ]
   },
   comp: {
     title: "Competition Warm-Up",
-    objective: "Mock comps, sends, or maximum effort send states activation protocol (60 Minutes)",
+    objective: "Targeted release, pulse elevation, stability activation, and max force ceilings triggering (60 Minutes)",
     phases: [
-      { name: "Phase A: Myofascial Tissue Flushing & Pulse", duration: "15:00" },
-      { name: "Phase B: Integrated Bodywork & Cross-Sling Stability", duration: "15:00" },
+      { name: "Phase A: Targeted Release & Pulse Influx", duration: "15:00" },
+      { name: "Phase B: Integrated Bodywork & Slings", duration: "15:00" },
       { name: "Phase C: Max Force Ceilings Triggering (Fmax)", duration: "15:00" },
       { name: "Phase D: Plyometric & Nervous Acceleration", duration: "15:00" }
     ],
     stations: [
       // Phase A
-      { name: "Systemic Pulse Elevation", desc: "High-knee skipping, directional footwork agility, and lateral shuffling to flood body with circulation.", duration: 300, phase: "Phase A: Tissue Flushing" },
-      { name: "Fascial Release & Self-Massage", desc: "Massage latissimus dorsi, thoracic spine column, hip flexors, and forearm brachioradialis with foam roller.", duration: 600, phase: "Phase A: Tissue Flushing" },
+      { name: "Targeted Tennis Ball Releases", desc: "Focus on pec minor, rhomboids, and latissimus dorsi to free scapular/shoulder restrictions before raising pulse.", duration: 180, phase: "Phase A: Release & Pulse" },
+      { name: "Systemic Pulse Elevation", desc: "High-knee skipping, directional footwork agility, and lateral shuffling to flood body with circulation.", duration: 300, phase: "Phase A: Release & Pulse" },
+      { name: "Dynamic Joint Matrix & T-Hip Roll", desc: "Neck CARs, arm circles, wrist rolls, and T-Hip Roll for full pelvic-scapular integration.", duration: 420, phase: "Phase A: Release & Pulse" },
       // Phase B
       { name: "Bodyweight Turkish Get-Ups", desc: "Slow floor-to-standing transition. Keep vertical shoulder locked.\nPerform 3 sets × 3 reps per side.", type: "reps", sets: 3, phase: "Phase B: Cross-Sling" },
       { name: "Dynamic Copenhagen Side Planks", desc: "Anchor top foot on bench, drive hips upward into side plank using adductor/core bracing.\nPerform 3 sets × 8 reps per side.", type: "reps", sets: 3, phase: "Phase B: Cross-Sling" },
       { name: "Banded Face Pulls with Dynamic Overhead Press", desc: "Pull band to nose, retract scapula, then press straight overhead.\nPerform 3 sets × 15 reps.", type: "reps", sets: 3, phase: "Phase B: Cross-Sling" },
       { name: "Single-Leg Romanian Deadlifts", desc: "Hinge at hips with straight trailing leg to fire hamstrings/glutes/ankle stabilization.\nPerform 3 sets × 10 reps per side.", type: "reps", sets: 3, phase: "Phase B: Cross-Sling" },
       // Phase C
-      { name: "Crane Pull Ramp-Up Sequence", desc: "Pull 3 distinct sets × 5 seconds at progressive effort thresholds (60% -> 75% -> 85%).\nRest 2 minutes between pulls.", duration: 120, type: "pulls", pullsCount: 3, pullDuration: 5, phase: "Phase C: Max Force" },
+      { name: "Crane Pull Neural Check (50% -> 75% MVC)", desc: "Pull 2 distinct sets × 5 seconds against crane scale at 50% and 75% effort. Rest 2 minutes.", duration: 120, type: "pulls", pullsCount: 2, pullDuration: 5, phase: "Phase C: Max Force" },
       { name: "Peak Recruitment Pulls (100% Downward Effort)", desc: "Perform 3 sets × 5 seconds absolute max downward pull on 20mm frame edge half-crimp.\nRest 2 minutes between pulls.", duration: 120, type: "pulls", pullsCount: 3, pullDuration: 5, phase: "Phase C: Max Force" },
       // Phase D
       { name: "Plyometric Push-Ups", desc: "Explode off floor so hands completely break contact.\nPerform 3 sets × 5 reps.\nRest 60s between sets.", duration: 60, type: "timer", sets: 3, phase: "Phase D: Plyometric" },
       { name: "High-Velocity Band Slams", desc: "Pull high-tension band overhead downward through core sling at max speed.\nPerform 3 sets × 6 reps.\nRest 60s between sets.", duration: 60, type: "timer", sets: 3, phase: "Phase D: Plyometric" },
-      { name: "Neurological Fast-Twitch Finger Flashes", desc: "Extend arms forward, cycle hands between absolute tight fist and wide open fingers at max speed.\nPerform 3 sets × 20 seconds.", duration: 20, type: "timer", sets: 3, phase: "Phase D: Plyometric" },
+      { name: "Neurological Fast-Twitch Finger Flashes", desc: "Extend arms forward, cycle hands between absolute tight fist and wide open fingers at max speed.", duration: 20, type: "timer", sets: 3, phase: "Phase D: Plyometric" },
       { name: "Pre-Comp Taper Rest", desc: "Rest completely seated with deep box breathing for 4 minutes before your first attempt.", duration: 240, phase: "Phase D: Plyometric" }
     ]
   }
@@ -2057,13 +2085,26 @@ function loadWarmupStation() {
 
   // Stepper config
   const setsBox = document.getElementById("warmup-station-sets-box");
-  if (station.sets || station.type === 'reps') {
-    setsBox.style.display = "flex";
-    const key = `${type}-${idx}`;
-    const completedSets = state.warmup.completions[key] || 0;
-    document.getElementById("warmup-set-val").textContent = `${completedSets} / ${station.sets || 1}`;
-  } else {
-    setsBox.style.display = "none";
+  const completedLabel = setsBox ? setsBox.querySelector("span") : null;
+  if (setsBox && completedLabel) {
+    if (station.cycles) {
+      setsBox.style.display = "flex";
+      completedLabel.textContent = "Cycle:";
+      document.getElementById("warmup-set-minus").style.display = "none";
+      document.getElementById("warmup-set-plus").style.display = "none";
+      const currentCycle = (state.warmup.intervalCycleCount || 0) + 1;
+      document.getElementById("warmup-set-val").textContent = `${currentCycle} / ${station.cycles}`;
+    } else if (station.sets || station.type === 'reps') {
+      setsBox.style.display = "flex";
+      completedLabel.textContent = "Completed Sets:";
+      document.getElementById("warmup-set-minus").style.display = "inline-block";
+      document.getElementById("warmup-set-plus").style.display = "inline-block";
+      const key = `${type}-${idx}`;
+      const completedSets = state.warmup.completions[key] || 0;
+      document.getElementById("warmup-set-val").textContent = `${completedSets} / ${station.sets || 1}`;
+    } else {
+      setsBox.style.display = "none";
+    }
   }
 
   // Timer setup
@@ -2079,6 +2120,7 @@ function loadWarmupStation() {
     if (station.type === 'coherent') timerLabel.textContent = "Inhale";
     else if (station.type === 'sigh') timerLabel.textContent = "Double Inhale";
     else if (station.type === 'retention') timerLabel.textContent = "Nasal Breathe";
+    else if (station.type === 'pulls') timerLabel.textContent = "Pull Time";
     else timerLabel.textContent = "Work Time";
     state.warmup.timerVal = station.work;
     state.warmup.intervalCycleCount = 0;
@@ -2205,7 +2247,7 @@ function toggleWarmupTimer() {
         const station = routine.stations[state.warmup.activeStationIdx];
 
         if (station.work && station.rest) {
-          // It's an automated interval station (Tabata, Coherent, Sigh, Retention)
+          // It's an automated interval station (Tabata, Coherent, Sigh, Retention, Pulls)
           if (!state.warmup.intervalCycleCount) state.warmup.intervalCycleCount = 0;
           
           if (state.warmup.tabataPhase === 'work') {
@@ -2219,6 +2261,8 @@ function toggleWarmupTimer() {
               if (station.type === 'coherent') nextLabel = "Exhale";
               else if (station.type === 'sigh') nextLabel = "Slow Exhale";
               else if (station.type === 'retention') nextLabel = "Breath Hold";
+            } else if (station.type === 'pulls') {
+              nextLabel = "Rest between reps";
             }
             
             document.getElementById("warmup-timer-label").textContent = nextLabel;
@@ -2232,6 +2276,11 @@ function toggleWarmupTimer() {
             const maxCycles = station.cycles || 1;
             
             if (state.warmup.intervalCycleCount < maxCycles) {
+              // Update cycle UI display
+              if (station.cycles) {
+                document.getElementById("warmup-set-val").textContent = `${state.warmup.intervalCycleCount + 1} / ${station.cycles}`;
+              }
+              
               state.warmup.tabataPhase = 'work';
               state.warmup.timerVal = station.work;
               
@@ -2240,6 +2289,8 @@ function toggleWarmupTimer() {
                 if (station.type === 'coherent') nextLabel = "Inhale";
                 else if (station.type === 'sigh') nextLabel = "Double Inhale";
                 else if (station.type === 'retention') nextLabel = "Nasal Breathe";
+              } else if (station.type === 'pulls') {
+                nextLabel = "Pull Time";
               }
               
               document.getElementById("warmup-timer-label").textContent = nextLabel;
@@ -2250,7 +2301,7 @@ function toggleWarmupTimer() {
             } else {
               // Finished all cycles for this station, reset count and go to next
               state.warmup.intervalCycleCount = 0;
-              nextWarmupStation();
+              nextWarmupStation(true);
             }
           }
         } else {
@@ -2294,11 +2345,14 @@ function resetWarmupTimer() {
 }
 
 // Next station navigation
-function nextWarmupStation() {
+function nextWarmupStation(autoStart = false) {
   const routine = WARMUP_ROUTINES[state.warmup.activeType];
   if (state.warmup.activeStationIdx < routine.stations.length - 1) {
     state.warmup.activeStationIdx++;
     loadWarmupStation();
+    if (autoStart) {
+      toggleWarmupTimer();
+    }
   } else {
     // Complete warm-up
     localStorage.setItem("warm_up_completed", "true");
