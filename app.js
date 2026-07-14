@@ -73,24 +73,7 @@ async function initApp() {
   document.getElementById("switch-role-btn").addEventListener("click", handleRoleSwitchToggle);
   setupSliderIndicators();
 
-  // Profile subtab switching
-  document.querySelectorAll(".profile-subtab").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const targetId = btn.dataset.subtab;
-      document.querySelectorAll(".profile-subtab-content").forEach(c => c.style.display = "none");
-      document.querySelectorAll(".profile-subtab").forEach(b => {
-        b.style.borderBottomColor = "transparent";
-        b.style.color = "var(--text-muted)";
-        b.style.fontWeight = "500";
-        b.classList.remove("active");
-      });
-      document.getElementById(targetId).style.display = "";
-      btn.style.borderBottomColor = "var(--accent-cyan)";
-      btn.style.color = "var(--accent-cyan)";
-      btn.style.fontWeight = "600";
-      btn.classList.add("active");
-    });
-  });
+
 
   const backToCalendarBtn = document.getElementById("back-to-calendar-btn");
   if (backToCalendarBtn) {
@@ -245,6 +228,56 @@ async function switchUser(userId) {
     loadTrainingCalendar();
     loadVideoReviews();
     setupSessionSelectDropdown();
+
+    // Setup Profile Carousel Swipe & Tab Syncing
+    const wrapper = document.getElementById("profile-carousel-wrapper");
+    const subtabs = document.querySelectorAll(".profile-subtab");
+
+    if (wrapper && subtabs.length > 0) {
+      // Sync click -> scroll
+      subtabs.forEach(btn => {
+        btn.addEventListener("click", () => {
+          const index = parseInt(btn.dataset.index);
+          const scrollWidth = wrapper.offsetWidth;
+          wrapper.scrollTo({
+            left: index * scrollWidth,
+            behavior: "smooth"
+          });
+        });
+      });
+
+      // Sync scroll -> active header styles
+      let scrollTimeout;
+      wrapper.addEventListener("scroll", () => {
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+          const scrollLeft = wrapper.scrollLeft;
+          const scrollWidth = wrapper.offsetWidth;
+          const index = Math.round(scrollLeft / scrollWidth);
+
+          subtabs.forEach((b, i) => {
+            if (i === index) {
+              b.style.borderBottomColor = "var(--accent-cyan)";
+              b.style.color = "var(--accent-cyan)";
+              b.style.fontWeight = "600";
+              b.classList.add("active");
+            } else {
+              b.style.borderBottomColor = "transparent";
+              b.style.color = "var(--text-muted)";
+              b.style.fontWeight = "500";
+              b.classList.remove("active");
+            }
+          });
+        }, 80);
+      });
+
+      // Position to the center slide (Profile, index 1) initially
+      // Delay slightly to ensure layout rendering is complete
+      setTimeout(() => {
+        const scrollWidth = wrapper.offsetWidth;
+        wrapper.scrollLeft = 1 * scrollWidth;
+      }, 300);
+    }
   } else {
     loadAdminAthletes();
     loadAdminPrograms();
@@ -316,6 +349,31 @@ function switchTab(tabId) {
     if (tabId === 'calendar') loadTrainingCalendar();
     else if (tabId === 'review') loadVideoReviews();
     else if (tabId === 'warmup') loadWarmupScreen();
+    else if (tabId === 'profile') {
+      const wrapper = document.getElementById("profile-carousel-wrapper");
+      const subtabs = document.querySelectorAll(".profile-subtab");
+      if (wrapper && subtabs.length > 0) {
+        // Reset subtab styling to highlight Profile (index 1)
+        subtabs.forEach((b, i) => {
+          if (i === 1) {
+            b.style.borderBottomColor = "var(--accent-cyan)";
+            b.style.color = "var(--accent-cyan)";
+            b.style.fontWeight = "600";
+            b.classList.add("active");
+          } else {
+            b.style.borderBottomColor = "transparent";
+            b.style.color = "var(--text-muted)";
+            b.style.fontWeight = "500";
+            b.classList.remove("active");
+          }
+        });
+        // Scroll the wrapper to center slide (index 1) immediately on render
+        setTimeout(() => {
+          const scrollWidth = wrapper.offsetWidth;
+          wrapper.scrollLeft = 1 * scrollWidth;
+        }, 50);
+      }
+    }
   } else {
     if (tabId === 'athletes') loadAdminAthletes();
     else if (tabId === 'programs') loadAdminPrograms();
@@ -1890,13 +1948,13 @@ const WARMUP_ROUTINES = {
     title: "Standard Warm-Up",
     objective: "Systemic pulse raising, Chiba Tore movement screening, capsule stabilization under light bodyweight, progressive pulley priming, and power potentiation (35-40 Minutes)",
     phases: [
-      { name: "Phase 1: Anatomical Prep & Systemic Pulse", duration: "8:00" },
+      { name: "Phase 1: Anatomical Prep & Systemic Pulse", duration: "10:00" },
       { name: "Phase 2: Scapular & Spinal Stabilization", duration: "10:00" },
       { name: "Phase 3: Autoregulated Potentiation & Loading", duration: "15:00" }
     ],
     stations: [
       // Phase 1
-      { name: "Systemic Pulse Raiser", desc: "High knees or jumping jacks to elevate core temperature and promote joint lubrication.", duration: 60, type: "timer", phase: "Phase 1: Systemic Pulse" },
+      { name: "Systemic Pulse Raiser", desc: "Perform 3 sets of 30 seconds of high knees or jumping jacks to raise heart rate, with 30 seconds of active rest (breathing/stretching) between sets.", work: 30, rest: 30, cycles: 3, type: "timer", phase: "Phase 1: Systemic Pulse" },
       { name: "Overhead Towel Squat Screen", desc: "Hold a towel overhead with wide arms and perform unweighted deep squats to assess chest, shoulder, and hip integration.", duration: 120, type: "timer", phase: "Phase 1: Systemic Pulse" },
       { name: "Chiba Diagonal Mobilization", desc: "Perform Staggered Squat & Elbow Circle (contralateral tracking) and Supine Hand-to-Toe Touch (coordinates obliques with opposite hip/shoulder).", duration: 300, type: "timer", phase: "Phase 1: Systemic Pulse" },
       // Phase 2

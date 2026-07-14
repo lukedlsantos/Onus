@@ -53,12 +53,12 @@ This file serves as the absolute technical blueprint for the separate, standalon
 * **8. 10mm Micro-Edge Hangs (Half-Crimp):** 1 set × 3 reps (5s hold / 15s rest). Final contact strength priming.
 ---
 
-## 3. Sub-Tab 3: Standard Warm-Up (33-to-38 Minute Universal Floor Baseline)
-* **Objective:** Systemic pulse raising, Chiba Tore movement screening, capsule stabilization under light bodyweight, progressive pulley priming, and power potentiation (33-38 Minutes total).
-* **Total Duration:** 33-38 Minutes
+## 3. Sub-Tab 3: Standard Warm-Up (35-to-40 Minute Universal Floor Baseline)
+* **Objective:** Systemic pulse raising, Chiba Tore movement screening, capsule stabilization under light bodyweight, progressive pulley priming, and power potentiation (35-40 Minutes total).
+* **Total Duration:** 35-40 Minutes
 
-### Phase 1: Anatomical Prep & Systemic Pulse (8 Minutes)
-* **Station 1: Systemic Pulse Raiser (1 Min):** High knees or Jumping jacks to elevate core temperature and joint lubrication.
+### Phase 1: Anatomical Prep & Systemic Pulse (10 Minutes)
+* **Station 1: Systemic Pulse Raiser (3 sets × 30s work / 30s rest):** High knees or Jumping jacks to elevate core temperature and joint lubrication, with 30s active rest (slow chest openers/breathing) between sets.
 * **Station 2: Overhead Towel Squat Screen (2 Mins):** Perform unweighted squats holding a towel overhead with wide arms to assess chest, shoulder, and hip integration.
 * **Station 3: Chiba Diagonal Mobilization (5 Mins):** Execute *Staggered Squat & Elbow Circle* (contralateral limb tracking) and *Supine Hand-to-Toe Touch* (coordinates obliques with opposite hip/shoulder).
 
