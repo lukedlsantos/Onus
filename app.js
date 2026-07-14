@@ -1817,7 +1817,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
 const WARMUP_ROUTINES = {
   breathing: {
-    title: "Breathing Prep (Oxygen Advantage Protocol)",
+    title: "Breathing Prep",
     objective: "Optimize oxygen delivery (Bohr Effect), elevate CO2 tolerance, and prime diaphragmatic recruitment (10 Minutes total). Best done seated before physical warm-up.",
     phases: [
       { name: "Phase A: Resonant Frequency (HRV Sync)", duration: "3:00" },
@@ -1831,7 +1831,7 @@ const WARMUP_ROUTINES = {
     ]
   },
   lazy: {
-    title: "Lazy Warm-Up (Climbing Plyometrics Master Protocol)",
+    title: "Lazy Warm-Up",
     objective: "Systemic temperature elevation, closed-chain stability, and progressive fingerboard recruitment (11-13 Minutes)",
     phases: [
       { name: "Phase 1: Anatomical Prep & Systemic Pulse", duration: "7:00" },
