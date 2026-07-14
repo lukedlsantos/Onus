@@ -249,10 +249,12 @@ async function switchUser(userId) {
       // Sync scroll -> active header styles
       let scrollTimeout;
       wrapper.addEventListener("scroll", () => {
+        if (state.activeTab !== "profile") return;
         clearTimeout(scrollTimeout);
         scrollTimeout = setTimeout(() => {
           const scrollLeft = wrapper.scrollLeft;
           const scrollWidth = wrapper.offsetWidth;
+          if (scrollWidth === 0) return; // Not visible
           const index = Math.round(scrollLeft / scrollWidth);
 
           subtabs.forEach((b, i) => {
