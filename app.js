@@ -229,57 +229,6 @@ async function switchUser(userId) {
     loadVideoReviews();
     setupSessionSelectDropdown();
 
-    // Setup Profile Carousel Swipe & Tab Syncing
-    const wrapper = document.getElementById("profile-carousel-wrapper");
-    const subtabs = document.querySelectorAll(".profile-subtab");
-
-    if (wrapper && subtabs.length > 0) {
-      // Sync click -> scroll
-      subtabs.forEach(btn => {
-        btn.addEventListener("click", () => {
-          const index = parseInt(btn.dataset.index);
-          const scrollWidth = wrapper.offsetWidth;
-          wrapper.scrollTo({
-            left: index * scrollWidth,
-            behavior: "smooth"
-          });
-        });
-      });
-
-      // Sync scroll -> active header styles
-      let scrollTimeout;
-      wrapper.addEventListener("scroll", () => {
-        if (state.activeTab !== "profile") return;
-        clearTimeout(scrollTimeout);
-        scrollTimeout = setTimeout(() => {
-          const scrollLeft = wrapper.scrollLeft;
-          const scrollWidth = wrapper.offsetWidth;
-          if (scrollWidth === 0) return; // Not visible
-          const index = Math.round(scrollLeft / scrollWidth);
-
-          subtabs.forEach((b, i) => {
-            if (i === index) {
-              b.style.borderBottomColor = "var(--accent-cyan)";
-              b.style.color = "var(--accent-cyan)";
-              b.style.fontWeight = "600";
-              b.classList.add("active");
-            } else {
-              b.style.borderBottomColor = "transparent";
-              b.style.color = "var(--text-muted)";
-              b.style.fontWeight = "500";
-              b.classList.remove("active");
-            }
-          });
-        }, 80);
-      });
-
-      // Position to the center slide (Profile, index 1) initially
-      // Delay slightly to ensure layout rendering is complete
-      setTimeout(() => {
-        const scrollWidth = wrapper.offsetWidth;
-        wrapper.scrollLeft = 1 * scrollWidth;
-      }, 300);
-    }
   } else {
     loadAdminAthletes();
     loadAdminPrograms();
@@ -351,31 +300,7 @@ function switchTab(tabId) {
     if (tabId === 'calendar') loadTrainingCalendar();
     else if (tabId === 'review') loadVideoReviews();
     else if (tabId === 'warmup') loadWarmupScreen();
-    else if (tabId === 'profile') {
-      const wrapper = document.getElementById("profile-carousel-wrapper");
-      const subtabs = document.querySelectorAll(".profile-subtab");
-      if (wrapper && subtabs.length > 0) {
-        // Reset subtab styling to highlight Profile (index 1)
-        subtabs.forEach((b, i) => {
-          if (i === 1) {
-            b.style.borderBottomColor = "var(--accent-cyan)";
-            b.style.color = "var(--accent-cyan)";
-            b.style.fontWeight = "600";
-            b.classList.add("active");
-          } else {
-            b.style.borderBottomColor = "transparent";
-            b.style.color = "var(--text-muted)";
-            b.style.fontWeight = "500";
-            b.classList.remove("active");
-          }
-        });
-        // Scroll the wrapper to center slide (index 1) immediately on render
-        setTimeout(() => {
-          const scrollWidth = wrapper.offsetWidth;
-          wrapper.scrollLeft = 1 * scrollWidth;
-        }, 50);
-      }
-    }
+
   } else {
     if (tabId === 'athletes') loadAdminAthletes();
     else if (tabId === 'programs') loadAdminPrograms();
