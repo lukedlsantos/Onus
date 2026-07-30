@@ -729,13 +729,13 @@ async function loadAthleteTodayScreen() {
           if (phaseNum === 3) {
             mainMins = isDeload ? 70 : 100;
           } else if (phaseNum === 4) {
-            mainMins = isDeload ? 66 : 95;
+            mainMins = isDeload ? 65 : 95;
           } else if (phaseNum === 5) {
             mainMins = isDeload ? 70 : 100;
           } else if (phaseNum === 6) {
-            mainMins = isDeload ? 52 : 75;
+            mainMins = isDeload ? 50 : 75;
           } else {
-            mainMins = isDeload ? 63 : 90;
+            mainMins = isDeload ? 65 : 90;
           }
           const workSecs = parseDurationText(d.reps_or_duration) || (mainMins * 60);
           const restSecs = parseDurationText(d.rest) || 90; // 90s default
@@ -748,15 +748,15 @@ async function loadAthleteTodayScreen() {
         } else if (d.category === "Progress Hook") {
           let hookMins = 30;
           if (phaseNum === 3) {
-            hookMins = isDeload ? 14 : 20;
+            hookMins = isDeload ? 15 : 20;
           } else if (phaseNum === 4) {
-            hookMins = isDeload ? 18 : 25;
+            hookMins = isDeload ? 20 : 25;
           } else if (phaseNum === 5) {
-            hookMins = isDeload ? 14 : 20;
+            hookMins = isDeload ? 15 : 20;
           } else if (phaseNum === 6) {
             hookMins = isDeload ? 10 : 15;
           } else {
-            hookMins = isDeload ? 21 : 30;
+            hookMins = isDeload ? 20 : 30;
           }
           const workSecs = parseDurationText(d.reps_or_duration) || (hookMins * 60);
           const dayNumMatch = d.id.match(/-d(\d+)-/);

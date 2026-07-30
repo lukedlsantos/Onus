@@ -363,34 +363,34 @@ function generateWorkouts() {
           ];
         }
 
-        // Calculate duration dynamically based on day, phase, and load/deload status
+        // Calculate duration dynamically based on day, phase, and load/deload status (rounded to multiples of 5)
         if (d === 1 || d === 3 || d === 5) {
           let main = 90;
           let hook = 30;
           if (phaseNum === 3) {
             main = isDeload ? 70 : 100;
-            hook = isDeload ? 14 : 20;
+            hook = isDeload ? 15 : 20;
           } else if (phaseNum === 4) {
-            main = isDeload ? 66 : 95;
-            hook = isDeload ? 18 : 25;
+            main = isDeload ? 65 : 95;
+            hook = isDeload ? 20 : 25;
           } else if (phaseNum === 5) {
             main = isDeload ? 70 : 100;
-            hook = isDeload ? 14 : 20;
+            hook = isDeload ? 15 : 20;
           } else if (phaseNum === 6) {
-            main = isDeload ? 52 : 75;
+            main = isDeload ? 50 : 75;
             hook = isDeload ? 10 : 15;
           } else {
             // Months 1 & 2
-            main = isDeload ? 63 : 90;
-            hook = isDeload ? 21 : 30;
+            main = isDeload ? 65 : 90;
+            hook = isDeload ? 20 : 30;
           }
           duration = 10 + main + hook + 10; // Warmup (10m) + Core Driver + Progress Hook + Restore/PT (10m)
         } else if (d === 2) {
-          duration = isDeload ? 42 : 60;
+          duration = isDeload ? 40 : 60;
         } else if (d === 4) {
-          duration = isDeload ? 31 : 45;
+          duration = isDeload ? 30 : 45;
         } else if (d === 6) {
-          duration = isDeload ? 52 : 75;
+          duration = isDeload ? 50 : 75;
         } else if (d === 7) {
           duration = 0;
         }
@@ -482,7 +482,7 @@ const DEFAULT_FAQS = [
 
 // Helper to initialize database
 function initDB() {
-  const CURRENT_VERSION = "3.9";
+  const CURRENT_VERSION = "4.0";
   const storedVersion = localStorage.getItem("onus_db_version");
   if (storedVersion !== CURRENT_VERSION) {
     // Clear all onus-related localStorage entries to force clean re-seeding
