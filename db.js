@@ -354,7 +354,7 @@ function generateWorkouts() {
         } else if (d === 7) {
           // DAY 7 (Rest Day)
           sessionType = "rest";
-          duration = 180;
+          duration = 0;
           intensity = 1;
           title = "Absolute Rest Day";
           objective = "* Complete central nervous system off-load.";
@@ -449,7 +449,7 @@ const DEFAULT_FAQS = [
 
 // Helper to initialize database
 function initDB() {
-  const CURRENT_VERSION = "3.6";
+  const CURRENT_VERSION = "3.7";
   const storedVersion = localStorage.getItem("onus_db_version");
   if (storedVersion !== CURRENT_VERSION) {
     // Clear all onus-related localStorage entries to force clean re-seeding
