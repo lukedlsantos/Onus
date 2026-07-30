@@ -363,6 +363,39 @@ function generateWorkouts() {
           ];
         }
 
+        // Calculate duration dynamically based on day, phase, and load/deload status
+        if (d === 1 || d === 3 || d === 5) {
+          let main = 90;
+          let hook = 30;
+          if (phaseNum === 3) {
+            main = isDeload ? 70 : 100;
+            hook = isDeload ? 14 : 20;
+          } else if (phaseNum === 4) {
+            main = isDeload ? 66 : 95;
+            hook = isDeload ? 18 : 25;
+          } else if (phaseNum === 5) {
+            main = isDeload ? 70 : 100;
+            hook = isDeload ? 14 : 20;
+          } else if (phaseNum === 6) {
+            main = isDeload ? 52 : 75;
+            hook = isDeload ? 10 : 15;
+          } else {
+            // Months 1 & 2
+            main = isDeload ? 63 : 90;
+            hook = isDeload ? 21 : 30;
+          }
+          duration = 10 + main + hook + 10; // Warmup (10m) + Core Driver + Progress Hook + Restore/PT (10m)
+        } else if (d === 2) {
+          duration = isDeload ? 42 : 60;
+        } else if (d === 4) {
+          duration = isDeload ? 31 : 45;
+        } else if (d === 6) {
+          duration = isDeload ? 52 : 75;
+        } else if (d === 7) {
+          duration = 0;
+        }
+
+
         // Add generated session
         DEFAULT_SESSIONS.push({
           id: sessionId,
@@ -449,7 +482,7 @@ const DEFAULT_FAQS = [
 
 // Helper to initialize database
 function initDB() {
-  const CURRENT_VERSION = "3.7";
+  const CURRENT_VERSION = "3.9";
   const storedVersion = localStorage.getItem("onus_db_version");
   if (storedVersion !== CURRENT_VERSION) {
     // Clear all onus-related localStorage entries to force clean re-seeding
