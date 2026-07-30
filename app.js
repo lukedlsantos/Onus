@@ -714,13 +714,30 @@ async function loadAthleteTodayScreen() {
     let drillsHtml = "";
 
     if (drills.length > 0) {
+      const weekNumMatch = session.week_id.match(/week-(\d+)/);
+      const weekNum = weekNumMatch ? parseInt(weekNumMatch[1]) : 1;
+      const isDeload = (weekNum % 4 === 0);
+      const phaseNum = Math.ceil(weekNum / 4);
+
       drillsHtml += drills.map(d => {
         let timerHtml = '';
         
         if (d.category === "Warm-up & Prep") {
           timerHtml = renderTimerMarkup(d.id + "-warmup", 600, "Warm-up Timer");
         } else if (d.category === "Core Driver") {
-          const workSecs = parseDurationText(d.reps_or_duration) || 5400; // 90 min default
+          let mainMins = 90;
+          if (phaseNum === 3) {
+            mainMins = isDeload ? 70 : 100;
+          } else if (phaseNum === 4) {
+            mainMins = isDeload ? 66 : 95;
+          } else if (phaseNum === 5) {
+            mainMins = isDeload ? 70 : 100;
+          } else if (phaseNum === 6) {
+            mainMins = isDeload ? 52 : 75;
+          } else {
+            mainMins = isDeload ? 63 : 90;
+          }
+          const workSecs = parseDurationText(d.reps_or_duration) || (mainMins * 60);
           const restSecs = parseDurationText(d.rest) || 90; // 90s default
           timerHtml = `
             <div style="display: flex; gap: 8px; margin-top: 6px; width: 100%; flex-wrap: wrap;">
@@ -729,7 +746,19 @@ async function loadAthleteTodayScreen() {
             </div>
           `;
         } else if (d.category === "Progress Hook") {
-          const workSecs = parseDurationText(d.reps_or_duration) || 2400; // 40 min default
+          let hookMins = 30;
+          if (phaseNum === 3) {
+            hookMins = isDeload ? 14 : 20;
+          } else if (phaseNum === 4) {
+            hookMins = isDeload ? 18 : 25;
+          } else if (phaseNum === 5) {
+            hookMins = isDeload ? 14 : 20;
+          } else if (phaseNum === 6) {
+            hookMins = isDeload ? 10 : 15;
+          } else {
+            hookMins = isDeload ? 21 : 30;
+          }
+          const workSecs = parseDurationText(d.reps_or_duration) || (hookMins * 60);
           const dayNumMatch = d.id.match(/-d(\d+)-/);
           const dayNum = dayNumMatch ? parseInt(dayNumMatch[1]) : 1;
           const restSecs = (dayNum === 3) ? 90 : 60;
