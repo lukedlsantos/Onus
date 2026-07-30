@@ -417,7 +417,7 @@ async function setupSessionSelectDropdown() {
     for (const week of weeks) {
       const sessions = await db.getSessionsForWeek(week.id);
       sessions.forEach(sess => {
-        optionsHtml += `<option value="${escapeHTML(sess.id)}">${escapeHTML(phase.title)} (W${week.week_number}) - ${escapeHTML(sess.day_label)}: ${escapeHTML(sess.title)}</option>`;
+        optionsHtml += `<option value="${escapeHTML(sess.id)}">${escapeHTML(phase.title)} (W${parseInt(week.id.replace('week-', '')) || week.week_number}) - ${escapeHTML(sess.day_label)}: ${escapeHTML(sess.title)}</option>`;
       });
     }
   }
@@ -471,9 +471,15 @@ function renderTimerMarkup(timerId, originalSecs, label) {
 }
 
 /// Parse text into individual sets/reps workouts for Tier 4
-function parseSubExercises(notes, parentId) {
-  if (!notes) return [];
-  const lines = notes.split('\n');
+function parseSubExercises(notes, parentId, instruction = "") {
+  let textToParse = notes || "";
+  if (instruction && (instruction.includes("sets x") || instruction.includes("sets of") || instruction.includes("set x") || instruction.includes("\n"))) {
+    if (!textToParse.includes("sets x") && !textToParse.includes("sets of") && !textToParse.includes("set x")) {
+      textToParse = instruction;
+    }
+  }
+  if (!textToParse) return [];
+  const lines = textToParse.split('\n');
   const subItems = [];
   
   lines.forEach((line, index) => {
@@ -626,7 +632,7 @@ async function loadAthleteTodayScreen() {
         const found = sessions.find(s => s.id === storedSessionId);
         if (found) {
           session = found;
-          phaseWeekLabel.textContent = `Week ${week.week_number} - ${phase.title}`;
+          phaseWeekLabel.textContent = `Week ${parseInt(week.id.replace('week-', '')) || week.week_number} - ${phase.title}`;
           break;
         }
       }
@@ -646,7 +652,7 @@ async function loadAthleteTodayScreen() {
           const logged = logs.some(l => l.session_id === sess.id);
           if (!logged) {
             session = sess;
-            phaseWeekLabel.textContent = `Week ${week.week_number} - ${phase.title}`;
+            phaseWeekLabel.textContent = `Week ${parseInt(week.id.replace('week-', '')) || week.week_number} - ${phase.title}`;
             foundUnlogged = true;
             break;
           }
@@ -663,7 +669,7 @@ async function loadAthleteTodayScreen() {
         const sessions = await db.getSessionsForWeek(weeks[0].id);
         if (sessions.length > 0) {
           session = sessions[0];
-          phaseWeekLabel.textContent = `Week ${weeks[0].week_number} - ${phases[0].title}`;
+          phaseWeekLabel.textContent = `Week ${parseInt(weeks[0].id.replace('week-', '')) || weeks[0].week_number} - ${phases[0].title}`;
         }
       }
     }
@@ -704,62 +710,10 @@ async function loadAthleteTodayScreen() {
       logBtn.style.display = "none";
     }
 
-    const isDay4 = session.day_label === "Day 4";
-    const choiceKey = "onus_recovery_choice_" + session.id;
-    const recoveryChoice = localStorage.getItem(choiceKey) || "";
-
-    let drills = [];
-    if (isDay4) {
-      if (recoveryChoice === "A") {
-        const day2SessionId = session.id.replace("-d4", "-d2");
-        drills = await db.getExercisesForSession(day2SessionId);
-      } else if (recoveryChoice === "B") {
-        const d4Drills = await db.getExercisesForSession(session.id);
-        drills = d4Drills.filter(d => d.name.includes("Option B") || d.name.includes("Passive"));
-      } else {
-        drills = [];
-      }
-    } else {
-      drills = await db.getExercisesForSession(session.id);
-    }
-
+    const drills = await db.getExercisesForSession(session.id);
     let drillsHtml = "";
-    if (isDay4) {
-      drillsHtml += `
-        <div class="recovery-selector-container" style="margin-bottom: 24px; width: 100%;">
-          <div style="font-size: 0.8rem; font-weight: 700; color: var(--text-secondary); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.05em;">
-            Select Recovery Strategy
-          </div>
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
-            <div class="recovery-option-card" 
-                 data-option="A" 
-                 style="padding: 16px; border-radius: var(--border-radius); border: 2px solid ${recoveryChoice === 'A' ? 'var(--accent-cyan)' : 'var(--border-color)'}; background: ${recoveryChoice === 'A' ? 'rgba(6, 182, 212, 0.08)' : 'var(--bg-secondary)'}; cursor: pointer; transition: all 0.2s ease; box-shadow: ${recoveryChoice === 'A' ? '0 0 12px rgba(6, 182, 212, 0.15)' : 'none'}; text-align: left;">
-              <div style="font-size: 1rem; font-weight: 700; color: ${recoveryChoice === 'A' ? 'var(--accent-cyan)' : 'var(--text-primary)'}; margin-bottom: 4px;">Option A</div>
-              <div style="font-size: 0.85rem; font-weight: 600; color: var(--text-primary); margin-bottom: 6px;">Active Flush</div>
-              <div style="font-size: 0.75rem; color: var(--text-muted); line-height: 1.3;">Re-execute Day 2's deep mobility and PT core container.</div>
-            </div>
-            <div class="recovery-option-card" 
-                 data-option="B" 
-                 style="padding: 16px; border-radius: var(--border-radius); border: 2px solid ${recoveryChoice === 'B' ? 'var(--accent-green)' : 'var(--border-color)'}; background: ${recoveryChoice === 'B' ? 'rgba(16, 185, 129, 0.08)' : 'var(--bg-secondary)'}; cursor: pointer; transition: all 0.2s ease; box-shadow: ${recoveryChoice === 'B' ? '0 0 12px rgba(16, 185, 129, 0.15)' : 'none'}; text-align: left;">
-              <div style="font-size: 1rem; font-weight: 700; color: ${recoveryChoice === 'B' ? 'var(--accent-green)' : 'var(--text-primary)'}; margin-bottom: 4px;">Option B</div>
-              <div style="font-size: 0.85rem; font-weight: 600; color: var(--text-primary); margin-bottom: 6px;">Passive Rest</div>
-              <div style="font-size: 0.75rem; color: var(--text-muted); line-height: 1.3;">Complete off-load. Zero physical stress to allow skin & pulley recovery.</div>
-            </div>
-          </div>
-        </div>
-      `;
-    }
 
-    if (isDay4 && !recoveryChoice) {
-      drillsHtml += `
-        <div style="padding: 32px 16px; text-align: center; border: 2px dashed var(--border-color); border-radius: var(--border-radius); color: var(--text-muted); background: var(--bg-secondary); width: 100%; box-sizing: border-box;">
-          <div style="font-size: 1.5rem; margin-bottom: 8px;">⏳</div>
-          <div style="font-size: 0.9rem; font-weight: 600; color: var(--text-primary); margin-bottom: 4px;">No Choice Selected</div>
-          <div style="font-size: 0.8rem;">Select Option A or Option B above to view your training parameters.</div>
-        </div>
-      `;
-      drillList.innerHTML = drillsHtml;
-    } else if (drills.length > 0) {
+    if (drills.length > 0) {
       drillsHtml += drills.map(d => {
         let timerHtml = '';
         
@@ -798,7 +752,7 @@ async function loadAthleteTodayScreen() {
         const checkBg = isCompleted ? 'background-color: rgba(16, 185, 129, 0.15); border-color: var(--accent-green);' : 'background: none; border-color: var(--border-color);';
         const cardBg = isCompleted ? 'border-color: var(--accent-green); box-shadow: 0 0 10px rgba(16, 185, 129, 0.05);' : '';
 
-        const subItems = parseSubExercises(d.notes, d.id);
+        const subItems = parseSubExercises(d.notes, d.id, d.instruction);
         const isWorkoutContainer = subItems.length > 0 && (
           d.category === "Care & Restoration" || 
           subItems.some(sub => sub.sets > 1 || sub.repsOrDuration !== "1 set")
@@ -901,18 +855,7 @@ async function loadAthleteTodayScreen() {
       }).join('');
       drillList.innerHTML = drillsHtml;
     } else {
-      drillList.innerHTML = isDay4 ? drillsHtml : '';
-    }
-
-    // Bind event listeners for Recovery options if Day 4
-    if (isDay4) {
-      drillList.querySelectorAll(".recovery-option-card").forEach(card => {
-        card.addEventListener("click", () => {
-          const option = card.dataset.option;
-          localStorage.setItem(choiceKey, option);
-          loadAthleteTodayScreen();
-        });
-      });
+      drillList.innerHTML = '';
     }
 
       // Bind toggle handlers for Tier 4 sub-drills
@@ -1111,7 +1054,7 @@ async function loadTrainingCalendar() {
       calendarHtml += `
         <div class="calendar-week-block" style="margin-top: 8px;">
           <div class="calendar-week-header" data-week-id="${escapeHTML(week.id)}" style="cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 10px; background-color: var(--bg-secondary); border-radius: var(--border-radius-sm); border: 1px solid var(--border-color);">
-            <span style="font-weight: 600; font-size: 0.85rem; color: var(--accent-cyan);">Week ${week.week_number}</span>
+            <span style="font-weight: 600; font-size: 0.85rem; color: var(--accent-cyan);">Week ${parseInt(week.id.replace('week-', '')) || week.week_number}</span>
             <span class="chevron" style="font-size: 0.75rem; color: var(--text-muted);">${chevronChar}</span>
           </div>
           <div class="calendar-days-container" id="days-container-${escapeHTML(week.id)}" style="display: ${displayStyle}; margin-top: 4px;">
@@ -1232,21 +1175,10 @@ async function submitQuickLog() {
   
   // Calculate completed exercises details
   let sessionDrills = await db.getExercisesForSession(state.todaySession.id);
-  const isDay4 = state.todaySession.day_label === "Day 4";
-  if (isDay4) {
-    const choiceKey = "onus_recovery_choice_" + state.todaySession.id;
-    const choice = localStorage.getItem(choiceKey) || "";
-    if (choice === "A") {
-      const day2SessionId = state.todaySession.id.replace("-d4", "-d2");
-      sessionDrills = await db.getExercisesForSession(day2SessionId);
-    } else {
-      sessionDrills = sessionDrills.filter(d => d.name.includes("Option B") || d.name.includes("Passive"));
-    }
-  }
   const completions = [];
   
   for (const d of sessionDrills) {
-    const subItems = parseSubExercises(d.notes, d.id);
+    const subItems = parseSubExercises(d.notes, d.id, d.instruction);
     const isWorkoutContainer = subItems.length > 0 && (
       d.category === "Care & Restoration" || 
       subItems.some(sub => sub.sets > 1 || sub.repsOrDuration !== "1 set")

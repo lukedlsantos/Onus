@@ -60,17 +60,18 @@ const DEFAULT_PHASES = [
   { id: "phase-2", program_id: "prog-6m", title: "Month 2: Basic Strength Phase", phase_order: 2 },
   { id: "phase-3", program_id: "prog-6m", title: "Month 3: Max Strength Phase", phase_order: 3 },
   { id: "phase-4", program_id: "prog-6m", title: "Month 4: Power Phase", phase_order: 4 },
-  { id: "phase-5", program_id: "prog-6m", title: "Month 5: Power Endurance Phase", phase_order: 5 }
+  { id: "phase-5", program_id: "prog-6m", title: "Month 5: Power Endurance Phase", phase_order: 5 },
+  { id: "phase-6", program_id: "prog-6m", title: "Month 6: Performance & Peak Phase", phase_order: 6 }
 ];
 
 const DEFAULT_WEEKS = [];
 const DEFAULT_SESSIONS = [];
 const DEFAULT_EXERCISES = [];
 
-// Dynamic workout generator for Months 1-5
+// Dynamic workout generator for Months 1-6
 function generateWorkouts() {
   // Generate weeks
-  for (let phaseNum = 1; phaseNum <= 5; phaseNum++) {
+  for (let phaseNum = 1; phaseNum <= 6; phaseNum++) {
     const phaseId = `phase-${phaseNum}`;
     for (let w = 1; w <= 4; w++) {
       const weekNum = (phaseNum - 1) * 4 + w;
@@ -83,7 +84,7 @@ function generateWorkouts() {
   }
 
   // Generate sessions and exercises
-  for (let phaseNum = 1; phaseNum <= 5; phaseNum++) {
+  for (let phaseNum = 1; phaseNum <= 6; phaseNum++) {
     const phaseId = `phase-${phaseNum}`;
     for (let w = 1; w <= 4; w++) {
       const weekNum = (phaseNum - 1) * 4 + w;
@@ -163,13 +164,24 @@ function generateWorkouts() {
               { name: "Neuro-Power Trigger", category: "Progress Hook", sets: 2, reps_or_duration: "2 attempts", intensity: "RPE 9.5", rest: "Self-paced", notes: "Progress Hook: Neuro-Power Trigger. Execute 2 max-velocity limit board attempts at the absolute start while fresh." },
               { name: "Forearm Flush & Core Restoration", category: "Care & Restoration", sets: 1, reps_or_duration: "1 set", intensity: "RPE 6", rest: "Self-paced", notes: "Forearm Flush & Core Restoration:\n2 sets x 60s Rice Bucket Hand Drills\n2 sets x 30s Pen Rolling\n2 sets x 10 reps Supine Hand-to-Toe Touches" }
             ];
+          } else if (phaseNum === 6) {
+            title = "Peaking / Limit Projecting Session";
+            objective = "Maximum quality projecting and mock competition send simulations.";
+            intensity = 10;
+            let projects = w === 4 ? 3 : 5;
+            exercises = [
+              { name: "Warm-up & Prep", category: "Warm-up & Prep", sets: 1, reps_or_duration: "10 Mins", intensity: "RPE 8", rest: "None", notes: "Standard Prep Container with screening." },
+              { name: "Limit Projecting & Send Simulation", category: "Core Driver", sets: projects, reps_or_duration: `${projects} projects`, intensity: "RPE 10", rest: "5 mins", notes: isDeload ? "Core Driver: Cut projecting intensity and attempts by 50%." : `Core Driver: Attempt ${projects} limit bouldering projects. Give 100% effort per attempt. Rest at least 5 minutes between burns.` },
+              { name: "Supercompensation Flush", category: "Progress Hook", sets: 1, reps_or_duration: "1 set", intensity: "RPE 5", rest: "Self-paced", notes: "Progress Hook: Supercompensation Flush. 15 mins of very easy movement on vertical terrain." },
+              { name: "Posture Decompression & Core", category: "Care & Restoration", sets: 1, reps_or_duration: "1 set", intensity: "RPE 5", rest: "Self-paced", notes: "Posture Decompression & Core:\n2 sets x 10 reps Cat & Camel\n2 sets x 8 reps Hanging Leg Raises\n2 sets x 30s Passive Overhead Hangs" }
+            ];
           }
         } else if (d === 2) {
           // DAY 2 (Mobility/PT Day)
           sessionType = "mobility";
           duration = 120;
           intensity = 3;
-          title = phaseNum === 5 ? "Technique Under Pump & Recovery" : "Physical Therapy Core & Recovery";
+          title = (phaseNum === 5 || phaseNum === 6) ? "Technique Under Pump & Recovery" : "Physical Therapy Core & Recovery";
           objective = "Nasal breathing flush and active joint range checks.";
           let plankSecs = w === 1 ? 45 : w === 2 ? 50 : w === 3 ? 60 : 30;
           exercises = [
@@ -233,17 +245,29 @@ function generateWorkouts() {
               { name: "Base Strength Maintenance", category: "Progress Hook", sets: 3, reps_or_duration: "3 sets x 5 reps", intensity: "RPE 8", rest: "Self-paced", notes: "Progress Hook: Base Strength Maintenance. Weighted pull-ups and heavy squats." },
               { name: "Antagonist Balance & Plyos", category: "Care & Restoration", sets: 1, reps_or_duration: "1 set", intensity: "RPE 6", rest: "Self-paced", notes: "Antagonist Balance & Plyos:\n3 sets x 5 reps Depth Jumps\n2 sets x 60s Forearm Rolling\n2 sets x 20 reps Extensor Bands" }
             ];
+          } else if (phaseNum === 6) {
+            title = "Max Power & Peaking Fingerboard";
+            objective = "High neuromuscular recruitment, low volume rate of force development.";
+            intensity = 9;
+            exercises = [
+              { name: "Warm-up & Prep", category: "Warm-up & Prep", sets: 1, reps_or_duration: "10 Mins", intensity: "RPE 8", rest: "None", notes: "Standard Prep Container with screening." },
+              { name: "Max Power campus & Edge Pulls", category: "Core Driver", sets: 3, reps_or_duration: "3 sets x 3 reps", intensity: "RPE 9.5", rest: "4 mins", notes: isDeload ? "Core Driver: Cut power work by 50%." : "Core Driver: Campus board 1-4-7 power pulls + 20mm edge maximum weight dead-hangs. Rest 4 mins." },
+              { name: "Power Baseline Retention", category: "Progress Hook", sets: 2, reps_or_duration: "2 sets x 3 reps", intensity: "RPE 8", rest: "Self-paced", notes: "Progress Hook: Power Baseline Retention. Weighted pullups and goblet squats." },
+              { name: "Finger Care & Antagonist Flush", category: "Care & Restoration", sets: 1, reps_or_duration: "1 set", intensity: "RPE 5", rest: "Self-paced", notes: "Finger Care & Antagonist Flush:\n2 sets x 20 reps Extensor Bands\n2 sets x 60s Forearm Self-Massage" }
+            ];
           }
         } else if (d === 4) {
-          // DAY 4 (Asynchronous Recovery Selector)
-          sessionType = "mobility";
-          duration = 180;
-          intensity = 1;
-          title = "Asynchronous Recovery Selector";
-          objective = "Active flush or passive rest selector.";
+          // DAY 4 (Active Recovery Day)
+          sessionType = "recovery";
+          duration = 60;
+          intensity = 3;
+          title = "Active Recovery Day";
+          objective = "Full-body isometric maintenance focusing on wrists, fingers, shoulders, and core tension.";
           exercises = [
-            { name: "Option A: Active Flush", category: "Mobility", sets: 1, reps_or_duration: "1 set", intensity: "RPE 3", rest: "Self-paced", notes: "Re-execute Day 2's deep mobility and PT core container." },
-            { name: "Option B: Passive Rest", category: "General", sets: 1, reps_or_duration: "1 set", intensity: "RPE 1", rest: "Self-paced", notes: "Complete off-load. Zero physical stress to repair skin calluses and finger pulley networks." }
+            { name: "Passive to Active Scapular Hangs", category: "Shoulders", sets: 3, reps_or_duration: "3 reps x 15s", intensity: "RPE 4", rest: "1 min", notes: "Intent: Build structural shoulder girdle integrity and scapular control under load.\nExecute a dead-hang, then pull your shoulder blades down and back without bending your elbows. Hold active position for 15s." },
+            { name: "Sub-Max Isometric Edge Hangs", category: "Fingers", sets: 3, reps_or_duration: "3 reps x 10s", intensity: "RPE 5", rest: "1 min", notes: "Intent: Condition tendon sheath pulleys and finger joints without high-neural stress.\nHang from a 20mm edge using a half-crimp or open-hand grip. Keep elbows slightly bent (active tension). Hold 10s at ~60% max effort." },
+            { name: "Isometric Wrist Extension Holds", category: "Wrists", sets: 3, reps_or_duration: "3 reps x 20s", intensity: "RPE 4", rest: "45s", notes: "Intent: Strengthen wrist stabilizers and forearm flexor/extensor muscle tendons.\nHold a dumbbell or resistance band in active wrist extension (palm up or palm down) parallel to the ground against resistance. Hold 20s per side." },
+            { name: "Full-Body Tension Plank", category: "Full-Body", sets: 3, reps_or_duration: "3 reps x 30s", intensity: "RPE 4", rest: "1 min", notes: "Intent: Re-enforce diagonal core tension and abdominal bracing necessary for steep walls.\nStandard forearm plank, but actively squeeze your glutes, quads, fists, and core as hard as possible to generate maximum body tension. Hold 30s." }
           ];
         } else if (d === 5) {
           // DAY 5 (Volume/Mileage Day)
@@ -256,7 +280,7 @@ function generateWorkouts() {
             exercises = [
               { name: "Warm-up & Prep", category: "Warm-up & Prep", sets: 1, reps_or_duration: "10 Mins", intensity: "RPE 6", rest: "None", notes: "3-5 easy problems on vertical/slab terrain, progressively increasing wall angle and hold difficulty." },
               { name: "Low-Intensity Volume Accrual & Mileage", category: "Core Driver", sets: 12, reps_or_duration: "12-15 problems", intensity: "RPE 6", rest: "2 mins", notes: isDeload ? "Core Driver: Cut volume by 50%." : "Core Driver: Clear 12-15 easy vertical/slab grade problems. Rest 2 mins." },
-              { name: "Eccentric Down-Climbing", category: "Progress Hook", sets: 1, reps_or_duration: "1 set", intensity: "RPE 6", rest: "Self-paced", notes: "Progress Hook: Eccentric Down-Climbing. Climb up a low-tier problem and completely down-climb using identical foot coordinates." },
+              { name: "Quiet Feet Practice", category: "Progress Hook", sets: 1, reps_or_duration: "1 set", intensity: "RPE 6", rest: "Self-paced", notes: "Intent: Train footwork accuracy, visual tracking, and core-to-toe load transfer under volume.\nQuiet Feet Practice. Focus on silent, precise foot placements. Lock your eyes on the hold until your shoe is fully placed and weighted without readjusting." },
               { name: "Postural Realignment & Scapular Release", category: "Care & Restoration", sets: 1, reps_or_duration: "1 set", intensity: "RPE 6", rest: "Self-paced", notes: "Postural Realignment & Scapular Release:\n2 sets x 10 reps Cat & Camel\n2 sets x 10 reps Spine Rolls\n2 sets x 30s passive overhead Hang Right holds" }
             ];
           } else if (phaseNum === 2) {
@@ -298,6 +322,17 @@ function generateWorkouts() {
               { name: "Power Endurance Peak Overload (4x4s)", category: "Core Driver", sets: 4, reps_or_duration: "4 blocks of 4 climbs", intensity: "RPE 9", rest: "4 mins", notes: isDeload ? "Core Driver: Eliminate 4x4s. Run easy climbs." : "Core Driver: Run 4x4 boulder intervals. Choose 4 distinct problems. Climb them back-to-back with no rest." },
               { name: "Friction Coordination Repeats", category: "Progress Hook", sets: 1, reps_or_duration: "1 set", intensity: "RPE 8", rest: "Self-paced", notes: "Progress Hook: Friction Coordination Repeats. Slab volume stepping drills under pump." },
               { name: "Gentle Posture Decompression", category: "Care & Restoration", sets: 1, reps_or_duration: "1 set", intensity: "RPE 6", rest: "Self-paced", notes: "Gentle Posture Decompression:\n2 sets x 10 reps Cat & Camel\n2 sets x 10 reps Spine Rolls\n2 sets x 30s Passive Overhead Hangs" }
+            ];
+          } else if (phaseNum === 6) {
+            title = "Mock Competition & Redpoint Peaking";
+            objective = "High technical complexity boulder mock competition.";
+            intensity = 9;
+            let projects = w === 4 ? 4 : 8;
+            exercises = [
+              { name: "Warm-up & Prep", category: "Warm-up & Prep", sets: 1, reps_or_duration: "10 Mins", intensity: "RPE 8", rest: "None", notes: "Standard Prep Container with screening." },
+              { name: "Mock Competition Redpoints", category: "Core Driver", sets: projects, reps_or_duration: `${projects} attempts`, intensity: "RPE 9", rest: "5 mins", notes: isDeload ? "Core Driver: Cut mock comp volume by 50%." : `Core Driver: Attempt ${projects} commercial boulder problems at your flash/redpoint limit. Rest 5 minutes between attempts.` },
+              { name: "Under-Pump Technical Repeats", category: "Progress Hook", sets: 1, reps_or_duration: "1 set", intensity: "RPE 8", rest: "Self-paced", notes: "Progress Hook: Under-Pump Technical Repeats. Slab volume stepping drills under pump." },
+              { name: "Postural Realignment & Release", category: "Care & Restoration", sets: 1, reps_or_duration: "1 set", intensity: "RPE 5", rest: "Self-paced", notes: "Postural Realignment & Release:\n2 sets x 10 reps Cat & Camel\n2 sets x 30s Passive Overhead Hangs" }
             ];
           }
         } else if (d === 6) {
@@ -441,6 +476,72 @@ function initDB() {
   store("onus_video_reviews", []);
   store("onus_resources", DEFAULT_RESOURCES);
   store("onus_faqs", DEFAULT_FAQS);
+
+  // Dynamic Month 6 & Day 4 Isometric Migration Patch
+  try {
+    const phasesJson = localStorage.getItem("onus_phases");
+    if (phasesJson) {
+      const currentPhases = JSON.parse(phasesJson);
+      const hasPhase6 = currentPhases.some(p => p.id === "phase-6");
+      if (!hasPhase6) {
+        // 1. Add phase-6
+        const phase6 = DEFAULT_PHASES.find(p => p.id === "phase-6");
+        if (phase6) {
+          currentPhases.push(phase6);
+          localStorage.setItem("onus_phases", JSON.stringify(currentPhases));
+        }
+
+        // 2. Add Phase 6 weeks (weeks 21-24)
+        const weeksJson = localStorage.getItem("onus_weeks");
+        if (weeksJson) {
+          const currentWeeks = JSON.parse(weeksJson);
+          const p6Weeks = DEFAULT_WEEKS.filter(w => w.phase_id === "phase-6");
+          p6Weeks.forEach(w => {
+            if (!currentWeeks.some(cw => cw.id === w.id)) {
+              currentWeeks.push(w);
+            }
+          });
+          localStorage.setItem("onus_weeks", JSON.stringify(currentWeeks));
+        }
+
+        // 3. Add Phase 6 sessions
+        const sessionsJson = localStorage.getItem("onus_sessions");
+        if (sessionsJson) {
+          const currentSessions = JSON.parse(sessionsJson);
+          const p6Sessions = DEFAULT_SESSIONS.filter(s => s.id.startsWith("session-w21") || s.id.startsWith("session-w22") || s.id.startsWith("session-w23") || s.id.startsWith("session-w24"));
+          p6Sessions.forEach(s => {
+            if (!currentSessions.some(cs => cs.id === s.id)) {
+              currentSessions.push(s);
+            }
+          });
+          localStorage.setItem("onus_sessions", JSON.stringify(currentSessions));
+        }
+
+        // 4. Add Phase 6 exercises
+        const exercisesJson = localStorage.getItem("onus_exercises");
+        if (exercisesJson) {
+          let currentExercises = JSON.parse(exercisesJson);
+          const p6SessionIds = new Set(DEFAULT_SESSIONS.filter(s => s.id.startsWith("session-w21") || s.id.startsWith("session-w22") || s.id.startsWith("session-w23") || s.id.startsWith("session-w24")).map(s => s.id));
+          const p6Exercises = DEFAULT_EXERCISES.filter(e => p6SessionIds.has(e.session_id));
+          p6Exercises.forEach(e => {
+            if (!currentExercises.some(ce => ce.id === e.id)) {
+              currentExercises.push(e);
+            }
+          });
+
+          // 5. Update Day 4 exercises (isometrics) for all existing weeks
+          currentExercises = currentExercises.filter(e => !e.session_id.endsWith("-d4"));
+          const newD4Exercises = DEFAULT_EXERCISES.filter(e => e.session_id.endsWith("-d4"));
+          currentExercises.push(...newD4Exercises);
+
+          localStorage.setItem("onus_exercises", JSON.stringify(currentExercises));
+        }
+        console.log("Database Migration: Successfully patched Month 6 (Phase 6) and Day 4 Isometrics into local storage.");
+      }
+    }
+  } catch (err) {
+    console.error("Database Migration Failed:", err);
+  }
 }
 
 // Initialize database right away
