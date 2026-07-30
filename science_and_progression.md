@@ -87,7 +87,7 @@ To prevent adaptation decay and optimize target system traits, the daily microcy
 *   **Day 1:** Low-Neural / High-Volume Climbing (capillary plumbing & endurance base)
 *   **Day 2:** Technique or Active Recovery (PT focus & joint mobility restoration)
 *   **Day 3:** Balanced Strength Block + On-Wall Loading (off-wall hypertrophy compounds)
-*   **Day 5:** Moderate Volume / Capacity Building (large feature mileage & down-climbing)
+*   **Day 5:** Moderate Volume / Capacity Building (large feature mileage & quiet feet practice)
 
 ### Month 3 & 4: Max Strength / Power
 *   **Day 1:** High-Neural / Absolute Fresh Limit Bouldering (neuromuscular maximum recruitment)

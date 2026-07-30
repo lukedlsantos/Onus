@@ -78,7 +78,7 @@ function generateWorkouts() {
       DEFAULT_WEEKS.push({
         id: `week-${weekNum}`,
         phase_id: phaseId,
-        week_number: w
+        week_number: weekNum
       });
     }
   }
@@ -449,7 +449,7 @@ const DEFAULT_FAQS = [
 
 // Helper to initialize database
 function initDB() {
-  const CURRENT_VERSION = "3.5";
+  const CURRENT_VERSION = "3.6";
   const storedVersion = localStorage.getItem("onus_db_version");
   if (storedVersion !== CURRENT_VERSION) {
     // Clear all onus-related localStorage entries to force clean re-seeding

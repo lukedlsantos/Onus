@@ -81,9 +81,9 @@ To automate the training block progression via the codebase, adjust the global v
     *   *Protocol:* High mileage on dynamic comp-style movement lines.
     *   *Execution:* Clear 12–15 intermediate-to-advanced commercial bouldering problems across various wall angles. Focus on generating upward momentum from the pelvis and shoulders rather than over-gripping.
     *   *Constraints:* Rest exactly 2 minutes between problems.
-*   **Progress Hook: Eccentric Down-Climbing [40 Mins]:**
-    *   *Protocol:* Spatial awareness and eccentric muscle loading.
-    *   *Execution:* Climb up a low-tier problem and completely down-climb using identical foot coordinates to reinforce precise weight placement under fatigue.
+*   **Progress Hook: Quiet Feet Practice [40 Mins]:**
+    *   *Protocol:* Footwork accuracy, visual tracking, and core-to-toe load transfer.
+    *   *Execution:* Focus on silent, precise foot placements. Lock your eyes on the hold until your shoe is fully placed and weighted without readjusting.
 *   **Care & Restoration: Postural Realignment & Scapular Release [10 Mins]:**
     *   *Execution:* Cat & Camel mobilization (3 Mins), Spine Roll (3 Mins), and passive centrated overhead "Hang Right" deadhangs (4 Mins).
 
@@ -133,8 +133,8 @@ To automate the training block progression via the codebase, adjust the global v
 *   **Core Driver: Dynamic Coordination Mileage [90 Mins]:**
     *   *Execution:* Complete 13 coordination problems on dynamic lines.
     *   *Constraints:* Rest exactly 2 minutes between attempts.
-*   **Progress Hook: Eccentric Down-Climbing [40 Mins]:**
-    *   *Execution:* Climb up and down vertical slab terrain.
+*   **Progress Hook: Quiet Feet Practice [40 Mins]:**
+    *   *Execution:* Focus on silent, precise foot placements without readjusting.
 *   **Care & Restoration: Postural Realignment & Scapular Release [10 Mins]:**
     *   *Execution:* Cat & Camel, Spine Rolls, and passive overhead hangs.
 
@@ -178,8 +178,8 @@ To automate the training block progression via the codebase, adjust the global v
 *   **Core Driver: Dynamic Coordination Mileage [90 Mins]:**
     *   *Execution:* Complete 15 coordination problems (RPE 9).
     *   *Constraints:* Rest 90 seconds between attempts.
-*   **Progress Hook: Eccentric Down-Climbing [40 Mins]:**
-    *   *Execution:* Climb up and down vertical slab terrain.
+*   **Progress Hook: Quiet Feet Practice [40 Mins]:**
+    *   *Execution:* Focus on silent, precise foot placements without readjusting.
 *   **Care & Restoration: Postural Realignment & Scapular Release [10 Mins]:**
     *   *Execution:* Cat & Camel, Spine Rolls, and passive overhead hangs.
 

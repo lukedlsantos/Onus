@@ -752,7 +752,7 @@ async function loadAthleteTodayScreen() {
         const checkBg = isCompleted ? 'background-color: rgba(16, 185, 129, 0.15); border-color: var(--accent-green);' : 'background: none; border-color: var(--border-color);';
         const cardBg = isCompleted ? 'border-color: var(--accent-green); box-shadow: 0 0 10px rgba(16, 185, 129, 0.05);' : '';
 
-        const subItems = parseSubExercises(d.notes, d.id, d.instruction);
+        const subItems = parseSubExercises(d.notes, d.id, d.instruction || d.instructions);
         const isWorkoutContainer = subItems.length > 0 && (
           d.category === "Care & Restoration" || 
           subItems.some(sub => sub.sets > 1 || sub.repsOrDuration !== "1 set")
@@ -1178,7 +1178,7 @@ async function submitQuickLog() {
   const completions = [];
   
   for (const d of sessionDrills) {
-    const subItems = parseSubExercises(d.notes, d.id, d.instruction);
+    const subItems = parseSubExercises(d.notes, d.id, d.instruction || d.instructions);
     const isWorkoutContainer = subItems.length > 0 && (
       d.category === "Care & Restoration" || 
       subItems.some(sub => sub.sets > 1 || sub.repsOrDuration !== "1 set")
