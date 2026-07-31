@@ -85,8 +85,8 @@ The training application configures daily session limits, resting intervals, and
   * *Protocol:* Continuous on-wall climbing targeting quadrupedal scapular and pelvic engine coordination on vertical to gentle $15^\circ$ overhanging walls.
   * *Execution:* 3 sets $\times$ 20 minutes of continuous climbing. Target a light, highly manageable forearm flush (RPE 4–5) without crossing the anaerobic threshold or building lactic acid.
   * *Constraints:* Rest exactly 10 minutes between sets. Maintain an "engaged rest" (centrated glenohumeral joints) when shaking out.
-* **Tier 3: Progress Hook — Friction & Foot-Volume Coordination (40 Mins):**
-  * *Protocol:* Direct center-of-mass matching on large sloper volumes and low-friction footholds.
+* **Tier 3: Progress Hook — Slab and Dynamic Slab (40 Mins):**
+  * *Protocol:* Intentionally direct center of mass to negative volumes or no-tex holds.
   * *Execution:* Execute 6–8 distinct low-grade commercial problems. On sloped surfaces, stand further from the wall to push perpendicular; on poor friction surfaces, bring feet flush to the wall and externally rotate hips.
 * **Tier 4: Chiba Tore Diagonal Core & Ankle Spring (10 Mins):**
   * *Execution:* 2 sets $\times$ 10 reps Supine Hand-to-Toe Alternating Touch (diagonal fascia core tension), 2 sets $\times$ 8 reps/side Single-Hand Elevated Scapular Push-Up (serratus anterior motor control), and 2 sets $\times$ 30 seconds Weighted Pogo Jumps (ankle tendon spring compliance for smear volume traction).
