@@ -114,7 +114,7 @@ function generateWorkouts() {
             exercises = [
               { name: "Warm-up & Ramp", category: "Warm-up & Prep", sets: 1, reps_or_duration: "10 Mins", intensity: "RPE 6", rest: "None", notes: "3-5 easy problems on vertical/slab terrain, progressively increasing wall angle and hold difficulty." },
               { name: "Aerobic Regeneration Circuits (ARC)", category: "Core Driver", sets: probs, reps_or_duration: `${probs} problems`, intensity: "RPE 6", rest: rest, notes: isDeload ? "Core Driver: Cut volume by 50%. Run easy vertical bouldering." : `Core Driver: Execute ${probs} unique vertical to gentle overhanging problems. Rest strictly ${rest} between problems.` },
-              { name: "Slab and Dynamic Slab", category: "Progress Hook", sets: 3, reps_or_duration: "3 reps", intensity: "RPE 6", rest: "1 min", notes: "Intentionally direct center of mass to negative volumes or no-tex holds" },
+              { name: "Slab and Dynamic Slab", category: "Progress Hook", sets: 3, reps_or_duration: "3 reps (1 climb/route)", intensity: "RPE 6", rest: "1 min", notes: "Intentionally direct center of mass to negative volumes or no-tex holds. 1 rep = 1 climb or route." },
               { name: "Chiba Tore Diagonal Core & Ankle Springs", category: "Care & Restoration", sets: 1, reps_or_duration: "1 set", intensity: "RPE 6", rest: "Self-paced", notes: "Chiba Tore Diagonal Core & Ankle Springs:\n2 sets x 10 reps Supine Hand-to-Toe Touches\n2 sets x 8 reps Single-Hand Elevated Scapular Push-ups\n2 sets x 20 reps Weighted Pogo Jumps" }
             ];
           } else if (phaseNum === 2) {
@@ -482,7 +482,7 @@ const DEFAULT_FAQS = [
 
 // Helper to initialize database
 function initDB() {
-  const CURRENT_VERSION = "4.2";
+  const CURRENT_VERSION = "4.3";
   const storedVersion = localStorage.getItem("onus_db_version");
   if (storedVersion !== CURRENT_VERSION) {
     // Clear all onus-related localStorage entries to force clean re-seeding
