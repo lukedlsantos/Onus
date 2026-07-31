@@ -48,7 +48,8 @@ To automate the training block progression via the codebase, adjust the global v
     *   *Constraints:* Rest exactly 10 minutes between sets. Maintain an "engaged rest" (centrated glenohumeral joints) when shaking out.
     *   **Progress Hook: Slab and Dynamic Slab [40 Mins]:**
         *   *Protocol:* Intentionally direct center of mass to negative volumes or no-tex holds.
-        *   *Execution:* Execute 6–8 distinct low-grade commercial problems. On sloped surfaces, stand further from the wall to push perpendicular; on poor friction surfaces, bring feet flush to the wall and externally rotate hips.
+        *   *Execution:* Execute 3 sets of 2–3 distinct low-grade commercial problems. On sloped surfaces, stand further from the wall to push perpendicular; on poor friction surfaces, bring feet flush to the wall and externally rotate hips.
+        *   *Constraints:* Rest exactly 1 minute between sets.
 *   **Care & Restoration: Chiba Tore Diagonal Core & Ankle Spring [10 Mins]:**
     *   *Execution:* 2 sets $\times$ 10 reps Supine Hand-to-Toe Alternating Touch (diagonal fascia core tension), 2 sets $\times$ 8 reps/side Single-Hand Elevated Scapular Push-Up (serratus anterior motor control), and 2 sets $\times$ 30 seconds Weighted Pogo Jumps (ankle tendon spring compliance for smear volume traction).
 
@@ -109,7 +110,8 @@ To automate the training block progression via the codebase, adjust the global v
     *   *Execution:* 3 sets $\times$ 20 minutes continuous climbing on $15^\circ$ overhang.
     *   *Constraints:* Rest exactly 10 minutes between sets. Rest strictly limited to 75 seconds between problems to increase aerobic tax.
 *   **Progress Hook: Slab and Dynamic Slab [40 Mins]:**
-    *   *Execution:* Complete 8–10 distinct problems focusing on lateral volume stepping.
+    *   *Execution:* Complete 3 sets of 3 distinct problems focusing on lateral volume stepping.
+    *   *Constraints:* Rest exactly 1 minute between sets.
 *   **Care & Restoration: Chiba Tore Diagonal Core & Ankle Spring [10 Mins]:**
     *   *Execution:* 3 sets $\times$ 10 reps Supine Hand-to-Toe Alternating Touch and 3 sets $\times$ 8 reps/side Single-Hand Elevated Scapular Push-Up.
 
@@ -154,7 +156,8 @@ To automate the training block progression via the codebase, adjust the global v
     *   *Execution:* 3 sets $\times$ 20 minutes continuous climbing.
     *   *Constraints:* Rest exactly 10 minutes between sets. Rest strictly limited to 60 seconds between problems to maximize aerobic tolerance boundaries.
 *   **Progress Hook: Slab and Dynamic Slab [40 Mins]:**
-    *   *Execution:* 12 repetitions on $15^\circ$ overhang. Enforce 3-second static pauses at maximum extension.
+    *   *Execution:* 3 sets of 4 repetitions on $15^\circ$ overhang. Enforce 3-second static pauses at maximum extension.
+    *   *Constraints:* Rest exactly 1 minute between sets.
 *   **Care & Restoration: Chiba Tore Diagonal Core & Ankle Spring [10 Mins]:**
     *   *Execution:* 3 sets $\times$ 10 reps Supine Hand-to-Toe Alternating Touch and 3 sets $\times$ 10 reps/side Single-Hand Elevated Scapular Push-Up.
 

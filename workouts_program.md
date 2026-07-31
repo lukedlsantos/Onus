@@ -87,7 +87,8 @@ The training application configures daily session limits, resting intervals, and
   * *Constraints:* Rest exactly 10 minutes between sets. Maintain an "engaged rest" (centrated glenohumeral joints) when shaking out.
 * **Tier 3: Progress Hook — Slab and Dynamic Slab (40 Mins):**
   * *Protocol:* Intentionally direct center of mass to negative volumes or no-tex holds.
-  * *Execution:* Execute 6–8 distinct low-grade commercial problems. On sloped surfaces, stand further from the wall to push perpendicular; on poor friction surfaces, bring feet flush to the wall and externally rotate hips.
+  * *Execution:* Execute 3 sets of 2–3 distinct low-grade commercial problems. On sloped surfaces, stand further from the wall to push perpendicular; on poor friction surfaces, bring feet flush to the wall and externally rotate hips.
+  * *Constraints:* Rest exactly 1 minute between sets.
 * **Tier 4: Chiba Tore Diagonal Core & Ankle Spring (10 Mins):**
   * *Execution:* 2 sets $\times$ 10 reps Supine Hand-to-Toe Alternating Touch (diagonal fascia core tension), 2 sets $\times$ 8 reps/side Single-Hand Elevated Scapular Push-Up (serratus anterior motor control), and 2 sets $\times$ 30 seconds Weighted Pogo Jumps (ankle tendon spring compliance for smear volume traction).
 
