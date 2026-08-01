@@ -2,7 +2,6 @@
   "name": "project-onus",
   "version": "1.0.0",
   "description": "Mobile-first climbing coach PWA MVP",
-  "main": "index.html",
   "scripts": {
     "dev": "npx -y http-server -p 8080"
   },
