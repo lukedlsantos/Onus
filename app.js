@@ -623,6 +623,8 @@ async function loadAthleteTodayScreen() {
   const phases = await db.getPhasesForProgram(assigned.program_id);
   let session = null;
   const storedSessionId = localStorage.getItem("onus_selected_today_session_id");
+  console.log("[Diagnostics] loadAthleteTodayScreen started. Stored ID:", storedSessionId);
+  console.log("[Diagnostics] Phases found:", phases.map(p => p.id));
 
   if (storedSessionId && phases.length > 0) {
     for (const phase of phases) {
@@ -631,6 +633,7 @@ async function loadAthleteTodayScreen() {
         const sessions = await db.getSessionsForWeek(week.id);
         const found = sessions.find(s => s.id === storedSessionId);
         if (found) {
+          console.log("[Diagnostics] Session found in Phase:", phase.id, "Week:", week.id, found);
           session = found;
           phaseWeekLabel.textContent = `Week ${parseInt(week.id.replace('week-', '')) || week.week_number} - ${phase.title}`;
           break;
@@ -641,6 +644,7 @@ async function loadAthleteTodayScreen() {
   }
 
   if (!session && phases.length > 0) {
+    console.log("[Diagnostics] Session lookup failed or was empty. Executing fallback logic.");
     // Find the first unlogged session in chronological order
     const logs = await db.getLogsForAthlete(state.currentUser.id);
     let foundUnlogged = false;
@@ -1135,6 +1139,7 @@ async function loadTrainingCalendar() {
       // Prevent parent trigger
       e.stopPropagation();
       const sessionId = row.dataset.sessionId;
+      console.log("[Diagnostics] Calendar row clicked. Data attribute sessionId:", sessionId);
       localStorage.setItem("onus_selected_today_session_id", sessionId);
       switchTab("today");
       loadAthleteTodayScreen();
