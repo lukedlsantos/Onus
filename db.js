@@ -4,6 +4,19 @@
  * Uses localStorage for persistence. All calls return Promises to simulate async network operations.
  */
 
+// Fallback for non-browser environments (e.g. Vercel serverless build/runtime)
+if (typeof localStorage === "undefined") {
+  globalThis.localStorage = {
+    getItem: () => null,
+    setItem: () => {},
+    removeItem: () => {},
+    clear: () => {},
+    key: () => null,
+    length: 0
+  };
+}
+
+
 // Seed Data
 const DEFAULT_PROFILES = [
   {
