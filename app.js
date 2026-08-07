@@ -1798,11 +1798,10 @@ const WARMUP_ROUTINES = {
   },
   lazy: {
     title: "Lazy Warm-Up",
-    objective: "Systemic temperature elevation, closed-chain stability, and progressive fingerboard recruitment (11-13 Minutes)",
+    objective: "Systemic temperature elevation and closed-chain stability (8-10 Minutes)",
     phases: [
-      { name: "Phase 1: Anatomical Prep & Systemic Pulse", duration: "7:00" },
-      { name: "Phase 2: Streamlined Targeted Activation", duration: "3:30" },
-      { name: "Phase 3: Autoregulated Power Potentiation", duration: "5:00" }
+      { name: "Phase 1: Systemic Pulse & Joint Matrix", duration: "7:00" },
+      { name: "Phase 2: Streamlined Targeted Activation", duration: "3:00" }
     ],
     stations: [
       // Phase 1: Anatomical Prep & Systemic Pulse
@@ -1817,33 +1816,23 @@ const WARMUP_ROUTINES = {
       { name: "Thoracic Spine Sweeps", desc: "Standing torso twists with relaxed, sweeping arms.", duration: 30, phase: "Phase 1: Joint Matrix" },
       { name: "Cat-Cow Pelvic Tilts", desc: "Spine flexion and extension from a quadruped posture.", duration: 30, phase: "Phase 1: Joint Matrix" },
       { name: "Dynamic Hip Gate Openers", desc: "Lift knee, rotate outward 90°, tap the floor, and reverse.", duration: 30, phase: "Phase 1: Joint Matrix" },
-      { name: "Ankle & Knee Circles", desc: "Ankle rotations paired with shallow, controlled knee bends.", duration: 30, phase: "Phase 1: Joint Matrix" },
+      { name: "Ankle & Knee Circles", desc: "Ankle rotations paired with controlled knee bends.", duration: 30, phase: "Phase 1: Joint Matrix" },
 
       // Phase 2: Streamlined Targeted Activation & Closed-Chain Stability
       { name: "Banded Pull-Aparts", desc: "Trigger the mid-trapezius and rhomboids.\nPerform 1 set × 10 reps.", type: "reps", sets: 1, phase: "Phase 2: Targeted Activation" },
       { name: "Banded External Rotations", desc: "Pin elbows firmly to ribs and rotate hands outward to fire the rotator cuff.\nPerform 1 set × 10 reps.", type: "reps", sets: 1, phase: "Phase 2: Targeted Activation" },
       { name: "Plank to Scapular Shrugs", desc: "Hold plank to wake up core/serratus, transitioning into hanging shoulder shrugs.\nRest 20 seconds after this station.", duration: 30, phase: "Phase 2: Targeted Activation" },
       { name: "Plank Shoulder Taps", desc: "Hold a rigid push-up plank. Tap opposite shoulder slowly without rocking your hips.", duration: 30, phase: "Phase 2: Targeted Activation" },
-      { name: "Unweighted Hip Extension Flips", desc: "Smooth bodyweight quarter-squats, focusing on driving hips forward to prime hip-to-core power transfer.", duration: 30, phase: "Phase 2: Targeted Activation" },
-
-      // Phase 3: Autoregulated Power Potentiation & Mechanical Loading
-      { name: "Controlled 20mm Edge Hangs", desc: "Engage shoulders and keep a strict half-crimp to recruit forearm flexors without dynamic impact.", type: "pulls", work: 5, rest: 15, cycles: 3, phase: "Phase 3: Fingerboard Matrix" },
-      { name: "3-Finger Drag Hangs", desc: "Drop your pinky finger off a comfortable edge, hanging in a relaxed, open-handed drag position.", type: "pulls", work: 5, rest: 15, cycles: 3, phase: "Phase 3: Fingerboard Matrix" },
-      { name: "20° Decline Sloper Hangs", desc: "Engage wrists and maximize skin contact on a gentle 20-degree sloper to prime friction grips.", type: "pulls", work: 5, rest: 15, cycles: 3, phase: "Phase 3: Fingerboard Matrix" },
-      { name: "30° Decline Sloper Hangs", desc: "Drive body tension straight through your core down to your toes on a 30-degree sloper.", type: "pulls", work: 5, rest: 15, cycles: 3, phase: "Phase 3: Fingerboard Matrix" },
-      { name: "40° Decline Sloper Hangs", desc: "Maximize palm compression on a slick 40-degree sloper to fully turn on your wrist stabilizers.", type: "pulls", work: 5, rest: 15, cycles: 3, phase: "Phase 3: Fingerboard Matrix" },
-      { name: "15mm Micro-Edge Hangs", desc: "Step down to a smaller edge size to increase neural recruitment in a strict half-crimp posture.", type: "pulls", work: 5, rest: 15, cycles: 3, phase: "Phase 3: Fingerboard Matrix" },
-      { name: "12mm Micro-Edge Hangs", desc: "Focus on immediate tension recruitment as the hold profile shrinks.", type: "pulls", work: 5, rest: 15, cycles: 3, phase: "Phase 3: Fingerboard Matrix" },
-      { name: "10mm Micro-Edge Hangs", desc: "The final priming step for high contact strength. Ensure your posture remains completely rigid.", type: "pulls", work: 5, rest: 15, cycles: 3, phase: "Phase 3: Fingerboard Matrix" }
+      { name: "Unweighted Hip Extension Flips", desc: "Smooth bodyweight quarter-squats, focusing on driving hips forward to prime hip-to-core power transfer.", duration: 30, phase: "Phase 2: Targeted Activation" }
     ]
   },
   standard: {
     title: "Standard Warm-Up",
-    objective: "Systemic pulse raising, Chiba Tore movement screening, capsule stabilization under light bodyweight, progressive pulley priming, and power potentiation (35-40 Minutes)",
+    objective: "Systemic pulse raising, Chiba Tore movement screening, capsule stabilization under light bodyweight, and body/power potentiation (20-25 Minutes)",
     phases: [
       { name: "Phase 1: Anatomical Prep & Systemic Pulse", duration: "10:00" },
       { name: "Phase 2: Scapular & Spinal Stabilization", duration: "10:00" },
-      { name: "Phase 3: Autoregulated Potentiation & Loading", duration: "15:00" }
+      { name: "Phase 3: Body & Power Potentiation", duration: "5:00" }
     ],
     stations: [
       // Phase 1
@@ -1855,24 +1844,20 @@ const WARMUP_ROUTINES = {
       { name: "Scapular Push-Ups to Downward Dog Shifting", desc: "Retract and protract shoulder blades in high plank, then drive hips back to downward dog.\nPerform 3 sets × 12 reps.", type: "reps", sets: 3, phase: "Phase 2: Stabilization" },
       { name: "Banded Pallof Press", desc: "Anchor band at chest height, step out for tension, hold at sternum and press straight out.\nPerform 3 sets × 12 reps per side.", type: "reps", sets: 3, phase: "Phase 2: Stabilization" },
       // Phase 3
-      { name: "CNS Neural Check: 50% & 75% MVC Pulls", desc: "Perform 2 pulls × 5 seconds (one at 50%, one at 75% effort) against static ground block. Verify neural drive. Rest 60s between pulls.", duration: 60, type: "pulls", pullsCount: 2, pullDuration: 5, phase: "Phase 3: Mechanical Loading" },
-      { name: "Tendon Priming Set 1: Target Edge (90% Effort)", desc: "Perform 2 reps × 5 seconds target session edge profile at 90% perceived max pull effort.\nRest 60 seconds between pulls.", duration: 60, type: "pulls", pullsCount: 2, pullDuration: 5, phase: "Phase 3: Mechanical Loading" },
-      // Body & Power Potentiation Drills (moved from lazy)
-      { name: "Static Block Presses", desc: "Perform slow, controlled push-ups on two small blocks to absorb force deeply into shoulders and chest.\nPerform 1 set × 3–5 reps.", type: "reps", sets: 1, phase: "Phase 3: Power Potentiation" },
-      { name: "Feet-On Campus Rung Taps", desc: "Stand in front of campus board (feet on floor/kickplate) and gently tap a higher rung with engaged shoulders.\nPerform 1 set × 3–5 reps.", type: "reps", sets: 1, phase: "Phase 3: Power Potentiation" },
-      { name: "Low-Impact Box Steps & Hops", desc: "Step onto low box, transition to light jumps, and land softly in a deep squat.\nPerform 1 set × 3–5 reps.", type: "reps", sets: 1, phase: "Phase 3: Power Potentiation" },
-      { name: "Mini Skater Bounds", desc: "Short lateral leaps foot-to-foot, landing and freezing for 2 seconds to train joint stability.\nPerform 1 set × 3–5 reps.", type: "reps", sets: 1, phase: "Phase 3: Power Potentiation" },
-      { name: "Sub-Maximal Vertical Rebounds", desc: "Dip into a quick quarter-squat and jump straight up while reaching overhead with both hands.\nPerform 1 set × 3–5 reps.", type: "reps", sets: 1, phase: "Phase 3: Power Potentiation" }
+      { name: "Static Block Presses", desc: "Perform slow, controlled push-ups on two small blocks to absorb force deeply into shoulders and chest.\nPerform 1 set × 3–5 reps.", type: "reps", sets: 1, phase: "Phase 3: Body & Power Potentiation" },
+      { name: "Feet-On Campus Rung Taps", desc: "Stand in front of campus board (feet on floor/kickplate) and gently tap a higher rung with engaged shoulders.\nPerform 1 set × 3–5 reps.", type: "reps", sets: 1, phase: "Phase 3: Body & Power Potentiation" },
+      { name: "Low-Impact Box Steps & Hops", desc: "Step onto low box, transition to light jumps, and land softly in a deep squat.\nPerform 1 set × 3–5 reps.", type: "reps", sets: 1, phase: "Phase 3: Body & Power Potentiation" },
+      { name: "Mini Skater Bounds", desc: "Short lateral leaps foot-to-foot, landing and freezing for 2 seconds to train joint stability.\nPerform 1 set × 3–5 reps.", type: "reps", sets: 1, phase: "Phase 3: Body & Power Potentiation" },
+      { name: "Sub-Maximal Vertical Rebounds", desc: "Dip into a quick quarter-squat and jump straight up while reaching overhead with both hands.\nPerform 1 set × 3–5 reps.", type: "reps", sets: 1, phase: "Phase 3: Body & Power Potentiation" }
     ]
   },
   comp: {
     title: "Competition Warm-Up",
-    objective: "Targeted release, pulse elevation, stability activation, and max force ceilings triggering (60 Minutes)",
+    objective: "Targeted release, pulse elevation, stability activation, and plyometric nervous acceleration (45 Minutes)",
     phases: [
       { name: "Phase A: Targeted Release & Pulse Influx", duration: "15:00" },
       { name: "Phase B: Integrated Bodywork & Slings", duration: "15:00" },
-      { name: "Phase C: Max Force Ceilings Triggering (Fmax)", duration: "15:00" },
-      { name: "Phase D: Plyometric & Nervous Acceleration", duration: "15:00" }
+      { name: "Phase C: Plyometric & Nervous Acceleration", duration: "15:00" }
     ],
     stations: [
       // Phase A
@@ -1885,13 +1870,34 @@ const WARMUP_ROUTINES = {
       { name: "Banded Face Pulls with Dynamic Overhead Press", desc: "Pull band to nose, retract scapula, then press straight overhead.\nPerform 3 sets × 15 reps.", type: "reps", sets: 3, phase: "Phase B: Cross-Sling" },
       { name: "Single-Leg Romanian Deadlifts", desc: "Hinge at hips with straight trailing leg to fire hamstrings/glutes/ankle stabilization.\nPerform 3 sets × 10 reps per side.", type: "reps", sets: 3, phase: "Phase B: Cross-Sling" },
       // Phase C
-      { name: "Crane Pull Neural Check (50% -> 75% MVC)", desc: "Pull 2 distinct sets × 5 seconds against crane scale at 50% and 75% effort. Rest 2 minutes.", duration: 120, type: "pulls", pullsCount: 2, pullDuration: 5, phase: "Phase C: Max Force" },
-      { name: "Peak Recruitment Pulls (100% Downward Effort)", desc: "Perform 3 sets × 5 seconds absolute max downward pull on 20mm frame edge half-crimp.\nRest 2 minutes between pulls.", duration: 120, type: "pulls", pullsCount: 3, pullDuration: 5, phase: "Phase C: Max Force" },
-      // Phase D
-      { name: "Plyometric Push-Ups", desc: "Explode off floor so hands completely break contact.\nPerform 3 sets × 5 reps.\nRest 60s between sets.", duration: 60, type: "timer", sets: 3, phase: "Phase D: Plyometric" },
-      { name: "High-Velocity Band Slams", desc: "Pull high-tension band overhead downward through core sling at max speed.\nPerform 3 sets × 6 reps.\nRest 60s between sets.", duration: 60, type: "timer", sets: 3, phase: "Phase D: Plyometric" },
-      { name: "Neurological Fast-Twitch Finger Flashes", desc: "Extend arms forward, cycle hands between absolute tight fist and wide open fingers at max speed.", duration: 20, type: "timer", sets: 3, phase: "Phase D: Plyometric" },
-      { name: "Pre-Comp Taper Rest", desc: "Rest completely seated with deep box breathing for 4 minutes before your first attempt.", duration: 240, phase: "Phase D: Plyometric" }
+      { name: "Plyometric Push-Ups", desc: "Explode off floor so hands completely break contact.\nPerform 3 sets × 5 reps.\nRest 60s between sets.", duration: 60, type: "timer", sets: 3, phase: "Phase C: Plyometric" },
+      { name: "High-Velocity Band Slams", desc: "Pull high-tension band overhead downward through core sling at max speed.\nPerform 3 sets × 6 reps.\nRest 60s between sets.", duration: 60, type: "timer", sets: 3, phase: "Phase C: Plyometric" },
+      { name: "Neurological Fast-Twitch Finger Flashes", desc: "Extend arms forward, cycle hands between absolute tight fist and wide open fingers at max speed.", duration: 20, type: "timer", sets: 3, phase: "Phase C: Plyometric" },
+      { name: "Pre-Comp Taper Rest", desc: "Rest completely seated with deep box breathing for 4 minutes before your first attempt.", duration: 240, phase: "Phase C: Plyometric" }
+    ]
+  },
+  fingerboard: {
+    title: "Fingerboard Routine",
+    objective: "Progressive mechanical loading, recruitment matrix, and max force ceiling priming (15 Minutes)",
+    phases: [
+      { name: "Phase 1: Pulley Priming & Sloper Engagement", duration: "5:00" },
+      { name: "Phase 2: Progressive Edge Loading", duration: "5:00" },
+      { name: "Phase 3: Max Recruitment Pulls", duration: "5:00" }
+    ],
+    stations: [
+      // Pulley Priming
+      { name: "Controlled 20mm Edge Hangs", desc: "Engage shoulders and keep a strict half-crimp to recruit forearm flexors without dynamic impact.", type: "pulls", work: 5, rest: 15, cycles: 3, phase: "Phase 1: Pulley Priming & Sloper Engagement" },
+      { name: "3-Finger Drag Hangs", desc: "Drop your pinky finger off a comfortable edge, hanging in a relaxed, open-handed drag position.", type: "pulls", work: 5, rest: 15, cycles: 3, phase: "Phase 1: Pulley Priming & Sloper Engagement" },
+      { name: "20° Decline Sloper Hangs", desc: "Engage wrists and maximize skin contact on a gentle 20-degree sloper to prime friction grips.", type: "pulls", work: 5, rest: 15, cycles: 3, phase: "Phase 1: Pulley Priming & Sloper Engagement" },
+      { name: "30° Decline Sloper Hangs", desc: "Drive body tension straight through your core down to your toes on a 30-degree sloper.", type: "pulls", work: 5, rest: 15, cycles: 3, phase: "Phase 1: Pulley Priming & Sloper Engagement" },
+      { name: "40° Decline Sloper Hangs", desc: "Maximize palm compression on a slick 40-degree sloper to fully turn on your wrist stabilizers.", type: "pulls", work: 5, rest: 15, cycles: 3, phase: "Phase 1: Pulley Priming & Sloper Engagement" },
+      // Edge Shrinking / Progressive Loading
+      { name: "15mm Micro-Edge Hangs", desc: "Step down to a smaller edge size to increase neural recruitment in a strict half-crimp posture.", type: "pulls", work: 5, rest: 15, cycles: 3, phase: "Phase 2: Progressive Edge Loading" },
+      { name: "12mm Micro-Edge Hangs", desc: "Focus on immediate tension recruitment as the hold profile shrinks.", type: "pulls", work: 5, rest: 15, cycles: 3, phase: "Phase 2: Progressive Edge Loading" },
+      { name: "10mm Micro-Edge Hangs", desc: "The final priming step for high contact strength. Ensure your posture remains completely rigid.", type: "pulls", work: 5, rest: 15, cycles: 3, phase: "Phase 2: Progressive Edge Loading" },
+      // Max Recruitment Pulls (from Standard / Comp)
+      { name: "CNS Neural Check: 50% & 75% MVC Pulls", desc: "Perform 2 pulls × 5 seconds (one at 50%, one at 75% effort) against static ground block or crane scale. Verify neural drive. Rest 60s between pulls.", duration: 60, type: "pulls", pullsCount: 2, pullDuration: 5, phase: "Phase 3: Max Recruitment Pulls" },
+      { name: "Peak Recruitment Pulls (100% effort)", desc: "Perform 3 sets × 5 seconds absolute max downward pull on 20mm frame edge half-crimp. Rest 2 minutes.", duration: 120, type: "pulls", pullsCount: 3, pullDuration: 5, phase: "Phase 3: Max Recruitment Pulls" }
     ]
   }
 };
