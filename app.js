@@ -1897,7 +1897,7 @@ const WARMUP_ROUTINES = {
       { name: "10mm Micro-Edge Hangs", desc: "The final priming step for high contact strength. Ensure your posture remains completely rigid.", type: "pulls", work: 5, rest: 15, cycles: 3, phase: "Phase 2: Progressive Edge Loading" },
       // Max Recruitment Pulls (from Standard / Comp)
       { name: "CNS Neural Check: 50% & 75% MVC Pulls", desc: "Perform 2 pulls × 5 seconds (one at 50%, one at 75% effort) against static ground block or crane scale. Verify neural drive. Rest 60s between pulls.", duration: 60, type: "pulls", pullsCount: 2, pullDuration: 5, phase: "Phase 3: Max Recruitment Pulls" },
-      { name: "Peak Recruitment Pulls (100% effort)", desc: "Perform 3 sets × 5 seconds absolute max downward pull on 20mm frame edge half-crimp. Rest 2 minutes.", duration: 120, type: "pulls", pullsCount: 3, pullDuration: 5, phase: "Phase 3: Max Recruitment Pulls" }
+      { name: "Peak Recruitment Pulls (100% effort)", desc: "Perform 3 holds × 5 seconds absolute max downward pull on 20mm frame edge half-crimp. Rest 1 minute.", type: "pulls", work: 5, rest: 60, cycles: 3, phase: "Phase 3: Max Recruitment Pulls" }
     ]
   }
 };
