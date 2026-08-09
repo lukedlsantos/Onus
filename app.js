@@ -508,8 +508,14 @@ function parseSubExercises(notes, parentId, instruction = "") {
       let repsOrDuration = "1 set";
       let cleanName = text;
       
+      const failureMatch = text.match(/^(\d+)\s*sets?\s*(?:to|x)\s*failure\s+(.*)/i);
       const setRepMatch = text.match(/^(\d+)\s*sets?\s*[×x*]\s*([\w\-]+(?:\s+[\w\-]+)?)\s+(.*)/i);
-      if (setRepMatch) {
+      
+      if (failureMatch) {
+        sets = parseInt(failureMatch[1]);
+        repsOrDuration = "to failure";
+        cleanName = failureMatch[2].trim();
+      } else if (setRepMatch) {
         sets = parseInt(setRepMatch[1]);
         repsOrDuration = setRepMatch[2].trim();
         cleanName = setRepMatch[3].trim();
