@@ -90,7 +90,9 @@ The training application configures daily session limits, resting intervals, and
   * *Execution:* Execute 3 sets of 3 reps (1 rep = 1 climb/route) using distinct low-grade commercial problems. On sloped surfaces, stand further from the wall to push perpendicular; on poor friction surfaces, bring feet flush to the wall and externally rotate hips.
   * *Constraints:* Rest exactly 1 minute between sets.
 * **Tier 4: Diagonal Sling & Reactive Ankle Integration (10 Mins):**
-  * *Execution:* 2 sets $\times$ 10 reps Supine Hand-to-Toe Alternating Touch (diagonal fascia core tension), 2 sets $\times$ 8 reps/side Single-Hand Elevated Scapular Push-Up (serratus anterior motor control), and 2 sets $\times$ 30 seconds Weighted Pogo Jumps (ankle tendon spring compliance for smear volume traction).
+  * 2 sets to failure Supine Hand-to-Toe Touches (Strict V-ups)
+  * 2 sets x 10 reps Single-Hand Elevated Scapular Push-ups (Or both hands if too hard)
+  * 2 sets x 15 reps per side Weighted Pogo Jumps
 
 #### Day 2: Specialized PT Core & Joint Recovery (2 Hours)
 * **Aerobic Flush (30 Mins):** Steady-state nasal breathing jogging or cycling ($<140$ BPM) to promote circulation.
