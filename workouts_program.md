@@ -89,7 +89,7 @@ The training application configures daily session limits, resting intervals, and
   * *Protocol:* Intentionally direct center of mass to negative volumes or no-tex holds.
   * *Execution:* Execute 3 sets of 3 reps (1 rep = 1 climb/route) using distinct low-grade commercial problems. On sloped surfaces, stand further from the wall to push perpendicular; on poor friction surfaces, bring feet flush to the wall and externally rotate hips.
   * *Constraints:* Rest exactly 1 minute between sets.
-* **Tier 4: Chiba Tore Diagonal Core & Ankle Spring (10 Mins):**
+* **Tier 4: Diagonal Sling & Reactive Ankle Integration (10 Mins):**
   * *Execution:* 2 sets $\times$ 10 reps Supine Hand-to-Toe Alternating Touch (diagonal fascia core tension), 2 sets $\times$ 8 reps/side Single-Hand Elevated Scapular Push-Up (serratus anterior motor control), and 2 sets $\times$ 30 seconds Weighted Pogo Jumps (ankle tendon spring compliance for smear volume traction).
 
 #### Day 2: Specialized PT Core & Joint Recovery (2 Hours)

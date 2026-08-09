@@ -50,7 +50,7 @@ To automate the training block progression via the codebase, adjust the global v
         *   *Protocol:* Intentionally direct center of mass to negative volumes or no-tex holds.
         *   *Execution:* Execute 3 sets of 3 reps (1 rep = 1 climb/route) using distinct low-grade commercial problems. On sloped surfaces, stand further from the wall to push perpendicular; on poor friction surfaces, bring feet flush to the wall and externally rotate hips.
         *   *Constraints:* Rest exactly 1 minute between sets.
-*   **Care & Restoration: Chiba Tore Diagonal Core & Ankle Spring [10 Mins]:**
+*   **Care & Restoration: Diagonal Sling & Reactive Ankle Integration [10 Mins]:**
     *   *Execution:* 2 sets $\times$ 10 reps Supine Hand-to-Toe Alternating Touch (diagonal fascia core tension), 2 sets $\times$ 8 reps/side Single-Hand Elevated Scapular Push-Up (serratus anterior motor control), and 2 sets $\times$ 30 seconds Weighted Pogo Jumps (ankle tendon spring compliance for smear volume traction).
 
 ### Week 1 - Day 2: Physical Therapy Core & Recovery (2 Hours)
@@ -112,7 +112,7 @@ To automate the training block progression via the codebase, adjust the global v
 *   **Progress Hook: Slab and Dynamic Slab [40 Mins]:**
     *   *Execution:* Complete 3 sets of 3 reps (1 rep = 1 climb/route) focusing on lateral volume stepping.
     *   *Constraints:* Rest exactly 1 minute between sets.
-*   **Care & Restoration: Chiba Tore Diagonal Core & Ankle Spring [10 Mins]:**
+*   **Care & Restoration: Diagonal Sling & Reactive Ankle Integration [10 Mins]:**
     *   *Execution:* 3 sets $\times$ 10 reps Supine Hand-to-Toe Alternating Touch and 3 sets $\times$ 8 reps/side Single-Hand Elevated Scapular Push-Up.
 
 ### Week 2 - Day 2: Physical Therapy Core & Recovery (2 Hours)
@@ -158,7 +158,7 @@ To automate the training block progression via the codebase, adjust the global v
 *   **Progress Hook: Slab and Dynamic Slab [40 Mins]:**
     *   *Execution:* 3 sets of 3 reps (1 rep = 1 climb/route) on $15^\circ$ overhang. Enforce 3-second static pauses at maximum extension.
     *   *Constraints:* Rest exactly 1 minute between sets.
-*   **Care & Restoration: Chiba Tore Diagonal Core & Ankle Spring [10 Mins]:**
+*   **Care & Restoration: Diagonal Sling & Reactive Ankle Integration [10 Mins]:**
     *   *Execution:* 3 sets $\times$ 10 reps Supine Hand-to-Toe Alternating Touch and 3 sets $\times$ 10 reps/side Single-Hand Elevated Scapular Push-Up.
 
 ### Week 3 - Day 2: Physical Therapy Core & Recovery (2 Hours)
