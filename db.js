@@ -201,7 +201,7 @@ function generateWorkouts() {
             { name: "Cardio Work (30 mins)", category: "General", sets: 1, reps_or_duration: "30 Mins", intensity: "RPE 3", rest: "None", notes: "Continuous zone 2 to zone 4 cardio work (Swimming, biking, running) with steady-state nasal breathing." },
             { name: "Climbing-Specific PT Core", category: "Core", sets: 1, reps_or_duration: "1 set", intensity: "RPE 3", rest: "None", notes: `Climbing-Specific PT Core:\n3 sets x 10 reps per side Cable Pallof Presses\n3 sets x ${plankSecs}s Side Planks (each side)\n3 sets x 10 reps Swiss-Ball Rollouts / Stir-the-Pot\n3 sets x 10 reps Seated Contra-Lateral Leg Raises` },
             { name: "Deep Shoulder & Spine Mobility", category: "Mobility", sets: 1, reps_or_duration: "1 set", intensity: "RPE 3", rest: "None", notes: "2 sets x 60s Thoracic Extensions Over Foam Roller\n2 sets x 30s Sleeper Stretches (each side)\n2 sets x 10 reps Prone Y Extensions\n2 sets x 10 reps Prone T Extensions\n2 sets x 10 reps Prone W Extensions\n2 sets x 10 reps Prone L Extensions\n2 sets x 30s Puppy Pose Lat Stretches\n2 sets x 30s Spine Twists (each side)" },
-            { name: "Antagonist Isometric Holds", category: "Isometrics", sets: 1, reps_or_duration: "1 set", intensity: "RPE 7", rest: "2 mins", notes: "2 sets x 30s Supinated Wrist Holds (RPE 7/10 target intensity. Keep forearm supported flat.)\n2 sets x 30s Pronated Wrist Holds (RPE 7/10 target intensity. Keep forearm supported flat.)" }
+            { name: "Antagonist Isometric Holds", category: "Isometrics", sets: 1, reps_or_duration: "1 set", intensity: "RPE 7", rest: "2 mins", notes: "2 sets x 30s Supinated Wrist Holds (RPE 7/10 target intensity, keep forearm supported flat)\n2 sets x 30s Pronated Wrist Holds (RPE 7/10 target intensity, keep forearm supported flat)" }
           ];
         } else if (d === 3) {
           // DAY 3 (Off-Wall Strength / Fingerboard)
@@ -496,7 +496,7 @@ const DEFAULT_FAQS = [
 
 // Helper to initialize database
 function initDB() {
-  const CURRENT_VERSION = "5.3";
+  const CURRENT_VERSION = "5.4";
   const storedVersion = localStorage.getItem("onus_db_version");
   if (storedVersion !== CURRENT_VERSION) {
     // Clear all onus-related localStorage entries to force clean re-seeding
