@@ -795,7 +795,9 @@ async function loadAthleteTodayScreen() {
         let timerHtml = '';
         
         if (d.category === "Warm-up & Prep") {
-          timerHtml = renderTimerMarkup(d.id + "-warmup", 600, "Warm-up Timer");
+          if (d.reps_or_duration !== "None") {
+            timerHtml = renderTimerMarkup(d.id + "-warmup", 600, "Warm-up Timer");
+          }
         } else if (d.category === "Core Driver") {
           let mainMins = 90;
           if (phaseNum === 3) {
@@ -811,12 +813,18 @@ async function loadAthleteTodayScreen() {
           }
           const workSecs = parseDurationText(d.reps_or_duration) || (mainMins * 60);
           const restSecs = parseDurationText(d.rest) || 90; // 90s default
-          timerHtml = `
-            <div style="display: flex; gap: 8px; margin-top: 6px; width: 100%; flex-wrap: wrap;">
-              ${renderTimerMarkup(d.id + "-work", workSecs, "Block Timer")}
-              ${renderTimerMarkup(d.id + "-rest", restSecs, "Rest Timer")}
-            </div>
-          `;
+          
+          let blockTimer = (d.reps_or_duration !== "None") ? renderTimerMarkup(d.id + "-work", workSecs, "Block Timer") : "";
+          let restTimer = (d.rest !== "None") ? renderTimerMarkup(d.id + "-rest", restSecs, "Rest Timer") : "";
+          
+          if (blockTimer || restTimer) {
+            timerHtml = `
+              <div style="display: flex; gap: 8px; margin-top: 6px; width: 100%; flex-wrap: wrap;">
+                ${blockTimer}
+                ${restTimer}
+              </div>
+            `;
+          }
         } else if (d.category === "Progress Hook") {
           let hookMins = 30;
           if (phaseNum === 3) {
