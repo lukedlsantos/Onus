@@ -95,11 +95,13 @@ The training application configures daily session limits, resting intervals, and
   * 2 sets x 15 reps per side Weighted Pogo Jumps
 
 #### Day 2: Specialized PT Core & Joint Recovery (2 Hours)
-* **Aerobic Flush (30 Mins):** Steady-state nasal breathing jogging or cycling ($<140$ BPM) to promote circulation.
+* **Cardio Work (30 mins) (30 Mins):** Continuous zone 2 to zone 4 cardio work (Swimming, biking, running) with steady-state nasal breathing.
 * **Climbing-Specific PT Core Container (40 Mins):**
-  * *Execution:* 3 sets $\times$ 10 reps of standing cable Pallof presses, side planks (45s/side), Swiss-ball rollouts, and Seated Contra-Lateral Leg Raises (isolating deep hip flexion).
+  * *Execution:* 3 sets $\times$ 10 reps per side of standing cable Pallof presses, side planks (45s/side), Swiss-ball rollouts, and Seated Contra-Lateral Leg Raises (isolating deep hip flexion).
 * **Deep Shoulder, Back & Mobility Matrix (50 Mins):**
-  * *Execution:* Thoracic extensions over a foam roller, passive sleeper stretches, prone unweighted Y-T-W-L shapes, and long child's pose tracks.
+  * *Execution:* Thoracic extensions over a foam roller, passive sleeper stretches, prone Y extensions (2 sets $\times$ 10 reps), prone T extensions (2 sets $\times$ 10 reps), prone W extensions (2 sets $\times$ 10 reps), prone L extensions (2 sets $\times$ 10 reps), and long child's pose tracks.
+* **Antagonist Isometric Holds (10 Mins):**
+  * *Execution:* 2 sets $\times$ 30s Supinated Wrist Holds (RPE 7/10 target intensity. Keep forearm supported flat.), 2 sets $\times$ 30s Pronated Wrist Holds (RPE 7/10 target intensity. Keep forearm supported flat.).
 
 #### Day 3: Baseline Functional Hypertrophy & Fingerboard Loading (3 Hours)
 * **Tier 1: Warm-Up & Prep (40 Mins):** Standard Prep Container with neural screening.

@@ -50,6 +50,19 @@
           <button class="btn btn-primary" id="start-session-btn" style="margin-top: 12px; display: none; width: 100%;">Start Session</button>
           
           <div id="today-drills-container" style="display: none;">
+            <!-- 2-Minute Rest Timer Widget -->
+            <div id="global-rest-timer" style="margin: 12px 0; padding: 12px; background-color: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: var(--border-radius-sm); display: flex; align-items: center; justify-content: space-between; gap: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.15);">
+              <div style="display: flex; flex-direction: column; gap: 2px;">
+                <span style="font-size: 0.7rem; color: var(--text-secondary); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">Rest Timer</span>
+                <span style="font-size: 0.8rem; color: var(--text-muted);">Keep pace between sets</span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span id="global-rest-display" style="font-size: 1.4rem; font-weight: 700; color: var(--accent-cyan); font-family: monospace;">02:00</span>
+                <button class="btn btn-secondary" id="global-rest-start" style="padding: 4px 10px; font-size: 0.75rem; min-width: 55px; cursor: pointer; border-radius: var(--border-radius-sm); border: 1px solid var(--border-color); background: none; color: var(--text-primary);">Start</button>
+                <button class="btn btn-secondary" id="global-rest-reset" style="padding: 4px 10px; font-size: 0.75rem; cursor: pointer; border-radius: var(--border-radius-sm); border: 1px solid var(--border-color); background: none; color: var(--text-primary); display: none;">Reset</button>
+              </div>
+            </div>
+            
             <h4 style="margin: 12px 0 6px 0; font-size: 0.95rem;">Drills & Plan:</h4>
             <div id="today-drills-list"></div>
           </div>

@@ -54,11 +54,13 @@ To automate the training block progression via the codebase, adjust the global v
     *   *Execution:* 2 sets $\times$ 10 reps Supine Hand-to-Toe Alternating Touch (diagonal fascia core tension), 2 sets $\times$ 8 reps/side Single-Hand Elevated Scapular Push-Up (serratus anterior motor control), and 2 sets $\times$ 30 seconds Weighted Pogo Jumps (ankle tendon spring compliance for smear volume traction).
 
 ### Week 1 - Day 2: Physical Therapy Core & Recovery (2 Hours)
-*   **Aerobic Influx Flush [30 Mins]:** Continuous nasal-breathing steady-state jog or cycle ($<140$ BPM).
+*   **Cardio Work (30 mins) [30 Mins]:** Continuous zone 2 to zone 4 cardio work (Swimming, biking, running) with steady-state nasal breathing.
 *   **Climbing-Specific PT Core Container [40 Mins]:**
-    *   *Exercises:* 3 sets $\times$ 10 reps of standing cable Pallof presses, side planks (45s/side), Swiss-ball Stir-the-Pot (12 reps/side), and Seated Contra-Lateral Leg Raises.
+    *   *Exercises:* 3 sets $\times$ 10 reps per side of standing cable Pallof presses, side planks (45s/side), Swiss-ball Stir-the-Pot (12 reps/side), and Seated Contra-Lateral Leg Raises.
 *   **Deep Shoulder, Spine & Mobility Matrix [50 Mins]:**
-    *   *Exercises:* 5-minute thoracic extensions over a foam roller, passive sleeper stretches, prone dumbbell Y-T-W-L arm raises, and Lat/shoulder capsule flossing.
+    *   *Exercises:* 5-minute thoracic extensions over a foam roller, passive sleeper stretches, prone Y extensions (2 sets $\times$ 10 reps), prone T extensions (2 sets $\times$ 10 reps), prone W extensions (2 sets $\times$ 10 reps), prone L extensions (2 sets $\times$ 10 reps), and Lat/shoulder capsule flossing.
+*   **Antagonist Isometric Holds [10 Mins]:**
+    *   *Exercises:* 2 sets $\times$ 30s Supinated Wrist Holds (RPE 7/10 target intensity. Keep forearm supported flat.), 2 sets $\times$ 30s Pronated Wrist Holds (RPE 7/10 target intensity. Keep forearm supported flat.).
 
 ### Week 1 - Day 3: Baseline Functional Hypertrophy & Fingerboard Loading (3 Hours)
 *   **Warm-Up & Prep [40 Mins]:** Standard Prep Container with neural screening.

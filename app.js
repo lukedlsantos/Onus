@@ -15,7 +15,9 @@ const state = {
   startedSessionId: null, // Track if current session has been started by user
   drillCompletions: {}, // { drillId: completedSets }
   activeTimers: {}, // { drillId: { intervalId, remainingSeconds, originalSeconds, running, startTime } }
-  wakeLockObj: null
+  wakeLockObj: null,
+  globalRestTimerVal: 120,
+  globalRestTimerInterval: null
 };
 
 // Helper to escape HTML characters to prevent Stored XSS injection
@@ -86,6 +88,54 @@ async function initApp() {
   document.getElementById("weekly-checkin-form").addEventListener("submit", handleCheckinSubmit);
   document.getElementById("video-review-form").addEventListener("submit", handleVideoReviewSubmit);
   document.getElementById("toggle-checkin-header").addEventListener("click", toggleWeeklyCheckinForm);
+
+  // Initialize Global 2-Minute Rest Timer listeners
+  const restStartBtn = document.getElementById("global-rest-start");
+  const restResetBtn = document.getElementById("global-rest-reset");
+  const restDisplay = document.getElementById("global-rest-display");
+
+  if (restStartBtn && restResetBtn && restDisplay) {
+    restStartBtn.addEventListener("click", () => {
+      if (state.globalRestTimerInterval) {
+        // Pause
+        clearInterval(state.globalRestTimerInterval);
+        state.globalRestTimerInterval = null;
+        restStartBtn.textContent = "Start";
+      } else {
+        // Start
+        restStartBtn.textContent = "Pause";
+        restResetBtn.style.display = "inline-block";
+        state.globalRestTimerInterval = setInterval(() => {
+          if (state.globalRestTimerVal > 0) {
+            state.globalRestTimerVal--;
+            restDisplay.textContent = formatTime(state.globalRestTimerVal);
+          } else {
+            // Alarm/done
+            clearInterval(state.globalRestTimerInterval);
+            state.globalRestTimerInterval = null;
+            restStartBtn.textContent = "Start";
+            playSoftDing();
+            if (navigator.vibrate) navigator.vibrate([200, 100, 200]);
+            // Reset to 120s
+            state.globalRestTimerVal = 120;
+            restDisplay.textContent = "02:00";
+            restResetBtn.style.display = "none";
+          }
+        }, 1000);
+      }
+    });
+
+    restResetBtn.addEventListener("click", () => {
+      if (state.globalRestTimerInterval) {
+        clearInterval(state.globalRestTimerInterval);
+        state.globalRestTimerInterval = null;
+      }
+      state.globalRestTimerVal = 120;
+      restDisplay.textContent = "02:00";
+      restStartBtn.textContent = "Start";
+      restResetBtn.style.display = "none";
+    });
+  }
 
   document.getElementById("log-today-btn").addEventListener("click", () => {
     const modal = document.getElementById("quick-log-modal");
