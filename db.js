@@ -213,9 +213,9 @@ function generateWorkouts() {
             objective = "Off-wall compound resistance and finger edge conditioning.";
             exercises = [
               { name: "Warm-up & Edge Activation", category: "Warm-up & Prep", sets: 1, reps_or_duration: "10 Mins", intensity: "RPE 6", rest: "None", notes: "3-5 easy problems on vertical/slab terrain, progressively increasing wall angle and hold difficulty." },
-              { name: "Compound Strength Overload", category: "Core Driver", sets: 3, reps_or_duration: "3 sets x 8 reps", intensity: "RPE 7", rest: "2 mins", notes: isDeload ? "Cut resistance reps by 50%." : "Weighted pull-ups, dumbbell floor presses, barbell rows, and Heels-Elevated Weighted Squats." },
-              { name: "Active Overcoming Isometrics", category: "Progress Hook", sets: 6, reps_or_duration: "6 reps x 10s", intensity: "RPE 6", rest: "50 seconds", notes: isDeload ? "Progress Hook: Eliminated." : "Progress Hook: Active Overcoming Isometrics: 10s max-effort dead-hangs on 20mm edge at RPE 9." },
-              { name: "Antagonist Balance & Plyos", category: "Care & Restoration", sets: 1, reps_or_duration: "1 set", intensity: "RPE 6", rest: "Self-paced", notes: "2 sets x 20 reps Extensor Bands\n2 sets x 15 reps Wrist Roller Rolls\n2 sets x 60s Forearm Self-Massage\n3 sets x 5 reps Depth Jumps" }
+              { name: "Compound Strength Overload", category: "Core Driver", sets: 3, reps_or_duration: "3 sets x 8 reps per exercise", intensity: "RPE 7", rest: "2 mins", notes: isDeload ? "Cut resistance reps by 50%." : "Perform 3 sets x 8 reps for each of the following:\n1. Strict Weighted Pull-ups (assisted if needed)\n2. Dumbbell Floor Presses (capsule protection)\n3. Barbell Rows\n4. Heels-Elevated Weighted Squats" },
+              { name: "Active Overcoming Isometrics", category: "Progress Hook", sets: 6, reps_or_duration: "6 reps x 10s", intensity: "RPE 9", rest: "50 seconds", notes: isDeload ? "Progress Hook: Eliminated." : "Perform 10-second active maximum-effort concentric pulls against an immovable fixed block (Tindeq gauge).\n\n*FALLBACK PROTOCOL:* If no Tindeq gauge or fixed block is available, execute 10-second active dead-hangs on a 20mm edge at RPE 9." },
+              { name: "Antagonist Balance & Plyos", category: "Care & Restoration", sets: 1, reps_or_duration: "1 set", intensity: "RPE 6", rest: "Self-paced", notes: "Perform the following care routine:\n1. Extensor Bands: 2 sets x 20 reps\n2. Wrist Roller Rolls: 2 sets x 15 reps\n3. Forearm Flexor Self-Massage: 2 sets x 60s\n4. Depth Jumps to Max Vertical Vector: 3 sets x 5 reps (quick ground contact)" }
             ];
           } else if (phaseNum === 2) {
             title = "Heavy Compound Strength & Overcoming Finger Pulls";
@@ -496,7 +496,7 @@ const DEFAULT_FAQS = [
 
 // Helper to initialize database
 function initDB() {
-  const CURRENT_VERSION = "5.2";
+  const CURRENT_VERSION = "5.3";
   const storedVersion = localStorage.getItem("onus_db_version");
   if (storedVersion !== CURRENT_VERSION) {
     // Clear all onus-related localStorage entries to force clean re-seeding
