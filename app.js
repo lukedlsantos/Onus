@@ -837,7 +837,7 @@ async function loadAthleteTodayScreen() {
                         <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-primary); text-align: left; padding-right: 8px;">${escapeHTML(sub.text)}</span>
                       </div>
                       <div style="display: flex; align-items: center; gap: 8px; flex-shrink: 0;">
-                        <span style="font-size: 0.75rem; color: var(--accent-cyan); font-weight: 500;">${sub.sets} sets</span>
+                        <span style="font-size: 0.75rem; color: var(--accent-cyan); font-weight: 500;">${sub.sets} sets ${sub.repsOrDuration && sub.repsOrDuration !== "1 set" ? `× ${sub.repsOrDuration}` : ''}</span>
                         <span class="sub-chevron" style="font-size: 0.65rem; color: var(--text-muted);">${chevronChar}</span>
                       </div>
                     </div>
@@ -845,7 +845,7 @@ async function loadAthleteTodayScreen() {
                       <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; width: 100%;">
                         <div class="stepper-container" data-drill-id="${escapeHTML(sub.id)}" data-drill-name="${escapeHTML(sub.text)}" data-max-sets="${sub.sets}">
                           <button class="stepper-btn stepper-minus" style="padding: 2px 8px; font-size: 0.75rem;">&minus;</button>
-                          <span class="stepper-val" style="font-size: 0.75rem;">${state.drillCompletions[sub.id] || 0} / ${sub.sets} sets</span>
+                          <span class="stepper-val" style="font-size: 0.75rem;">${state.drillCompletions[sub.id] || 0} / ${sub.sets} sets ${sub.repsOrDuration && sub.repsOrDuration !== "1 set" ? `× ${sub.repsOrDuration}` : ''}</span>
                           <button class="stepper-btn stepper-plus" style="padding: 2px 8px; font-size: 0.75rem;">+</button>
                         </div>
                         ${subTimerHtml}
