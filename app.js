@@ -838,6 +838,8 @@ async function loadAthleteTodayScreen() {
               ${renderTimerMarkup(d.id + "-rest", restSecs, "Rest Timer")}
             </div>
           `;
+        } else if (d.name === "Passive to Active Scapular Hangs") {
+          timerHtml = renderTimerMarkup(d.id, 50, "Scapular Hang Timer");
         } else if (d.category !== "Care & Restoration") {
           const timerSecs = parseDurationText(d.reps_or_duration);
           if (timerSecs !== null) {
@@ -1052,11 +1054,16 @@ function handleDrillActionsClick(e) {
     const originalSecs = parseInt(container.dataset.seconds);
     
     if (!state.activeTimers[drillId]) {
+      const parentCard = target.closest(".card");
+      const nameEl = parentCard ? parentCard.querySelector("span[style*='font-weight: 600']") : null;
+      const isScapularHang = nameEl && nameEl.textContent.trim() === "Passive to Active Scapular Hangs";
+
       state.activeTimers[drillId] = {
         intervalId: null,
         remainingSeconds: originalSecs,
         originalSeconds: originalSecs,
-        running: false
+        running: false,
+        isScapularHang: isScapularHang
       };
     }
 
@@ -1084,6 +1091,23 @@ function handleDrillActionsClick(e) {
           activeContainer.querySelector(".timer-display").textContent = formatTime(timer.remainingSeconds);
         }
 
+        // Handle Audio-Guided Scapular Hang beeps
+        if (timer.isScapularHang) {
+          const currentSec = timer.originalSeconds - timer.remainingSeconds;
+          if (timer.lastPlayedSecond !== currentSec) {
+            timer.lastPlayedSecond = currentSec;
+            if (currentSec >= 0 && currentSec < 5) {
+              playScapularAudio('warning');
+            } else if (currentSec === 5 || currentSec === 20 || currentSec === 35) {
+              playScapularAudio('low');
+            } else if (currentSec === 10 || currentSec === 25 || currentSec === 40) {
+              playScapularAudio('high');
+            } else if (currentSec === 50) {
+              playScapularAudio('double-high');
+            }
+          }
+        }
+
         if (timer.remainingSeconds <= 0) {
           clearInterval(timer.intervalId);
           timer.running = false;
@@ -1094,7 +1118,9 @@ function handleDrillActionsClick(e) {
           }
           
           // Trigger audible, vibration, and push notification alarms
-          playAlarmSound();
+          if (!timer.isScapularHang) {
+            playAlarmSound();
+          }
           if (navigator.vibrate) navigator.vibrate([300, 150, 300, 150, 300]);
           sendTimerNotification(drillId, activeContainer);
         }
@@ -2172,6 +2198,47 @@ function loadWarmupStation() {
  
   timerDigits.textContent = formatTime(state.warmup.timerVal);
   updateBreathingVisual(timerLabel.textContent);
+}
+
+// Play a clean audio beep at a specific frequency and duration
+function playBeep(frequency, durationSeconds) {
+  try {
+    initAudioContext();
+    const ctx = state.audioContext;
+    if (!ctx) return;
+    
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    
+    osc.type = "sine";
+    osc.frequency.setValueAtTime(frequency, ctx.currentTime);
+    
+    gain.gain.setValueAtTime(0, ctx.currentTime);
+    gain.gain.linearRampToValueAtTime(0.3, ctx.currentTime + 0.02);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + durationSeconds);
+    
+    osc.start(ctx.currentTime);
+    osc.stop(ctx.currentTime + durationSeconds);
+  } catch (e) {
+    console.warn("AudioContext failed to start beep:", e);
+  }
+}
+
+// Play guided scapular audio cues
+function playScapularAudio(cueType) {
+  if (cueType === 'warning') {
+    playBeep(350, 0.15);
+  } else if (cueType === 'low') {
+    playBeep(400, 0.4);
+  } else if (cueType === 'high') {
+    playBeep(800, 0.4);
+  } else if (cueType === 'double-high') {
+    playBeep(800, 0.25);
+    setTimeout(() => playBeep(800, 0.25), 250);
+  }
 }
 
 // Play a soft meditative bell chime / ding (528Hz Solfeggio frequency with smooth decay)
