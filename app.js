@@ -758,6 +758,16 @@ async function loadAthleteTodayScreen() {
     const backBtn = document.getElementById("back-to-calendar-btn");
     if (backBtn) backBtn.style.display = "inline-flex";
 
+    // Conditionally show/hide global 2-minute Rest Timer for Day 1, 5, 7
+    const restTimerEl = document.getElementById("global-rest-timer");
+    if (restTimerEl) {
+      if (session.day_label === "Day 1" || session.day_label === "Day 5" || session.day_label === "Day 7") {
+        restTimerEl.style.display = "none";
+      } else {
+        restTimerEl.style.display = "flex";
+      }
+    }
+
     // Toggle view components based on started state
     const isStarted = state.startedSessionId === session.id;
     if (isStarted) {
