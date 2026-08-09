@@ -212,7 +212,7 @@ function generateWorkouts() {
             title = "Baseline Functional Hypertrophy & Fingerboard Loading";
             objective = "Off-wall compound resistance and finger edge conditioning.";
             exercises = [
-              { name: "Warm-up & Edge Activation", category: "Warm-up & Prep", sets: 1, reps_or_duration: "10 Mins", intensity: "RPE 6", rest: "None", notes: "3-5 easy problems on vertical/slab terrain, progressively increasing wall angle and hold difficulty." },
+              { name: "Off-Wall Prep Container & Edge Activation", category: "Warm-up & Prep", sets: 1, reps_or_duration: "40 Mins", intensity: "RPE 6", rest: "None", notes: "Follow standard prep container off-wall routine:\n1. Neck & Spine: 3 half-circles, 15 passes foam rolling thoracic, 10 Spine Waves.\n2. Scapular & Cuff: 12 passes band dislocates, 10 Serratus wall slides, 8 prone Y-T-W-Ls.\n3. Lower Chain: 10 dynamic 90-90 hip switches, 8 hip CARs/side, 12 resisted dorsiflexion ankle wall-touches.\n4. Edge Activation: 2-3 submaximal hangs or pulls on fingerboard at 50% and 75% effort." },
               { name: "Compound Strength Overload", category: "Core Driver", sets: 3, reps_or_duration: "3 sets x 8 reps per exercise", intensity: "RPE 7", rest: "2 mins", notes: isDeload ? "Cut resistance reps by 50%." : "Perform 3 sets x 8 reps for each of the following:\n1. Strict Weighted Pull-ups (assisted if needed)\n2. Dumbbell Floor Presses (capsule protection)\n3. Barbell Rows\n4. Heels-Elevated Weighted Squats" },
               { name: "Active Overcoming Isometrics", category: "Progress Hook", sets: 6, reps_or_duration: "6 reps x 10s", intensity: "RPE 9", rest: "50 seconds", notes: isDeload ? "Progress Hook: Eliminated." : "Perform 10-second active maximum-effort concentric pulls against an immovable fixed block (Tindeq gauge).\n\n*FALLBACK PROTOCOL:* If no Tindeq gauge or fixed block is available, execute 10-second active dead-hangs on a 20mm edge at RPE 9." },
               { name: "Antagonist Balance & Plyos", category: "Care & Restoration", sets: 1, reps_or_duration: "1 set", intensity: "RPE 6", rest: "Self-paced", notes: "Perform the following care routine:\n1. Extensor Bands: 2 sets x 20 reps\n2. Wrist Roller Rolls: 2 sets x 15 reps\n3. Forearm Flexor Self-Massage: 2 sets x 60s\n4. Depth Jumps to Max Vertical Vector: 3 sets x 5 reps (quick ground contact)" }
@@ -496,7 +496,7 @@ const DEFAULT_FAQS = [
 
 // Helper to initialize database
 function initDB() {
-  const CURRENT_VERSION = "5.4";
+  const CURRENT_VERSION = "5.5";
   const storedVersion = localStorage.getItem("onus_db_version");
   if (storedVersion !== CURRENT_VERSION) {
     // Clear all onus-related localStorage entries to force clean re-seeding
