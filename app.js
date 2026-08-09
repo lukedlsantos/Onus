@@ -529,6 +529,8 @@ function parseSubExercises(notes, parentId, instruction = "") {
     }
   }
   if (!textToParse) return [];
+  const hasSetsPattern = /sets?\s*(?:x|of|to|×|\*)/i.test(textToParse);
+  if (!hasSetsPattern) return [];
   const lines = textToParse.split('\n');
   const subItems = [];
   
