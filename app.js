@@ -548,6 +548,7 @@ function parseSubExercises(notes, parentId, instruction = "") {
       }
     }
     
+    let lastSub = null;
     const parts = cleanLine.split(/(?<=\D\.)\s+|(?<=;)\s+/);
     parts.forEach((part, subIndex) => {
       let text = part.trim();
@@ -556,45 +557,58 @@ function parseSubExercises(notes, parentId, instruction = "") {
       text = text.replace(/^[\*\-\s\:\,]+/, '').replace(/[\*]+$/, '').trim();
       if (!text) return;
       
-      let sets = 1;
-      let repsOrDuration = "1 set";
-      let cleanName = text;
-      
       const failureMatch = text.match(/^(\d+)\s*sets?\s*(?:to|x)\s*failure\s+(.*)/i);
       const setRepMatch = text.match(/^(\d+)\s*sets?\s*[×x*]\s*(\d+\s*(?:s|sec|secs|seconds?|reps?|mins?|minutes?|holds?|per\s+side|per-side|each\s+side|each-side)*)\s+(.*)/i);
+      const setOfMatch = text.match(/^(\d+)\s*sets?\s+of\s+([^,]+),\s*(.*)/i);
+      const repSetMatch = text.match(/^(\d+)\s*(?:reps?|s|sec|secs|seconds?|mins?|minutes?)\s*x\s*(\d+)\s*sets?\s+(.*)/i);
+      const genericSetMatch = text.match(/^(\d+)\s*sets?\s+(.*)/i);
+      const durMatch = text.match(/^(\d+)\s*(?:min|minute|sec|second|s)\b\s*(.*)/i);
       
-      if (failureMatch) {
-        sets = parseInt(failureMatch[1]);
-        repsOrDuration = "to failure";
-        cleanName = failureMatch[2].trim();
-      } else if (setRepMatch) {
-        sets = parseInt(setRepMatch[1]);
-        repsOrDuration = setRepMatch[2].trim();
-        cleanName = setRepMatch[3].trim();
+      const hasPattern = failureMatch || setRepMatch || setOfMatch || repSetMatch || genericSetMatch || durMatch;
+      
+      if (!hasPattern && lastSub) {
+        lastSub.text += ". " + text;
       } else {
-        const setOfMatch = text.match(/^(\d+)\s*sets?\s+of\s+([^,]+),\s*(.*)/i);
-        if (setOfMatch) {
+        let sets = 1;
+        let repsOrDuration = "1 set";
+        let cleanName = text;
+        
+        if (failureMatch) {
+          sets = parseInt(failureMatch[1]);
+          repsOrDuration = "to failure";
+          cleanName = failureMatch[2].trim();
+        } else if (setRepMatch) {
+          sets = parseInt(setRepMatch[1]);
+          repsOrDuration = setRepMatch[2].trim();
+          cleanName = setRepMatch[3].trim();
+        } else if (setOfMatch) {
           sets = parseInt(setOfMatch[1]);
           repsOrDuration = setOfMatch[2].trim();
           cleanName = setOfMatch[3].trim();
-        } else {
-          const durMatch = text.match(/^(\d+)\s*(?:min|minute|sec|second|s)\b\s*(.*)/i);
-          if (durMatch) {
-            repsOrDuration = text.match(/^(\d+)\s*(?:min|minute|sec|second|s)\b/i)[0];
-            cleanName = durMatch[2].trim();
-          }
+        } else if (repSetMatch) {
+          sets = parseInt(repSetMatch[2]);
+          repsOrDuration = repSetMatch[1].trim();
+          cleanName = repSetMatch[3].trim();
+        } else if (genericSetMatch) {
+          sets = parseInt(genericSetMatch[1]);
+          repsOrDuration = "1 set";
+          cleanName = genericSetMatch[2].trim();
+        } else if (durMatch) {
+          repsOrDuration = text.match(/^(\d+)\s*(?:min|minute|sec|second|s)\b/i)[0];
+          cleanName = durMatch[2].trim();
         }
+        
+        cleanName = cleanName.charAt(0).toUpperCase() + cleanName.slice(1);
+        
+        lastSub = {
+          id: `${parentId}-sub-${index}-${subIndex}`,
+          category: categoryHeader || "Exercise",
+          text: cleanName,
+          sets: sets,
+          repsOrDuration: repsOrDuration
+        };
+        subItems.push(lastSub);
       }
-      
-      cleanName = cleanName.charAt(0).toUpperCase() + cleanName.slice(1);
-      
-      subItems.push({
-        id: `${parentId}-sub-${index}-${subIndex}`,
-        category: categoryHeader || "Exercise",
-        text: cleanName,
-        sets: sets,
-        repsOrDuration: repsOrDuration
-      });
     });
   });
   
