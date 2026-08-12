@@ -219,10 +219,10 @@ function generateWorkouts() {
               { name: "Submaximal Edge Activation", category: "Warm-up & Prep", sets: 3, reps_or_duration: "3 hangs", intensity: "RPE 6", rest: "1 min", notes: "2-3 submaximal hangs or pulls on fingerboard at 50% and 75% effort." },
               
               // Core Driver / Strength Overload (Broken out individually)
-              { name: "Strict Weighted Pull-Ups", category: "Core Driver", sets: 3, reps_or_duration: "8 reps", intensity: "RPE 7", rest: "2 mins", notes: isDeload ? "Cut resistance reps by 50%." : "Weighted pull-ups (assisted if needed). Focus on clean scapular retraction." },
-              { name: "Dumbbell Floor Presses", category: "Core Driver", sets: 3, reps_or_duration: "8 reps", intensity: "RPE 7", rest: "2 mins", notes: isDeload ? "Cut resistance reps by 50%." : "Capsule protection: Keep elbows tucked at 45 degrees relative to torso." },
-              { name: "Barbell Rows", category: "Core Driver", sets: 3, reps_or_duration: "8 reps", intensity: "RPE 7", rest: "2 mins", notes: isDeload ? "Cut resistance reps by 50%." : "Maintain neutral spine posture." },
-              { name: "Heels-Elevated Weighted Squats", category: "Core Driver", sets: 3, reps_or_duration: "8 reps", intensity: "RPE 7", rest: "2 mins", notes: isDeload ? "Cut resistance reps by 50%." : "Elevate heels on wedges, descend into deep squat control." },
+              { name: "Strict Weighted Pull-Ups", category: "Core Driver", sets: 3, reps_or_duration: "8 reps", intensity: "RPE 7", rest: "None", notes: isDeload ? "Cut resistance reps by 50%." : "Weighted pull-ups (assisted if needed). Focus on clean scapular retraction." },
+              { name: "Dumbbell Floor Presses", category: "Core Driver", sets: 3, reps_or_duration: "8 reps", intensity: "RPE 7", rest: "None", notes: isDeload ? "Cut resistance reps by 50%." : "Capsule protection: Keep elbows tucked at 45 degrees relative to torso." },
+              { name: "Barbell Rows", category: "Core Driver", sets: 3, reps_or_duration: "8 reps", intensity: "RPE 7", rest: "None", notes: isDeload ? "Cut resistance reps by 50%." : "Maintain neutral spine posture." },
+              { name: "Heels-Elevated Weighted Squats", category: "Core Driver", sets: 3, reps_or_duration: "8 reps", intensity: "RPE 7", rest: "None", notes: isDeload ? "Cut resistance reps by 50%." : "Elevate heels on wedges, descend into deep squat control." },
 
               // Progress Hook
               { name: "Active Overcoming Isometrics", category: "Progress Hook", sets: 6, reps_or_duration: "10s pull", intensity: "RPE 9", rest: "50s", notes: isDeload ? "Progress Hook: Eliminated." : "Perform 10-second active maximum-effort concentric pulls against an immovable fixed block (Tindeq gauge). Fallback: 10s active dead-hangs on a 20mm edge." },
@@ -512,7 +512,7 @@ const DEFAULT_FAQS = [
 
 // Helper to initialize database
 function initDB() {
-  const CURRENT_VERSION = "5.7";
+  const CURRENT_VERSION = "5.8";
   const storedVersion = localStorage.getItem("onus_db_version");
   if (storedVersion !== CURRENT_VERSION) {
     // Clear all onus-related localStorage entries to force clean re-seeding

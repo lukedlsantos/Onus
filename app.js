@@ -800,7 +800,7 @@ async function loadAthleteTodayScreen() {
           if (d.reps_or_duration !== "None" && !isMonth1Day3) {
             timerHtml = renderTimerMarkup(d.id + "-warmup", 600, "Warm-up Timer");
           }
-        } else if (d.category === "Core Driver") {
+        } else if (d.category === "Core Driver" && !isMonth1Day3) {
           let mainMins = 90;
           if (phaseNum === 3) {
             mainMins = isDeload ? 70 : 100;
@@ -951,7 +951,7 @@ async function loadAthleteTodayScreen() {
             </div>
             
             ${!isWorkoutContainer ? `
-              <div class="drill-meta">Rep/Duration: ${escapeHTML(d.reps_or_duration)} | Rest: ${escapeHTML(d.rest)}</div>
+              <div class="drill-meta">Rep/Duration: ${escapeHTML(d.reps_or_duration)}${d.rest && d.rest !== "None" ? ` | Rest: ${escapeHTML(d.rest)}` : ''}</div>
               ${d.notes ? `<div class="drill-meta" style="font-style: italic; color: var(--text-muted); white-space: pre-wrap;">Note: ${escapeHTML(d.notes)}</div>` : ''}
               
               <div class="drill-actions">
