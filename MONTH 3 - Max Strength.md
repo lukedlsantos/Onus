@@ -1,4 +1,4 @@
-# Project Onus - Month 3: Max Strength Phase Curriculum
+# DIM Coaching - Month 3: Max Strength Phase Curriculum
 
 This file serves as the definitive programming blueprint for the 4-week Max Strength macrocycle block. It implements a 3-hour on-wall container, maximum motor-unit recruitment protocols, active scapular centration, and overcoming isometric finger conditioning.
 

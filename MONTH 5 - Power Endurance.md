@@ -1,4 +1,4 @@
-# Project Onus - Month 5: Power Endurance Phase Curriculum
+# DIM Coaching - Month 5: Power Endurance Phase Curriculum
 
 This file serves as the definitive programming blueprint for the 4-week Power Endurance macrocycle block. It implements a 3-hour on-wall container, metabolic lactic capacity intervals (4x4s), linked route tracking, and lower chain posterior line conditioning for dynamic heel-hook stability.
 

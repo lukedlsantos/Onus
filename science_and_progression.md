@@ -7,7 +7,7 @@ This data engine architecture document breaks down the physiological rules, kine
 ## 1. The Conjugate-Block Model vs. Traditional Linear Periodization
 Traditional periodization forces a climber to train a single biological adaptation (e.g., endurance) while allowing all other performance metrics (e.g., contact power, finger strength) to systematically decay. 
 
-Project Onus utilizes a **Conjugate-Block Framework**. We isolate a primary adaptation driver during a 4-week block while using highly specific, minimal-volume "booster" tracks to lock secondary metrics well above their decay boundaries.
+DIM Coaching utilizes a **Conjugate-Block Framework**. We isolate a primary adaptation driver during a 4-week block while using highly specific, minimal-volume "booster" tracks to lock secondary metrics well above their decay boundaries.
 
 ```
 Linear Strategy:    [ Endurance Block ] -> [ Strength Block ] -> [ Power Block ]

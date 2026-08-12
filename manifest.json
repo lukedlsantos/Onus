@@ -1,6 +1,6 @@
 {
-  "name": "Onus Climbing Coach",
-  "short_name": "Onus",
+  "name": "DIM Coaching",
+  "short_name": "DIM",
   "description": "Private climbing training & coaching dashboard.",
   "start_url": "./index.html",
   "display": "standalone",

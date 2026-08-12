@@ -1,4 +1,4 @@
-# Project Onus - Month 2: Basic Strength Phase Curriculum
+# DIM Coaching - Month 2: Basic Strength Phase Curriculum
 
 This file serves as the definitive programming blueprint for the 4-week Basic Strength macrocycle block. It implements a 3-hour on-wall container, progressive resistance overload, Chiba Tore diagonal stability, and submaximal overcoming isometric finger conditioning.
 

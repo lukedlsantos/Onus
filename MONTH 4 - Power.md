@@ -1,4 +1,4 @@
-# Project Onus - Month 4: Power Phase Curriculum
+# DIM Coaching - Month 4: Power Phase Curriculum
 
 This file serves as the definitive programming blueprint for the 4-week Power macrocycle block. It implements a 3-hour on-wall container, Rate of Force Development (RFD) exercises, speed-coordination drills, and plyometric jump-rebounds.
 

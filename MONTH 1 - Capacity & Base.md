@@ -1,4 +1,4 @@
-# Project Onus - Month 1: Capacity & Base Phase Curriculum
+# DIM Coaching - Month 1: Capacity & Base Phase Curriculum
 
 This file serves as the definitive programming blueprint for the 4-week Capacity & Base macrocycle block. It implements a 3-hour on-wall container, a progressive volume loading structure, active scapular centration, and Chiba Tore diagonal stability.
 
