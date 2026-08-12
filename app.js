@@ -795,19 +795,9 @@ async function loadAthleteTodayScreen() {
         let timerHtml = '';
         
         const isMonth1Day3 = (phaseNum === 1 && session.day_label === "Day 3");
-        if (isMonth1Day3) {
-          let checkedSetsCount = 0;
-          for (let i = 1; i <= d.sets; i++) {
-            const key = `set-${phaseNum}-${weekNum}-${session.day_label}-${d.id}-${i}`;
-            if (localStorage.getItem(key) === "true") {
-              checkedSetsCount++;
-            }
-          }
-          state.drillCompletions[d.id] = checkedSetsCount;
-        }
         
         if (d.category === "Warm-up & Prep") {
-          if (d.reps_or_duration !== "None") {
+          if (d.reps_or_duration !== "None" && !isMonth1Day3) {
             timerHtml = renderTimerMarkup(d.id + "-warmup", 600, "Warm-up Timer");
           }
         } else if (d.category === "Core Driver") {
@@ -965,30 +955,11 @@ async function loadAthleteTodayScreen() {
               ${d.notes ? `<div class="drill-meta" style="font-style: italic; color: var(--text-muted); white-space: pre-wrap;">Note: ${escapeHTML(d.notes)}</div>` : ''}
               
               <div class="drill-actions">
-                ${isMonth1Day3 ? `
-                  <div class="sets-dots-container" style="display: flex; gap: 8px; align-items: center;">
-                    <span style="font-size: 0.75rem; color: var(--text-secondary); font-weight: 500; margin-right: 4px;">Sets:</span>
-                    ${Array.from({ length: d.sets }, (_, i) => {
-                      const setNum = i + 1;
-                      const key = `set-${phaseNum}-${weekNum}-${session.day_label}-${d.id}-${setNum}`;
-                      const isChecked = localStorage.getItem(key) === "true";
-                      const dotBg = isChecked ? 'var(--accent-cyan)' : 'transparent';
-                      const dotBorder = isChecked ? 'var(--accent-cyan)' : 'var(--border-color)';
-                      const dotColor = isChecked ? 'var(--bg-primary)' : 'var(--text-secondary)';
-                      return `
-                        <button class="set-dot-btn" data-set-key="${key}" data-drill-id="${escapeHTML(d.id)}" data-sets-count="${d.sets}" style="width: 24px; height: 24px; border-radius: 50%; border: 1.5px solid ${dotBorder}; background-color: ${dotBg}; color: ${dotColor}; font-size: 0.7rem; font-weight: 700; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s;">
-                          ${setNum}
-                        </button>
-                      `;
-                    }).join('')}
-                  </div>
-                ` : `
-                  <div class="stepper-container" data-drill-id="${escapeHTML(d.id)}" data-drill-name="${escapeHTML(d.name)}" data-max-sets="${d.sets}">
-                    <button class="stepper-btn stepper-minus">&minus;</button>
-                    <span class="stepper-val">${state.drillCompletions[d.id] || 0} / ${d.sets} sets</span>
-                    <button class="stepper-btn stepper-plus">+</button>
-                  </div>
-                `}
+                <div class="stepper-container" data-drill-id="${escapeHTML(d.id)}" data-drill-name="${escapeHTML(d.name)}" data-max-sets="${d.sets}">
+                  <button class="stepper-btn stepper-minus">&minus;</button>
+                  <span class="stepper-val">${state.drillCompletions[d.id] || 0} / ${d.sets} sets</span>
+                  <button class="stepper-btn stepper-plus">+</button>
+                </div>
                 ${timerHtml}
               </div>
             ` : subCardsHtml}
@@ -1038,38 +1009,6 @@ async function loadAthleteTodayScreen() {
 function handleDrillActionsClick(e) {
   const target = e.target;
 
-  // Handle set dot clicks
-  if (target.classList.contains("set-dot-btn") || target.closest(".set-dot-btn")) {
-    const btn = target.classList.contains("set-dot-btn") ? target : target.closest(".set-dot-btn");
-    const key = btn.dataset.setKey;
-    const drillId = btn.dataset.drillId;
-    const maxSets = parseInt(btn.dataset.setsCount) || 1;
-    
-    const isChecked = localStorage.getItem(key) === "true";
-    if (isChecked) {
-      localStorage.removeItem(key);
-    } else {
-      localStorage.setItem(key, "true");
-    }
-    
-    const parts = key.split('-');
-    const phaseNum = parts[1];
-    const weekNum = parts[2];
-    const dayLabel = parts[3];
-    
-    let completedCount = 0;
-    for (let i = 1; i <= maxSets; i++) {
-      const k = `set-${phaseNum}-${weekNum}-${dayLabel}-${drillId}-${i}`;
-      if (localStorage.getItem(k) === "true") {
-        completedCount++;
-      }
-    }
-    state.drillCompletions[drillId] = completedCount;
-    
-    loadAthleteTodayScreen();
-    return;
-  }
-
   // Handle Checkmark completions
   if (target.classList.contains("drill-check-btn") || target.closest(".drill-check-btn")) {
     const btn = target.classList.contains("drill-check-btn") ? target : target.closest(".drill-check-btn");
@@ -1077,42 +1016,6 @@ function handleDrillActionsClick(e) {
     
     // Find sets limit
     let container = btn.closest(".drill-item") || btn.closest(".sub-drill-card");
-    const dotsContainer = container ? container.querySelector(".sets-dots-container") : null;
-    
-    if (dotsContainer) {
-      const dots = dotsContainer.querySelectorAll(".set-dot-btn");
-      const allChecked = Array.from(dots).every(dot => localStorage.getItem(dot.dataset.setKey) === "true");
-      
-      dots.forEach(dot => {
-        if (allChecked) {
-          localStorage.removeItem(dot.dataset.setKey);
-        } else {
-          localStorage.setItem(dot.dataset.setKey, "true");
-        }
-      });
-      
-      if (dots.length > 0) {
-        const dot1 = dots[0];
-        const key = dot1.dataset.setKey;
-        const maxSets = parseInt(dot1.dataset.setsCount) || 1;
-        const parts = key.split('-');
-        const phaseNum = parts[1];
-        const weekNum = parts[2];
-        const dayLabel = parts[3];
-        
-        let completedCount = 0;
-        for (let i = 1; i <= maxSets; i++) {
-          const k = `set-${phaseNum}-${weekNum}-${dayLabel}-${drillId}-${i}`;
-          if (localStorage.getItem(k) === "true") {
-            completedCount++;
-          }
-        }
-        state.drillCompletions[drillId] = completedCount;
-      }
-      
-      loadAthleteTodayScreen();
-      return;
-    }
     
     let max = 1;
     let stepper = container ? container.querySelector(`.stepper-container[data-drill-id="${drillId}"]`) : null;
