@@ -212,26 +212,10 @@ function generateWorkouts() {
             title = "Baseline Functional Hypertrophy & Fingerboard Loading";
             objective = "Off-wall compound resistance and finger edge conditioning.";
             exercises = [
-              // Warm-up & Prep (Broken out individually)
-              { name: "Spine & Thoracic Mobilization", category: "Warm-up & Prep", sets: 1, reps_or_duration: "1 set", intensity: "RPE 5", rest: "None", notes: "3 half-circles, 15 passes foam rolling thoracic, 10 Spine Waves." },
-              { name: "Scapular & Rotator Cuff Activation", category: "Warm-up & Prep", sets: 1, reps_or_duration: "1 set", intensity: "RPE 5", rest: "None", notes: "12 passes band dislocates, 10 Serratus wall slides, 8 prone Y-T-W-L positions." },
-              { name: "Lower Chain Mobility", category: "Warm-up & Prep", sets: 1, reps_or_duration: "1 set", intensity: "RPE 5", rest: "None", notes: "10 dynamic 90-90 hip switches, 8 hip CARs/side, 12 resisted dorsiflexion ankle wall-touches." },
-              { name: "Submaximal Edge Activation", category: "Warm-up & Prep", sets: 3, reps_or_duration: "3 hangs", intensity: "RPE 6", rest: "1 min", notes: "2-3 submaximal hangs or pulls on fingerboard at 50% and 75% effort." },
-              
-              // Core Driver / Strength Overload (Broken out individually)
-              { name: "Strict Weighted Pull-Ups", category: "Core Driver", sets: 3, reps_or_duration: "8 reps", intensity: "RPE 7", rest: "None", notes: isDeload ? "Cut resistance reps by 50%." : "Weighted pull-ups (assisted if needed). Focus on clean scapular retraction." },
-              { name: "Dumbbell Floor Presses", category: "Core Driver", sets: 3, reps_or_duration: "8 reps", intensity: "RPE 7", rest: "None", notes: isDeload ? "Cut resistance reps by 50%." : "Capsule protection: Keep elbows tucked at 45 degrees relative to torso." },
-              { name: "Barbell Rows", category: "Core Driver", sets: 3, reps_or_duration: "8 reps", intensity: "RPE 7", rest: "None", notes: isDeload ? "Cut resistance reps by 50%." : "Maintain neutral spine posture." },
-              { name: "Heels-Elevated Weighted Squats", category: "Core Driver", sets: 3, reps_or_duration: "8 reps", intensity: "RPE 7", rest: "None", notes: isDeload ? "Cut resistance reps by 50%." : "Elevate heels on wedges, descend into deep squat control." },
-
-              // Progress Hook
-              { name: "Active Overcoming Isometrics", category: "Progress Hook", sets: 6, reps_or_duration: "10s pull", intensity: "RPE 9", rest: "50s", notes: isDeload ? "Progress Hook: Eliminated." : "Perform 10-second active maximum-effort concentric pulls against an immovable fixed block (Tindeq gauge). Fallback: 10s active dead-hangs on a 20mm edge." },
-
-              // Care & Restoration (Broken out individually)
-              { name: "Extensor Bands", category: "Care & Restoration", sets: 2, reps_or_duration: "20 reps", intensity: "RPE 5", rest: "30s", notes: "Antagonist finger extension balance." },
-              { name: "Wrist Roller Rolls", category: "Care & Restoration", sets: 2, reps_or_duration: "15 reps", intensity: "RPE 6", rest: "30s", notes: "Forearm extensors." },
-              { name: "Forearm Flexor Self-Massage", category: "Care & Restoration", sets: 2, reps_or_duration: "60s", intensity: "RPE 4", rest: "None", notes: "Decompress tight forearm tissue." },
-              { name: "Depth Jumps to Max Vertical Vector", category: "Care & Restoration", sets: 3, reps_or_duration: "5 reps", intensity: "RPE 7", rest: "1 min", notes: "Quick ground contact to build reactive power." }
+              { name: "Off-Wall Prep Container & Edge Activation", category: "Warm-up & Prep", sets: 1, reps_or_duration: "None", intensity: "RPE 6", rest: "None", notes: "1 set Spine & Thoracic Mobilization: 3 half-circles, 15 passes foam rolling thoracic, 10 Spine Waves.\n1 set Scapular & Rotator Cuff Activation: 12 passes band dislocates, 10 Serratus wall slides, 8 prone Y-T-W-L positions.\n1 set Lower Chain Mobility: 10 dynamic 90-90 hip switches, 8 hip CARs/side, 12 resisted dorsiflexion ankle wall-touches.\n3 sets x 3 hangs Submaximal Edge Activation: 2-3 submaximal hangs or pulls on fingerboard at 50% and 75% effort." },
+              { name: "Compound Strength Overload", category: "Core Driver", sets: 3, reps_or_duration: "None", intensity: "RPE 7", rest: "None", notes: isDeload ? "Cut resistance reps by 50%." : "3 sets x 8 reps Strict Weighted Pull-Ups (assisted if needed). Focus on clean scapular retraction.\n3 sets x 8 reps Dumbbell Floor Presses. Capsule protection: Keep elbows tucked at 45 degrees relative to torso.\n3 sets x 8 reps Barbell Rows. Maintain neutral spine posture.\n3 sets x 8 reps Heels-Elevated Weighted Squats. Elevate heels on wedges, descend into deep squat control." },
+              { name: "Active Overcoming Isometrics", category: "Progress Hook", sets: 6, reps_or_duration: "6 reps x 10s", intensity: "RPE 9", rest: "50 seconds", notes: isDeload ? "Progress Hook: Eliminated." : "Perform 10-second active maximum-effort concentric pulls against an immovable fixed block (Tindeq gauge).\n\n*FALLBACK PROTOCOL:* If no Tindeq gauge or fixed block is available, execute 10-second active dead-hangs on a 20mm edge at RPE 9." },
+              { name: "Antagonist Balance & Plyos", category: "Care & Restoration", sets: 1, reps_or_duration: "1 set", intensity: "RPE 6", rest: "Self-paced", notes: "2 sets x 20 reps Extensor Bands: Antagonist finger extension balance.\n2 sets x 15 reps Wrist Roller Rolls: Forearm extensors.\n2 sets x 60s Forearm Flexor Self-Massage: Decompress tight forearm tissue.\n3 sets x 5 reps Depth Jumps to Max Vertical Vector: Quick ground contact to build reactive power." }
             ];
           } else if (phaseNum === 2) {
             title = "Heavy Compound Strength & Overcoming Finger Pulls";
@@ -512,7 +496,7 @@ const DEFAULT_FAQS = [
 
 // Helper to initialize database
 function initDB() {
-  const CURRENT_VERSION = "5.8";
+  const CURRENT_VERSION = "5.9";
   const storedVersion = localStorage.getItem("onus_db_version");
   if (storedVersion !== CURRENT_VERSION) {
     // Clear all onus-related localStorage entries to force clean re-seeding
