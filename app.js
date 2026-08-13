@@ -756,6 +756,38 @@ async function loadAthleteTodayScreen() {
     titleEl.textContent = `${session.day_label}: ${session.title}`;
     objectiveEl.style.display = "none"; // Do not show objective/description anymore
 
+    // Early return for rest sessions
+    if (session.session_type === "rest") {
+      if (checkinCard) {
+        if (session.day_label === "Day 7") {
+          checkinCard.style.display = "";
+          const checkins = await db.getWeeklyCheckinsForAthlete(state.currentUser.id);
+          const badge = document.getElementById("checkin-status-badge");
+          if (checkins.length > 0) {
+            badge.textContent = "Done";
+            badge.style.backgroundColor = "rgba(16, 185, 129, 0.15)";
+            badge.style.color = "var(--accent-green)";
+            badge.style.display = "inline-block";
+          } else {
+            badge.style.display = "none";
+          }
+        } else {
+          checkinCard.style.display = "none";
+        }
+      }
+      
+      const restTimerEl = document.getElementById("global-rest-timer");
+      if (restTimerEl) restTimerEl.style.display = "none";
+      
+      document.getElementById("start-session-btn").style.display = "none";
+      drillContainer.style.display = "none";
+      logBtn.style.display = "none";
+      
+      const backBtn = document.getElementById("back-to-calendar-btn");
+      if (backBtn) backBtn.style.display = "inline-flex";
+      return;
+    }
+
     // Show weekly check-in card only on Day 7
     if (session.day_label === "Day 7" && checkinCard) {
       checkinCard.style.display = "";
