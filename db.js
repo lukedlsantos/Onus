@@ -289,7 +289,7 @@ function generateWorkouts() {
               { name: "Passive to Active Scapular Hangs", category: "Shoulders", sets: 3, reps_or_duration: "3 reps x 15s", intensity: "RPE 4", rest: "None", notes: "Intent: Build structural shoulder girdle integrity and scapular control under load.\nExecute a dead-hang, then pull your shoulder blades down and back without bending your elbows. Hold active position for 15s." },
               { name: "Sub-Max Isometric Edge Hangs", category: "Fingers", sets: 3, reps_or_duration: "3 reps x 10s", intensity: "RPE 5", rest: "None", notes: "Intent: Condition tendon sheath pulleys and finger joints without high-neural stress.\nHang from a 20mm edge using a half-crimp or open-hand grip. Keep elbows slightly bent (active tension). Hold 10s at ~60% max effort." },
               { name: "Isometric Wrist Extension Holds", category: "Wrists", sets: 3, reps_or_duration: "3 reps x 20s", intensity: "RPE 4", rest: "None", notes: "Intent: Strengthen wrist stabilizers and forearm flexor/extensor muscle tendons.\nHold a dumbbell or resistance band in active wrist extension (palm up or palm down) parallel to the ground against resistance. Hold 20s per side." },
-              { name: "Overcoming Isometric Core Plank", category: "Full-Body", sets: 3, reps_or_duration: "3 reps x 30s", intensity: "RPE 5", rest: "None", notes: "Intent: Force high-tension abdominal bracing.\nGet into a standard forearm plank. Once in position, actively pull your elbows towards your toes and squeeze your glutes, quads, and fists as hard as possible, creating a maximal self-resisted overcoming contraction. Hold 30s." }
+              { name: "Overcoming Isometric Core Plank", category: "Full-Body", sets: 3, reps_or_duration: "3 reps x 30s", intensity: "RPE 5", rest: "None", notes: "Intent: Force high-tension abdominal bracing.\nGet into a standard forearm plank. Over the 30-second duration, alternate cycles of:\n- 5 seconds maximum overcoming tension (actively pull your elbows toward your toes, squeezing glutes/fists/core as hard as possible)\n- 5 seconds standard passive plank recovery.\nRepeat for 3 cycles total per set." }
             ];
           }
         } else if (d === 5) {
@@ -505,7 +505,7 @@ const DEFAULT_FAQS = [
 
 // Helper to initialize database
 function initDB() {
-  const CURRENT_VERSION = "6.0";
+  const CURRENT_VERSION = "6.1";
   const storedVersion = localStorage.getItem("onus_db_version");
   if (storedVersion !== CURRENT_VERSION) {
     // Clear all onus-related localStorage entries to force clean re-seeding
