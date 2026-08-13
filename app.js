@@ -761,6 +761,14 @@ async function loadAthleteTodayScreen() {
       if (checkinCard) {
         if (session.day_label === "Day 7") {
           checkinCard.style.display = "";
+          
+          // Auto-expand the weekly check-in form
+          const checkinForm = document.getElementById("weekly-checkin-form");
+          if (checkinForm) {
+            checkinForm.style.display = "flex";
+            checkinForm.style.flexDirection = "column";
+          }
+
           const checkins = await db.getWeeklyCheckinsForAthlete(state.currentUser.id);
           const badge = document.getElementById("checkin-status-badge");
           if (checkins.length > 0) {
