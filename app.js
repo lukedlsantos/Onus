@@ -786,7 +786,8 @@ async function loadAthleteTodayScreen() {
 
     // Toggle view components based on started state
     const isStarted = state.startedSessionId === session.id;
-    if (isStarted) {
+    const isDay7 = session.day_label === "Day 7";
+    if (isStarted || isDay7) {
       document.getElementById("start-session-btn").style.display = "none";
       drillContainer.style.display = "block";
       logBtn.style.display = "block";
@@ -1448,6 +1449,9 @@ async function handleCheckinSubmit(e) {
   document.getElementById("weekly-checkin-form").reset();
   setupSliderIndicators();
   toggleWeeklyCheckinForm();
+
+  // Redirect to Google Calendar to schedule a check-in call
+  window.open("https://calendar.app.google/it9svVfqq9THP8xo6", "_blank");
 }
 
 // Handle video review submissions
