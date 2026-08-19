@@ -1,4 +1,4 @@
-const CACHE_NAME = 'dim-cache-v10';
+const CACHE_NAME = 'dim-cache-v11';
 const ASSETS = [
   './',
   './index.html',
@@ -6,7 +6,7 @@ const ASSETS = [
   './app.js',
   './db.js',
   './manifest.json',
-  './icon.png'
+  './icon.svg'
 ];
 
 // Install Event - cache assets

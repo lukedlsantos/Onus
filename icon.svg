@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Background Base Gradient -->
+    <linearGradient id="iconBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F172A"/>
+      <stop offset="60%" stop-color="#0B111E"/>
+      <stop offset="100%" stop-color="#070A12"/>
+    </linearGradient>
+
+    <!-- Ultra-Wide Cyan Ambient Radial Glow (Extended reach to edges) -->
+    <radialGradient id="ultraWideGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.48"/>
+      <stop offset="30%" stop-color="#0284C7" stop-opacity="0.32"/>
+      <stop offset="65%" stop-color="#0369A1" stop-opacity="0.12"/>
+      <stop offset="85%" stop-color="#0B111E" stop-opacity="0.03"/>
+      <stop offset="100%" stop-color="#0B111E" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Concentrated Core Light Flare -->
+    <radialGradient id="centerCore" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#BAE6FD" stop-opacity="0.35"/>
+      <stop offset="50%" stop-color="#38BDF8" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#0B111E" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Delta Upward Vector Gradient -->
+    <linearGradient id="cyanVector" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#7DD3FC"/>
+      <stop offset="45%" stop-color="#38BDF8"/>
+      <stop offset="100%" stop-color="#0284C7"/>
+    </linearGradient>
+
+    <!-- Letter Gradient for Crisp High Contrast -->
+    <linearGradient id="textGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="40%" stop-color="#F8FAFC"/>
+      <stop offset="100%" stop-color="#E2E8F0"/>
+    </linearGradient>
+
+    <!-- Outer Squircle Border Gradient -->
+    <linearGradient id="borderGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#334155"/>
+      <stop offset="50%" stop-color="#1E293B"/>
+      <stop offset="100%" stop-color="#0F172A"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Base Squircle Container -->
+  <rect x="16" y="16" width="480" height="480" rx="108" fill="url(#iconBg)" stroke="url(#borderGrad)" stroke-width="6"/>
+
+  <!-- Inner Cyan Edge Accent Ring -->
+  <rect x="26" y="26" width="460" height="460" rx="98" fill="none" stroke="#38BDF8" stroke-width="1.2" opacity="0.22"/>
+
+  <!-- ==================== ULTRA-WIDE CIRCULAR AMBIENT GLOW ==================== -->
+  <!-- Outer Extended Glow (Maximized radius across container) -->
+  <circle cx="256" cy="256" r="238" fill="url(#ultraWideGlow)"/>
+
+  <!-- Soft Central Core Glow -->
+  <circle cx="256" cy="256" r="150" fill="url(#centerCore)"/>
+
+  <!-- ==================== LOGO MARK ==================== -->
+  <g transform="translate(256, 256)">
+    <!-- Upward Progression Delta -->
+    <path d="M 0,-115 L 56,-25 L -56,-25 Z" fill="url(#cyanVector)"/>
+
+    <!-- Crisp 'DIM' Wordmark -->
+    <text x="0" y="80" 
+          font-family="system-ui, -apple-system, 'Inter', 'Helvetica Neue', sans-serif" 
+          font-size="118" 
+          font-weight="900" 
+          letter-spacing="6" 
+          fill="url(#textGrad)" 
+          text-anchor="middle">DIM</text>
+  </g>
+</svg>
